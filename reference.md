@@ -2009,6 +2009,63 @@ await client.discovery.getDiscoveryFeed({
 </dl>
 </details>
 
+<details><summary><code>client.discovery.<a href="/src/api/resources/discovery/client/Client.ts">getDiscoveryHighlights</a>() -> FiveOneEat.DiscoveryHighlightsResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns curated sections of businesses for the discovery home screen,
+including staff picks and founding partners. This endpoint is designed
+to be extended with additional sections (e.g. editorial, trending) over time.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.discovery.getDiscoveryHighlights();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `DiscoveryClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.discovery.<a href="/src/api/resources/discovery/client/Client.ts">getDiscoveryCategories</a>() -> FiveOneEat.GetDiscoveryCategoriesResponse</code></summary>
 <dl>
 <dd>

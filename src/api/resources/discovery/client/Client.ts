@@ -199,6 +199,77 @@ export class DiscoveryClient {
     }
 
     /**
+     * Returns curated sections of businesses for the discovery home screen,
+     * including staff picks and founding partners. This endpoint is designed
+     * to be extended with additional sections (e.g. editorial, trending) over time.
+     *
+     * @param {DiscoveryClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.discovery.getDiscoveryHighlights()
+     */
+    public getDiscoveryHighlights(
+        requestOptions?: DiscoveryClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.DiscoveryHighlightsResource> {
+        return core.HttpResponsePromise.fromPromise(this.__getDiscoveryHighlights(requestOptions));
+    }
+
+    private async __getDiscoveryHighlights(
+        requestOptions?: DiscoveryClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.DiscoveryHighlightsResource>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/discovery/highlights",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.DiscoveryHighlightsResource,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/discovery/highlights",
+        );
+    }
+
+    /**
      * Retrieve a list of all business categories that have businesses.
      * This endpoint is used to populate category filters and navigation.
      *

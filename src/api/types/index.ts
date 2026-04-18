@@ -14,6 +14,7 @@ export * from "./CuisineResource.js";
 export * from "./DiscoveryBusinessResource.js";
 export * from "./DiscoveryCategoryResource.js";
 export * from "./DiscoveryFeedResource.js";
+export * from "./DiscoveryHighlightsResource.js";
 export * from "./DiscoveryResponseResource.js";
 export * from "./EventDetailResource.js";
 export * from "./EventFeedItemResource.js";
