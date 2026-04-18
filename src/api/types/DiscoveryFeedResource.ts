@@ -4,14 +4,5 @@ import type * as FiveOneEat from "../index.js";
 
 export interface DiscoveryFeedResource {
     data: FiveOneEat.DiscoveryCategoryResource[];
-    meta: DiscoveryFeedResource.Meta;
-}
-
-export namespace DiscoveryFeedResource {
-    export interface Meta {
-        current_page: number;
-        per_page: number;
-        total_categories: number;
-        has_more: boolean;
-    }
+    meta: FiveOneEat.PaginationResource;
 }

@@ -88,8 +88,31 @@ describe("DiscoveryClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            data: [{ value: "value", label: "label", total_businesses: 1, businesses: [] }],
-            meta: { current_page: 1, per_page: 1, total_categories: 1, has_more: true },
+            data: [
+                {
+                    value: "value",
+                    label: "label",
+                    total_businesses: 1,
+                    businesses: [
+                        {
+                            id: "id",
+                            name: "name",
+                            handle: "handle",
+                            category: null,
+                            description: null,
+                            bio: null,
+                            location: { city: null, state: null },
+                            logo: null,
+                            photos: [{ id: "id", url: "url", alt_text: null }],
+                            has_bulletins: true,
+                            latest_bulletin: null,
+                            badges: { founding_partner: true, staff_pick: true },
+                            created_at: "created_at",
+                        },
+                    ],
+                },
+            ],
+            meta: { current_page: "current_page", per_page: "per_page", total: "total", has_more: "has_more" },
         };
 
         server
