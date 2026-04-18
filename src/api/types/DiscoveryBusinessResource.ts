@@ -14,6 +14,7 @@ export interface DiscoveryBusinessResource {
     latest_bulletin: DiscoveryBusinessResource.LatestBulletin | null;
     badges: DiscoveryBusinessResource.Badges;
     created_at: string;
+    editorial?: (DiscoveryBusinessResource.Editorial | null) | undefined;
 }
 
 export namespace DiscoveryBusinessResource {
@@ -41,5 +42,11 @@ export namespace DiscoveryBusinessResource {
     export interface Badges {
         founding_partner: boolean;
         staff_pick: boolean;
+    }
+
+    export interface Editorial {
+        slug: string;
+        title: string;
+        excerpt: string | null;
     }
 }

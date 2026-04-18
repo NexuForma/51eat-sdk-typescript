@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "private": false,
     "repository": {
         "type": "git",
@@ -87,6 +87,17 @@
                 "default": "./dist/cjs/api/resources/discovery/exports.js"
             },
             "default": "./dist/cjs/api/resources/discovery/exports.js"
+        },
+        "./editorials": {
+            "import": {
+                "types": "./dist/esm/api/resources/editorials/exports.d.mts",
+                "default": "./dist/esm/api/resources/editorials/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/editorials/exports.d.ts",
+                "default": "./dist/cjs/api/resources/editorials/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/editorials/exports.js"
         },
         "./events": {
             "import": {
