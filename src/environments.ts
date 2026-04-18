@@ -2,6 +2,11 @@
 
 export const FiveOneEatEnvironment = {
     Production: "https://51eat.co/api/v1",
+    Staging: "https://staging.51eat.co/api/v1",
+    Local: "https://51eat.test/api/v1",
 } as const;
 
-export type FiveOneEatEnvironment = typeof FiveOneEatEnvironment.Production;
+export type FiveOneEatEnvironment =
+    | typeof FiveOneEatEnvironment.Production
+    | typeof FiveOneEatEnvironment.Staging
+    | typeof FiveOneEatEnvironment.Local;

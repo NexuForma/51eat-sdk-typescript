@@ -6,9 +6,9 @@
         "namespaceExport": "FiveOneEat"
     },
     "originGitCommit": "ab11a1d39a6edb6afbf678dca408b354de061108",
-    "originGitCommitIsDirty": false,
+    "originGitCommitIsDirty": true,
     "invokedBy": "manual",
     "requestedVersion": null,
     "ciProvider": null,
-    "sdkVersion": "0.0.5"
+    "sdkVersion": "0.0.6"
 }
