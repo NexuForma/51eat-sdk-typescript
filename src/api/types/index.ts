@@ -16,6 +16,8 @@ export * from "./DiscoveryCategoryResource.js";
 export * from "./DiscoveryFeedResource.js";
 export * from "./DiscoveryHighlightsResource.js";
 export * from "./DiscoveryResponseResource.js";
+export * from "./EditorialResource.js";
+export * from "./EditorialSummaryResource.js";
 export * from "./EventDetailResource.js";
 export * from "./EventFeedItemResource.js";
 export * from "./EventFeedResponseResource.js";
