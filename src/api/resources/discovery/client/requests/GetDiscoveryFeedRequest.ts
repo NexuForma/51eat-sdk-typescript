@@ -14,7 +14,7 @@ export interface GetDiscoveryFeedRequest {
     /** Search term to filter businesses within categories */
     search?: string;
     /** Filter businesses by cuisine IDs */
-    "cuisine_ids[][]"?: string | string[];
+    "cuisine_ids[]"?: number | number[];
     /** Filter businesses by certification IDs */
-    "certification_ids[][]"?: string | string[];
+    "certification_ids[]"?: number | number[];
 }

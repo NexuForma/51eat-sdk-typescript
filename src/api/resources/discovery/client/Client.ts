@@ -136,15 +136,15 @@ export class DiscoveryClient {
             page,
             per_page: perPage,
             search,
-            "cuisine_ids[][]": cuisineIdsArrayArray,
-            "certification_ids[][]": certificationIdsArrayArray,
+            "cuisine_ids[]": cuisineIdsArray,
+            "certification_ids[]": certificationIdsArray,
         } = request;
         const _queryParams: Record<string, unknown> = {
             page,
             per_page: perPage,
             search,
-            "cuisine_ids[][]": cuisineIdsArrayArray,
-            "certification_ids[][]": certificationIdsArrayArray,
+            "cuisine_ids[]": cuisineIdsArray,
+            "certification_ids[]": certificationIdsArray,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
