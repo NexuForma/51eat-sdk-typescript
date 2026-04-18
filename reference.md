@@ -2065,6 +2065,118 @@ await client.discovery.getDiscoveryCategories();
 </dl>
 </details>
 
+<details><summary><code>client.discovery.<a href="/src/api/resources/discovery/client/Client.ts">getDiscoveryCuisines</a>() -> FiveOneEat.GetDiscoveryCuisinesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all cuisines, ordered alphabetically.
+This endpoint is used to populate cuisine filters.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.discovery.getDiscoveryCuisines();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `DiscoveryClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.discovery.<a href="/src/api/resources/discovery/client/Client.ts">getDiscoveryCertifications</a>() -> FiveOneEat.GetDiscoveryCertificationsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all certifications, ordered alphabetically.
+This endpoint is used to populate certification filters.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.discovery.getDiscoveryCertifications();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `DiscoveryClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.discovery.<a href="/src/api/resources/discovery/client/Client.ts">getCategoryBusinesses</a>({ ...params }) -> FiveOneEat.GetCategoryBusinessesResponse</code></summary>
 <dl>
 <dd>

@@ -204,6 +204,82 @@ describe("DiscoveryClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("getDiscoveryCuisines (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { data: [{ id: 1, name: "name", slug: "slug", description: "description" }] };
+
+        server
+            .mockEndpoint()
+            .get("/customer/discovery/cuisines")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.discovery.getDiscoveryCuisines();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getDiscoveryCuisines (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/discovery/cuisines")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.discovery.getDiscoveryCuisines();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("getDiscoveryCertifications (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [{ id: 1, name: "name", slug: "slug", description: "description", icon: "icon" }],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/discovery/certifications")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.discovery.getDiscoveryCertifications();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getDiscoveryCertifications (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/discovery/certifications")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.discovery.getDiscoveryCertifications();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
     test("getCategoryBusinesses (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
