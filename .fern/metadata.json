@@ -1,0 +1,14 @@
+{
+    "cliVersion": "4.78.0",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.64.1",
+    "generatorConfig": {
+        "namespaceExport": "FiveOneEat"
+    },
+    "originGitCommit": "96f6c1328eaee8d7b2676881fd07537ea75f7ae8",
+    "originGitCommitIsDirty": true,
+    "invokedBy": "manual",
+    "requestedVersion": null,
+    "ciProvider": null,
+    "sdkVersion": "0.0.3"
+}
