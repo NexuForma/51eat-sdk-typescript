@@ -2301,6 +2301,128 @@ await client.discovery.getCategoryBusinesses({
 </dl>
 </details>
 
+## Editorials
+<details><summary><code>client.editorials.<a href="/src/api/resources/editorials/client/Client.ts">listEditorials</a>() -> FiveOneEat.ListEditorialsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of published editorials with basic business info.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.editorials.listEditorials();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `EditorialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.editorials.<a href="/src/api/resources/editorials/client/Client.ts">getEditorial</a>({ ...params }) -> FiveOneEat.GetEditorialResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a published editorial by slug, with the full augmented body
+including resolved menu item, product, and event references.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.editorials.getEditorial({
+    slug: "slug"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetEditorialRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EditorialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Events
 <details><summary><code>client.events.<a href="/src/api/resources/events/client/Client.ts">getEventFeed</a>({ ...params }) -> FiveOneEat.GetEventFeedResponse</code></summary>
 <dl>

@@ -7,6 +7,7 @@ import { BusinessContentClient } from "./api/resources/businessContent/client/Cl
 import { BusinessProfilesClient } from "./api/resources/businessProfiles/client/Client.js";
 import { CustomerMessagingClient } from "./api/resources/customerMessaging/client/Client.js";
 import { DiscoveryClient } from "./api/resources/discovery/client/Client.js";
+import { EditorialsClient } from "./api/resources/editorials/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { MyAccountClient } from "./api/resources/myAccount/client/Client.js";
 import { TicketingClient } from "./api/resources/ticketing/client/Client.js";
@@ -33,6 +34,7 @@ export class FiveOneEatClient {
     protected _businessProfiles: BusinessProfilesClient | undefined;
     protected _customerMessaging: CustomerMessagingClient | undefined;
     protected _discovery: DiscoveryClient | undefined;
+    protected _editorials: EditorialsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _myAccount: MyAccountClient | undefined;
     protected _ticketing: TicketingClient | undefined;
@@ -63,6 +65,10 @@ export class FiveOneEatClient {
 
     public get discovery(): DiscoveryClient {
         return (this._discovery ??= new DiscoveryClient(this._options));
+    }
+
+    public get editorials(): EditorialsClient {
+        return (this._editorials ??= new EditorialsClient(this._options));
     }
 
     public get events(): EventsClient {
