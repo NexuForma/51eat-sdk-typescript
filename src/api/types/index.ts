@@ -1,3 +1,4 @@
+export * from "./AdResource.js";
 export * from "./Allergen.js";
 export * from "./BardBlockquoteNode.js";
 export * from "./BardBody.js";
