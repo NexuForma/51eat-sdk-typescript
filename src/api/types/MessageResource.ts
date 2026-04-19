@@ -8,6 +8,7 @@ export interface MessageResource {
     content: string;
     message_type: string;
     metadata: Record<string, unknown> | null;
+    is_read: boolean;
     is_edited: boolean;
     edited_at: string | null;
     created_at: string;
