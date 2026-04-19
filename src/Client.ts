@@ -10,6 +10,7 @@ import { DiscoveryClient } from "./api/resources/discovery/client/Client.js";
 import { EditorialsClient } from "./api/resources/editorials/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { MyAccountClient } from "./api/resources/myAccount/client/Client.js";
+import { PushNotificationsClient } from "./api/resources/pushNotifications/client/Client.js";
 import { RecordClickClient } from "./api/resources/recordClick/client/Client.js";
 import { ServeAdClient } from "./api/resources/serveAd/client/Client.js";
 import { TicketingClient } from "./api/resources/ticketing/client/Client.js";
@@ -39,6 +40,7 @@ export class FiveOneEatClient {
     protected _editorials: EditorialsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _myAccount: MyAccountClient | undefined;
+    protected _pushNotifications: PushNotificationsClient | undefined;
     protected _ticketing: TicketingClient | undefined;
     protected _recordClick: RecordClickClient | undefined;
     protected _serveAd: ServeAdClient | undefined;
@@ -81,6 +83,10 @@ export class FiveOneEatClient {
 
     public get myAccount(): MyAccountClient {
         return (this._myAccount ??= new MyAccountClient(this._options));
+    }
+
+    public get pushNotifications(): PushNotificationsClient {
+        return (this._pushNotifications ??= new PushNotificationsClient(this._options));
     }
 
     public get ticketing(): TicketingClient {

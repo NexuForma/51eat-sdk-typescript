@@ -226,6 +226,7 @@ export class AuthenticationClient {
     /**
      * Revoke the current API token and log out the user.
      *
+     * @param {FiveOneEat.LogoutCurrentRequest} request
      * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -234,12 +235,14 @@ export class AuthenticationClient {
      *     await client.authentication.logoutCurrent()
      */
     public logoutCurrent(
+        request: FiveOneEat.LogoutCurrentRequest = {},
         requestOptions?: AuthenticationClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.LogoutCurrentResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__logoutCurrent(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__logoutCurrent(request, requestOptions));
     }
 
     private async __logoutCurrent(
+        request: FiveOneEat.LogoutCurrentRequest = {},
         requestOptions?: AuthenticationClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.LogoutCurrentResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -257,7 +260,10 @@ export class AuthenticationClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

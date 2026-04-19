@@ -261,7 +261,7 @@ await client.authentication.getCurrentUser();
 </dl>
 </details>
 
-<details><summary><code>client.authentication.<a href="/src/api/resources/authentication/client/Client.ts">logoutCurrent</a>() -> FiveOneEat.LogoutCurrentResponse</code></summary>
+<details><summary><code>client.authentication.<a href="/src/api/resources/authentication/client/Client.ts">logoutCurrent</a>({ ...params }) -> FiveOneEat.LogoutCurrentResponse</code></summary>
 <dl>
 <dd>
 
@@ -300,6 +300,14 @@ await client.authentication.logoutCurrent();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.LogoutCurrentRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -2866,6 +2874,138 @@ await client.myAccount.getMyTicketOrder({
 <dd>
 
 **requestOptions:** `MyAccountClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Push Notifications
+<details><summary><code>client.pushNotifications.<a href="/src/api/resources/pushNotifications/client/Client.ts">registerPushToken</a>({ ...params }) -> FiveOneEat.RegisterPushTokenResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Register (or update) the authenticated user's Expo push token for a device. If
+a `device_id` is provided, an existing registration for that device is updated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pushNotifications.registerPushToken({
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StorePushTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PushNotificationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pushNotifications.<a href="/src/api/resources/pushNotifications/client/Client.ts">unregisterPushToken</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete the authenticated user's Expo push token registration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pushNotifications.unregisterPushToken({
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UnregisterPushTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PushNotificationsClient.RequestOptions` 
     
 </dd>
 </dl>
