@@ -10,6 +10,8 @@ import { DiscoveryClient } from "./api/resources/discovery/client/Client.js";
 import { EditorialsClient } from "./api/resources/editorials/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { MyAccountClient } from "./api/resources/myAccount/client/Client.js";
+import { RecordClickClient } from "./api/resources/recordClick/client/Client.js";
+import { ServeAdClient } from "./api/resources/serveAd/client/Client.js";
 import { TicketingClient } from "./api/resources/ticketing/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
@@ -38,6 +40,8 @@ export class FiveOneEatClient {
     protected _events: EventsClient | undefined;
     protected _myAccount: MyAccountClient | undefined;
     protected _ticketing: TicketingClient | undefined;
+    protected _recordClick: RecordClickClient | undefined;
+    protected _serveAd: ServeAdClient | undefined;
 
     constructor(options: FiveOneEatClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -81,6 +85,14 @@ export class FiveOneEatClient {
 
     public get ticketing(): TicketingClient {
         return (this._ticketing ??= new TicketingClient(this._options));
+    }
+
+    public get recordClick(): RecordClickClient {
+        return (this._recordClick ??= new RecordClickClient(this._options));
+    }
+
+    public get serveAd(): ServeAdClient {
+        return (this._serveAd ??= new ServeAdClient(this._options));
     }
 
     /**

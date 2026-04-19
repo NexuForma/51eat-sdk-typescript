@@ -3217,3 +3217,107 @@ await client.ticketing.confirmTicketOrder({
 </dl>
 </details>
 
+## RecordClick
+<details><summary><code>client.recordClick.<a href="/src/api/resources/recordClick/client/Client.ts">adsRecordClick</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.recordClick.adsRecordClick({
+    advertisement: "advertisement"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.AdsRecordClickRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RecordClickClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ServeAd
+<details><summary><code>client.serveAd.<a href="/src/api/resources/serveAd/client/Client.ts">adsServeAd</a>({ ...params }) -> FiveOneEat.AdsServeAdResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serveAd.adsServeAd({
+    placement: "placement"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.AdsServeAdRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServeAdClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
