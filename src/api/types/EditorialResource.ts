@@ -9,29 +9,7 @@ export interface EditorialResource {
     author: string | null;
     excerpt: string | null;
     body: FiveOneEat.BardBody | null;
-    business: EditorialResource.Business;
+    business: FiveOneEat.BusinessProfileResource;
     published_at: string | null;
     created_at: string;
-}
-
-export namespace EditorialResource {
-    export interface Business {
-        id: string;
-        name: string;
-        handle: string;
-        logo: string | null;
-        photos: Business.Photos.Item[];
-    }
-
-    export namespace Business {
-        export type Photos = Photos.Item[];
-
-        export namespace Photos {
-            export interface Item {
-                id: string;
-                url: string;
-                alt_text: string | null;
-            }
-        }
-    }
 }

@@ -4,7 +4,8 @@ import type * as FiveOneEat from "../index.js";
 
 export type BardParagraphNodeContentItem =
     | FiveOneEat.BardParagraphNodeContentItem.Text
-    | FiveOneEat.BardParagraphNodeContentItem.HardBreak;
+    | FiveOneEat.BardParagraphNodeContentItem.HardBreak
+    | FiveOneEat.BardParagraphNodeContentItem.Image;
 
 export namespace BardParagraphNodeContentItem {
     export interface Text extends FiveOneEat.BardTextNode {
@@ -13,5 +14,9 @@ export namespace BardParagraphNodeContentItem {
 
     export interface HardBreak extends FiveOneEat.BardHardBreakNode {
         type: "hardBreak";
+    }
+
+    export interface Image extends FiveOneEat.BardImageNode {
+        type: "image";
     }
 }

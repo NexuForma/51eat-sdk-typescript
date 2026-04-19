@@ -10,7 +10,6 @@ export namespace BardSetNode {
     export interface Attrs {
         /** Bard set row identifier. */
         id: string;
-        enabled: boolean;
         values: FiveOneEat.BardSetValues;
     }
 }
