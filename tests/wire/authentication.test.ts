@@ -147,10 +147,17 @@ describe("AuthenticationClient", () => {
     test("logoutCurrent (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = {};
         const rawResponseBody = { message: "Successfully logged out" };
 
-        server.mockEndpoint().post("/customer/logout").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .post("/customer/logout")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const response = await client.authentication.logoutCurrent();
         expect(response).toEqual(rawResponseBody);
@@ -159,10 +166,17 @@ describe("AuthenticationClient", () => {
     test("logoutCurrent (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().post("/customer/logout").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .post("/customer/logout")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
             return await client.authentication.logoutCurrent();
