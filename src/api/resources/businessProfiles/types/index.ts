@@ -1,2 +1,2 @@
 export * from "./FavoritesBusinessResponse.js";
-export * from "./GetBusinessProfileResponse.js";
+export * from "./ProfileShowResponse.js";

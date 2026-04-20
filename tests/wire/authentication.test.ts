@@ -287,4 +287,388 @@ describe("AuthenticationClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
+
+    test("registerBusiness (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            name: "name",
+            email: "email",
+            password: "password",
+            device_name: "device_name",
+            password_confirmation: "password_confirmation",
+        };
+        const rawResponseBody = {
+            data: { token: "token", user: { id: "id", name: "name", email: "email", role: "role" } },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/business/register")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.registerBusiness({
+            name: "name",
+            email: "email",
+            password: "password",
+            device_name: "device_name",
+            password_confirmation: "password_confirmation",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("registerBusiness (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            name: "name",
+            email: "email",
+            password: "password",
+            device_name: "device_name",
+            password_confirmation: "password_confirmation",
+        };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/register")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.registerBusiness({
+                name: "name",
+                email: "email",
+                password: "password",
+                device_name: "device_name",
+                password_confirmation: "password_confirmation",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("loginBusiness (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email", password: "password", device_name: "device_name" };
+        const rawResponseBody = {
+            data: { token: "token", user: { id: "id", name: "name", email: "email", role: "role" } },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/business/login")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.loginBusiness({
+            email: "email",
+            password: "password",
+            device_name: "device_name",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("loginBusiness (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email", password: "password", device_name: "device_name" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/login")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.loginBusiness({
+                email: "email",
+                password: "password",
+                device_name: "device_name",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("getBusinessMe (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                name: "name",
+                email: "email",
+                role: "role",
+                active_business: { id: "id", name: "name", handle: "handle", logo: "logo", category: "category" },
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo", category: "category" }],
+            },
+        };
+
+        server.mockEndpoint().get("/business/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.authentication.getBusinessMe();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getBusinessMe (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/me").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.authentication.getBusinessMe();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("logoutBusiness (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { message: "Successfully logged out" };
+
+        server
+            .mockEndpoint()
+            .post("/business/logout")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.logoutBusiness();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("logoutBusiness (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/logout")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.logoutBusiness();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("logoutAllBusiness (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { message: "All tokens revoked successfully" };
+
+        server
+            .mockEndpoint()
+            .post("/business/logout-all")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.logoutAllBusiness();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("logoutAllBusiness (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/logout-all")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.logoutAllBusiness();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("getBusinessTokens (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: { id: "id", name: "name", last_used_at: "last_used_at", created_at: "created_at" },
+        };
+
+        server.mockEndpoint().get("/business/tokens").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.authentication.getBusinessTokens();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getBusinessTokens (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/tokens").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.authentication.getBusinessTokens();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("revokeBusinessToken (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { message: "Token revoked successfully" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/tokens/token")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.revokeBusinessToken({
+            token: "token",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("revokeBusinessToken (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/tokens/token")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.revokeBusinessToken({
+                token: "token",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("switchBusiness (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                name: "name",
+                email: "email",
+                role: "role",
+                active_business: { id: "id", name: "name", handle: "handle", logo: "logo", category: "category" },
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo", category: "category" }],
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/business/switch/business")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.authentication.switchBusiness({
+            business: "business",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("switchBusiness (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/switch/business")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.switchBusiness({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("switchBusiness (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/switch/business")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.switchBusiness({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("switchBusiness (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/switch/business")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.authentication.switchBusiness({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
 });

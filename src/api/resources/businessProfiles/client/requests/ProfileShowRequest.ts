@@ -6,7 +6,7 @@
  *         handle: "katzs-deli"
  *     }
  */
-export interface GetBusinessProfileRequest {
+export interface ProfileShowRequest {
     /** The business handle */
     handle: string;
 }

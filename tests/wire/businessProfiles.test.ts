@@ -5,7 +5,7 @@ import { FiveOneEatClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("BusinessProfilesClient", () => {
-    test("getBusinessProfile (1)", async () => {
+    test("profile.show (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -76,13 +76,13 @@ describe("BusinessProfilesClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.businessProfiles.getBusinessProfile({
+        const response = await client.businessProfiles.profileShow({
             handle: "katzs-deli",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("getBusinessProfile (2)", async () => {
+    test("profile.show (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -97,7 +97,7 @@ describe("BusinessProfilesClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.businessProfiles.getBusinessProfile({
+            return await client.businessProfiles.profileShow({
                 handle: "handle",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);

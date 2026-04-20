@@ -3,12 +3,15 @@
 import * as FiveOneEat from "./api/index.js";
 import { AuthenticationClient } from "./api/resources/authentication/client/Client.js";
 import { BroadcastingClient } from "./api/resources/broadcasting/client/Client.js";
+import { BulletinsClient } from "./api/resources/bulletins/client/Client.js";
 import { BusinessContentClient } from "./api/resources/businessContent/client/Client.js";
+import { BusinessProfileClient } from "./api/resources/businessProfile/client/Client.js";
 import { BusinessProfilesClient } from "./api/resources/businessProfiles/client/Client.js";
 import { CustomerMessagingClient } from "./api/resources/customerMessaging/client/Client.js";
 import { DiscoveryClient } from "./api/resources/discovery/client/Client.js";
 import { EditorialsClient } from "./api/resources/editorials/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
+import { MenusClient } from "./api/resources/menus/client/Client.js";
 import { MyAccountClient } from "./api/resources/myAccount/client/Client.js";
 import { PushNotificationsClient } from "./api/resources/pushNotifications/client/Client.js";
 import { RecordClickClient } from "./api/resources/recordClick/client/Client.js";
@@ -33,12 +36,15 @@ export class FiveOneEatClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FiveOneEatClient.Options>;
     protected _authentication: AuthenticationClient | undefined;
     protected _broadcasting: BroadcastingClient | undefined;
+    protected _bulletins: BulletinsClient | undefined;
     protected _businessContent: BusinessContentClient | undefined;
+    protected _businessProfile: BusinessProfileClient | undefined;
     protected _businessProfiles: BusinessProfilesClient | undefined;
     protected _customerMessaging: CustomerMessagingClient | undefined;
     protected _discovery: DiscoveryClient | undefined;
     protected _editorials: EditorialsClient | undefined;
     protected _events: EventsClient | undefined;
+    protected _menus: MenusClient | undefined;
     protected _myAccount: MyAccountClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
     protected _ticketing: TicketingClient | undefined;
@@ -57,8 +63,16 @@ export class FiveOneEatClient {
         return (this._broadcasting ??= new BroadcastingClient(this._options));
     }
 
+    public get bulletins(): BulletinsClient {
+        return (this._bulletins ??= new BulletinsClient(this._options));
+    }
+
     public get businessContent(): BusinessContentClient {
         return (this._businessContent ??= new BusinessContentClient(this._options));
+    }
+
+    public get businessProfile(): BusinessProfileClient {
+        return (this._businessProfile ??= new BusinessProfileClient(this._options));
     }
 
     public get businessProfiles(): BusinessProfilesClient {
@@ -79,6 +93,10 @@ export class FiveOneEatClient {
 
     public get events(): EventsClient {
         return (this._events ??= new EventsClient(this._options));
+    }
+
+    public get menus(): MenusClient {
+        return (this._menus ??= new MenusClient(this._options));
     }
 
     public get myAccount(): MyAccountClient {

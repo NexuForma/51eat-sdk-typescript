@@ -2,6 +2,6 @@
 
 import type * as FiveOneEat from "../../../index.js";
 
-export interface GetBusinessProfileResponse {
-    data: FiveOneEat.BusinessProfileResource;
+export interface UpdateMenuItemVariationResponse {
+    data: FiveOneEat.MenuItemVariationResource;
 }

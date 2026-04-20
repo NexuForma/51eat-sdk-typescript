@@ -1,3 +1,3 @@
 export type { FavoritesBusinessRequest } from "./FavoritesBusinessRequest.js";
-export type { GetBusinessProfileRequest } from "./GetBusinessProfileRequest.js";
+export type { ProfileShowRequest } from "./ProfileShowRequest.js";
 export type { UnfavoritesBusinessRequest } from "./UnfavoritesBusinessRequest.js";
