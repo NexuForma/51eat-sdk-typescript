@@ -4,6 +4,6 @@ import type * as FiveOneEat from "../../../index.js";
 
 export type AdsServeAdResponse =
     | {
-          data: FiveOneEat.AdResource;
+          data: FiveOneEat.Ad;
       }
     | Record<string, unknown>;
