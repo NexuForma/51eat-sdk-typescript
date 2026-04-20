@@ -25,27 +25,27 @@ export class BusinessProfilesClient {
     /**
      * Retrieve core business information for the profile page.
      *
-     * @param {FiveOneEat.GetBusinessProfileRequest} request
+     * @param {FiveOneEat.ProfileShowRequest} request
      * @param {BusinessProfilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
      *
      * @example
-     *     await client.businessProfiles.getBusinessProfile({
+     *     await client.businessProfiles.profileShow({
      *         handle: "katzs-deli"
      *     })
      */
-    public getBusinessProfile(
-        request: FiveOneEat.GetBusinessProfileRequest,
+    public profileShow(
+        request: FiveOneEat.ProfileShowRequest,
         requestOptions?: BusinessProfilesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.GetBusinessProfileResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getBusinessProfile(request, requestOptions));
+    ): core.HttpResponsePromise<FiveOneEat.ProfileShowResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__profileShow(request, requestOptions));
     }
 
-    private async __getBusinessProfile(
-        request: FiveOneEat.GetBusinessProfileRequest,
+    private async __profileShow(
+        request: FiveOneEat.ProfileShowRequest,
         requestOptions?: BusinessProfilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.GetBusinessProfileResponse>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.ProfileShowResponse>> {
         const { handle } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -70,10 +70,7 @@ export class BusinessProfilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.GetBusinessProfileResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as FiveOneEat.ProfileShowResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

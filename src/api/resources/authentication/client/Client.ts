@@ -478,4 +478,537 @@ export class AuthenticationClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/customer/tokens/{token}");
     }
+
+    /**
+     * Create a new business user account and return an API token for immediate authentication.
+     *
+     * @param {FiveOneEat.RegisterBusinessRequest} request
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.authentication.registerBusiness({
+     *         name: "name",
+     *         email: "email",
+     *         password: "password",
+     *         device_name: "device_name",
+     *         password_confirmation: "password_confirmation"
+     *     })
+     */
+    public registerBusiness(
+        request: FiveOneEat.RegisterBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.RegisterBusinessResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__registerBusiness(request, requestOptions));
+    }
+
+    private async __registerBusiness(
+        request: FiveOneEat.RegisterBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.RegisterBusinessResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/register",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.RegisterBusinessResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/register");
+    }
+
+    /**
+     * Exchange business user credentials for an API token. Returns a 422 if the account is not a business account.
+     *
+     * @param {FiveOneEat.LoginBusinessRequest} request
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.authentication.loginBusiness({
+     *         email: "email",
+     *         password: "password",
+     *         device_name: "device_name"
+     *     })
+     */
+    public loginBusiness(
+        request: FiveOneEat.LoginBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.LoginBusinessResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__loginBusiness(request, requestOptions));
+    }
+
+    private async __loginBusiness(
+        request: FiveOneEat.LoginBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.LoginBusinessResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/login",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.LoginBusinessResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/login");
+    }
+
+    /**
+     * Retrieve the current authenticated business user with their active business and all owned businesses.
+     *
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.authentication.getBusinessMe()
+     */
+    public getBusinessMe(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.GetBusinessMeResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getBusinessMe(requestOptions));
+    }
+
+    private async __getBusinessMe(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.GetBusinessMeResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/me",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.GetBusinessMeResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/me");
+    }
+
+    /**
+     * Revoke the current API token and log out the business user.
+     *
+     * @param {FiveOneEat.LogoutBusinessRequest} request
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.authentication.logoutBusiness()
+     */
+    public logoutBusiness(
+        request: FiveOneEat.LogoutBusinessRequest = {},
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.LogoutBusinessResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__logoutBusiness(request, requestOptions));
+    }
+
+    private async __logoutBusiness(
+        request: FiveOneEat.LogoutBusinessRequest = {},
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.LogoutBusinessResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/logout",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.LogoutBusinessResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/logout");
+    }
+
+    /**
+     * Revoke all API tokens for the authenticated business user.
+     *
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.authentication.logoutAllBusiness()
+     */
+    public logoutAllBusiness(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.LogoutAllBusinessResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__logoutAllBusiness(requestOptions));
+    }
+
+    private async __logoutAllBusiness(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.LogoutAllBusinessResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/logout-all",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.LogoutAllBusinessResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/logout-all");
+    }
+
+    /**
+     * Retrieve a list of all API tokens for the authenticated business user.
+     *
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.authentication.getBusinessTokens()
+     */
+    public getBusinessTokens(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.GetBusinessTokensResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getBusinessTokens(requestOptions));
+    }
+
+    private async __getBusinessTokens(
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.GetBusinessTokensResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/tokens",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.GetBusinessTokensResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/tokens");
+    }
+
+    /**
+     * Delete a specific API token by its ID.
+     *
+     * @param {FiveOneEat.RevokeBusinessTokenRequest} request
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.authentication.revokeBusinessToken({
+     *         token: "token"
+     *     })
+     */
+    public revokeBusinessToken(
+        request: FiveOneEat.RevokeBusinessTokenRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.RevokeBusinessTokenResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__revokeBusinessToken(request, requestOptions));
+    }
+
+    private async __revokeBusinessToken(
+        request: FiveOneEat.RevokeBusinessTokenRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.RevokeBusinessTokenResponse>> {
+        const { token } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `business/tokens/${core.url.encodePathParam(token)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.RevokeBusinessTokenResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/business/tokens/{token}");
+    }
+
+    /**
+     * Set a different business as the active business for the authenticated user.
+     *
+     * @param {FiveOneEat.SwitchBusinessRequest} request
+     * @param {AuthenticationClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     *
+     * @example
+     *     await client.authentication.switchBusiness({
+     *         business: "business"
+     *     })
+     */
+    public switchBusiness(
+        request: FiveOneEat.SwitchBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.SwitchBusinessResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__switchBusiness(request, requestOptions));
+    }
+
+    private async __switchBusiness(
+        request: FiveOneEat.SwitchBusinessRequest,
+        requestOptions?: AuthenticationClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.SwitchBusinessResponse>> {
+        const { business } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `business/switch/${core.url.encodePathParam(business)}`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as FiveOneEat.SwitchBusinessResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/switch/{business}");
+    }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "private": false,
     "repository": {
         "type": "git",
@@ -44,6 +44,17 @@
             },
             "default": "./dist/cjs/api/resources/broadcasting/exports.js"
         },
+        "./bulletins": {
+            "import": {
+                "types": "./dist/esm/api/resources/bulletins/exports.d.mts",
+                "default": "./dist/esm/api/resources/bulletins/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/bulletins/exports.d.ts",
+                "default": "./dist/cjs/api/resources/bulletins/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/bulletins/exports.js"
+        },
         "./businessContent": {
             "import": {
                 "types": "./dist/esm/api/resources/businessContent/exports.d.mts",
@@ -54,6 +65,17 @@
                 "default": "./dist/cjs/api/resources/businessContent/exports.js"
             },
             "default": "./dist/cjs/api/resources/businessContent/exports.js"
+        },
+        "./businessProfile": {
+            "import": {
+                "types": "./dist/esm/api/resources/businessProfile/exports.d.mts",
+                "default": "./dist/esm/api/resources/businessProfile/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/businessProfile/exports.d.ts",
+                "default": "./dist/cjs/api/resources/businessProfile/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/businessProfile/exports.js"
         },
         "./businessProfiles": {
             "import": {
@@ -109,6 +131,17 @@
                 "default": "./dist/cjs/api/resources/events/exports.js"
             },
             "default": "./dist/cjs/api/resources/events/exports.js"
+        },
+        "./menus": {
+            "import": {
+                "types": "./dist/esm/api/resources/menus/exports.d.mts",
+                "default": "./dist/esm/api/resources/menus/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/menus/exports.d.ts",
+                "default": "./dist/cjs/api/resources/menus/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/menus/exports.js"
         },
         "./myAccount": {
             "import": {
