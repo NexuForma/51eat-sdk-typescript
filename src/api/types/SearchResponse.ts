@@ -3,5 +3,9 @@
 import type * as FiveOneEat from "../index.js";
 
 export interface SearchResponse {
-    data: FiveOneEat.SearchResource;
+    query: string;
+    businesses: FiveOneEat.BusinessSearchResult[];
+    events: FiveOneEat.EventSearchResult[];
+    menu_items: FiveOneEat.MenuItemSearchResult[];
+    products: FiveOneEat.ProductSearchResult[];
 }

@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "private": false,
     "repository": {
         "type": "git",
@@ -22,159 +22,38 @@
             },
             "default": "./dist/cjs/index.js"
         },
-        "./authentication": {
+        "./customerEvents": {
             "import": {
-                "types": "./dist/esm/api/resources/authentication/exports.d.mts",
-                "default": "./dist/esm/api/resources/authentication/exports.mjs"
+                "types": "./dist/esm/api/resources/customerEvents/exports.d.mts",
+                "default": "./dist/esm/api/resources/customerEvents/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/authentication/exports.d.ts",
-                "default": "./dist/cjs/api/resources/authentication/exports.js"
+                "types": "./dist/cjs/api/resources/customerEvents/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customerEvents/exports.js"
             },
-            "default": "./dist/cjs/api/resources/authentication/exports.js"
+            "default": "./dist/cjs/api/resources/customerEvents/exports.js"
         },
-        "./broadcasting": {
+        "./customerMyAccount": {
             "import": {
-                "types": "./dist/esm/api/resources/broadcasting/exports.d.mts",
-                "default": "./dist/esm/api/resources/broadcasting/exports.mjs"
+                "types": "./dist/esm/api/resources/customerMyAccount/exports.d.mts",
+                "default": "./dist/esm/api/resources/customerMyAccount/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/broadcasting/exports.d.ts",
-                "default": "./dist/cjs/api/resources/broadcasting/exports.js"
+                "types": "./dist/cjs/api/resources/customerMyAccount/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customerMyAccount/exports.js"
             },
-            "default": "./dist/cjs/api/resources/broadcasting/exports.js"
+            "default": "./dist/cjs/api/resources/customerMyAccount/exports.js"
         },
-        "./bulletins": {
+        "./customer": {
             "import": {
-                "types": "./dist/esm/api/resources/bulletins/exports.d.mts",
-                "default": "./dist/esm/api/resources/bulletins/exports.mjs"
+                "types": "./dist/esm/api/resources/customer/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/bulletins/exports.d.ts",
-                "default": "./dist/cjs/api/resources/bulletins/exports.js"
+                "types": "./dist/cjs/api/resources/customer/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/exports.js"
             },
-            "default": "./dist/cjs/api/resources/bulletins/exports.js"
-        },
-        "./businessContent": {
-            "import": {
-                "types": "./dist/esm/api/resources/businessContent/exports.d.mts",
-                "default": "./dist/esm/api/resources/businessContent/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/businessContent/exports.d.ts",
-                "default": "./dist/cjs/api/resources/businessContent/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/businessContent/exports.js"
-        },
-        "./businessProfile": {
-            "import": {
-                "types": "./dist/esm/api/resources/businessProfile/exports.d.mts",
-                "default": "./dist/esm/api/resources/businessProfile/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/businessProfile/exports.d.ts",
-                "default": "./dist/cjs/api/resources/businessProfile/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/businessProfile/exports.js"
-        },
-        "./businessProfiles": {
-            "import": {
-                "types": "./dist/esm/api/resources/businessProfiles/exports.d.mts",
-                "default": "./dist/esm/api/resources/businessProfiles/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/businessProfiles/exports.d.ts",
-                "default": "./dist/cjs/api/resources/businessProfiles/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/businessProfiles/exports.js"
-        },
-        "./customerMessaging": {
-            "import": {
-                "types": "./dist/esm/api/resources/customerMessaging/exports.d.mts",
-                "default": "./dist/esm/api/resources/customerMessaging/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/customerMessaging/exports.d.ts",
-                "default": "./dist/cjs/api/resources/customerMessaging/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/customerMessaging/exports.js"
-        },
-        "./discovery": {
-            "import": {
-                "types": "./dist/esm/api/resources/discovery/exports.d.mts",
-                "default": "./dist/esm/api/resources/discovery/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/discovery/exports.d.ts",
-                "default": "./dist/cjs/api/resources/discovery/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/discovery/exports.js"
-        },
-        "./editorials": {
-            "import": {
-                "types": "./dist/esm/api/resources/editorials/exports.d.mts",
-                "default": "./dist/esm/api/resources/editorials/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/editorials/exports.d.ts",
-                "default": "./dist/cjs/api/resources/editorials/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/editorials/exports.js"
-        },
-        "./events": {
-            "import": {
-                "types": "./dist/esm/api/resources/events/exports.d.mts",
-                "default": "./dist/esm/api/resources/events/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/events/exports.d.ts",
-                "default": "./dist/cjs/api/resources/events/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/events/exports.js"
-        },
-        "./menus": {
-            "import": {
-                "types": "./dist/esm/api/resources/menus/exports.d.mts",
-                "default": "./dist/esm/api/resources/menus/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/menus/exports.d.ts",
-                "default": "./dist/cjs/api/resources/menus/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/menus/exports.js"
-        },
-        "./myAccount": {
-            "import": {
-                "types": "./dist/esm/api/resources/myAccount/exports.d.mts",
-                "default": "./dist/esm/api/resources/myAccount/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/myAccount/exports.d.ts",
-                "default": "./dist/cjs/api/resources/myAccount/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/myAccount/exports.js"
-        },
-        "./pushNotifications": {
-            "import": {
-                "types": "./dist/esm/api/resources/pushNotifications/exports.d.mts",
-                "default": "./dist/esm/api/resources/pushNotifications/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/pushNotifications/exports.d.ts",
-                "default": "./dist/cjs/api/resources/pushNotifications/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/pushNotifications/exports.js"
-        },
-        "./ticketing": {
-            "import": {
-                "types": "./dist/esm/api/resources/ticketing/exports.d.mts",
-                "default": "./dist/esm/api/resources/ticketing/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/ticketing/exports.d.ts",
-                "default": "./dist/cjs/api/resources/ticketing/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/ticketing/exports.js"
+            "default": "./dist/cjs/api/resources/customer/exports.js"
         },
         "./recordClick": {
             "import": {
@@ -197,6 +76,325 @@
                 "default": "./dist/cjs/api/resources/serveAd/exports.js"
             },
             "default": "./dist/cjs/api/resources/serveAd/exports.js"
+        },
+        "./business": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/exports.js"
+        },
+        "./business/auth": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/auth/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/auth/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/auth/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/auth/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/auth/exports.js"
+        },
+        "./business/bulletins": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/bulletins/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/bulletins/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/bulletins/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/bulletins/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/bulletins/exports.js"
+        },
+        "./business/menus": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/menus/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/menus/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/menus/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/menus/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/menus/exports.js"
+        },
+        "./business/profile": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/profile/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/profile/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/profile/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/profile/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/profile/exports.js"
+        },
+        "./business/auth/tokens": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/auth/resources/tokens/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/auth/resources/tokens/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/auth/resources/tokens/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/auth/resources/tokens/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/auth/resources/tokens/exports.js"
+        },
+        "./business/menus/groups": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/menus/resources/groups/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/menus/resources/groups/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/menus/resources/groups/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/menus/resources/groups/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/menus/resources/groups/exports.js"
+        },
+        "./business/menus/items": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/menus/resources/items/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/menus/resources/items/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/menus/resources/items/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/exports.js"
+        },
+        "./business/menus/items/variations": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/menus/resources/items/resources/variations/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/menus/resources/items/resources/variations/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/variations/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/variations/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/variations/exports.js"
+        },
+        "./business/menus/items/modifiers": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.js"
+        },
+        "./business/profile/logo": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/profile/resources/logo/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/profile/resources/logo/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/profile/resources/logo/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/profile/resources/logo/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/profile/resources/logo/exports.js"
+        },
+        "./customer/auth": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/auth/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/auth/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/auth/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/auth/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/auth/exports.js"
+        },
+        "./customer/businesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/businesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/businesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/businesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
+        },
+        "./customer/explore": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/explore/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/explore/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/explore/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/explore/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/explore/exports.js"
+        },
+        "./customer/discovery": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/discovery/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/discovery/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/discovery/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/discovery/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/discovery/exports.js"
+        },
+        "./customer/editorials": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/editorials/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/editorials/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/editorials/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/editorials/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/editorials/exports.js"
+        },
+        "./customer/events": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/events/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/events/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/events/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/events/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/events/exports.js"
+        },
+        "./customer/messaging": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/messaging/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/messaging/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/messaging/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/messaging/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/messaging/exports.js"
+        },
+        "./customer/me": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/exports.js"
+        },
+        "./customer/pushNotifications": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/pushNotifications/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/pushNotifications/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/pushNotifications/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/pushNotifications/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/pushNotifications/exports.js"
+        },
+        "./customer/auth/tokens": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/auth/resources/tokens/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/auth/resources/tokens/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/auth/resources/tokens/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/auth/resources/tokens/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/auth/resources/tokens/exports.js"
+        },
+        "./customer/businesses/bulletins": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/businesses/resources/bulletins/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/businesses/resources/bulletins/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/exports.js"
+        },
+        "./customer/businesses/events": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/businesses/resources/events/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/businesses/resources/events/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/businesses/resources/events/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/events/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/events/exports.js"
+        },
+        "./customer/businesses/bulletins/comments": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/exports.js"
+        },
+        "./customer/events/ticketing": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/events/resources/ticketing/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/events/resources/ticketing/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/events/resources/ticketing/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/events/resources/ticketing/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/events/resources/ticketing/exports.js"
+        },
+        "./customer/me/tickets": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/tickets/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/tickets/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/tickets/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/tickets/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/tickets/exports.js"
+        },
+        "./customer/me/ticketOrders": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/ticketOrders/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/ticketOrders/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/ticketOrders/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/ticketOrders/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/ticketOrders/exports.js"
+        },
+        "./customer/messaging/conversations": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/messaging/resources/conversations/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/messaging/resources/conversations/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/messaging/resources/conversations/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/messaging/resources/conversations/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/messaging/resources/conversations/exports.js"
+        },
+        "./customer/messaging/messages": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/messaging/resources/messages/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/messaging/resources/messages/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/messaging/resources/messages/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/messaging/resources/messages/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/messaging/resources/messages/exports.js"
         },
         "./package.json": "./package.json"
     },
