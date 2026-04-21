@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "private": false,
     "repository": {
         "type": "git",
@@ -21,6 +21,28 @@
                 "default": "./dist/cjs/index.js"
             },
             "default": "./dist/cjs/index.js"
+        },
+        "./businessMessaging": {
+            "import": {
+                "types": "./dist/esm/api/resources/businessMessaging/exports.d.mts",
+                "default": "./dist/esm/api/resources/businessMessaging/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/businessMessaging/exports.d.ts",
+                "default": "./dist/cjs/api/resources/businessMessaging/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/businessMessaging/exports.js"
+        },
+        "./businessPushNotifications": {
+            "import": {
+                "types": "./dist/esm/api/resources/businessPushNotifications/exports.d.mts",
+                "default": "./dist/esm/api/resources/businessPushNotifications/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/businessPushNotifications/exports.d.ts",
+                "default": "./dist/cjs/api/resources/businessPushNotifications/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/businessPushNotifications/exports.js"
         },
         "./customerEvents": {
             "import": {
