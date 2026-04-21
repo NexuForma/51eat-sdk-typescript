@@ -109,8 +109,8 @@ import * as fs from "fs";
 import { FiveOneEatClient } from "@51eat/sdk";
 
 const client = new FiveOneEatClient({ token: "YOUR_TOKEN" });
-await client.business.profile.logo.upload({
-    logo: fs.createReadStream("/path/to/your/file")
+await client.business.gallery.upload({
+    photo: fs.createReadStream("/path/to/your/file")
 });
 ```
 The client accepts a variety of types for file upload parameters:

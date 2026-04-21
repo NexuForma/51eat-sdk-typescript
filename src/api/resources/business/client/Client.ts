@@ -4,7 +4,9 @@ import type { BaseClientOptions } from "../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BulletinsClient } from "../resources/bulletins/client/Client.js";
+import { GalleryClient } from "../resources/gallery/client/Client.js";
 import { MenusClient } from "../resources/menus/client/Client.js";
+import { MessagingClient } from "../resources/messaging/client/Client.js";
 import { ProfileClient } from "../resources/profile/client/Client.js";
 
 export declare namespace BusinessClient {
@@ -15,8 +17,10 @@ export class BusinessClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<BusinessClient.Options>;
     protected _auth: AuthClient | undefined;
     protected _bulletins: BulletinsClient | undefined;
+    protected _gallery: GalleryClient | undefined;
     protected _menus: MenusClient | undefined;
     protected _profile: ProfileClient | undefined;
+    protected _messaging: MessagingClient | undefined;
 
     constructor(options: BusinessClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -30,11 +34,19 @@ export class BusinessClient {
         return (this._bulletins ??= new BulletinsClient(this._options));
     }
 
+    public get gallery(): GalleryClient {
+        return (this._gallery ??= new GalleryClient(this._options));
+    }
+
     public get menus(): MenusClient {
         return (this._menus ??= new MenusClient(this._options));
     }
 
     public get profile(): ProfileClient {
         return (this._profile ??= new ProfileClient(this._options));
+    }
+
+    public get messaging(): MessagingClient {
+        return (this._messaging ??= new MessagingClient(this._options));
     }
 }
