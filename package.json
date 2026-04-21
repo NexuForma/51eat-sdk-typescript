@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "private": false,
     "repository": {
         "type": "git",
@@ -110,6 +110,17 @@
             },
             "default": "./dist/cjs/api/resources/business/resources/bulletins/exports.js"
         },
+        "./business/gallery": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/gallery/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/gallery/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/gallery/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/gallery/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/gallery/exports.js"
+        },
         "./business/menus": {
             "import": {
                 "types": "./dist/esm/api/resources/business/resources/menus/exports.d.mts",
@@ -186,6 +197,39 @@
                 "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/menus/resources/items/resources/modifiers/exports.js"
+        },
+        "./business/messaging": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/messaging/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/messaging/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/messaging/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/messaging/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/messaging/exports.js"
+        },
+        "./business/messaging/conversations": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/messaging/resources/conversations/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/messaging/resources/conversations/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/messaging/resources/conversations/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/messaging/resources/conversations/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/messaging/resources/conversations/exports.js"
+        },
+        "./business/messaging/messages": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/messaging/resources/messages/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/messaging/resources/messages/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/messaging/resources/messages/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/messaging/resources/messages/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/messaging/resources/messages/exports.js"
         },
         "./business/profile/logo": {
             "import": {
