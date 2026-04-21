@@ -1,4 +1,206 @@
 # Reference
+## Business: Messaging
+<details><summary><code>client.businessMessaging.<a href="/src/api/resources/businessMessaging/client/Client.ts">businessChannelAuthAuthenticate</a>({ ...params }) -> number</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+This endpoint is used by the business companion mobile app to authenticate with
+Pusher channels. It validates that the authenticated business user has
+permission to access the requested channel, scoped to their active business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessMessaging.businessChannelAuthAuthenticate({
+    channel_name: "channel_name",
+    socket_id: "socket_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.BusinessChannelAuthAuthenticateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessMessagingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Business: Push Notifications
+<details><summary><code>client.businessPushNotifications.<a href="/src/api/resources/businessPushNotifications/client/Client.ts">registerBusinessPushToken</a>({ ...params }) -> FiveOneEat.RegisterBusinessPushTokenResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Register (or update) the authenticated business user's Expo push token for a
+device. If a `device_id` is provided, an existing registration for that device
+is updated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessPushNotifications.registerBusinessPushToken({
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StorePushTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessPushNotificationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessPushNotifications.<a href="/src/api/resources/businessPushNotifications/client/Client.ts">unregisterBusinessPushToken</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete the authenticated business user's Expo push token registration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessPushNotifications.unregisterBusinessPushToken({
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UnregisterBusinessPushTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessPushNotificationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Events
 <details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">holdTickets</a>({ ...params }) -> FiveOneEat.HoldTicketsResponse</code></summary>
 <dl>
@@ -5390,7 +5592,7 @@ await client.customer.pushNotifications.register({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.StorePushTokenRequest` 
+**request:** `FiveOneEat.customer.AppHttpRequestsApiV1CustomerPushTokensStorePushTokenRequest` 
     
 </dd>
 </dl>
