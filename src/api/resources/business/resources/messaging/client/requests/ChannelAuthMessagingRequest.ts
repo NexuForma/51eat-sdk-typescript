@@ -7,7 +7,7 @@
  *         socket_id: "socket_id"
  *     }
  */
-export interface BusinessChannelAuthAuthenticateRequest {
+export interface ChannelAuthMessagingRequest {
     /** string */
     channel_name: string;
     /** string */
