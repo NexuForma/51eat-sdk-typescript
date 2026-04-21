@@ -1,9 +1,4 @@
 export * as business from "./business/index.js";
-export * from "./businessMessaging/client/requests/index.js";
-export * as businessMessaging from "./businessMessaging/index.js";
-export * from "./businessPushNotifications/client/requests/index.js";
-export * as businessPushNotifications from "./businessPushNotifications/index.js";
-export * from "./businessPushNotifications/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";

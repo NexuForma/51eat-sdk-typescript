@@ -6,6 +6,6 @@
  *         token: "token"
  *     }
  */
-export interface UnregisterBusinessPushTokenRequest {
+export interface UnregisterPushNotificationsRequest {
     token: string;
 }

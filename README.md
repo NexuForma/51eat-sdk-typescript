@@ -45,9 +45,12 @@ Instantiate and use the client with the following:
 import { FiveOneEatClient } from "@51eat/sdk";
 
 const client = new FiveOneEatClient({ token: "YOUR_TOKEN" });
-await client.businessMessaging.businessChannelAuthAuthenticate({
-    channel_name: "channel_name",
-    socket_id: "socket_id"
+await client.customerEvents.holdTickets({
+    eventId: "eventId",
+    tickets: [{
+            ticket_type_id: "ticket_type_id",
+            quantity: 1
+        }]
 });
 ```
 
@@ -71,7 +74,7 @@ following namespace:
 ```typescript
 import { FiveOneEat } from "@51eat/sdk";
 
-const request: FiveOneEat.BusinessChannelAuthAuthenticateRequest = {
+const request: FiveOneEat.StoreTicketHoldRequest = {
     ...
 };
 ```
@@ -85,7 +88,7 @@ will be thrown.
 import { FiveOneEatError } from "@51eat/sdk";
 
 try {
-    await client.businessMessaging.businessChannelAuthAuthenticate(...);
+    await client.customerEvents.holdTickets(...);
 } catch (err) {
     if (err instanceof FiveOneEatError) {
         console.log(err.statusCode);
@@ -147,9 +150,9 @@ For example, `fs.ReadStream` has a `path` property which the SDK uses to retriev
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { BusinessMessagingClient } from '@51eat/sdk/businessMessaging';
+import { CustomerEventsClient } from '@51eat/sdk/customerEvents';
 
-const client = new BusinessMessagingClient({...});
+const client = new CustomerEventsClient({...});
 ```
 
 ### Additional Headers
@@ -166,7 +169,7 @@ const client = new FiveOneEatClient({
     }
 });
 
-const response = await client.businessMessaging.businessChannelAuthAuthenticate(..., {
+const response = await client.customerEvents.holdTickets(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -178,7 +181,7 @@ const response = await client.businessMessaging.businessChannelAuthAuthenticate(
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.businessMessaging.businessChannelAuthAuthenticate(..., {
+const response = await client.customerEvents.holdTickets(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -200,7 +203,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.businessMessaging.businessChannelAuthAuthenticate(..., {
+const response = await client.customerEvents.holdTickets(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -210,7 +213,7 @@ const response = await client.businessMessaging.businessChannelAuthAuthenticate(
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.businessMessaging.businessChannelAuthAuthenticate(..., {
+const response = await client.customerEvents.holdTickets(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -221,7 +224,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.businessMessaging.businessChannelAuthAuthenticate(..., {
+const response = await client.customerEvents.holdTickets(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -233,7 +236,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.businessMessaging.businessChannelAuthAuthenticate(...).withRawResponse();
+const { data, rawResponse } = await client.customerEvents.holdTickets(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

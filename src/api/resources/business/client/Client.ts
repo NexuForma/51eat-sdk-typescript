@@ -8,6 +8,7 @@ import { GalleryClient } from "../resources/gallery/client/Client.js";
 import { MenusClient } from "../resources/menus/client/Client.js";
 import { MessagingClient } from "../resources/messaging/client/Client.js";
 import { ProfileClient } from "../resources/profile/client/Client.js";
+import { PushNotificationsClient } from "../resources/pushNotifications/client/Client.js";
 
 export declare namespace BusinessClient {
     export type Options = BaseClientOptions;
@@ -19,8 +20,9 @@ export class BusinessClient {
     protected _bulletins: BulletinsClient | undefined;
     protected _gallery: GalleryClient | undefined;
     protected _menus: MenusClient | undefined;
-    protected _profile: ProfileClient | undefined;
     protected _messaging: MessagingClient | undefined;
+    protected _profile: ProfileClient | undefined;
+    protected _pushNotifications: PushNotificationsClient | undefined;
 
     constructor(options: BusinessClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -42,11 +44,15 @@ export class BusinessClient {
         return (this._menus ??= new MenusClient(this._options));
     }
 
+    public get messaging(): MessagingClient {
+        return (this._messaging ??= new MessagingClient(this._options));
+    }
+
     public get profile(): ProfileClient {
         return (this._profile ??= new ProfileClient(this._options));
     }
 
-    public get messaging(): MessagingClient {
-        return (this._messaging ??= new MessagingClient(this._options));
+    public get pushNotifications(): PushNotificationsClient {
+        return (this._pushNotifications ??= new PushNotificationsClient(this._options));
     }
 }
