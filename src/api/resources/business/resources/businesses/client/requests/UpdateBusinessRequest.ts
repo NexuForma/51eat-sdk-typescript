@@ -38,12 +38,23 @@ export interface UpdateBusinessRequest {
     seasonal?: boolean;
     ownership?: string[] | null;
     category_ids: number[];
+    hours?: UpdateBusinessRequest.Hours.Item[] | null;
     operating_months?: UpdateBusinessRequest.OperatingMonths.Item[] | null;
     certification_ids?: number[] | null;
     cuisine_ids?: number[] | null;
 }
 
 export namespace UpdateBusinessRequest {
+    export type Hours = Hours.Item[];
+
+    export namespace Hours {
+        export interface Item {
+            isOpen?: boolean | undefined;
+            openTime?: (string | null) | undefined;
+            closeTime?: (string | null) | undefined;
+        }
+    }
+
     export type OperatingMonths = OperatingMonths.Item[];
 
     export namespace OperatingMonths {
