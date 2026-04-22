@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "private": false,
     "repository": {
         "type": "git",
@@ -164,6 +164,50 @@
                 "default": "./dist/cjs/api/resources/business/resources/pushNotifications/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/pushNotifications/exports.js"
+        },
+        "./business/businesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/businesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/businesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/businesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
+        },
+        "./business/cuisines": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/cuisines/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/cuisines/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/cuisines/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/cuisines/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/cuisines/exports.js"
+        },
+        "./business/certifications": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/certifications/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/certifications/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/certifications/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/certifications/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/certifications/exports.js"
+        },
+        "./business/categories": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/categories/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/categories/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/categories/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/categories/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/categories/exports.js"
         },
         "./business/auth/tokens": {
             "import": {
