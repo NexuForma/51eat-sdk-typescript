@@ -7,6 +7,7 @@ import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
+import * as FiveOneEat from "../../../../../index.js";
 
 export declare namespace CuisinesClient {
     export type Options = BaseClientOptions;
@@ -22,16 +23,25 @@ export class CuisinesClient {
     }
 
     /**
+     * Retrieve a list of all cuisines, ordered alphabetically. Use these IDs to
+     * populate the `cuisine_ids` field when updating a business profile.
+     *
      * @param {CuisinesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
      *
      * @example
      *     await client.business.cuisines.list()
      */
-    public list(requestOptions?: CuisinesClient.RequestOptions): core.HttpResponsePromise<void> {
+    public list(
+        requestOptions?: CuisinesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.business.ListCuisinesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
-    private async __list(requestOptions?: CuisinesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
+    private async __list(
+        requestOptions?: CuisinesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.business.ListCuisinesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -55,15 +65,23 @@ export class CuisinesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.ListCuisinesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/cuisines");

@@ -17,7 +17,6 @@ describe("CustomerClient", () => {
                         id: "id",
                         name: "name",
                         handle: "handle",
-                        category: null,
                         city: null,
                         state: null,
                         logo: null,
@@ -64,7 +63,7 @@ describe("CustomerClient", () => {
 
         const response = await client.customer.search({
             q: "wings",
-            category: "restaurant",
+            categories: "restaurant,bakery",
             city: "Buffalo",
             cuisines: "italian,mexican",
             certifications: "kosher,halal",

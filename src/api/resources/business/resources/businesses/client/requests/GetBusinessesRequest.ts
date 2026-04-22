@@ -7,5 +7,6 @@
  *     }
  */
 export interface GetBusinessesRequest {
+    /** The business ID */
     business: string;
 }

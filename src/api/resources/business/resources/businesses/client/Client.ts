@@ -7,7 +7,7 @@ import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
-import type * as FiveOneEat from "../../../../../index.js";
+import * as FiveOneEat from "../../../../../index.js";
 
 export declare namespace BusinessesClient {
     export type Options = BaseClientOptions;
@@ -23,16 +23,34 @@ export class BusinessesClient {
     }
 
     /**
+     * Retrieve a paginated list of all businesses owned by the authenticated user.
+     * Useful for rendering a business picker in the companion mobile app.
+     *
+     * @param {FiveOneEat.business.ListBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.businesses.list()
      */
-    public list(requestOptions?: BusinessesClient.RequestOptions): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+    public list(
+        request: FiveOneEat.business.ListBusinessesRequest = {},
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.business.ListBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __list(requestOptions?: BusinessesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
+    private async __list(
+        request: FiveOneEat.business.ListBusinessesRequest = {},
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.business.ListBusinessesResponse>> {
+        const { page, per_page: perPage } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            per_page: perPage,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -48,7 +66,12 @@ export class BusinessesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -56,31 +79,62 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.ListBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/businesses");
     }
 
     /**
+     * Create a new business owned by the authenticated user. The newly created
+     * business is automatically set as the user's active business.
+     *
+     * @param {FiveOneEat.business.StoreBusinessRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
      * @example
-     *     await client.business.businesses.create()
+     *     await client.business.businesses.create({
+     *         name: "name",
+     *         handle: "handle",
+     *         category_ids: [1]
+     *     })
      */
-    public create(requestOptions?: BusinessesClient.RequestOptions): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(this.__create(requestOptions));
+    public create(
+        request: FiveOneEat.business.StoreBusinessRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<number> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
-    private async __create(requestOptions?: BusinessesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
+    private async __create(
+        request: FiveOneEat.business.StoreBusinessRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<number>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -96,7 +150,10 @@ export class BusinessesClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -104,23 +161,41 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return { data: _response.body as number, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/businesses");
     }
 
     /**
+     * Retrieve a single business owned by the authenticated user.
+     *
      * @param {FiveOneEat.business.GetBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.business.businesses.get({
@@ -130,14 +205,14 @@ export class BusinessesClient {
     public get(
         request: FiveOneEat.business.GetBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.GetBusinessesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
         request: FiveOneEat.business.GetBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.business.GetBusinessesResponse>> {
         const { business } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -162,15 +237,27 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.GetBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
@@ -182,26 +269,36 @@ export class BusinessesClient {
     }
 
     /**
-     * @param {FiveOneEat.business.UpdateBusinessesRequest} request
+     * Update core fields for a business owned by the authenticated user.
+     *
+     * @param {FiveOneEat.business.UpdateBusinessRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.businesses.update({
-     *         business: "business"
+     *         business: "business",
+     *         name: "name",
+     *         handle: "handle",
+     *         category_ids: [1]
      *     })
      */
     public update(
-        request: FiveOneEat.business.UpdateBusinessesRequest,
+        request: FiveOneEat.business.UpdateBusinessRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.UpdateBusinessesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
     private async __update(
-        request: FiveOneEat.business.UpdateBusinessesRequest,
+        request: FiveOneEat.business.UpdateBusinessRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { business } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.business.UpdateBusinessesResponse>> {
+        const { business, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -217,7 +314,10 @@ export class BusinessesClient {
             ),
             method: "PUT",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -225,15 +325,32 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.UpdateBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
@@ -245,8 +362,14 @@ export class BusinessesClient {
     }
 
     /**
+     * Delete a business owned by the authenticated user.
+     *
      * @param {FiveOneEat.business.DeleteBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.business.businesses.delete({
@@ -292,11 +415,20 @@ export class BusinessesClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(

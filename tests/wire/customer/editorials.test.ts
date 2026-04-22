@@ -79,7 +79,6 @@ describe("EditorialsClient", () => {
                     handle: "handle",
                     description: "description",
                     bio: "bio",
-                    category: "category",
                     email: "email",
                     phone: "phone",
                     website: "website",
@@ -109,6 +108,17 @@ describe("EditorialsClient", () => {
                     staff_pick: true,
                     favorites_count: 1,
                     is_favorited: true,
+                    categories: [
+                        {
+                            id: 1,
+                            name: "name",
+                            slug: "slug",
+                            description: null,
+                            icon: null,
+                            group: "group",
+                            sort_order: 1,
+                        },
+                    ],
                     cuisines: [{ id: "id", name: "name", slug: "slug" }],
                     certifications: [{ id: 1, name: "name", slug: "slug", icon: null }],
                     temporary_locations: [

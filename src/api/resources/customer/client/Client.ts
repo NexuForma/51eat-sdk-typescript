@@ -90,7 +90,7 @@ export class CustomerClient {
      * @example
      *     await client.customer.search({
      *         q: "wings",
-     *         category: "restaurant",
+     *         categories: "restaurant,bakery",
      *         city: "Buffalo",
      *         cuisines: "italian,mexican",
      *         certifications: "kosher,halal"
@@ -109,7 +109,7 @@ export class CustomerClient {
     ): Promise<core.WithRawResponse<FiveOneEat.SearchCustomerResponse>> {
         const {
             q,
-            category,
+            categories,
             city,
             cuisines,
             certifications,
@@ -120,7 +120,7 @@ export class CustomerClient {
         } = request;
         const _queryParams: Record<string, unknown> = {
             q,
-            category,
+            categories,
             city,
             cuisines,
             certifications,

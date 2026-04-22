@@ -7,7 +7,6 @@
 export interface UpdateBusinessProfileRequest {
     name?: string;
     handle?: string;
-    category?: string | null;
     phone?: string | null;
     email?: string | null;
     website?: string | null;
@@ -34,6 +33,7 @@ export interface UpdateBusinessProfileRequest {
     pickup_instructions?: string | null;
     ownership?: string[] | null;
     badges?: string[] | null;
+    category_ids?: number[];
     hours?: UpdateBusinessProfileRequest.Hours.Item[] | null;
     operating_months?: number[] | null;
 }

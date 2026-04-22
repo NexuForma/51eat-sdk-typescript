@@ -14,7 +14,6 @@ describe("LogoClient", () => {
                 id: "id",
                 name: "name",
                 handle: "handle",
-                category: "category",
                 description: "description",
                 bio: "bio",
                 email: "email",
@@ -48,6 +47,9 @@ describe("LogoClient", () => {
                 founding_partner: true,
                 staff_pick: true,
                 favorites_count: 1,
+                categories: [
+                    { id: 1, name: "name", slug: "slug", description: null, icon: null, group: "group", sort_order: 1 },
+                ],
                 cuisines: [{ id: "id", name: "name", slug: "slug" }],
                 certifications: [{ id: 1, name: "name", slug: "slug", icon: null }],
                 active_temporary_locations: [

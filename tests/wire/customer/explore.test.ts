@@ -16,7 +16,6 @@ describe("ExploreClient", () => {
                         id: "id",
                         name: "name",
                         handle: "handle",
-                        category: null,
                         latitude: null,
                         longitude: null,
                         logo: null,

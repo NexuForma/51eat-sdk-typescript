@@ -7,5 +7,6 @@
  *     }
  */
 export interface DeleteBusinessesRequest {
+    /** The business ID */
     business: string;
 }

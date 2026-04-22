@@ -6,7 +6,6 @@ export interface BusinessProfile {
     id: string;
     name: string;
     handle: string;
-    category: string | null;
     description: string | null;
     bio: string | null;
     email: string | null;
@@ -40,6 +39,7 @@ export interface BusinessProfile {
     founding_partner: boolean;
     staff_pick: boolean;
     favorites_count: number;
+    categories?: FiveOneEat.BusinessCategory[] | undefined;
     cuisines?: BusinessProfile.Cuisines.Item[] | undefined;
     certifications?: BusinessProfile.Certifications.Item[] | undefined;
     active_temporary_locations?: FiveOneEat.CustomerTemporaryLocation[] | undefined;

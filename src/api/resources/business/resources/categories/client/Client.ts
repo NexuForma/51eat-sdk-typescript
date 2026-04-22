@@ -7,6 +7,7 @@ import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
+import * as FiveOneEat from "../../../../../index.js";
 
 export declare namespace CategoriesClient {
     export type Options = BaseClientOptions;
@@ -22,16 +23,25 @@ export class CategoriesClient {
     }
 
     /**
+     * Retrieve a list of all business categories, ordered by sort order and name.
+     * Use these IDs to populate the `category_ids` field when creating or updating a business.
+     *
      * @param {CategoriesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
      *
      * @example
      *     await client.business.categories.list()
      */
-    public list(requestOptions?: CategoriesClient.RequestOptions): core.HttpResponsePromise<void> {
+    public list(
+        requestOptions?: CategoriesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.business.ListCategoriesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
-    private async __list(requestOptions?: CategoriesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
+    private async __list(
+        requestOptions?: CategoriesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.business.ListCategoriesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -55,15 +65,23 @@ export class CategoriesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.ListCategoriesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/categories");

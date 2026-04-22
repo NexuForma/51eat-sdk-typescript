@@ -501,7 +501,7 @@ appear per section. Optionally filter by category, city, or geo radius.
 ```typescript
 await client.customer.search({
     q: "wings",
-    category: "restaurant",
+    categories: "restaurant,bakery",
     city: "Buffalo",
     cuisines: "italian,mexican",
     certifications: "kosher,halal"
@@ -1362,6 +1362,337 @@ await client.business.bulletins.togglePublished({
 <dd>
 
 **requestOptions:** `BulletinsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Business Businesses
+<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a paginated list of all businesses owned by the authenticated user.
+Useful for rendering a business picker in the companion mobile app.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.businesses.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ListBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">create</a>({ ...params }) -> number</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new business owned by the authenticated user. The newly created
+business is automatically set as the user's active business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.businesses.create({
+    name: "name",
+    handle: "handle",
+    category_ids: [1]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.StoreBusinessRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a single business owned by the authenticated user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.businesses.get({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.GetBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">update</a>({ ...params }) -> FiveOneEat.UpdateBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update core fields for a business owned by the authenticated user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.businesses.update({
+    business: "business",
+    name: "name",
+    handle: "handle",
+    category_ids: [1]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.UpdateBusinessRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a business owned by the authenticated user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.businesses.delete({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.DeleteBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2334,246 +2665,25 @@ await client.business.pushNotifications.unregister({
 </dl>
 </details>
 
-## Business Businesses
-<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">list</a>() -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.business.businesses.list();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">create</a>() -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.business.businesses.create();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">get</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.business.businesses.get({
-    business: "business"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.business.GetBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">update</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.business.businesses.update({
-    business: "business"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.business.UpdateBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.business.businesses.<a href="/src/api/resources/business/resources/businesses/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.business.businesses.delete({
-    business: "business"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.business.DeleteBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Business Cuisines
-<details><summary><code>client.business.cuisines.<a href="/src/api/resources/business/resources/cuisines/client/Client.ts">list</a>() -> void</code></summary>
+<details><summary><code>client.business.cuisines.<a href="/src/api/resources/business/resources/cuisines/client/Client.ts">list</a>() -> FiveOneEat.ListCuisinesResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all cuisines, ordered alphabetically. Use these IDs to
+populate the `cuisine_ids` field when updating a business profile.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -2613,9 +2723,24 @@ await client.business.cuisines.list();
 </details>
 
 ## Business Certifications
-<details><summary><code>client.business.certifications.<a href="/src/api/resources/business/resources/certifications/client/Client.ts">list</a>() -> void</code></summary>
+<details><summary><code>client.business.certifications.<a href="/src/api/resources/business/resources/certifications/client/Client.ts">list</a>() -> FiveOneEat.ListCertificationsResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all certifications, ordered alphabetically. Use these IDs
+to populate the `certification_ids` field when updating a business profile.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -2655,9 +2780,24 @@ await client.business.certifications.list();
 </details>
 
 ## Business Categories
-<details><summary><code>client.business.categories.<a href="/src/api/resources/business/resources/categories/client/Client.ts">list</a>() -> void</code></summary>
+<details><summary><code>client.business.categories.<a href="/src/api/resources/business/resources/categories/client/Client.ts">list</a>() -> FiveOneEat.ListCategoriesResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all business categories, ordered by sort order and name.
+Use these IDs to populate the `category_ids` field when creating or updating a business.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -5296,7 +5436,7 @@ await client.customer.discovery.highlights();
 <dl>
 <dd>
 
-Retrieve a list of all business categories that have businesses.
+Retrieve a list of all business categories with their business counts.
 This endpoint is used to populate category filters and navigation.
 </dd>
 </dl>

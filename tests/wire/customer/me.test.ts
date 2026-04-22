@@ -18,7 +18,6 @@ describe("MeClient", () => {
                         handle: "handle",
                         description: null,
                         bio: null,
-                        category: null,
                         email: null,
                         phone: null,
                         website: null,

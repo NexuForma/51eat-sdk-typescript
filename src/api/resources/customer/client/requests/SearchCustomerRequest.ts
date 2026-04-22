@@ -4,7 +4,7 @@
  * @example
  *     {
  *         q: "wings",
- *         category: "restaurant",
+ *         categories: "restaurant,bakery",
  *         city: "Buffalo",
  *         cuisines: "italian,mexican",
  *         certifications: "kosher,halal"
@@ -13,8 +13,8 @@
 export interface SearchCustomerRequest {
     /** Search query */
     q: string;
-    /** Filter by business category */
-    category?: string;
+    /** Comma-separated category slugs to filter businesses by */
+    categories?: string;
     /** Filter by city */
     city?: string;
     /** Comma-separated cuisine slugs to filter businesses by */

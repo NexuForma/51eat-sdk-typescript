@@ -129,8 +129,24 @@ describe("AuthClient", () => {
                 name: "name",
                 email: "email",
                 role: "role",
-                active_business: { id: "id", name: "name", handle: "handle", logo: "logo", category: "category" },
-                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo", category: "category" }],
+                active_business: {
+                    id: "id",
+                    name: "name",
+                    handle: "handle",
+                    logo: "logo",
+                    categories: [
+                        {
+                            id: 1,
+                            name: "name",
+                            slug: "slug",
+                            description: null,
+                            icon: null,
+                            group: "group",
+                            sort_order: 1,
+                        },
+                    ],
+                },
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo" }],
             },
         };
 
@@ -239,8 +255,24 @@ describe("AuthClient", () => {
                 name: "name",
                 email: "email",
                 role: "role",
-                active_business: { id: "id", name: "name", handle: "handle", logo: "logo", category: "category" },
-                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo", category: "category" }],
+                active_business: {
+                    id: "id",
+                    name: "name",
+                    handle: "handle",
+                    logo: "logo",
+                    categories: [
+                        {
+                            id: 1,
+                            name: "name",
+                            slug: "slug",
+                            description: null,
+                            icon: null,
+                            group: "group",
+                            sort_order: 1,
+                        },
+                    ],
+                },
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo" }],
             },
         };
 
