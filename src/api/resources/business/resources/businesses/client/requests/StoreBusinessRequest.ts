@@ -28,10 +28,21 @@ export interface StoreBusinessRequest {
     seasonal?: boolean;
     ownership?: string[] | null;
     category_ids: number[];
+    hours?: StoreBusinessRequest.Hours.Item[] | null;
     operating_months?: StoreBusinessRequest.OperatingMonths.Item[] | null;
 }
 
 export namespace StoreBusinessRequest {
+    export type Hours = Hours.Item[];
+
+    export namespace Hours {
+        export interface Item {
+            isOpen?: boolean | undefined;
+            openTime?: (string | null) | undefined;
+            closeTime?: (string | null) | undefined;
+        }
+    }
+
     export type OperatingMonths = OperatingMonths.Item[];
 
     export namespace OperatingMonths {
