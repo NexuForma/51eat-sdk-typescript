@@ -184,7 +184,7 @@ export class DiscoveryClient {
     }
 
     /**
-     * Retrieve a list of all business categories that have businesses.
+     * Retrieve a list of all business categories with their business counts.
      * This endpoint is used to populate category filters and navigation.
      *
      * @param {DiscoveryClient.RequestOptions} requestOptions - Request-specific configuration.

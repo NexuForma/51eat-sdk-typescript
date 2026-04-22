@@ -20,7 +20,6 @@ describe("DiscoveryClient", () => {
                             id: "id",
                             name: "name",
                             handle: "handle",
-                            category: null,
                             description: null,
                             bio: null,
                             location: { city: null, state: null },
@@ -100,7 +99,6 @@ describe("DiscoveryClient", () => {
                         id: "id",
                         name: "name",
                         handle: "handle",
-                        category: null,
                         description: null,
                         bio: null,
                         location: { city: null, state: null },
@@ -117,7 +115,6 @@ describe("DiscoveryClient", () => {
                         id: "id",
                         name: "name",
                         handle: "handle",
-                        category: null,
                         description: null,
                         bio: null,
                         location: { city: null, state: null },
@@ -167,7 +164,19 @@ describe("DiscoveryClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { data: [{ value: "value", label: "label", business_count: 1 }] };
+        const rawResponseBody = {
+            data: [
+                {
+                    id: 1,
+                    name: "name",
+                    slug: "slug",
+                    description: "description",
+                    icon: "icon",
+                    group: "group",
+                    business_count: 1,
+                },
+            ],
+        };
 
         server
             .mockEndpoint()
@@ -287,7 +296,6 @@ describe("DiscoveryClient", () => {
                         id: "id",
                         name: "name",
                         handle: "handle",
-                        category: null,
                         description: null,
                         bio: null,
                         location: { city: null, state: null },

@@ -8,7 +8,6 @@ export interface CustomerBusinessProfile {
     handle: string;
     description: string | null;
     bio: string | null;
-    category: string | null;
     email: string | null;
     phone: string | null;
     website: string | null;
@@ -38,6 +37,7 @@ export interface CustomerBusinessProfile {
     staff_pick: boolean;
     favorites_count: number;
     is_favorited: boolean;
+    categories?: FiveOneEat.BusinessCategory[] | undefined;
     cuisines?: CustomerBusinessProfile.Cuisines.Item[] | undefined;
     certifications?: CustomerBusinessProfile.Certifications.Item[] | undefined;
     temporary_locations?: FiveOneEat.CustomerTemporaryLocation[] | undefined;

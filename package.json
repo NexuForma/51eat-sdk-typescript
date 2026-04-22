@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "private": false,
     "repository": {
         "type": "git",
@@ -110,6 +110,17 @@
             },
             "default": "./dist/cjs/api/resources/business/resources/bulletins/exports.js"
         },
+        "./business/businesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/businesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/businesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/businesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
+        },
         "./business/gallery": {
             "import": {
                 "types": "./dist/esm/api/resources/business/resources/gallery/exports.d.mts",
@@ -164,17 +175,6 @@
                 "default": "./dist/cjs/api/resources/business/resources/pushNotifications/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/pushNotifications/exports.js"
-        },
-        "./business/businesses": {
-            "import": {
-                "types": "./dist/esm/api/resources/business/resources/businesses/exports.d.mts",
-                "default": "./dist/esm/api/resources/business/resources/businesses/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/business/resources/businesses/exports.d.ts",
-                "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
         },
         "./business/cuisines": {
             "import": {

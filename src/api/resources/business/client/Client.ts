@@ -22,12 +22,12 @@ export class BusinessClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<BusinessClient.Options>;
     protected _auth: AuthClient | undefined;
     protected _bulletins: BulletinsClient | undefined;
+    protected _businesses: BusinessesClient | undefined;
     protected _gallery: GalleryClient | undefined;
     protected _menus: MenusClient | undefined;
     protected _messaging: MessagingClient | undefined;
     protected _profile: ProfileClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
-    protected _businesses: BusinessesClient | undefined;
     protected _cuisines: CuisinesClient | undefined;
     protected _certifications: CertificationsClient | undefined;
     protected _categories: CategoriesClient | undefined;
@@ -42,6 +42,10 @@ export class BusinessClient {
 
     public get bulletins(): BulletinsClient {
         return (this._bulletins ??= new BulletinsClient(this._options));
+    }
+
+    public get businesses(): BusinessesClient {
+        return (this._businesses ??= new BusinessesClient(this._options));
     }
 
     public get gallery(): GalleryClient {
@@ -62,10 +66,6 @@ export class BusinessClient {
 
     public get pushNotifications(): PushNotificationsClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
-    }
-
-    public get businesses(): BusinessesClient {
-        return (this._businesses ??= new BusinessesClient(this._options));
     }
 
     public get cuisines(): CuisinesClient {
