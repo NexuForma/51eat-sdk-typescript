@@ -4,6 +4,10 @@ import type { BaseClientOptions } from "../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BulletinsClient } from "../resources/bulletins/client/Client.js";
+import { BusinessesClient } from "../resources/businesses/client/Client.js";
+import { CategoriesClient } from "../resources/categories/client/Client.js";
+import { CertificationsClient } from "../resources/certifications/client/Client.js";
+import { CuisinesClient } from "../resources/cuisines/client/Client.js";
 import { GalleryClient } from "../resources/gallery/client/Client.js";
 import { MenusClient } from "../resources/menus/client/Client.js";
 import { MessagingClient } from "../resources/messaging/client/Client.js";
@@ -23,6 +27,10 @@ export class BusinessClient {
     protected _messaging: MessagingClient | undefined;
     protected _profile: ProfileClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
+    protected _businesses: BusinessesClient | undefined;
+    protected _cuisines: CuisinesClient | undefined;
+    protected _certifications: CertificationsClient | undefined;
+    protected _categories: CategoriesClient | undefined;
 
     constructor(options: BusinessClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -54,5 +62,21 @@ export class BusinessClient {
 
     public get pushNotifications(): PushNotificationsClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
+    }
+
+    public get businesses(): BusinessesClient {
+        return (this._businesses ??= new BusinessesClient(this._options));
+    }
+
+    public get cuisines(): CuisinesClient {
+        return (this._cuisines ??= new CuisinesClient(this._options));
+    }
+
+    public get certifications(): CertificationsClient {
+        return (this._certifications ??= new CertificationsClient(this._options));
+    }
+
+    public get categories(): CategoriesClient {
+        return (this._categories ??= new CategoriesClient(this._options));
     }
 }
