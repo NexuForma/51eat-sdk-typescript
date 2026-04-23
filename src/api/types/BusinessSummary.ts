@@ -6,6 +6,7 @@ export interface BusinessSummary {
     id: string;
     name: string;
     handle: string;
-    logo: string;
+    logo: string | null;
+    logo_url: string | null;
     categories?: FiveOneEat.BusinessCategory[] | undefined;
 }

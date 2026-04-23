@@ -134,6 +134,7 @@ describe("AuthClient", () => {
                     name: "name",
                     handle: "handle",
                     logo: "logo",
+                    logo_url: "logo_url",
                     categories: [
                         {
                             id: 1,
@@ -146,7 +147,7 @@ describe("AuthClient", () => {
                         },
                     ],
                 },
-                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo" }],
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: null, logo_url: null }],
             },
         };
 
@@ -260,6 +261,7 @@ describe("AuthClient", () => {
                     name: "name",
                     handle: "handle",
                     logo: "logo",
+                    logo_url: "logo_url",
                     categories: [
                         {
                             id: 1,
@@ -272,7 +274,7 @@ describe("AuthClient", () => {
                         },
                     ],
                 },
-                businesses: [{ id: "id", name: "name", handle: "handle", logo: "logo" }],
+                businesses: [{ id: "id", name: "name", handle: "handle", logo: null, logo_url: null }],
             },
         };
 
