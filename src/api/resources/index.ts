@@ -1,4 +1,10 @@
 export * as business from "./business/index.js";
+export * from "./businessEvents/client/requests/index.js";
+export * as businessEvents from "./businessEvents/index.js";
+export * from "./businessEvents/types/index.js";
+export * from "./businessStripeConnect/client/requests/index.js";
+export * as businessStripeConnect from "./businessStripeConnect/index.js";
+export * from "./businessStripeConnect/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";
