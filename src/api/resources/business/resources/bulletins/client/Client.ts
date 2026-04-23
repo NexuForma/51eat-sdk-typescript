@@ -8,6 +8,7 @@ import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
+import { CommentsClient } from "../resources/comments/client/Client.js";
 
 export declare namespace BulletinsClient {
     export type Options = BaseClientOptions;
@@ -17,9 +18,14 @@ export declare namespace BulletinsClient {
 
 export class BulletinsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<BulletinsClient.Options>;
+    protected _comments: CommentsClient | undefined;
 
     constructor(options: BulletinsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get comments(): CommentsClient {
+        return (this._comments ??= new CommentsClient(this._options));
     }
 
     /**
