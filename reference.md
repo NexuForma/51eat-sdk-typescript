@@ -1,1252 +1,4 @@
 # Reference
-## Business: Events
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">listBusinessEvents</a>() -> FiveOneEat.ListBusinessEventsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Accepts an optional `filter` query param: `upcoming`, `past`, or `all` (default `all`).
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.listBusinessEvents();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">createBusinessEvent</a>({ ...params }) -> FiveOneEat.CreateBusinessEventResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.createBusinessEvent({
-    title: "title",
-    starts_at: "2024-01-15T09:30:00Z",
-    ends_at: "2024-01-15T09:30:00Z"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.StoreEventRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">eventShow</a>({ ...params }) -> FiveOneEat.EventShowResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.eventShow({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.EventShowRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">updateBusinessEvent</a>({ ...params }) -> FiveOneEat.UpdateBusinessEventResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.updateBusinessEvent({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.UpdateEventRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">deleteBusinessEvent</a>({ ...params }) -> FiveOneEat.DeleteBusinessEventResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.deleteBusinessEvent({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.DeleteBusinessEventRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">toggleBusinessEventPublished</a>({ ...params }) -> FiveOneEat.ToggleBusinessEventPublishedResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.toggleBusinessEventPublished({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ToggleBusinessEventPublishedRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">uploadBusinessEventImage</a>({ ...params }) -> FiveOneEat.UploadBusinessEventImageResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload and replace the image for the given event. Any existing image will be deleted.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.uploadBusinessEventImage({
-    image: fs.createReadStream("/path/to/your/file"),
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.UploadEventImageRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">deleteBusinessEventImage</a>({ ...params }) -> FiveOneEat.DeleteBusinessEventImageResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.deleteBusinessEventImage({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.DeleteBusinessEventImageRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">listBusinessEventTicketTypes</a>({ ...params }) -> FiveOneEat.ListBusinessEventTicketTypesResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.listBusinessEventTicketTypes({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ListBusinessEventTicketTypesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">createBusinessEventTicketType</a>({ ...params }) -> FiveOneEat.CreateBusinessEventTicketTypeResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.createBusinessEventTicketType({
-    event: "event",
-    name: "name",
-    price: 1.1,
-    quantity_available: 1
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.StoreTicketTypeRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">getBusinessEventTicketType</a>({ ...params }) -> FiveOneEat.GetBusinessEventTicketTypeResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.getBusinessEventTicketType({
-    ticketType: "ticketType"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.GetBusinessEventTicketTypeRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">updateBusinessEventTicketType</a>({ ...params }) -> FiveOneEat.UpdateBusinessEventTicketTypeResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.updateBusinessEventTicketType({
-    ticketType: "ticketType"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.UpdateTicketTypeRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">deleteBusinessEventTicketType</a>({ ...params }) -> FiveOneEat.DeleteBusinessEventTicketTypeResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.deleteBusinessEventTicketType({
-    ticketType: "ticketType"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.DeleteBusinessEventTicketTypeRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">listBusinessEventRsvps</a>({ ...params }) -> FiveOneEat.ListBusinessEventRsvpsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Accepts an optional `status` query param: `attending`, `not_attending`, or `maybe`.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.listBusinessEventRsvps({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ListBusinessEventRsvpsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">listBusinessEventAttendees</a>({ ...params }) -> FiveOneEat.ListBusinessEventAttendeesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Accepts an optional `status` query param matching the ticket status
-(`valid`, `used`, `cancelled`, `refunded`).
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.listBusinessEventAttendees({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ListBusinessEventAttendeesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">listBusinessEventOrders</a>({ ...params }) -> FiveOneEat.ListBusinessEventOrdersResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Accepts an optional `status` query param (`pending`, `paid`, `failed`, `refunded`, `partially_refunded`).
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.listBusinessEventOrders({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ListBusinessEventOrdersRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">getBusinessEventOrder</a>({ ...params }) -> FiveOneEat.GetBusinessEventOrderResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.getBusinessEventOrder({
-    event: "event",
-    order: "order"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.GetBusinessEventOrderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessEvents.<a href="/src/api/resources/businessEvents/client/Client.ts">getBusinessEventSalesSummary</a>({ ...params }) -> FiveOneEat.GetBusinessEventSalesSummaryResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns aggregated sales totals: gross revenue, refunds, tickets sold,
-and a per-ticket-type breakdown.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessEvents.getBusinessEventSalesSummary({
-    event: "event"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.GetBusinessEventSalesSummaryRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Business: Stripe Connect
-<details><summary><code>client.businessStripeConnect.<a href="/src/api/resources/businessStripeConnect/client/Client.ts">getBusinessStripeConnect</a>() -> FiveOneEat.GetBusinessStripeConnectResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns the current Stripe Connect connection for the active business,
-creating a new Express account on Stripe if one does not yet exist.
-Also returns the publishable key and derived flags that the mobile
-client uses to decide whether to present onboarding or the management UI.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessStripeConnect.getBusinessStripeConnect();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessStripeConnectClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessStripeConnect.<a href="/src/api/resources/businessStripeConnect/client/Client.ts">disconnectBusinessStripeConnect</a>() -> FiveOneEat.DisconnectBusinessStripeConnectResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deletes the local StripeConnection record. The Stripe account itself is
-not deleted; it becomes orphaned from the business and can be reconnected
-later by calling the status endpoint.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessStripeConnect.disconnectBusinessStripeConnect();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessStripeConnectClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessStripeConnect.<a href="/src/api/resources/businessStripeConnect/client/Client.ts">createBusinessStripeAccountSession</a>({ ...params }) -> FiveOneEat.CreateBusinessStripeAccountSessionResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-The request body specifies which embedded components to enable on the
-session. Use `account_onboarding` during onboarding and any of the
-management components (payments, payouts, balances, documents,
-account_management, notification_banner, tax_settings, tax_registrations)
-after the connected account has submitted their details.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessStripeConnect.createBusinessStripeAccountSession({
-    components: [{
-            enabled: true,
-            features: ["features"]
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.CreateAccountSessionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessStripeConnectClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.businessStripeConnect.<a href="/src/api/resources/businessStripeConnect/client/Client.ts">refreshBusinessStripeConnect</a>() -> FiveOneEat.RefreshBusinessStripeConnectResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Pulls the latest account data from Stripe and updates the local
-`stripe_connections` record. Provided as a belt-and-suspenders option
-alongside the `account.updated` webhook so mobile clients can guarantee
-freshness immediately after returning from an onboarding flow.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.businessStripeConnect.refreshBusinessStripeConnect();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessStripeConnectClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Customer: Events
 <details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">holdTickets</a>({ ...params }) -> FiveOneEat.HoldTicketsResponse</code></summary>
 <dl>
@@ -2952,6 +1704,633 @@ await client.business.businesses.delete({
 </dl>
 </details>
 
+## Business Events
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">list</a>() -> FiveOneEat.ListEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accepts an optional `filter` query param: `upcoming`, `past`, or `all` (default `all`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.create({
+    title: "title",
+    starts_at: "2024-01-15T09:30:00Z",
+    ends_at: "2024-01-15T09:30:00Z"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.StoreEventRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.get({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.GetEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">update</a>({ ...params }) -> FiveOneEat.UpdateEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.update({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.UpdateEventRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">delete</a>({ ...params }) -> FiveOneEat.DeleteEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.delete({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.DeleteEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">togglePublished</a>({ ...params }) -> FiveOneEat.TogglePublishedEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.togglePublished({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.TogglePublishedEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">uploadImage</a>({ ...params }) -> FiveOneEat.UploadImageEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload and replace the image for the given event. Any existing image will be deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.uploadImage({
+    image: fs.createReadStream("/path/to/your/file"),
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.UploadEventImageRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">deleteImage</a>({ ...params }) -> FiveOneEat.DeleteImageEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.deleteImage({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.DeleteImageEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">listRsvps</a>({ ...params }) -> FiveOneEat.ListRsvpsEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accepts an optional `status` query param: `attending`, `not_attending`, or `maybe`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.listRsvps({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ListRsvpsEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">listAttendees</a>({ ...params }) -> FiveOneEat.ListAttendeesEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accepts an optional `status` query param matching the ticket status
+(`valid`, `used`, `cancelled`, `refunded`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.listAttendees({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ListAttendeesEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.<a href="/src/api/resources/business/resources/events/client/Client.ts">salesSummary</a>({ ...params }) -> FiveOneEat.SalesSummaryEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns aggregated sales totals: gross revenue, refunds, tickets sold,
+and a per-ticket-type breakdown.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.salesSummary({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.SalesSummaryEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Gallery
 <details><summary><code>client.business.gallery.<a href="/src/api/resources/business/resources/gallery/client/Client.ts">list</a>() -> FiveOneEat.ListGalleryResponse</code></summary>
 <dl>
@@ -3913,6 +3292,252 @@ await client.business.pushNotifications.unregister({
 </dl>
 </details>
 
+## Business StripeConnect
+<details><summary><code>client.business.stripeConnect.<a href="/src/api/resources/business/resources/stripeConnect/client/Client.ts">status</a>() -> FiveOneEat.StatusStripeConnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the current Stripe Connect connection for the active business,
+creating a new Express account on Stripe if one does not yet exist.
+Also returns the publishable key and derived flags that the mobile
+client uses to decide whether to present onboarding or the management UI.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.stripeConnect.status();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `StripeConnectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.stripeConnect.<a href="/src/api/resources/business/resources/stripeConnect/client/Client.ts">disconnect</a>() -> FiveOneEat.DisconnectStripeConnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes the local StripeConnection record. The Stripe account itself is
+not deleted; it becomes orphaned from the business and can be reconnected
+later by calling the status endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.stripeConnect.disconnect();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `StripeConnectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.stripeConnect.<a href="/src/api/resources/business/resources/stripeConnect/client/Client.ts">createAccountSession</a>({ ...params }) -> FiveOneEat.CreateAccountSessionStripeConnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The request body specifies which embedded components to enable on the
+session. Use `account_onboarding` during onboarding and any of the
+management components (payments, payouts, balances, documents,
+account_management, notification_banner, tax_settings, tax_registrations)
+after the connected account has submitted their details.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.stripeConnect.createAccountSession({
+    components: [{
+            enabled: true,
+            features: ["features"]
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.CreateAccountSessionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StripeConnectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.stripeConnect.<a href="/src/api/resources/business/resources/stripeConnect/client/Client.ts">refresh</a>() -> FiveOneEat.RefreshStripeConnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pulls the latest account data from Stripe and updates the local
+`stripe_connections` record. Provided as a belt-and-suspenders option
+alongside the `account.updated` webhook so mobile clients can guarantee
+freshness immediately after returning from an onboarding flow.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.stripeConnect.refresh();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `StripeConnectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Cuisines
 <details><summary><code>client.business.cuisines.<a href="/src/api/resources/business/resources/cuisines/client/Client.ts">list</a>() -> FiveOneEat.ListCuisinesResponse</code></summary>
 <dl>
@@ -4194,6 +3819,383 @@ await client.business.auth.tokens.revoke({
 <dd>
 
 **requestOptions:** `TokensClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Business Events TicketTypes
+<details><summary><code>client.business.events.ticketTypes.<a href="/src/api/resources/business/resources/events/resources/ticketTypes/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListTicketTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.ticketTypes.list({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.ListTicketTypesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketTypesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.ticketTypes.<a href="/src/api/resources/business/resources/events/resources/ticketTypes/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateTicketTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.ticketTypes.create({
+    event: "event",
+    name: "name",
+    price: 1.1,
+    quantity_available: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.StoreTicketTypeRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketTypesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.ticketTypes.<a href="/src/api/resources/business/resources/events/resources/ticketTypes/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetTicketTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.ticketTypes.get({
+    ticketType: "ticketType"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.GetTicketTypesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketTypesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.ticketTypes.<a href="/src/api/resources/business/resources/events/resources/ticketTypes/client/Client.ts">update</a>({ ...params }) -> FiveOneEat.UpdateTicketTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.ticketTypes.update({
+    ticketType: "ticketType"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.UpdateTicketTypeRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketTypesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.ticketTypes.<a href="/src/api/resources/business/resources/events/resources/ticketTypes/client/Client.ts">delete</a>({ ...params }) -> FiveOneEat.DeleteTicketTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.ticketTypes.delete({
+    ticketType: "ticketType"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.DeleteTicketTypesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketTypesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Business Events Orders
+<details><summary><code>client.business.events.orders.<a href="/src/api/resources/business/resources/events/resources/orders/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListOrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accepts an optional `status` query param (`pending`, `paid`, `failed`, `refunded`, `partially_refunded`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.orders.list({
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.ListOrdersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.events.orders.<a href="/src/api/resources/business/resources/events/resources/orders/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetOrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.events.orders.get({
+    event: "event",
+    order: "order"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.events.GetOrdersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
     
 </dd>
 </dl>

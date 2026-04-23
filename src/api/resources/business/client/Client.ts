@@ -8,11 +8,13 @@ import { BusinessesClient } from "../resources/businesses/client/Client.js";
 import { CategoriesClient } from "../resources/categories/client/Client.js";
 import { CertificationsClient } from "../resources/certifications/client/Client.js";
 import { CuisinesClient } from "../resources/cuisines/client/Client.js";
+import { EventsClient } from "../resources/events/client/Client.js";
 import { GalleryClient } from "../resources/gallery/client/Client.js";
 import { MenusClient } from "../resources/menus/client/Client.js";
 import { MessagingClient } from "../resources/messaging/client/Client.js";
 import { ProfileClient } from "../resources/profile/client/Client.js";
 import { PushNotificationsClient } from "../resources/pushNotifications/client/Client.js";
+import { StripeConnectClient } from "../resources/stripeConnect/client/Client.js";
 
 export declare namespace BusinessClient {
     export type Options = BaseClientOptions;
@@ -23,11 +25,13 @@ export class BusinessClient {
     protected _auth: AuthClient | undefined;
     protected _bulletins: BulletinsClient | undefined;
     protected _businesses: BusinessesClient | undefined;
+    protected _events: EventsClient | undefined;
     protected _gallery: GalleryClient | undefined;
     protected _menus: MenusClient | undefined;
     protected _messaging: MessagingClient | undefined;
     protected _profile: ProfileClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
+    protected _stripeConnect: StripeConnectClient | undefined;
     protected _cuisines: CuisinesClient | undefined;
     protected _certifications: CertificationsClient | undefined;
     protected _categories: CategoriesClient | undefined;
@@ -48,6 +52,10 @@ export class BusinessClient {
         return (this._businesses ??= new BusinessesClient(this._options));
     }
 
+    public get events(): EventsClient {
+        return (this._events ??= new EventsClient(this._options));
+    }
+
     public get gallery(): GalleryClient {
         return (this._gallery ??= new GalleryClient(this._options));
     }
@@ -66,6 +74,10 @@ export class BusinessClient {
 
     public get pushNotifications(): PushNotificationsClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
+    }
+
+    public get stripeConnect(): StripeConnectClient {
+        return (this._stripeConnect ??= new StripeConnectClient(this._options));
     }
 
     public get cuisines(): CuisinesClient {
