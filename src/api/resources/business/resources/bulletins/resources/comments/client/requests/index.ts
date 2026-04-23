@@ -1,2 +1,2 @@
-export type { CreateCommentsRequest } from "./CreateCommentsRequest.js";
 export type { ListCommentsRequest } from "./ListCommentsRequest.js";
+export type { StoreBulletinCommentRequest } from "./StoreBulletinCommentRequest.js";

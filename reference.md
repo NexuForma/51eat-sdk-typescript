@@ -3831,7 +3831,7 @@ await client.business.auth.tokens.revoke({
 </details>
 
 ## Business Bulletins Comments
-<details><summary><code>client.business.bulletins.comments.<a href="/src/api/resources/business/resources/bulletins/resources/comments/client/Client.ts">list</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.bulletins.comments.<a href="/src/api/resources/business/resources/bulletins/resources/comments/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListCommentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3882,9 +3882,24 @@ await client.business.bulletins.comments.list({
 </dl>
 </details>
 
-<details><summary><code>client.business.bulletins.comments.<a href="/src/api/resources/business/resources/bulletins/resources/comments/client/Client.ts">create</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.bulletins.comments.<a href="/src/api/resources/business/resources/bulletins/resources/comments/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateCommentsResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Omit `parent_id` for a top-level comment. Set `parent_id` to a top-level
+comment's id to post a one-level reply (replies to replies are not allowed).
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -3896,7 +3911,8 @@ await client.business.bulletins.comments.list({
 
 ```typescript
 await client.business.bulletins.comments.create({
-    bulletin: "bulletin"
+    bulletin: "bulletin",
+    body: "body"
 });
 
 ```
@@ -3913,7 +3929,7 @@ await client.business.bulletins.comments.create({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.bulletins.CreateCommentsRequest` 
+**request:** `FiveOneEat.business.bulletins.StoreBulletinCommentRequest` 
     
 </dd>
 </dl>
@@ -8098,7 +8114,7 @@ await client.customer.businesses.bulletins.comments.create({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentRequest` 
+**request:** `FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest` 
     
 </dd>
 </dl>

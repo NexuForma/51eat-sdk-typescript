@@ -8,10 +8,11 @@
  *         body: "body"
  *     }
  */
-export interface StoreBulletinCommentRequest {
+export interface AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest {
     /** The business handle */
     handle: string;
     /** The bulletin ID */
     bulletin: string;
     body: string;
+    parent_id?: string | null;
 }
