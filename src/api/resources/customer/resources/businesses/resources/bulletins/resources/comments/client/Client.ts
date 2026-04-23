@@ -122,7 +122,7 @@ export class CommentsClient {
     /**
      * Post a comment on a business bulletin. Requires authentication.
      *
-     * @param {FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentRequest} request
+     * @param {FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest} request
      * @param {CommentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -137,14 +137,14 @@ export class CommentsClient {
      *     })
      */
     public create(
-        request: FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentRequest,
+        request: FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest,
         requestOptions?: CommentsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.customer.businesses.bulletins.CreateCommentsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentRequest,
+        request: FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest,
         requestOptions?: CommentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.bulletins.CreateCommentsResponse>> {
         const { handle, bulletin, ..._body } = request;

@@ -11,7 +11,9 @@ describe("CommentsClient", () => {
 
         const rawResponseBody = {
             data: {
-                comments: [{ id: "id", body: "body", user: { id: "id", name: "name" }, created_at: null }],
+                comments: [
+                    { id: "id", parent_id: null, body: "body", user: { id: "id", name: "name" }, created_at: null },
+                ],
                 pagination: {
                     current_page: "current_page",
                     per_page: "per_page",
@@ -107,7 +109,22 @@ describe("CommentsClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { body: "body" };
         const rawResponseBody = {
-            data: { id: "id", body: "body", user: { id: "id", name: "name" }, created_at: "2024-01-15T09:30:00Z" },
+            data: {
+                id: "id",
+                parent_id: "parent_id",
+                body: "body",
+                user: { id: "id", name: "name" },
+                created_at: "2024-01-15T09:30:00Z",
+                replies: [
+                    {
+                        id: "id",
+                        parent_id: "parent_id",
+                        body: "body",
+                        user: { id: "id", name: "name" },
+                        created_at: "created_at",
+                    },
+                ],
+            },
         };
 
         server

@@ -3,12 +3,13 @@
 /**
  * @example
  *     {
- *         bulletin: "bulletin"
+ *         bulletin: "bulletin",
+ *         body: "body"
  *     }
  */
-export interface ListCommentsRequest {
+export interface StoreBulletinCommentRequest {
     /** The bulletin ID */
     bulletin: string;
-    page?: number | null;
-    per_page?: number | null;
+    body: string;
+    parent_id?: string | null;
 }
