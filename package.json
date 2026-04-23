@@ -22,28 +22,6 @@
             },
             "default": "./dist/cjs/index.js"
         },
-        "./businessEvents": {
-            "import": {
-                "types": "./dist/esm/api/resources/businessEvents/exports.d.mts",
-                "default": "./dist/esm/api/resources/businessEvents/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/businessEvents/exports.d.ts",
-                "default": "./dist/cjs/api/resources/businessEvents/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/businessEvents/exports.js"
-        },
-        "./businessStripeConnect": {
-            "import": {
-                "types": "./dist/esm/api/resources/businessStripeConnect/exports.d.mts",
-                "default": "./dist/esm/api/resources/businessStripeConnect/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/businessStripeConnect/exports.d.ts",
-                "default": "./dist/cjs/api/resources/businessStripeConnect/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/businessStripeConnect/exports.js"
-        },
         "./customerEvents": {
             "import": {
                 "types": "./dist/esm/api/resources/customerEvents/exports.d.mts",
@@ -143,6 +121,17 @@
             },
             "default": "./dist/cjs/api/resources/business/resources/businesses/exports.js"
         },
+        "./business/events": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/events/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/events/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/events/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/events/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/events/exports.js"
+        },
         "./business/gallery": {
             "import": {
                 "types": "./dist/esm/api/resources/business/resources/gallery/exports.d.mts",
@@ -198,6 +187,17 @@
             },
             "default": "./dist/cjs/api/resources/business/resources/pushNotifications/exports.js"
         },
+        "./business/stripeConnect": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/stripeConnect/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/stripeConnect/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/stripeConnect/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/stripeConnect/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/stripeConnect/exports.js"
+        },
         "./business/cuisines": {
             "import": {
                 "types": "./dist/esm/api/resources/business/resources/cuisines/exports.d.mts",
@@ -241,6 +241,28 @@
                 "default": "./dist/cjs/api/resources/business/resources/auth/resources/tokens/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/auth/resources/tokens/exports.js"
+        },
+        "./business/events/ticketTypes": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/events/resources/ticketTypes/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/events/resources/ticketTypes/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/events/resources/ticketTypes/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/events/resources/ticketTypes/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/events/resources/ticketTypes/exports.js"
+        },
+        "./business/events/orders": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/events/resources/orders/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/events/resources/orders/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/events/resources/orders/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/events/resources/orders/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/events/resources/orders/exports.js"
         },
         "./business/menus/groups": {
             "import": {
