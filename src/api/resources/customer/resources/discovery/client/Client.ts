@@ -389,6 +389,71 @@ export class DiscoveryClient {
     }
 
     /**
+     * Retrieve a list of all allergens, ordered alphabetically, for use in
+     * filters, labels, and other customer-facing display.
+     *
+     * @param {DiscoveryClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.customer.discovery.allergens()
+     */
+    public allergens(
+        requestOptions?: DiscoveryClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.AllergensDiscoveryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__allergens(requestOptions));
+    }
+
+    private async __allergens(
+        requestOptions?: DiscoveryClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.AllergensDiscoveryResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/discovery/allergens",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.AllergensDiscoveryResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/customer/discovery/allergens");
+    }
+
+    /**
      * Retrieve businesses for a specific category with pagination support.
      * Results are optimized for list display.
      *

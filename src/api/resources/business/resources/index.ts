@@ -1,3 +1,5 @@
+export * as allergens from "./allergens/index.js";
+export * from "./allergens/types/index.js";
 export * from "./auth/client/requests/index.js";
 export * as auth from "./auth/index.js";
 export * from "./auth/types/index.js";

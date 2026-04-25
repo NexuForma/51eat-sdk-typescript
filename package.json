@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.29",
+    "version": "0.0.30",
     "private": false,
     "repository": {
         "type": "git",
@@ -230,6 +230,17 @@
                 "default": "./dist/cjs/api/resources/business/resources/categories/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/categories/exports.js"
+        },
+        "./business/allergens": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/allergens/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/allergens/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/allergens/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/allergens/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/allergens/exports.js"
         },
         "./business/auth/tokens": {
             "import": {
