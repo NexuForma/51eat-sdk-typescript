@@ -3709,6 +3709,63 @@ await client.business.categories.list();
 </dl>
 </details>
 
+## Business Allergens
+<details><summary><code>client.business.allergens.<a href="/src/api/resources/business/resources/allergens/client/Client.ts">list</a>() -> FiveOneEat.ListAllergensResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all allergens, ordered alphabetically. Use these UUIDs
+in the `allergens` array when creating or updating a menu item.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.allergens.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AllergensClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Auth Tokens
 <details><summary><code>client.business.auth.tokens.<a href="/src/api/resources/business/resources/auth/resources/tokens/client/Client.ts">list</a>() -> FiveOneEat.ListTokensResponse</code></summary>
 <dl>
@@ -6934,6 +6991,62 @@ This endpoint is used to populate certification filters.
 
 ```typescript
 await client.customer.discovery.certifications();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `DiscoveryClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.discovery.<a href="/src/api/resources/customer/resources/discovery/client/Client.ts">allergens</a>() -> FiveOneEat.AllergensDiscoveryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of all allergens, ordered alphabetically, for use in
+filters, labels, and other customer-facing display.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.discovery.allergens();
 
 ```
 </dd>

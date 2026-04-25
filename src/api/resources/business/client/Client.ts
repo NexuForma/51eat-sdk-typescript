@@ -2,6 +2,7 @@
 
 import type { BaseClientOptions } from "../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
+import { AllergensClient } from "../resources/allergens/client/Client.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BulletinsClient } from "../resources/bulletins/client/Client.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
@@ -35,6 +36,7 @@ export class BusinessClient {
     protected _cuisines: CuisinesClient | undefined;
     protected _certifications: CertificationsClient | undefined;
     protected _categories: CategoriesClient | undefined;
+    protected _allergens: AllergensClient | undefined;
 
     constructor(options: BusinessClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -90,5 +92,9 @@ export class BusinessClient {
 
     public get categories(): CategoriesClient {
         return (this._categories ??= new CategoriesClient(this._options));
+    }
+
+    public get allergens(): AllergensClient {
+        return (this._allergens ??= new AllergensClient(this._options));
     }
 }
