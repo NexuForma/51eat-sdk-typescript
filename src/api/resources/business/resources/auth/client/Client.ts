@@ -175,6 +175,151 @@ export class AuthClient {
     }
 
     /**
+     * Sends a password reset link to the provided email address if an account exists.
+     * Always returns a 200 response to prevent email enumeration.
+     *
+     * @param {FiveOneEat.business.ForgotPasswordRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.business.auth.forgotPassword({
+     *         email: "email"
+     *     })
+     */
+    public forgotPassword(
+        request: FiveOneEat.business.ForgotPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.business.ForgotPasswordAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__forgotPassword(request, requestOptions));
+    }
+
+    private async __forgotPassword(
+        request: FiveOneEat.business.ForgotPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.business.ForgotPasswordAuthResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/forgot-password",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.business.ForgotPasswordAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/forgot-password");
+    }
+
+    /**
+     * Validates the reset token and updates the user's password. All existing API tokens
+     * are revoked after a successful reset, requiring re-authentication on all devices.
+     *
+     * @param {FiveOneEat.business.ResetPasswordRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.business.auth.resetPassword({
+     *         token: "token",
+     *         email: "email",
+     *         password: "password",
+     *         password_confirmation: "password_confirmation"
+     *     })
+     */
+    public resetPassword(
+        request: FiveOneEat.business.ResetPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.business.ResetPasswordAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__resetPassword(request, requestOptions));
+    }
+
+    private async __resetPassword(
+        request: FiveOneEat.business.ResetPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.business.ResetPasswordAuthResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "business/reset-password",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.business.ResetPasswordAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/reset-password");
+    }
+
+    /**
      * Retrieve the current authenticated business user with their active business and all owned businesses.
      *
      * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.

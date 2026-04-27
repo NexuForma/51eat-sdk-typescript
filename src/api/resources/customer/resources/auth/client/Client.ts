@@ -2,7 +2,7 @@
 
 import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../../../BaseClient.js";
-import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
 import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
@@ -175,6 +175,151 @@ export class AuthClient {
     }
 
     /**
+     * Sends a password reset link to the provided email address if an account exists.
+     * Always returns a 200 response to prevent email enumeration.
+     *
+     * @param {FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.auth.forgotPassword({
+     *         email: "email"
+     *     })
+     */
+    public forgotPassword(
+        request: FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.ForgotPasswordAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__forgotPassword(request, requestOptions));
+    }
+
+    private async __forgotPassword(
+        request: FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.ForgotPasswordAuthResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/forgot-password",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.ForgotPasswordAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/customer/forgot-password");
+    }
+
+    /**
+     * Validates the reset token and updates the user's password. All existing API tokens
+     * are revoked after a successful reset, requiring re-authentication on all devices.
+     *
+     * @param {FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthResetPasswordRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.auth.resetPassword({
+     *         token: "token",
+     *         email: "email",
+     *         password: "password",
+     *         password_confirmation: "password_confirmation"
+     *     })
+     */
+    public resetPassword(
+        request: FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthResetPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.ResetPasswordAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__resetPassword(request, requestOptions));
+    }
+
+    private async __resetPassword(
+        request: FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthResetPasswordRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.ResetPasswordAuthResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/reset-password",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.ResetPasswordAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/customer/reset-password");
+    }
+
+    /**
      * Retrieve the current authenticated user's profile information.
      *
      * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -233,6 +378,230 @@ export class AuthClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/customer/user");
+    }
+
+    /**
+     * Update name, email, and/or password. All fields are optional. To change the
+     * password, `current_password` must be provided alongside `password` and `password_confirmation`.
+     *
+     * @param {FiveOneEat.customer.UpdateUserRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.auth.updateProfile()
+     */
+    public updateProfile(
+        request: FiveOneEat.customer.UpdateUserRequest = {},
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.UpdateProfileAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateProfile(request, requestOptions));
+    }
+
+    private async __updateProfile(
+        request: FiveOneEat.customer.UpdateUserRequest = {},
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.UpdateProfileAuthResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/user",
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.UpdateProfileAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PUT", "/customer/user");
+    }
+
+    /**
+     * Upload and replace the avatar for the authenticated customer. Any existing avatar file will be deleted.
+     *
+     * @param {FiveOneEat.customer.UploadAvatarRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     import { createReadStream } from "fs";
+     *     await client.customer.auth.uploadAvatar({
+     *         avatar: fs.createReadStream("/path/to/your/file")
+     *     })
+     */
+    public uploadAvatar(
+        request: FiveOneEat.customer.UploadAvatarRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.UploadAvatarAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__uploadAvatar(request, requestOptions));
+    }
+
+    private async __uploadAvatar(
+        request: FiveOneEat.customer.UploadAvatarRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.UploadAvatarAuthResponse>> {
+        const _body = await core.newFormData();
+        await _body.appendFile("avatar", request.avatar);
+        const _maybeEncodedRequest = await _body.getRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ ..._maybeEncodedRequest.headers }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/user/avatar",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.UploadAvatarAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/customer/user/avatar");
+    }
+
+    /**
+     * Remove the avatar for the authenticated customer. Returns the updated user with a null avatar_url.
+     *
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.customer.auth.deleteAvatar()
+     */
+    public deleteAvatar(
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.DeleteAvatarAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteAvatar(requestOptions));
+    }
+
+    private async __deleteAvatar(
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.DeleteAvatarAuthResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/user/avatar",
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.DeleteAvatarAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/customer/user/avatar");
     }
 
     /**

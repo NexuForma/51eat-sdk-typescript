@@ -187,6 +187,7 @@ export class DiscoveryClient {
      * Retrieve a list of all business categories with their business counts.
      * This endpoint is used to populate category filters and navigation.
      *
+     * @param {FiveOneEat.customer.CategoriesDiscoveryRequest} request
      * @param {DiscoveryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -195,14 +196,20 @@ export class DiscoveryClient {
      *     await client.customer.discovery.categories()
      */
     public categories(
+        request: FiveOneEat.customer.CategoriesDiscoveryRequest = {},
         requestOptions?: DiscoveryClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.customer.CategoriesDiscoveryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__categories(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__categories(request, requestOptions));
     }
 
     private async __categories(
+        request: FiveOneEat.customer.CategoriesDiscoveryRequest = {},
         requestOptions?: DiscoveryClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.CategoriesDiscoveryResponse>> {
+        const { with_businesses: withBusinesses } = request;
+        const _queryParams: Record<string, unknown> = {
+            with_businesses: withBusinesses,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -218,7 +225,12 @@ export class DiscoveryClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

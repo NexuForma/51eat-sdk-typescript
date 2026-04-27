@@ -5,4 +5,5 @@ export interface CustomerUser {
     name: string;
     email: string;
     role: string;
+    avatar_url: string | null;
 }

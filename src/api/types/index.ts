@@ -72,6 +72,7 @@ export * from "./CustomerMenuItem.js";
 export * from "./CustomerMenuResponse.js";
 export * from "./CustomerPhoto.js";
 export * from "./CustomerPhotoResponse.js";
+export * from "./CustomerReplyResponse.js";
 export * from "./CustomerTemporaryLocation.js";
 export * from "./CustomerToken.js";
 export * from "./CustomerUser.js";
