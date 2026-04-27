@@ -16,7 +16,10 @@ describe("AuthClient", () => {
             password_confirmation: "password_confirmation",
         };
         const rawResponseBody = {
-            data: { token: "token", user: { id: "id", name: "name", email: "email", role: "role" } },
+            data: {
+                token: "token",
+                user: { id: "id", name: "name", email: "email", role: "role", avatar_url: "avatar_url" },
+            },
         };
 
         server
@@ -75,7 +78,10 @@ describe("AuthClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email", password: "password", device_name: "device_name" };
         const rawResponseBody = {
-            data: { token: "token", user: { id: "id", name: "name", email: "email", role: "role" } },
+            data: {
+                token: "token",
+                user: { id: "id", name: "name", email: "email", role: "role", avatar_url: "avatar_url" },
+            },
         };
 
         server
@@ -115,6 +121,108 @@ describe("AuthClient", () => {
                 email: "email",
                 password: "password",
                 device_name: "device_name",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("forgotPassword (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { message: "A reset link will be sent if the account exists." };
+
+        server
+            .mockEndpoint()
+            .post("/business/forgot-password")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.business.auth.forgotPassword({
+            email: "email",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("forgotPassword (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/forgot-password")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.auth.forgotPassword({
+                email: "email",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("resetPassword (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            token: "token",
+            email: "email",
+            password: "password",
+            password_confirmation: "password_confirmation",
+        };
+        const rawResponseBody = { message: "Your password has been reset." };
+
+        server
+            .mockEndpoint()
+            .post("/business/reset-password")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.business.auth.resetPassword({
+            token: "token",
+            email: "email",
+            password: "password",
+            password_confirmation: "password_confirmation",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("resetPassword (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            token: "token",
+            email: "email",
+            password: "password",
+            password_confirmation: "password_confirmation",
+        };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/reset-password")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.auth.resetPassword({
+                token: "token",
+                email: "email",
+                password: "password",
+                password_confirmation: "password_confirmation",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });

@@ -215,4 +215,224 @@ describe("CommentsClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
+
+    test("listReplies (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: {
+                replies: [
+                    {
+                        id: "id",
+                        parent_id: "parent_id",
+                        body: "body",
+                        user: { id: "id", name: "name" },
+                        created_at: "created_at",
+                    },
+                ],
+                pagination: {
+                    current_page: "current_page",
+                    per_page: "per_page",
+                    total: "total",
+                    has_more: "has_more",
+                },
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .get(
+                "/customer/businesses/katzs-deli/bulletins/01950e7d-1234-7000-abcd-ef0123456789/comments/01950e7d-5678-7000-abcd-ef0123456789/replies",
+            )
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.businesses.bulletins.comments.listReplies({
+            handle: "katzs-deli",
+            bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+            comment: "01950e7d-5678-7000-abcd-ef0123456789",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("listReplies (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.listReplies({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("listReplies (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.listReplies({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("listReplies (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.listReplies({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("reply (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { body: "body" };
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                parent_id: "parent_id",
+                body: "body",
+                user: { id: "id", name: "name" },
+                created_at: "created_at",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post(
+                "/customer/businesses/katzs-deli/bulletins/01950e7d-1234-7000-abcd-ef0123456789/comments/01950e7d-5678-7000-abcd-ef0123456789/replies",
+            )
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.businesses.bulletins.comments.reply({
+            handle: "katzs-deli",
+            bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+            comment: "01950e7d-5678-7000-abcd-ef0123456789",
+            body: "body",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("reply (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { body: "body" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.reply({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+                body: "body",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("reply (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { body: "body" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.reply({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+                body: "body",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("reply (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { body: "body" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/customer/businesses/handle/bulletins/bulletin/comments/comment/replies")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.bulletins.comments.reply({
+                handle: "handle",
+                bulletin: "bulletin",
+                comment: "comment",
+                body: "body",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
 });

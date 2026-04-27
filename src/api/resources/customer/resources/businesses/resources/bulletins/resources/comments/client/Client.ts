@@ -207,4 +207,189 @@ export class CommentsClient {
             "/customer/businesses/{handle}/bulletins/{bulletin}/comments",
         );
     }
+
+    /**
+     * Retrieve paginated replies for a top-level comment on a published bulletin.
+     *
+     * @param {FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsRequest} request
+     * @param {CommentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.businesses.bulletins.comments.listReplies({
+     *         handle: "katzs-deli",
+     *         bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+     *         comment: "01950e7d-5678-7000-abcd-ef0123456789"
+     *     })
+     */
+    public listReplies(
+        request: FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsRequest,
+        requestOptions?: CommentsClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listReplies(request, requestOptions));
+    }
+
+    private async __listReplies(
+        request: FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsRequest,
+        requestOptions?: CommentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsResponse>> {
+        const { handle, bulletin, comment, page, per_page: perPage } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            per_page: perPage,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(handle)}/bulletins/${core.url.encodePathParam(bulletin)}/comments/${core.url.encodePathParam(comment)}/replies`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/businesses/{handle}/bulletins/{bulletin}/comments/{comment}/replies",
+        );
+    }
+
+    /**
+     * Post a reply to a top-level comment on a published bulletin. Requires authentication.
+     *
+     * @param {FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentReplyRequest} request
+     * @param {CommentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.businesses.bulletins.comments.reply({
+     *         handle: "katzs-deli",
+     *         bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+     *         comment: "01950e7d-5678-7000-abcd-ef0123456789",
+     *         body: "body"
+     *     })
+     */
+    public reply(
+        request: FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentReplyRequest,
+        requestOptions?: CommentsClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.businesses.bulletins.ReplyCommentsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reply(request, requestOptions));
+    }
+
+    private async __reply(
+        request: FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentReplyRequest,
+        requestOptions?: CommentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.bulletins.ReplyCommentsResponse>> {
+        const { handle, bulletin, comment, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(handle)}/bulletins/${core.url.encodePathParam(bulletin)}/comments/${core.url.encodePathParam(comment)}/replies`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.businesses.bulletins.ReplyCommentsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/customer/businesses/{handle}/bulletins/{bulletin}/comments/{comment}/replies",
+        );
+    }
 }

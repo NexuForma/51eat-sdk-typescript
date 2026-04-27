@@ -782,6 +782,141 @@ await client.business.auth.login({
 </dl>
 </details>
 
+<details><summary><code>client.business.auth.<a href="/src/api/resources/business/resources/auth/client/Client.ts">forgotPassword</a>({ ...params }) -> FiveOneEat.ForgotPasswordAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a password reset link to the provided email address if an account exists.
+Always returns a 200 response to prevent email enumeration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.auth.forgotPassword({
+    email: "email"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ForgotPasswordRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.auth.<a href="/src/api/resources/business/resources/auth/client/Client.ts">resetPassword</a>({ ...params }) -> FiveOneEat.ResetPasswordAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validates the reset token and updates the user's password. All existing API tokens
+are revoked after a successful reset, requiring re-authentication on all devices.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.auth.resetPassword({
+    token: "token",
+    email: "email",
+    password: "password",
+    password_confirmation: "password_confirmation"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ResetPasswordRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.business.auth.<a href="/src/api/resources/business/resources/auth/client/Client.ts">me</a>() -> FiveOneEat.MeAuthResponse</code></summary>
 <dl>
 <dd>
@@ -6159,6 +6294,141 @@ await client.customer.auth.login({
 </dl>
 </details>
 
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">forgotPassword</a>({ ...params }) -> FiveOneEat.ForgotPasswordAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a password reset link to the provided email address if an account exists.
+Always returns a 200 response to prevent email enumeration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.forgotPassword({
+    email: "email"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">resetPassword</a>({ ...params }) -> FiveOneEat.ResetPasswordAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validates the reset token and updates the user's password. All existing API tokens
+are revoked after a successful reset, requiring re-authentication on all devices.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.resetPassword({
+    token: "token",
+    email: "email",
+    password: "password",
+    password_confirmation: "password_confirmation"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.AppHttpRequestsApiV1CustomerAuthResetPasswordRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">me</a>() -> FiveOneEat.MeAuthResponse</code></summary>
 <dl>
 <dd>
@@ -6187,6 +6457,190 @@ Retrieve the current authenticated user's profile information.
 
 ```typescript
 await client.customer.auth.me();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">updateProfile</a>({ ...params }) -> FiveOneEat.UpdateProfileAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update name, email, and/or password. All fields are optional. To change the
+password, `current_password` must be provided alongside `password` and `password_confirmation`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.updateProfile();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.UpdateUserRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">uploadAvatar</a>({ ...params }) -> FiveOneEat.UploadAvatarAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload and replace the avatar for the authenticated customer. Any existing avatar file will be deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.uploadAvatar({
+    avatar: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.UploadAvatarRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">deleteAvatar</a>() -> FiveOneEat.DeleteAvatarAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove the avatar for the authenticated customer. Returns the updated user with a null avatar_url.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.deleteAvatar();
 
 ```
 </dd>
@@ -6850,7 +7304,7 @@ await client.customer.discovery.highlights();
 </dl>
 </details>
 
-<details><summary><code>client.customer.discovery.<a href="/src/api/resources/customer/resources/discovery/client/Client.ts">categories</a>() -> FiveOneEat.CategoriesDiscoveryResponse</code></summary>
+<details><summary><code>client.customer.discovery.<a href="/src/api/resources/customer/resources/discovery/client/Client.ts">categories</a>({ ...params }) -> FiveOneEat.CategoriesDiscoveryResponse</code></summary>
 <dl>
 <dd>
 
@@ -6890,6 +7344,14 @@ await client.customer.discovery.categories();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.CategoriesDiscoveryRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -8228,6 +8690,141 @@ await client.customer.businesses.bulletins.comments.create({
 <dd>
 
 **request:** `FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CommentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">listReplies</a>({ ...params }) -> FiveOneEat.ListRepliesCommentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve paginated replies for a top-level comment on a published bulletin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.bulletins.comments.listReplies({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    comment: "01950e7d-5678-7000-abcd-ef0123456789"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.businesses.bulletins.ListRepliesCommentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CommentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">reply</a>({ ...params }) -> FiveOneEat.ReplyCommentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Post a reply to a top-level comment on a published bulletin. Requires authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.bulletins.comments.reply({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    comment: "01950e7d-5678-7000-abcd-ef0123456789",
+    body: "body"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentReplyRequest` 
     
 </dd>
 </dl>
