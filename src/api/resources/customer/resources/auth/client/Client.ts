@@ -2,7 +2,7 @@
 
 import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../../../BaseClient.js";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
+import { mergeHeaders } from "../../../../../../core/headers.js";
 import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
@@ -467,9 +467,8 @@ export class AuthClient {
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
-     *     import { createReadStream } from "fs";
      *     await client.customer.auth.uploadAvatar({
-     *         avatar: fs.createReadStream("/path/to/your/file")
+     *         avatar: "avatar"
      *     })
      */
     public uploadAvatar(
@@ -483,14 +482,10 @@ export class AuthClient {
         request: FiveOneEat.customer.UploadAvatarRequest,
         requestOptions?: AuthClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.UploadAvatarAuthResponse>> {
-        const _body = await core.newFormData();
-        await _body.appendFile("avatar", request.avatar);
-        const _maybeEncodedRequest = await _body.getRequest();
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ ..._maybeEncodedRequest.headers }),
             requestOptions?.headers,
         );
         const _response = await core.fetcher({
@@ -502,10 +497,10 @@ export class AuthClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "file",
-            duplex: _maybeEncodedRequest.duplex,
-            body: _maybeEncodedRequest.body,
+            requestType: "json",
+            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

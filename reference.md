@@ -6576,7 +6576,7 @@ Upload and replace the avatar for the authenticated customer. Any existing avata
 
 ```typescript
 await client.customer.auth.uploadAvatar({
-    avatar: fs.createReadStream("/path/to/your/file")
+    avatar: "avatar"
 });
 
 ```
