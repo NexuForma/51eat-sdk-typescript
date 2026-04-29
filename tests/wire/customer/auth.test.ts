@@ -315,6 +315,73 @@ describe("AuthClient", () => {
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
+    test("uploadAvatar (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { avatar: "avatar" };
+        const rawResponseBody = {
+            data: { id: "id", name: "name", email: "email", role: "role", avatar_url: "avatar_url" },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/customer/user/avatar")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.auth.uploadAvatar({
+            avatar: "avatar",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("uploadAvatar (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { avatar: "avatar" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/customer/user/avatar")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.auth.uploadAvatar({
+                avatar: "avatar",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("uploadAvatar (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { avatar: "avatar" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/customer/user/avatar")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.auth.uploadAvatar({
+                avatar: "avatar",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("deleteAvatar (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
