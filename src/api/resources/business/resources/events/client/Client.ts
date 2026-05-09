@@ -8,6 +8,7 @@ import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
+import { CheckInClient } from "../resources/checkIn/client/Client.js";
 import { OrdersClient } from "../resources/orders/client/Client.js";
 import { TicketTypesClient } from "../resources/ticketTypes/client/Client.js";
 
@@ -21,6 +22,7 @@ export class EventsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EventsClient.Options>;
     protected _ticketTypes: TicketTypesClient | undefined;
     protected _orders: OrdersClient | undefined;
+    protected _checkIn: CheckInClient | undefined;
 
     constructor(options: EventsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -32,6 +34,10 @@ export class EventsClient {
 
     public get orders(): OrdersClient {
         return (this._orders ??= new OrdersClient(this._options));
+    }
+
+    public get checkIn(): CheckInClient {
+        return (this._checkIn ??= new CheckInClient(this._options));
     }
 
     /**
