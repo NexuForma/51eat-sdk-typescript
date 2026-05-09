@@ -1,344 +1,4 @@
 # Reference
-## Customer: Events
-<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">holdTickets</a>({ ...params }) -> FiveOneEat.HoldTicketsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Place a temporary hold on tickets for the specified event. Holds expire after 10 minutes.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerEvents.holdTickets({
-    eventId: "eventId",
-    tickets: [{
-            ticket_type_id: "ticket_type_id",
-            quantity: 1
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.StoreTicketHoldRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">releaseTicketHold</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Release all active holds for the given session, freeing the tickets for others.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerEvents.releaseTicketHold({
-    eventId: "eventId",
-    sessionId: "sessionId"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.ReleaseTicketHoldRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">calculateTicketPrice</a>({ ...params }) -> FiveOneEat.CalculateTicketPriceResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Preview the subtotal, platform fee, and total for a given ticket selection.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerEvents.calculateTicketPrice({
-    eventId: "eventId",
-    tickets: [{
-            ticket_type_id: "ticket_type_id",
-            quantity: 1
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.CalculatePriceRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">createPaymentIntent</a>({ ...params }) -> FiveOneEat.CreatePaymentIntentResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a Stripe payment intent for the tickets held in the given session.
-Returns a client_secret for the mobile app to confirm payment with Stripe.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerEvents.createPaymentIntent({
-    eventId: "eventId",
-    session_id: "session_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.CreatePaymentIntentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">confirmTicketOrder</a>({ ...params }) -> FiveOneEat.ConfirmTicketOrderResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Confirm a completed Stripe payment and create the ticket order.
-The payment must have succeeded before calling this endpoint.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerEvents.confirmTicketOrder({
-    eventId: "eventId",
-    payment_intent_id: "payment_intent_id",
-    session_id: "session_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.StoreTicketOrderRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerEventsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Customer: My Account
 <details><summary><code>client.customerMyAccount.<a href="/src/api/resources/customerMyAccount/client/Client.ts">getMyTicket</a>({ ...params }) -> FiveOneEat.GetMyTicketResponse</code></summary>
 <dl>
@@ -8845,9 +8505,23 @@ await client.customer.businesses.bulletins.comments.reply({
 </details>
 
 ## Customer Events Ticketing
-<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">holdTickets</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">holdTickets</a>({ ...params }) -> FiveOneEat.HoldTicketsTicketingResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Place a temporary hold on tickets for the specified event. Holds expire after 10 minutes.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -8859,7 +8533,11 @@ await client.customer.businesses.bulletins.comments.reply({
 
 ```typescript
 await client.customer.events.ticketing.holdTickets({
-    event: "event"
+    eventId: "eventId",
+    tickets: [{
+            ticket_type_id: "ticket_type_id",
+            quantity: 1
+        }]
 });
 
 ```
@@ -8876,7 +8554,7 @@ await client.customer.events.ticketing.holdTickets({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.events.HoldTicketsTicketingRequest` 
+**request:** `FiveOneEat.customer.events.StoreTicketHoldRequest` 
     
 </dd>
 </dl>
@@ -8900,6 +8578,20 @@ await client.customer.events.ticketing.holdTickets({
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Release all active holds for the given session, freeing the tickets for others.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -8910,7 +8602,7 @@ await client.customer.events.ticketing.holdTickets({
 
 ```typescript
 await client.customer.events.ticketing.releaseHold({
-    event: "event",
+    eventId: "eventId",
     sessionId: "sessionId"
 });
 
@@ -8948,9 +8640,23 @@ await client.customer.events.ticketing.releaseHold({
 </dl>
 </details>
 
-<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">calculatePrice</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">calculatePrice</a>({ ...params }) -> FiveOneEat.CalculatePriceTicketingResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Preview the subtotal, platform fee, and total for a given ticket selection.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -8962,7 +8668,11 @@ await client.customer.events.ticketing.releaseHold({
 
 ```typescript
 await client.customer.events.ticketing.calculatePrice({
-    event: "event"
+    eventId: "eventId",
+    tickets: [{
+            ticket_type_id: "ticket_type_id",
+            quantity: 1
+        }]
 });
 
 ```
@@ -8979,7 +8689,7 @@ await client.customer.events.ticketing.calculatePrice({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.events.CalculatePriceTicketingRequest` 
+**request:** `FiveOneEat.customer.events.CalculatePriceRequest` 
     
 </dd>
 </dl>
@@ -8999,9 +8709,24 @@ await client.customer.events.ticketing.calculatePrice({
 </dl>
 </details>
 
-<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">createPaymentIntent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">createPaymentIntent</a>({ ...params }) -> FiveOneEat.CreatePaymentIntentTicketingResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a Stripe payment intent for the tickets held in the given session.
+Returns a client_secret for the mobile app to confirm payment with Stripe.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -9013,7 +8738,8 @@ await client.customer.events.ticketing.calculatePrice({
 
 ```typescript
 await client.customer.events.ticketing.createPaymentIntent({
-    event: "event"
+    eventId: "eventId",
+    session_id: "session_id"
 });
 
 ```
@@ -9030,7 +8756,7 @@ await client.customer.events.ticketing.createPaymentIntent({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.events.CreatePaymentIntentTicketingRequest` 
+**request:** `FiveOneEat.customer.events.CreatePaymentIntentRequest` 
     
 </dd>
 </dl>
@@ -9050,9 +8776,24 @@ await client.customer.events.ticketing.createPaymentIntent({
 </dl>
 </details>
 
-<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">confirmOrder</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">confirmOrder</a>({ ...params }) -> FiveOneEat.ConfirmOrderTicketingResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Confirm a completed Stripe payment and create the ticket order.
+The payment must have succeeded before calling this endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -9064,7 +8805,9 @@ await client.customer.events.ticketing.createPaymentIntent({
 
 ```typescript
 await client.customer.events.ticketing.confirmOrder({
-    event: "event"
+    eventId: "eventId",
+    payment_intent_id: "payment_intent_id",
+    session_id: "session_id"
 });
 
 ```
@@ -9081,7 +8824,7 @@ await client.customer.events.ticketing.confirmOrder({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.events.ConfirmOrderTicketingRequest` 
+**request:** `FiveOneEat.customer.events.StoreTicketOrderRequest` 
     
 </dd>
 </dl>
