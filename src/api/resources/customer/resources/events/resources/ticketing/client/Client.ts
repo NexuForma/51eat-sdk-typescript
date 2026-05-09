@@ -10,7 +10,7 @@ import * as core from "../../../../../../../../core/index.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
-import type * as FiveOneEat from "../../../../../../../index.js";
+import * as FiveOneEat from "../../../../../../../index.js";
 
 export declare namespace TicketingClient {
     export type Options = BaseClientOptions;
@@ -26,26 +26,36 @@ export class TicketingClient {
     }
 
     /**
-     * @param {FiveOneEat.customer.events.HoldTicketsTicketingRequest} request
+     * Place a temporary hold on tickets for the specified event. Holds expire after 10 minutes.
+     *
+     * @param {FiveOneEat.customer.events.StoreTicketHoldRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.customer.events.ticketing.holdTickets({
-     *         event: "event"
+     *         eventId: "eventId",
+     *         tickets: [{
+     *                 ticket_type_id: "ticket_type_id",
+     *                 quantity: 1
+     *             }]
      *     })
      */
     public holdTickets(
-        request: FiveOneEat.customer.events.HoldTicketsTicketingRequest,
+        request: FiveOneEat.customer.events.StoreTicketHoldRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.events.HoldTicketsTicketingResponse> {
         return core.HttpResponsePromise.fromPromise(this.__holdTickets(request, requestOptions));
     }
 
     private async __holdTickets(
-        request: FiveOneEat.customer.events.HoldTicketsTicketingRequest,
+        request: FiveOneEat.customer.events.StoreTicketHoldRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.events.HoldTicketsTicketingResponse>> {
+        const { eventId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -57,11 +67,14 @@ export class TicketingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/events/${core.url.encodePathParam(event)}/ticket-holds`,
+                `customer/events/${core.url.encodePathParam(eventId)}/ticket-holds`,
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -69,32 +82,52 @@ export class TicketingClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.events.HoldTicketsTicketingResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "POST",
-            "/customer/events/{event}/ticket-holds",
+            "/customer/events/{eventId}/ticket-holds",
         );
     }
 
     /**
+     * Release all active holds for the given session, freeing the tickets for others.
+     *
      * @param {FiveOneEat.customer.events.ReleaseHoldTicketingRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     *
      * @example
      *     await client.customer.events.ticketing.releaseHold({
-     *         event: "event",
+     *         eventId: "eventId",
      *         sessionId: "sessionId"
      *     })
      */
@@ -109,7 +142,7 @@ export class TicketingClient {
         request: FiveOneEat.customer.events.ReleaseHoldTicketingRequest,
         requestOptions?: TicketingClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
-        const { event, sessionId } = request;
+        const { eventId, sessionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -121,7 +154,7 @@ export class TicketingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/events/${core.url.encodePathParam(event)}/ticket-holds/${core.url.encodePathParam(sessionId)}`,
+                `customer/events/${core.url.encodePathParam(eventId)}/ticket-holds/${core.url.encodePathParam(sessionId)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -137,42 +170,59 @@ export class TicketingClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "DELETE",
-            "/customer/events/{event}/ticket-holds/{sessionId}",
+            "/customer/events/{eventId}/ticket-holds/{sessionId}",
         );
     }
 
     /**
-     * @param {FiveOneEat.customer.events.CalculatePriceTicketingRequest} request
+     * Preview the subtotal, platform fee, and total for a given ticket selection.
+     *
+     * @param {FiveOneEat.customer.events.CalculatePriceRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.customer.events.ticketing.calculatePrice({
-     *         event: "event"
+     *         eventId: "eventId",
+     *         tickets: [{
+     *                 ticket_type_id: "ticket_type_id",
+     *                 quantity: 1
+     *             }]
      *     })
      */
     public calculatePrice(
-        request: FiveOneEat.customer.events.CalculatePriceTicketingRequest,
+        request: FiveOneEat.customer.events.CalculatePriceRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.events.CalculatePriceTicketingResponse> {
         return core.HttpResponsePromise.fromPromise(this.__calculatePrice(request, requestOptions));
     }
 
     private async __calculatePrice(
-        request: FiveOneEat.customer.events.CalculatePriceTicketingRequest,
+        request: FiveOneEat.customer.events.CalculatePriceRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.events.CalculatePriceTicketingResponse>> {
+        const { eventId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -184,11 +234,14 @@ export class TicketingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/events/${core.url.encodePathParam(event)}/calculate-price`,
+                `customer/events/${core.url.encodePathParam(eventId)}/calculate-price`,
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -196,46 +249,69 @@ export class TicketingClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.events.CalculatePriceTicketingResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "POST",
-            "/customer/events/{event}/calculate-price",
+            "/customer/events/{eventId}/calculate-price",
         );
     }
 
     /**
-     * @param {FiveOneEat.customer.events.CreatePaymentIntentTicketingRequest} request
+     * Create a Stripe payment intent for the tickets held in the given session.
+     * Returns a client_secret for the mobile app to confirm payment with Stripe.
+     *
+     * @param {FiveOneEat.customer.events.CreatePaymentIntentRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.customer.events.ticketing.createPaymentIntent({
-     *         event: "event"
+     *         eventId: "eventId",
+     *         session_id: "session_id"
      *     })
      */
     public createPaymentIntent(
-        request: FiveOneEat.customer.events.CreatePaymentIntentTicketingRequest,
+        request: FiveOneEat.customer.events.CreatePaymentIntentRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.events.CreatePaymentIntentTicketingResponse> {
         return core.HttpResponsePromise.fromPromise(this.__createPaymentIntent(request, requestOptions));
     }
 
     private async __createPaymentIntent(
-        request: FiveOneEat.customer.events.CreatePaymentIntentTicketingRequest,
+        request: FiveOneEat.customer.events.CreatePaymentIntentRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.events.CreatePaymentIntentTicketingResponse>> {
+        const { eventId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -247,11 +323,14 @@ export class TicketingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/events/${core.url.encodePathParam(event)}/payment-intent`,
+                `customer/events/${core.url.encodePathParam(eventId)}/payment-intent`,
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -259,46 +338,69 @@ export class TicketingClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.events.CreatePaymentIntentTicketingResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "POST",
-            "/customer/events/{event}/payment-intent",
+            "/customer/events/{eventId}/payment-intent",
         );
     }
 
     /**
-     * @param {FiveOneEat.customer.events.ConfirmOrderTicketingRequest} request
+     * Confirm a completed Stripe payment and create the ticket order.
+     * The payment must have succeeded before calling this endpoint.
+     *
+     * @param {FiveOneEat.customer.events.StoreTicketOrderRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.customer.events.ticketing.confirmOrder({
-     *         event: "event"
+     *         eventId: "eventId",
+     *         payment_intent_id: "payment_intent_id",
+     *         session_id: "session_id"
      *     })
      */
     public confirmOrder(
-        request: FiveOneEat.customer.events.ConfirmOrderTicketingRequest,
+        request: FiveOneEat.customer.events.StoreTicketOrderRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.events.ConfirmOrderTicketingResponse> {
         return core.HttpResponsePromise.fromPromise(this.__confirmOrder(request, requestOptions));
     }
 
     private async __confirmOrder(
-        request: FiveOneEat.customer.events.ConfirmOrderTicketingRequest,
+        request: FiveOneEat.customer.events.StoreTicketOrderRequest,
         requestOptions?: TicketingClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.events.ConfirmOrderTicketingResponse>> {
+        const { eventId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -310,11 +412,14 @@ export class TicketingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/events/${core.url.encodePathParam(event)}/ticket-orders`,
+                `customer/events/${core.url.encodePathParam(eventId)}/ticket-orders`,
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -322,22 +427,35 @@ export class TicketingClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.events.ConfirmOrderTicketingResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "POST",
-            "/customer/events/{event}/ticket-orders",
+            "/customer/events/{eventId}/ticket-orders",
         );
     }
 }

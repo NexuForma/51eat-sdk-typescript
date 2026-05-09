@@ -2,7 +2,6 @@
 
 import { BusinessClient } from "./api/resources/business/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
-import { CustomerEventsClient } from "./api/resources/customerEvents/client/Client.js";
 import { CustomerMyAccountClient } from "./api/resources/customerMyAccount/client/Client.js";
 import { RecordClickClient } from "./api/resources/recordClick/client/Client.js";
 import { ServeAdClient } from "./api/resources/serveAd/client/Client.js";
@@ -18,7 +17,6 @@ export declare namespace FiveOneEatClient {
 
 export class FiveOneEatClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FiveOneEatClient.Options>;
-    protected _customerEvents: CustomerEventsClient | undefined;
     protected _customerMyAccount: CustomerMyAccountClient | undefined;
     protected _customer: CustomerClient | undefined;
     protected _recordClick: RecordClickClient | undefined;
@@ -27,10 +25,6 @@ export class FiveOneEatClient {
 
     constructor(options: FiveOneEatClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
-    }
-
-    public get customerEvents(): CustomerEventsClient {
-        return (this._customerEvents ??= new CustomerEventsClient(this._options));
     }
 
     public get customerMyAccount(): CustomerMyAccountClient {

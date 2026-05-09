@@ -3,11 +3,11 @@
 /**
  * @example
  *     {
- *         event: "event",
+ *         eventId: "eventId",
  *         sessionId: "sessionId"
  *     }
  */
 export interface ReleaseHoldTicketingRequest {
-    event: string;
+    eventId: string;
     sessionId: string;
 }
