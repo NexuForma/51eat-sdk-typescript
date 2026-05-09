@@ -4179,9 +4179,24 @@ await client.business.events.orders.get({
 </details>
 
 ## Business Events CheckIn
-<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">lookup</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">lookup</a>({ ...params }) -> FiveOneEat.LookupCheckInResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Decodes the base64 QR payload and returns ticket details without performing check-in.
+Accepts either a `ticket_id` or `ticket_number` inside the QR payload.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -4193,7 +4208,8 @@ await client.business.events.orders.get({
 
 ```typescript
 await client.business.events.checkIn.lookup({
-    event: "event"
+    event: "event",
+    qr_data: "qr_data"
 });
 
 ```
@@ -4210,7 +4226,7 @@ await client.business.events.checkIn.lookup({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.events.LookupCheckInRequest` 
+**request:** `FiveOneEat.business.events.LookupTicketRequest` 
     
 </dd>
 </dl>
@@ -4230,9 +4246,27 @@ await client.business.events.checkIn.lookup({
 </dl>
 </details>
 
-<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">scan</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">scan</a>({ ...params }) -> FiveOneEat.ScanCheckInResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Decodes the base64 QR payload, validates the ticket's current status, marks it as used,
+and broadcasts the `ticket.checked-in` event via Reverb.
+
+Returns `409` if the ticket has already been checked in, `400` for refunded or otherwise
+invalid tickets.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -4244,7 +4278,8 @@ await client.business.events.checkIn.lookup({
 
 ```typescript
 await client.business.events.checkIn.scan({
-    event: "event"
+    event: "event",
+    qr_data: "qr_data"
 });
 
 ```
@@ -4261,7 +4296,7 @@ await client.business.events.checkIn.scan({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.events.ScanCheckInRequest` 
+**request:** `FiveOneEat.business.events.ScanTicketRequest` 
     
 </dd>
 </dl>
@@ -4281,9 +4316,23 @@ await client.business.events.checkIn.scan({
 </dl>
 </details>
 
-<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">stats</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">stats</a>({ ...params }) -> FiveOneEat.StatsCheckInResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns ticket counts and check-in rate for the event dashboard.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -4332,9 +4381,24 @@ await client.business.events.checkIn.stats({
 </dl>
 </details>
 
-<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">recent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.business.events.checkIn.<a href="/src/api/resources/business/resources/events/resources/checkIn/client/Client.ts">recent</a>({ ...params }) -> FiveOneEat.RecentCheckInResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns checked-in tickets ordered by check-in time descending.
+Accepts an optional `limit` query param (default `20`, max `100`).
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 

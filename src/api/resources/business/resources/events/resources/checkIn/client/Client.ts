@@ -10,7 +10,7 @@ import * as core from "../../../../../../../../core/index.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
-import type * as FiveOneEat from "../../../../../../../index.js";
+import * as FiveOneEat from "../../../../../../../index.js";
 
 export declare namespace CheckInClient {
     export type Options = BaseClientOptions;
@@ -26,26 +26,35 @@ export class CheckInClient {
     }
 
     /**
-     * @param {FiveOneEat.business.events.LookupCheckInRequest} request
+     * Decodes the base64 QR payload and returns ticket details without performing check-in.
+     * Accepts either a `ticket_id` or `ticket_number` inside the QR payload.
+     *
+     * @param {FiveOneEat.business.events.LookupTicketRequest} request
      * @param {CheckInClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.checkIn.lookup({
-     *         event: "event"
+     *         event: "event",
+     *         qr_data: "qr_data"
      *     })
      */
     public lookup(
-        request: FiveOneEat.business.events.LookupCheckInRequest,
+        request: FiveOneEat.business.events.LookupTicketRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.events.LookupCheckInResponse> {
         return core.HttpResponsePromise.fromPromise(this.__lookup(request, requestOptions));
     }
 
     private async __lookup(
-        request: FiveOneEat.business.events.LookupCheckInRequest,
+        request: FiveOneEat.business.events.LookupTicketRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.business.events.LookupCheckInResponse>> {
+        const { event, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -61,7 +70,10 @@ export class CheckInClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -69,15 +81,32 @@ export class CheckInClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.events.LookupCheckInResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
@@ -89,26 +118,38 @@ export class CheckInClient {
     }
 
     /**
-     * @param {FiveOneEat.business.events.ScanCheckInRequest} request
+     * Decodes the base64 QR payload, validates the ticket's current status, marks it as used,
+     * and broadcasts the `ticket.checked-in` event via Reverb.
+     *
+     * Returns `409` if the ticket has already been checked in, `400` for refunded or otherwise
+     * invalid tickets.
+     *
+     * @param {FiveOneEat.business.events.ScanTicketRequest} request
      * @param {CheckInClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.checkIn.scan({
-     *         event: "event"
+     *         event: "event",
+     *         qr_data: "qr_data"
      *     })
      */
     public scan(
-        request: FiveOneEat.business.events.ScanCheckInRequest,
+        request: FiveOneEat.business.events.ScanTicketRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.events.ScanCheckInResponse> {
         return core.HttpResponsePromise.fromPromise(this.__scan(request, requestOptions));
     }
 
     private async __scan(
-        request: FiveOneEat.business.events.ScanCheckInRequest,
+        request: FiveOneEat.business.events.ScanTicketRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { event } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.business.events.ScanCheckInResponse>> {
+        const { event, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -124,7 +165,10 @@ export class CheckInClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -132,15 +176,32 @@ export class CheckInClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.events.ScanCheckInResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
@@ -152,8 +213,14 @@ export class CheckInClient {
     }
 
     /**
+     * Returns ticket counts and check-in rate for the event dashboard.
+     *
      * @param {FiveOneEat.business.events.StatsCheckInRequest} request
      * @param {CheckInClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.business.events.checkIn.stats({
@@ -163,14 +230,14 @@ export class CheckInClient {
     public stats(
         request: FiveOneEat.business.events.StatsCheckInRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.events.StatsCheckInResponse> {
         return core.HttpResponsePromise.fromPromise(this.__stats(request, requestOptions));
     }
 
     private async __stats(
         request: FiveOneEat.business.events.StatsCheckInRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.business.events.StatsCheckInResponse>> {
         const { event } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -195,15 +262,27 @@ export class CheckInClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.events.StatsCheckInResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
@@ -215,8 +294,15 @@ export class CheckInClient {
     }
 
     /**
+     * Returns checked-in tickets ordered by check-in time descending.
+     * Accepts an optional `limit` query param (default `20`, max `100`).
+     *
      * @param {FiveOneEat.business.events.RecentCheckInRequest} request
      * @param {CheckInClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.business.events.checkIn.recent({
@@ -226,14 +312,14 @@ export class CheckInClient {
     public recent(
         request: FiveOneEat.business.events.RecentCheckInRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.business.events.RecentCheckInResponse> {
         return core.HttpResponsePromise.fromPromise(this.__recent(request, requestOptions));
     }
 
     private async __recent(
         request: FiveOneEat.business.events.RecentCheckInRequest,
         requestOptions?: CheckInClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.business.events.RecentCheckInResponse>> {
         const { event } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -258,15 +344,27 @@ export class CheckInClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.events.RecentCheckInResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
