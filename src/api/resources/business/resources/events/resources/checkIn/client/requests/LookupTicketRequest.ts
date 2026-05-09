@@ -3,10 +3,12 @@
 /**
  * @example
  *     {
- *         event: "event"
+ *         event: "event",
+ *         qr_data: "qr_data"
  *     }
  */
-export interface StatsCheckInRequest {
+export interface LookupTicketRequest {
     /** The event ID */
     event: string;
+    qr_data: string;
 }

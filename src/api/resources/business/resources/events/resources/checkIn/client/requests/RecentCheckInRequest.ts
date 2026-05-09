@@ -7,5 +7,6 @@
  *     }
  */
 export interface RecentCheckInRequest {
+    /** The event ID */
     event: string;
 }
