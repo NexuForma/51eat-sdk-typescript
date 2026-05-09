@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.34",
+    "version": "0.0.35",
     "private": false,
     "repository": {
         "type": "git",
@@ -274,6 +274,17 @@
                 "default": "./dist/cjs/api/resources/business/resources/events/resources/orders/exports.js"
             },
             "default": "./dist/cjs/api/resources/business/resources/events/resources/orders/exports.js"
+        },
+        "./business/events/checkIn": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/events/resources/checkIn/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/events/resources/checkIn/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/events/resources/checkIn/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/events/resources/checkIn/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/events/resources/checkIn/exports.js"
         },
         "./business/menus/groups": {
             "import": {
