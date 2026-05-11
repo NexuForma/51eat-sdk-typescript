@@ -1,4 +1,5 @@
 export type { FavoriteBusinessesRequest } from "./FavoriteBusinessesRequest.js";
+export type { ListTemporaryLocationsBusinessesRequest } from "./ListTemporaryLocationsBusinessesRequest.js";
 export type { MenusBusinessesRequest } from "./MenusBusinessesRequest.js";
 export type { PhotosBusinessesRequest } from "./PhotosBusinessesRequest.js";
 export type { ProfileBusinessesRequest } from "./ProfileBusinessesRequest.js";
