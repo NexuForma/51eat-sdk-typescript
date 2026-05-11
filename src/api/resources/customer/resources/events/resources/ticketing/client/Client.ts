@@ -287,7 +287,7 @@ export class TicketingClient {
      * Create a Stripe payment intent for the tickets held in the given session.
      * Returns a client_secret for the mobile app to confirm payment with Stripe.
      *
-     * @param {FiveOneEat.customer.events.CreatePaymentIntentRequest} request
+     * @param {FiveOneEat.customer.events.AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest} request
      * @param {TicketingClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -301,14 +301,14 @@ export class TicketingClient {
      *     })
      */
     public createPaymentIntent(
-        request: FiveOneEat.customer.events.CreatePaymentIntentRequest,
+        request: FiveOneEat.customer.events.AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest,
         requestOptions?: TicketingClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.customer.events.CreatePaymentIntentTicketingResponse> {
         return core.HttpResponsePromise.fromPromise(this.__createPaymentIntent(request, requestOptions));
     }
 
     private async __createPaymentIntent(
-        request: FiveOneEat.customer.events.CreatePaymentIntentRequest,
+        request: FiveOneEat.customer.events.AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest,
         requestOptions?: TicketingClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.events.CreatePaymentIntentTicketingResponse>> {
         const { eventId, ..._body } = request;

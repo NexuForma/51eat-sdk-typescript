@@ -395,4 +395,63 @@ describe("BusinessesClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
+
+    test("listTemporaryLocations (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    id: "id",
+                    title: "title",
+                    notes: "notes",
+                    address: "address",
+                    city: "city",
+                    state: "state",
+                    zip: "zip",
+                    country: "country",
+                    latitude: 1.1,
+                    longitude: 1.1,
+                    hours: { key: "value" },
+                    starts_at: "2024-01-15T09:30:00Z",
+                    ends_at: "2024-01-15T09:30:00Z",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/katzs-deli/temporary-locations")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.businesses.listTemporaryLocations({
+            handle: "katzs-deli",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("listTemporaryLocations (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/temporary-locations")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.listTemporaryLocations({
+                handle: "handle",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
 });
