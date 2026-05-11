@@ -439,4 +439,79 @@ export class BusinessesClient {
             "/customer/businesses/{handle}/favorite",
         );
     }
+
+    /**
+     * Retrieve active and upcoming temporary locations for a business.
+     *
+     * @param {FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.customer.businesses.listTemporaryLocations({
+     *         handle: "katzs-deli"
+     *     })
+     */
+    public listTemporaryLocations(
+        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listTemporaryLocations(request, requestOptions));
+    }
+
+    private async __listTemporaryLocations(
+        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse>> {
+        const { handle } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(handle)}/temporary-locations`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/businesses/{handle}/temporary-locations",
+        );
+    }
 }

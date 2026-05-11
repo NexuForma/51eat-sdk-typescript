@@ -7,7 +7,7 @@
  *         session_id: "session_id"
  *     }
  */
-export interface CreatePaymentIntentRequest {
+export interface AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest {
     eventId: string;
     session_id: string;
 }

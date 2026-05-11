@@ -11,13 +11,16 @@ import * as errors from "../../../../errors/index.js";
 import * as FiveOneEat from "../../../index.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
+import { CartClient } from "../resources/cart/client/Client.js";
 import { DiscoveryClient } from "../resources/discovery/client/Client.js";
 import { EditorialsClient } from "../resources/editorials/client/Client.js";
 import { EventsClient } from "../resources/events/client/Client.js";
 import { ExploreClient } from "../resources/explore/client/Client.js";
 import { MeClient } from "../resources/me/client/Client.js";
 import { MessagingClient } from "../resources/messaging/client/Client.js";
+import { ProductOrdersClient } from "../resources/productOrders/client/Client.js";
 import { PushNotificationsClient } from "../resources/pushNotifications/client/Client.js";
+import { ShopClient } from "../resources/shop/client/Client.js";
 
 export declare namespace CustomerClient {
     export type Options = BaseClientOptions;
@@ -29,13 +32,16 @@ export class CustomerClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CustomerClient.Options>;
     protected _auth: AuthClient | undefined;
     protected _businesses: BusinessesClient | undefined;
+    protected _cart: CartClient | undefined;
     protected _explore: ExploreClient | undefined;
     protected _discovery: DiscoveryClient | undefined;
     protected _editorials: EditorialsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _messaging: MessagingClient | undefined;
     protected _me: MeClient | undefined;
+    protected _productOrders: ProductOrdersClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
+    protected _shop: ShopClient | undefined;
 
     constructor(options: CustomerClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -47,6 +53,10 @@ export class CustomerClient {
 
     public get businesses(): BusinessesClient {
         return (this._businesses ??= new BusinessesClient(this._options));
+    }
+
+    public get cart(): CartClient {
+        return (this._cart ??= new CartClient(this._options));
     }
 
     public get explore(): ExploreClient {
@@ -73,8 +83,16 @@ export class CustomerClient {
         return (this._me ??= new MeClient(this._options));
     }
 
+    public get productOrders(): ProductOrdersClient {
+        return (this._productOrders ??= new ProductOrdersClient(this._options));
+    }
+
     public get pushNotifications(): PushNotificationsClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
+    }
+
+    public get shop(): ShopClient {
+        return (this._shop ??= new ShopClient(this._options));
     }
 
     /**
