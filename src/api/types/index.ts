@@ -81,6 +81,8 @@ export * from "./CustomerLoginResponse.js";
 export * from "./CustomerMenu.js";
 export * from "./CustomerMenuGroup.js";
 export * from "./CustomerMenuItem.js";
+export * from "./CustomerMenuItemModifier.js";
+export * from "./CustomerMenuItemVariation.js";
 export * from "./CustomerMenuResponse.js";
 export * from "./CustomerPhoto.js";
 export * from "./CustomerPhotoResponse.js";
