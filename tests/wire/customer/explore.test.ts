@@ -34,7 +34,7 @@ describe("ExploreClient", () => {
                         country: null,
                         latitude: null,
                         longitude: null,
-                        hours: { key: "value" },
+                        hours: { key: { isOpen: true, openTime: "openTime", closeTime: "closeTime" } },
                         full_address: "full_address",
                         starts_at: "starts_at",
                         ends_at: "ends_at",

@@ -11,10 +11,20 @@ export interface BusinessTemporaryLocation {
     country: string | null;
     latitude: number | null;
     longitude: number | null;
-    hours: Record<string, unknown>;
+    hours: Record<string, BusinessTemporaryLocation.Hours.Value>;
     full_address: string;
     starts_at: string;
     ends_at: string;
     created_at: string | null;
     updated_at: string | null;
+}
+
+export namespace BusinessTemporaryLocation {
+    export namespace Hours {
+        export interface Value {
+            isOpen: boolean;
+            openTime: string;
+            closeTime: string;
+        }
+    }
 }

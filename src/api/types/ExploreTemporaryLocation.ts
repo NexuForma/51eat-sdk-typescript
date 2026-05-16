@@ -11,7 +11,7 @@ export interface ExploreTemporaryLocation {
     country: string | null;
     latitude: number | null;
     longitude: number | null;
-    hours: Record<string, unknown>;
+    hours: Record<string, ExploreTemporaryLocation.Hours.Value>;
     full_address: string;
     starts_at: string;
     ends_at: string;
@@ -19,6 +19,14 @@ export interface ExploreTemporaryLocation {
 }
 
 export namespace ExploreTemporaryLocation {
+    export namespace Hours {
+        export interface Value {
+            isOpen: boolean;
+            openTime: string;
+            closeTime: string;
+        }
+    }
+
     export interface Business {
         id: string;
         name: string;
