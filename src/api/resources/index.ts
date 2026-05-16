@@ -1,7 +1,13 @@
 export * as business from "./business/index.js";
+export * from "./businessMessaging/client/requests/index.js";
+export * as businessMessaging from "./businessMessaging/index.js";
+export * from "./businessMessaging/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";
+export * from "./customerMessaging/client/requests/index.js";
+export * as customerMessaging from "./customerMessaging/index.js";
+export * from "./customerMessaging/types/index.js";
 export * from "./customerMyAccount/client/requests/index.js";
 export * as customerMyAccount from "./customerMyAccount/index.js";
 export * from "./customerMyAccount/types/index.js";

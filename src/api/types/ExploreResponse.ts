@@ -5,6 +5,7 @@ import type * as FiveOneEat from "../index.js";
 export interface ExploreResponse {
     businesses: FiveOneEat.ExploreBusiness[];
     temporary_locations: FiveOneEat.ExploreTemporaryLocation[];
+    events: FiveOneEat.ExploreEvent[];
     bounds: ExploreResponse.Bounds;
 }
 
