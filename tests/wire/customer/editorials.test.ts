@@ -133,7 +133,7 @@ describe("EditorialsClient", () => {
                             country: null,
                             latitude: null,
                             longitude: null,
-                            hours: { key: "value" },
+                            hours: { key: { isOpen: true, openTime: "openTime", closeTime: "closeTime" } },
                             starts_at: "2024-01-15T09:30:00Z",
                             ends_at: "2024-01-15T09:30:00Z",
                         },
