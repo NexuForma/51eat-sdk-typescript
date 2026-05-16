@@ -9,6 +9,6 @@ export interface CustomerMenuItem {
     price: number | null;
     image: string | null;
     allergens: string[] | null;
-    modifiers?: FiveOneEat.CustomerMenuItemModifier[] | undefined;
-    variations?: FiveOneEat.CustomerMenuItemVariation[] | undefined;
+    modifiers: FiveOneEat.CustomerMenuItemModifier[];
+    variations: FiveOneEat.CustomerMenuItemVariation[];
 }

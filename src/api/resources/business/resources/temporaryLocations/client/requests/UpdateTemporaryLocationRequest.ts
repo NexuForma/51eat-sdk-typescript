@@ -18,7 +18,19 @@ export interface UpdateTemporaryLocationRequest {
     country?: string | null;
     latitude?: number | null;
     longitude?: number | null;
-    hours?: string[] | null;
     starts_at?: string;
     ends_at?: string;
+    hours?: UpdateTemporaryLocationRequest.Hours.Item[] | null;
+}
+
+export namespace UpdateTemporaryLocationRequest {
+    export type Hours = Hours.Item[];
+
+    export namespace Hours {
+        export interface Item {
+            isOpen?: boolean | undefined;
+            openTime?: (string | null) | undefined;
+            closeTime?: (string | null) | undefined;
+        }
+    }
 }
