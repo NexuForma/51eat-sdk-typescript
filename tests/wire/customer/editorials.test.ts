@@ -129,7 +129,7 @@ describe("EditorialsClient", () => {
                             address: null,
                             city: null,
                             state: null,
-                            zip: null,
+                            zipcode: null,
                             country: null,
                             latitude: null,
                             longitude: null,

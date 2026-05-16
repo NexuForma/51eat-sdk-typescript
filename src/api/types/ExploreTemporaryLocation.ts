@@ -7,7 +7,7 @@ export interface ExploreTemporaryLocation {
     address: string | null;
     city: string | null;
     state: string | null;
-    zip: string | null;
+    zipcode: string | null;
     country: string | null;
     latitude: number | null;
     longitude: number | null;
