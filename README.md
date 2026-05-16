@@ -70,7 +70,7 @@ following namespace:
 ```typescript
 import { FiveOneEat } from "@51eat/sdk";
 
-const request: FiveOneEat.GetMyTicketRequest = {
+const request: FiveOneEat.SearchBusinessConversationsRequest = {
     ...
 };
 ```
@@ -147,9 +147,9 @@ For example, `fs.ReadStream` has a `path` property which the SDK uses to retriev
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { CustomerMyAccountClient } from '@51eat/sdk/customerMyAccount';
+import { BusinessMessagingClient } from '@51eat/sdk/businessMessaging';
 
-const client = new CustomerMyAccountClient({...});
+const client = new BusinessMessagingClient({...});
 ```
 
 ### Additional Headers

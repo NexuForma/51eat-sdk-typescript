@@ -108,6 +108,7 @@ export * from "./EventFeedItem.js";
 export * from "./EventFeedResponse.js";
 export * from "./EventSearchResult.js";
 export * from "./ExploreBusiness.js";
+export * from "./ExploreEvent.js";
 export * from "./ExploreResponse.js";
 export * from "./ExploreTemporaryLocation.js";
 export * from "./FavoriteResponse.js";

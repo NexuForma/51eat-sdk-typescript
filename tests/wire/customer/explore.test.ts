@@ -40,6 +40,19 @@ describe("ExploreClient", () => {
                         ends_at: "ends_at",
                     },
                 ],
+                events: [
+                    {
+                        id: "id",
+                        title: "title",
+                        description: null,
+                        location: null,
+                        starts_at: "starts_at",
+                        ends_at: "ends_at",
+                        latitude: null,
+                        longitude: null,
+                        is_featured: true,
+                    },
+                ],
                 bounds: { north: "north", south: "south", east: "east", west: "west" },
             },
         };
