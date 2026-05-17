@@ -32,6 +32,7 @@ export interface UpdateProductRequest {
     taxable?: boolean;
     tax_code?: string | null;
     is_active?: boolean;
+    published_at?: string | null;
     is_featured?: boolean;
     category_ids?: number[] | null;
 }
