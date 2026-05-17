@@ -51,6 +51,994 @@ await client.businessMessaging.searchBusinessConversations({
 </dl>
 </details>
 
+## Customer: Businesses
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">profileShow</a>({ ...params }) -> FiveOneEat.ProfileShowResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve core business information for the profile page.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.profileShow({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ProfileShowRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessMenus</a>({ ...params }) -> FiveOneEat.GetBusinessMenusResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all menus organized by groups for the business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessMenus({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessMenusRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessPhotos</a>({ ...params }) -> FiveOneEat.GetBusinessPhotosResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve photo gallery for the business with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessPhotos({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessPhotosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessBulletins</a>({ ...params }) -> FiveOneEat.GetBusinessBulletinsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve business announcements and updates with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessBulletins({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessBulletinsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBulletinComments</a>({ ...params }) -> FiveOneEat.GetBulletinCommentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve paginated comments for a published business bulletin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBulletinComments({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBulletinCommentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">createBulletinComment</a>({ ...params }) -> FiveOneEat.CreateBulletinCommentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Post a comment on a business bulletin. Requires authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.createBulletinComment({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    body: "body"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBulletinCommentReplies</a>({ ...params }) -> FiveOneEat.GetBulletinCommentRepliesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve paginated replies for a top-level comment on a published bulletin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBulletinCommentReplies({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    comment: "01950e7d-5678-7000-abcd-ef0123456789"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBulletinCommentRepliesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">replyToBulletinComment</a>({ ...params }) -> FiveOneEat.ReplyToBulletinCommentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Post a reply to a top-level comment on a published bulletin. Requires authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.replyToBulletinComment({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    comment: "01950e7d-5678-7000-abcd-ef0123456789",
+    body: "body"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreBulletinCommentReplyRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">favoritesBusiness</a>({ ...params }) -> FiveOneEat.FavoritesBusinessResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a business to the authenticated user's favorites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.favoritesBusiness({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.FavoritesBusinessRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">unfavoritesBusiness</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a business from the authenticated user's favorites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.unfavoritesBusiness({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UnfavoritesBusinessRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessEvents</a>({ ...params }) -> FiveOneEat.GetBusinessEventsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve upcoming events for the business with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessEvents({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">businessesEventShow</a>({ ...params }) -> FiveOneEat.BusinessesEventShowResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve full details for a single upcoming event belonging to the business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.businessesEventShow({
+    handle: "katzs-deli",
+    event: "event"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.BusinessesEventShowRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">storeEventRsvp</a>({ ...params }) -> FiveOneEat.StoreEventRsvpResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create or update the authenticated user's RSVP for a business event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.storeEventRsvp({
+    handle: "katzs-deli",
+    event: "01950e7d-1234-7000-abcd-ef0123456789",
+    status: "attending"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreEventRsvpRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">destroyEventRsvp</a>({ ...params }) -> number</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel the authenticated user's RSVP for a business event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.destroyEventRsvp({
+    handle: "katzs-deli",
+    event: "01950e7d-1234-7000-abcd-ef0123456789"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.DestroyEventRsvpRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessTemporaryLocations</a>({ ...params }) -> FiveOneEat.GetBusinessTemporaryLocationsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve active and upcoming temporary locations for a business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessTemporaryLocations({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessTemporaryLocationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Messaging
 <details><summary><code>client.customerMessaging.<a href="/src/api/resources/customerMessaging/client/Client.ts">searchCustomerConversations</a>({ ...params }) -> FiveOneEat.SearchCustomerConversationsResponse</code></summary>
 <dl>
@@ -294,6 +1282,161 @@ await client.customer.search({
 <dd>
 
 **requestOptions:** `CustomerClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Customer: Shop
+<details><summary><code>client.customerShop.<a href="/src/api/resources/customerShop/client/Client.ts">listShopProducts</a>({ ...params }) -> FiveOneEat.ListShopProductsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerShop.listShopProducts({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ListShopProductsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerShopClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerShop.<a href="/src/api/resources/customerShop/client/Client.ts">getShopProduct</a>({ ...params }) -> FiveOneEat.GetShopProductResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerShop.getShopProduct({
+    handle: "katzs-deli",
+    product: "product"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetShopProductRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerShopClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerShop.<a href="/src/api/resources/customerShop/client/Client.ts">listShopCategories</a>({ ...params }) -> FiveOneEat.ListShopCategoriesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerShop.listShopCategories({
+    handle: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ListShopCategoriesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerShopClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7507,6 +8650,330 @@ await client.business.products.variants.delete({
 </dl>
 </details>
 
+## Business Products Images
+<details><summary><code>client.business.products.images.<a href="/src/api/resources/business/resources/products/resources/images/client/Client.ts">upload</a>({ ...params }) -> FiveOneEat.UploadImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.images.upload({
+    image: fs.createReadStream("/path/to/your/file"),
+    product: "product"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.UploadImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.products.images.<a href="/src/api/resources/business/resources/products/resources/images/client/Client.ts">reorder</a>({ ...params }) -> FiveOneEat.ReorderImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.images.reorder({
+    product: "product",
+    body: {
+        images: [{
+                id: "id",
+                sort_order: 1
+            }]
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.ReorderImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.products.images.<a href="/src/api/resources/business/resources/products/resources/images/client/Client.ts">delete</a>({ ...params }) -> FiveOneEat.DeleteImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.images.delete({
+    product: "product",
+    image: "image"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.DeleteImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Business Products Variants Images
+<details><summary><code>client.business.products.variants.images.<a href="/src/api/resources/business/resources/products/resources/variants/resources/images/client/Client.ts">upload</a>({ ...params }) -> FiveOneEat.UploadImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.variants.images.upload({
+    image: fs.createReadStream("/path/to/your/file"),
+    variant: "variant"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.variants.UploadImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.products.variants.images.<a href="/src/api/resources/business/resources/products/resources/variants/resources/images/client/Client.ts">reorder</a>({ ...params }) -> FiveOneEat.ReorderImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.variants.images.reorder({
+    variant: "variant",
+    body: {
+        images: [{
+                id: "id",
+                sort_order: 1
+            }]
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.variants.ReorderImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.products.variants.images.<a href="/src/api/resources/business/resources/products/resources/variants/resources/images/client/Client.ts">delete</a>({ ...params }) -> FiveOneEat.DeleteImagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.products.variants.images.delete({
+    variant: "variant",
+    image: "image"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.products.variants.DeleteImagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Profile Logo
 <details><summary><code>client.business.profile.logo.<a href="/src/api/resources/business/resources/profile/resources/logo/client/Client.ts">upload</a>({ ...params }) -> FiveOneEat.UploadLogoResponse</code></summary>
 <dl>
@@ -8257,399 +9724,8 @@ await client.customer.auth.logoutAll();
 </dl>
 </details>
 
-## Customer Businesses
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">profile</a>({ ...params }) -> FiveOneEat.ProfileBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve core business information for the profile page.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.profile({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.ProfileBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">menus</a>({ ...params }) -> FiveOneEat.MenusBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve all menus organized by groups for the business.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.menus({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.MenusBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">photos</a>({ ...params }) -> FiveOneEat.PhotosBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve photo gallery for the business with pagination.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.photos({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.PhotosBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">favorite</a>({ ...params }) -> FiveOneEat.FavoriteBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a business to the authenticated user's favorites.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.favorite({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.FavoriteBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Remove a business from the authenticated user's favorites.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.unfavorite({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.UnfavoriteBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">listTemporaryLocations</a>({ ...params }) -> FiveOneEat.ListTemporaryLocationsBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve active and upcoming temporary locations for a business.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.listTemporaryLocations({
-    handle: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Customer Cart
-<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">get</a>() -> FiveOneEat.GetCartResponse</code></summary>
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetCartResponse</code></summary>
 <dl>
 <dd>
 
@@ -8662,7 +9738,9 @@ await client.customer.businesses.listTemporaryLocations({
 <dd>
 
 ```typescript
-await client.customer.cart.get();
+await client.customer.cart.get({
+    business: "katzs-deli"
+});
 
 ```
 </dd>
@@ -8674,6 +9752,14 @@ await client.customer.cart.get();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.GetCartRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -8704,7 +9790,7 @@ await client.customer.cart.get();
 
 ```typescript
 await client.customer.cart.addItem({
-    business_id: 1,
+    business: "katzs-deli",
     product_id: 1,
     quantity: 1
 });
@@ -8743,7 +9829,7 @@ await client.customer.cart.addItem({
 </dl>
 </details>
 
-<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">clear</a>() -> FiveOneEat.ClearCartResponse</code></summary>
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">clear</a>({ ...params }) -> FiveOneEat.ClearCartResponse</code></summary>
 <dl>
 <dd>
 
@@ -8756,7 +9842,9 @@ await client.customer.cart.addItem({
 <dd>
 
 ```typescript
-await client.customer.cart.clear();
+await client.customer.cart.clear({
+    business: "katzs-deli"
+});
 
 ```
 </dd>
@@ -8768,6 +9856,160 @@ await client.customer.cart.clear();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.ClearCartRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CartClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">createPaymentIntent</a>({ ...params }) -> FiveOneEat.CreatePaymentIntentCartResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns client_secret, price breakdown, and tax calculation for use with Stripe SDK.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.cart.createPaymentIntent({
+    business: "katzs-deli",
+    billing_address: {
+        line1: "line1",
+        city: "city",
+        state: "state",
+        postal_code: "postal_code",
+        country: "country"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.CreatePaymentIntentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CartClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">checkout</a>({ ...params }) -> FiveOneEat.CheckoutCartResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Verifies the Stripe payment intent, creates the order, decrements inventory,
+clears the cart, and dispatches order confirmation notifications.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.cart.checkout({
+    business: "katzs-deli",
+    payment_intent_id: "payment_intent_id",
+    billing_address: {
+        line1: "line1",
+        city: "city",
+        state: "state",
+        postal_code: "postal_code",
+        country: "country"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.CheckoutRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -8868,150 +10110,6 @@ await client.customer.cart.removeItem({
 <dd>
 
 **request:** `FiveOneEat.customer.RemoveItemCartRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CartClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">createPaymentIntent</a>({ ...params }) -> FiveOneEat.CreatePaymentIntentCartResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns client_secret, price breakdown, and tax calculation for use with Stripe SDK.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.cart.createPaymentIntent({
-    billing_address: {
-        line1: "line1",
-        city: "city",
-        state: "state",
-        postal_code: "postal_code",
-        country: "country"
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.CreatePaymentIntentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CartClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">checkout</a>({ ...params }) -> FiveOneEat.CheckoutCartResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Verifies the Stripe payment intent, creates the order, decrements inventory,
-clears the cart, and dispatches order confirmation notifications.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.cart.checkout({
-    payment_intent_id: "payment_intent_id",
-    billing_address: {
-        line1: "line1",
-        city: "city",
-        state: "state",
-        postal_code: "postal_code",
-        country: "country"
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.CheckoutRequest` 
     
 </dd>
 </dl>
@@ -10135,8 +11233,315 @@ await client.customer.pushNotifications.unregister({
 </dl>
 </details>
 
+## Customer Businesses
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">profile</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.profile({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.ProfileBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">menus</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.menus({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.MenusBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">photos</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.photos({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.PhotosBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">favorite</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.favorite({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.FavoriteBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.unfavorite({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.UnfavoriteBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">listTemporaryLocations</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.listTemporaryLocations({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer Shop
-<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">listProducts</a>({ ...params }) -> FiveOneEat.ListProductsShopResponse</code></summary>
+<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">listProducts</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -10150,7 +11555,7 @@ await client.customer.pushNotifications.unregister({
 
 ```typescript
 await client.customer.shop.listProducts({
-    handle: "katzs-deli"
+    business: "business"
 });
 
 ```
@@ -10187,7 +11592,7 @@ await client.customer.shop.listProducts({
 </dl>
 </details>
 
-<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">getProduct</a>({ ...params }) -> FiveOneEat.GetProductShopResponse</code></summary>
+<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">getProduct</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -10201,7 +11606,7 @@ await client.customer.shop.listProducts({
 
 ```typescript
 await client.customer.shop.getProduct({
-    handle: "katzs-deli",
+    business: "business",
     product: "product"
 });
 
@@ -10239,7 +11644,7 @@ await client.customer.shop.getProduct({
 </dl>
 </details>
 
-<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">listCategories</a>({ ...params }) -> FiveOneEat.ListCategoriesShopResponse</code></summary>
+<details><summary><code>client.customer.shop.<a href="/src/api/resources/customer/resources/shop/client/Client.ts">listCategories</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -10253,7 +11658,7 @@ await client.customer.shop.getProduct({
 
 ```typescript
 await client.customer.shop.listCategories({
-    handle: "katzs-deli"
+    business: "business"
 });
 
 ```
@@ -10412,23 +11817,9 @@ await client.customer.auth.tokens.revoke({
 </details>
 
 ## Customer Businesses Bulletins
-<details><summary><code>client.customer.businesses.bulletins.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListBulletinsResponse</code></summary>
+<details><summary><code>client.customer.businesses.bulletins.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/client/Client.ts">list</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve business announcements and updates with pagination.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10440,7 +11831,7 @@ Retrieve business announcements and updates with pagination.
 
 ```typescript
 await client.customer.businesses.bulletins.list({
-    handle: "katzs-deli"
+    business: "business"
 });
 
 ```
@@ -10478,23 +11869,9 @@ await client.customer.businesses.bulletins.list({
 </details>
 
 ## Customer Businesses Events
-<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListEventsResponse</code></summary>
+<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">list</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve upcoming events for the business with pagination.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10506,7 +11883,7 @@ Retrieve upcoming events for the business with pagination.
 
 ```typescript
 await client.customer.businesses.events.list({
-    handle: "katzs-deli"
+    business: "business"
 });
 
 ```
@@ -10543,23 +11920,9 @@ await client.customer.businesses.events.list({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetEventsResponse</code></summary>
+<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">get</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve full details for a single upcoming event belonging to the business.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10571,7 +11934,7 @@ Retrieve full details for a single upcoming event belonging to the business.
 
 ```typescript
 await client.customer.businesses.events.get({
-    handle: "katzs-deli",
+    business: "business",
     event: "event"
 });
 
@@ -10609,23 +11972,9 @@ await client.customer.businesses.events.get({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">rsvp</a>({ ...params }) -> FiveOneEat.RsvpEventsResponse</code></summary>
+<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">rsvp</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create or update the authenticated user's RSVP for a business event.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10637,9 +11986,8 @@ Create or update the authenticated user's RSVP for a business event.
 
 ```typescript
 await client.customer.businesses.events.rsvp({
-    handle: "katzs-deli",
-    event: "01950e7d-1234-7000-abcd-ef0123456789",
-    status: "attending"
+    business: "business",
+    event: "event"
 });
 
 ```
@@ -10656,7 +12004,7 @@ await client.customer.businesses.events.rsvp({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.businesses.StoreEventRsvpRequest` 
+**request:** `FiveOneEat.customer.businesses.RsvpEventsRequest` 
     
 </dd>
 </dl>
@@ -10676,23 +12024,9 @@ await client.customer.businesses.events.rsvp({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">cancelRsvp</a>({ ...params }) -> number</code></summary>
+<details><summary><code>client.customer.businesses.events.<a href="/src/api/resources/customer/resources/businesses/resources/events/client/Client.ts">cancelRsvp</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Cancel the authenticated user's RSVP for a business event.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10704,8 +12038,8 @@ Cancel the authenticated user's RSVP for a business event.
 
 ```typescript
 await client.customer.businesses.events.cancelRsvp({
-    handle: "katzs-deli",
-    event: "01950e7d-1234-7000-abcd-ef0123456789"
+    business: "business",
+    event: "event"
 });
 
 ```
@@ -10743,23 +12077,9 @@ await client.customer.businesses.events.cancelRsvp({
 </details>
 
 ## Customer Businesses Bulletins Comments
-<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListCommentsResponse</code></summary>
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">list</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve paginated comments for a published business bulletin.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10771,8 +12091,8 @@ Retrieve paginated comments for a published business bulletin.
 
 ```typescript
 await client.customer.businesses.bulletins.comments.list({
-    handle: "katzs-deli",
-    bulletin: "01950e7d-1234-7000-abcd-ef0123456789"
+    business: "business",
+    bulletin: "bulletin"
 });
 
 ```
@@ -10809,23 +12129,9 @@ await client.customer.businesses.bulletins.comments.list({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateCommentsResponse</code></summary>
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">create</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Post a comment on a business bulletin. Requires authentication.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10837,9 +12143,8 @@ Post a comment on a business bulletin. Requires authentication.
 
 ```typescript
 await client.customer.businesses.bulletins.comments.create({
-    handle: "katzs-deli",
-    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
-    body: "body"
+    business: "business",
+    bulletin: "bulletin"
 });
 
 ```
@@ -10856,7 +12161,7 @@ await client.customer.businesses.bulletins.comments.create({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.businesses.bulletins.AppHttpRequestsApiV1CustomerBusinessesStoreBulletinCommentRequest` 
+**request:** `FiveOneEat.customer.businesses.bulletins.CreateCommentsRequest` 
     
 </dd>
 </dl>
@@ -10876,23 +12181,9 @@ await client.customer.businesses.bulletins.comments.create({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">listReplies</a>({ ...params }) -> FiveOneEat.ListRepliesCommentsResponse</code></summary>
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">listReplies</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve paginated replies for a top-level comment on a published bulletin.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10904,9 +12195,9 @@ Retrieve paginated replies for a top-level comment on a published bulletin.
 
 ```typescript
 await client.customer.businesses.bulletins.comments.listReplies({
-    handle: "katzs-deli",
-    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
-    comment: "01950e7d-5678-7000-abcd-ef0123456789"
+    business: "business",
+    bulletin: "bulletin",
+    comment: "comment"
 });
 
 ```
@@ -10943,23 +12234,9 @@ await client.customer.businesses.bulletins.comments.listReplies({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">reply</a>({ ...params }) -> FiveOneEat.ReplyCommentsResponse</code></summary>
+<details><summary><code>client.customer.businesses.bulletins.comments.<a href="/src/api/resources/customer/resources/businesses/resources/bulletins/resources/comments/client/Client.ts">reply</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Post a reply to a top-level comment on a published bulletin. Requires authentication.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -10971,10 +12248,9 @@ Post a reply to a top-level comment on a published bulletin. Requires authentica
 
 ```typescript
 await client.customer.businesses.bulletins.comments.reply({
-    handle: "katzs-deli",
-    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
-    comment: "01950e7d-5678-7000-abcd-ef0123456789",
-    body: "body"
+    business: "business",
+    bulletin: "bulletin",
+    comment: "comment"
 });
 
 ```
@@ -10991,7 +12267,7 @@ await client.customer.businesses.bulletins.comments.reply({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.customer.businesses.bulletins.StoreBulletinCommentReplyRequest` 
+**request:** `FiveOneEat.customer.businesses.bulletins.ReplyCommentsRequest` 
     
 </dd>
 </dl>

@@ -10,7 +10,7 @@ import * as core from "../../../../../../../../core/index.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
-import * as FiveOneEat from "../../../../../../../index.js";
+import type * as FiveOneEat from "../../../../../../../index.js";
 
 export declare namespace EventsClient {
     export type Options = BaseClientOptions;
@@ -26,35 +26,26 @@ export class EventsClient {
     }
 
     /**
-     * Retrieve upcoming events for the business with pagination.
-     *
      * @param {FiveOneEat.customer.businesses.ListEventsRequest} request
      * @param {EventsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
      *     await client.customer.businesses.events.list({
-     *         handle: "katzs-deli"
+     *         business: "business"
      *     })
      */
     public list(
         request: FiveOneEat.customer.businesses.ListEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.businesses.ListEventsResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
         request: FiveOneEat.customer.businesses.ListEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.ListEventsResponse>> {
-        const { handle, page, per_page: perPage } = request;
-        const _queryParams: Record<string, unknown> = {
-            page,
-            per_page: perPage,
-        };
+    ): Promise<core.WithRawResponse<void>> {
+        const { business } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -66,16 +57,11 @@ export class EventsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(handle)}/events`,
+                `customer/businesses/${core.url.encodePathParam(business)}/events`,
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -83,64 +69,47 @@ export class EventsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.businesses.ListEventsResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "GET",
-            "/customer/businesses/{handle}/events",
+            "/customer/businesses/{business}/events",
         );
     }
 
     /**
-     * Retrieve full details for a single upcoming event belonging to the business.
-     *
      * @param {FiveOneEat.customer.businesses.GetEventsRequest} request
      * @param {EventsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     *
      * @example
      *     await client.customer.businesses.events.get({
-     *         handle: "katzs-deli",
+     *         business: "business",
      *         event: "event"
      *     })
      */
     public get(
         request: FiveOneEat.customer.businesses.GetEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.businesses.GetEventsResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
         request: FiveOneEat.customer.businesses.GetEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.GetEventsResponse>> {
-        const { handle, event } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { business, event } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -152,7 +121,7 @@ export class EventsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(handle)}/events/${core.url.encodePathParam(event)}`,
+                `customer/businesses/${core.url.encodePathParam(business)}/events/${core.url.encodePathParam(event)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -164,62 +133,47 @@ export class EventsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.businesses.GetEventsResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "GET",
-            "/customer/businesses/{handle}/events/{event}",
+            "/customer/businesses/{business}/events/{event}",
         );
     }
 
     /**
-     * Create or update the authenticated user's RSVP for a business event.
-     *
-     * @param {FiveOneEat.customer.businesses.StoreEventRsvpRequest} request
+     * @param {FiveOneEat.customer.businesses.RsvpEventsRequest} request
      * @param {EventsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.customer.businesses.events.rsvp({
-     *         handle: "katzs-deli",
-     *         event: "01950e7d-1234-7000-abcd-ef0123456789",
-     *         status: "attending"
+     *         business: "business",
+     *         event: "event"
      *     })
      */
     public rsvp(
-        request: FiveOneEat.customer.businesses.StoreEventRsvpRequest,
+        request: FiveOneEat.customer.businesses.RsvpEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.businesses.RsvpEventsResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__rsvp(request, requestOptions));
     }
 
     private async __rsvp(
-        request: FiveOneEat.customer.businesses.StoreEventRsvpRequest,
+        request: FiveOneEat.customer.businesses.RsvpEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.businesses.RsvpEventsResponse>> {
-        const { handle, event, ..._body } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { business, event } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -231,14 +185,11 @@ export class EventsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(handle)}/events/${core.url.encodePathParam(event)}/rsvp`,
+                `customer/businesses/${core.url.encodePathParam(business)}/events/${core.url.encodePathParam(event)}/rsvp`,
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -246,67 +197,47 @@ export class EventsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.businesses.RsvpEventsResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "POST",
-            "/customer/businesses/{handle}/events/{event}/rsvp",
+            "/customer/businesses/{business}/events/{event}/rsvp",
         );
     }
 
     /**
-     * Cancel the authenticated user's RSVP for a business event.
-     *
      * @param {FiveOneEat.customer.businesses.CancelRsvpEventsRequest} request
      * @param {EventsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     *
      * @example
      *     await client.customer.businesses.events.cancelRsvp({
-     *         handle: "katzs-deli",
-     *         event: "01950e7d-1234-7000-abcd-ef0123456789"
+     *         business: "business",
+     *         event: "event"
      *     })
      */
     public cancelRsvp(
         request: FiveOneEat.customer.businesses.CancelRsvpEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): core.HttpResponsePromise<number> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__cancelRsvp(request, requestOptions));
     }
 
     private async __cancelRsvp(
         request: FiveOneEat.customer.businesses.CancelRsvpEventsRequest,
         requestOptions?: EventsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<number>> {
-        const { handle, event } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { business, event } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -318,7 +249,7 @@ export class EventsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(handle)}/events/${core.url.encodePathParam(event)}/rsvp`,
+                `customer/businesses/${core.url.encodePathParam(business)}/events/${core.url.encodePathParam(event)}/rsvp`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -330,29 +261,22 @@ export class EventsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as number, rawResponse: _response.rawResponse };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "DELETE",
-            "/customer/businesses/{handle}/events/{event}/rsvp",
+            "/customer/businesses/{business}/events/{event}/rsvp",
         );
     }
 }

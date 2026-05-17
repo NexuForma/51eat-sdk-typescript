@@ -3,14 +3,9 @@
 /**
  * @example
  *     {
- *         handle: "katzs-deli"
+ *         business: "business"
  *     }
  */
 export interface ListEventsRequest {
-    /** The business handle */
-    handle: string;
-    /** Page number for pagination */
-    page?: number;
-    /** Number of events per page */
-    per_page?: number;
+    business: string;
 }

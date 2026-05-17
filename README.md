@@ -45,8 +45,10 @@ Instantiate and use the client with the following:
 import { FiveOneEatClient } from "@51eat/sdk";
 
 const client = new FiveOneEatClient({ token: "YOUR_TOKEN" });
-await client.recordClick.adsRecordClick({
-    advertisement: "advertisement"
+await client.customerBusinesses.createBulletinComment({
+    handle: "katzs-deli",
+    bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
+    body: "body"
 });
 ```
 
@@ -84,7 +86,7 @@ will be thrown.
 import { FiveOneEatError } from "@51eat/sdk";
 
 try {
-    await client.recordClick.adsRecordClick(...);
+    await client.customerBusinesses.createBulletinComment(...);
 } catch (err) {
     if (err instanceof FiveOneEatError) {
         console.log(err.statusCode);
@@ -166,7 +168,7 @@ const client = new FiveOneEatClient({
     }
 });
 
-const response = await client.recordClick.adsRecordClick(..., {
+const response = await client.customerBusinesses.createBulletinComment(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -178,7 +180,7 @@ const response = await client.recordClick.adsRecordClick(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.recordClick.adsRecordClick(..., {
+const response = await client.customerBusinesses.createBulletinComment(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -200,7 +202,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.recordClick.adsRecordClick(..., {
+const response = await client.customerBusinesses.createBulletinComment(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -210,7 +212,7 @@ const response = await client.recordClick.adsRecordClick(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.recordClick.adsRecordClick(..., {
+const response = await client.customerBusinesses.createBulletinComment(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -221,7 +223,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.recordClick.adsRecordClick(..., {
+const response = await client.customerBusinesses.createBulletinComment(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -233,7 +235,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.recordClick.adsRecordClick(...).withRawResponse();
+const { data, rawResponse } = await client.customerBusinesses.createBulletinComment(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

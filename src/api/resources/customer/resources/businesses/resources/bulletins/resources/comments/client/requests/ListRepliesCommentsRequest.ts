@@ -3,20 +3,13 @@
 /**
  * @example
  *     {
- *         handle: "katzs-deli",
- *         bulletin: "01950e7d-1234-7000-abcd-ef0123456789",
- *         comment: "01950e7d-5678-7000-abcd-ef0123456789"
+ *         business: "business",
+ *         bulletin: "bulletin",
+ *         comment: "comment"
  *     }
  */
 export interface ListRepliesCommentsRequest {
-    /** The business handle */
-    handle: string;
-    /** The bulletin ID */
+    business: string;
     bulletin: string;
-    /** The comment ID */
     comment: string;
-    /** Page number for pagination */
-    page?: number;
-    /** Number of replies per page */
-    per_page?: number;
 }

@@ -3,6 +3,7 @@
 /**
  * @example
  *     {
+ *         business: "katzs-deli",
  *         billing_address: {
  *             line1: "line1",
  *             city: "city",
@@ -13,6 +14,8 @@
  *     }
  */
 export interface CreatePaymentIntentRequest {
+    /** The business handle */
+    business: string;
     fulfillment_method?: CreatePaymentIntentRequest.FulfillmentMethod | null;
     pickup_date?: CreatePaymentIntentRequest.PickupDate | null;
     pickup_time?: string | null;
