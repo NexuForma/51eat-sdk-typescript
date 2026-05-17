@@ -3,9 +3,10 @@
 /**
  * @example
  *     {
- *         business: "business"
+ *         business: "katzs-deli"
  *     }
  */
 export interface FavoriteBusinessesRequest {
+    /** The business handle */
     business: string;
 }

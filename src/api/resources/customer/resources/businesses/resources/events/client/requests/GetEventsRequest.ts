@@ -3,11 +3,13 @@
 /**
  * @example
  *     {
- *         business: "business",
+ *         business: "katzs-deli",
  *         event: "event"
  *     }
  */
 export interface GetEventsRequest {
+    /** The business handle */
     business: string;
+    /** The event ID */
     event: string;
 }

@@ -3,11 +3,13 @@
 /**
  * @example
  *     {
- *         business: "business",
- *         event: "event"
+ *         business: "katzs-deli",
+ *         event: "01950e7d-1234-7000-abcd-ef0123456789"
  *     }
  */
 export interface CancelRsvpEventsRequest {
+    /** The business handle */
     business: string;
+    /** The event ID */
     event: string;
 }

@@ -3,11 +3,17 @@
 /**
  * @example
  *     {
- *         business: "business",
- *         bulletin: "bulletin"
+ *         business: "katzs-deli",
+ *         bulletin: "01950e7d-1234-7000-abcd-ef0123456789"
  *     }
  */
 export interface ListCommentsRequest {
+    /** The business handle */
     business: string;
+    /** The bulletin ID */
     bulletin: string;
+    /** Page number for pagination */
+    page?: number;
+    /** Number of comments per page */
+    per_page?: number;
 }
