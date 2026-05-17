@@ -31,6 +31,7 @@ export declare namespace CustomerClient {
 export class CustomerClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CustomerClient.Options>;
     protected _auth: AuthClient | undefined;
+    protected _businesses: BusinessesClient | undefined;
     protected _cart: CartClient | undefined;
     protected _explore: ExploreClient | undefined;
     protected _discovery: DiscoveryClient | undefined;
@@ -40,7 +41,6 @@ export class CustomerClient {
     protected _me: MeClient | undefined;
     protected _productOrders: ProductOrdersClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
-    protected _businesses: BusinessesClient | undefined;
     protected _shop: ShopClient | undefined;
 
     constructor(options: CustomerClient.Options = {}) {
@@ -49,6 +49,10 @@ export class CustomerClient {
 
     public get auth(): AuthClient {
         return (this._auth ??= new AuthClient(this._options));
+    }
+
+    public get businesses(): BusinessesClient {
+        return (this._businesses ??= new BusinessesClient(this._options));
     }
 
     public get cart(): CartClient {
@@ -85,10 +89,6 @@ export class CustomerClient {
 
     public get pushNotifications(): PushNotificationsClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
-    }
-
-    public get businesses(): BusinessesClient {
-        return (this._businesses ??= new BusinessesClient(this._options));
     }
 
     public get shop(): ShopClient {

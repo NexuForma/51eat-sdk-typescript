@@ -3,9 +3,14 @@
 /**
  * @example
  *     {
- *         business: "business"
+ *         business: "katzs-deli"
  *     }
  */
 export interface ListProductsShopRequest {
+    /** The business handle */
     business: string;
+    /** Filter by product category ID */
+    category_id?: string;
+    /** Return only featured products */
+    featured?: boolean;
 }
