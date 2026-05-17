@@ -28,7 +28,7 @@ export interface BusinessProduct {
     is_featured: boolean;
     sort_order: number;
     variants?: FiveOneEat.BusinessProductVariant[] | undefined;
-    images?: Record<string, unknown>[] | undefined;
+    images?: FiveOneEat.BusinessPhoto[] | undefined;
     categories?: FiveOneEat.BusinessProductCategory[] | undefined;
     created_at: string | null;
     updated_at: string | null;

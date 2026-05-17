@@ -3,10 +3,9 @@
 /**
  * @example
  *     {
- *         handle: "katzs-deli"
+ *         business: "business"
  *     }
  */
 export interface ListCategoriesShopRequest {
-    /** The business handle */
-    handle: string;
+    business: string;
 }

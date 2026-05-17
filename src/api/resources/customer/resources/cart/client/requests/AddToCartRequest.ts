@@ -3,13 +3,14 @@
 /**
  * @example
  *     {
- *         business_id: 1,
+ *         business: "katzs-deli",
  *         product_id: 1,
  *         quantity: 1
  *     }
  */
 export interface AddToCartRequest {
-    business_id: number;
+    /** The business handle */
+    business: string;
     product_id: number;
     variant_id?: number | null;
     quantity: number;

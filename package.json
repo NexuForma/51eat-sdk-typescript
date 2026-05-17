@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.42",
+    "version": "0.0.43",
     "private": false,
     "repository": {
         "type": "git",
@@ -32,6 +32,17 @@
                 "default": "./dist/cjs/api/resources/businessMessaging/exports.js"
             },
             "default": "./dist/cjs/api/resources/businessMessaging/exports.js"
+        },
+        "./customerBusinesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/customerBusinesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/customerBusinesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customerBusinesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customerBusinesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customerBusinesses/exports.js"
         },
         "./customerMessaging": {
             "import": {
@@ -65,6 +76,17 @@
                 "default": "./dist/cjs/api/resources/customer/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/exports.js"
+        },
+        "./customerShop": {
+            "import": {
+                "types": "./dist/esm/api/resources/customerShop/exports.d.mts",
+                "default": "./dist/esm/api/resources/customerShop/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customerShop/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customerShop/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customerShop/exports.js"
         },
         "./recordClick": {
             "import": {
@@ -440,6 +462,28 @@
             },
             "default": "./dist/cjs/api/resources/business/resources/products/resources/variants/exports.js"
         },
+        "./business/products/images": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/products/resources/images/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/products/resources/images/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/products/resources/images/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/products/resources/images/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/products/resources/images/exports.js"
+        },
+        "./business/products/variants/images": {
+            "import": {
+                "types": "./dist/esm/api/resources/business/resources/products/resources/variants/resources/images/exports.d.mts",
+                "default": "./dist/esm/api/resources/business/resources/products/resources/variants/resources/images/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/business/resources/products/resources/variants/resources/images/exports.d.ts",
+                "default": "./dist/cjs/api/resources/business/resources/products/resources/variants/resources/images/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/business/resources/products/resources/variants/resources/images/exports.js"
+        },
         "./business/profile/logo": {
             "import": {
                 "types": "./dist/esm/api/resources/business/resources/profile/resources/logo/exports.d.mts",
@@ -461,17 +505,6 @@
                 "default": "./dist/cjs/api/resources/customer/resources/auth/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/resources/auth/exports.js"
-        },
-        "./customer/businesses": {
-            "import": {
-                "types": "./dist/esm/api/resources/customer/resources/businesses/exports.d.mts",
-                "default": "./dist/esm/api/resources/customer/resources/businesses/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/customer/resources/businesses/exports.d.ts",
-                "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
         },
         "./customer/cart": {
             "import": {
@@ -571,6 +604,17 @@
                 "default": "./dist/cjs/api/resources/customer/resources/pushNotifications/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/resources/pushNotifications/exports.js"
+        },
+        "./customer/businesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/businesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/businesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/businesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/businesses/exports.js"
         },
         "./customer/shop": {
             "import": {

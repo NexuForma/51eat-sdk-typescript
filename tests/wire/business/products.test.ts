@@ -58,7 +58,17 @@ describe("ProductsClient", () => {
                             updated_at: null,
                         },
                     ],
-                    images: [{ key: "value" }],
+                    images: [
+                        {
+                            id: "id",
+                            url: "url",
+                            original_filename: "original_filename",
+                            alt_text: null,
+                            sort_order: 1,
+                            size: null,
+                            created_at: "created_at",
+                        },
+                    ],
                     categories: [
                         {
                             id: "id",
@@ -148,7 +158,17 @@ describe("ProductsClient", () => {
                         updated_at: null,
                     },
                 ],
-                images: [{ key: "value" }],
+                images: [
+                    {
+                        id: "id",
+                        url: "url",
+                        original_filename: "original_filename",
+                        alt_text: null,
+                        sort_order: 1,
+                        size: null,
+                        created_at: "created_at",
+                    },
+                ],
                 categories: [
                     {
                         id: "id",
@@ -307,7 +327,17 @@ describe("ProductsClient", () => {
                         updated_at: null,
                     },
                 ],
-                images: [{ key: "value" }],
+                images: [
+                    {
+                        id: "id",
+                        url: "url",
+                        original_filename: "original_filename",
+                        alt_text: null,
+                        sort_order: 1,
+                        size: null,
+                        created_at: "created_at",
+                    },
+                ],
                 categories: [
                     {
                         id: "id",
@@ -454,7 +484,17 @@ describe("ProductsClient", () => {
                         updated_at: null,
                     },
                 ],
-                images: [{ key: "value" }],
+                images: [
+                    {
+                        id: "id",
+                        url: "url",
+                        original_filename: "original_filename",
+                        alt_text: null,
+                        sort_order: 1,
+                        size: null,
+                        created_at: "created_at",
+                    },
+                ],
                 categories: [
                     {
                         id: "id",

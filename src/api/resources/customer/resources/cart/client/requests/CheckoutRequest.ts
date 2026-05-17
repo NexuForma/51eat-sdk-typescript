@@ -3,6 +3,7 @@
 /**
  * @example
  *     {
+ *         business: "katzs-deli",
  *         payment_intent_id: "payment_intent_id",
  *         billing_address: {
  *             line1: "line1",
@@ -14,6 +15,8 @@
  *     }
  */
 export interface CheckoutRequest {
+    /** The business handle */
+    business: string;
     payment_intent_id: string;
     fulfillment_method?: CheckoutRequest.FulfillmentMethod | null;
     pickup_date?: CheckoutRequest.PickupDate | null;

@@ -11,6 +11,7 @@ import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../../../index.js";
+import { ImagesClient } from "../resources/images/client/Client.js";
 
 export declare namespace VariantsClient {
     export type Options = BaseClientOptions;
@@ -20,9 +21,14 @@ export declare namespace VariantsClient {
 
 export class VariantsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<VariantsClient.Options>;
+    protected _images: ImagesClient | undefined;
 
     constructor(options: VariantsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get images(): ImagesClient {
+        return (this._images ??= new ImagesClient(this._options));
     }
 
     /**
