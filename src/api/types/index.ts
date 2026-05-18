@@ -124,6 +124,7 @@ export * from "./MenuItemSearchResult.js";
 export * from "./Message.js";
 export * from "./NotFoundErrorBody.js";
 export * from "./PaginationResource.js";
+export * from "./PaymentMethod.js";
 export * from "./ProductSearchResult.js";
 export * from "./ReorderProductImagesRequest.js";
 export * from "./RsvpEvent.js";

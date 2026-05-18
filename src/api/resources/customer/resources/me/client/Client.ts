@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
 import { AddressesClient } from "../resources/addresses/client/Client.js";
+import { PaymentMethodsClient } from "../resources/paymentMethods/client/Client.js";
 import { TicketOrdersClient } from "../resources/ticketOrders/client/Client.js";
 import { TicketsClient } from "../resources/tickets/client/Client.js";
 
@@ -23,6 +24,7 @@ export class MeClient {
     protected _tickets: TicketsClient | undefined;
     protected _ticketOrders: TicketOrdersClient | undefined;
     protected _addresses: AddressesClient | undefined;
+    protected _paymentMethods: PaymentMethodsClient | undefined;
 
     constructor(options: MeClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -38,6 +40,10 @@ export class MeClient {
 
     public get addresses(): AddressesClient {
         return (this._addresses ??= new AddressesClient(this._options));
+    }
+
+    public get paymentMethods(): PaymentMethodsClient {
+        return (this._paymentMethods ??= new PaymentMethodsClient(this._options));
     }
 
     /**
