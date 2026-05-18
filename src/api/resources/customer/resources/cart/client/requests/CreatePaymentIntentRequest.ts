@@ -19,6 +19,7 @@ export interface CreatePaymentIntentRequest {
     fulfillment_method?: CreatePaymentIntentRequest.FulfillmentMethod | null;
     pickup_date?: CreatePaymentIntentRequest.PickupDate | null;
     pickup_time?: string | null;
+    payment_method_id?: string | null;
     billing_address: CreatePaymentIntentRequest.BillingAddress;
     shipping_address?: CreatePaymentIntentRequest.ShippingAddress;
 }
