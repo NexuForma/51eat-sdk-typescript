@@ -1,6 +1,9 @@
 export * from "./addresses/client/requests/index.js";
 export * as addresses from "./addresses/index.js";
 export * from "./addresses/types/index.js";
+export * from "./paymentMethods/client/requests/index.js";
+export * as paymentMethods from "./paymentMethods/index.js";
+export * from "./paymentMethods/types/index.js";
 export * from "./ticketOrders/client/requests/index.js";
 export * as ticketOrders from "./ticketOrders/index.js";
 export * from "./ticketOrders/types/index.js";

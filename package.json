@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.47",
+    "version": "0.0.48",
     "private": false,
     "repository": {
         "type": "git",
@@ -703,6 +703,17 @@
                 "default": "./dist/cjs/api/resources/customer/resources/me/resources/addresses/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/resources/me/resources/addresses/exports.js"
+        },
+        "./customer/me/paymentMethods": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/paymentMethods/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/paymentMethods/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/paymentMethods/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/paymentMethods/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/paymentMethods/exports.js"
         },
         "./customer/messaging/conversations": {
             "import": {

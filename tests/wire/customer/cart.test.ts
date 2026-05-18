@@ -207,6 +207,7 @@ describe("CartClient", () => {
             },
         };
         const rawResponseBody = {
+            status: "status",
             client_secret: "client_secret",
             payment_intent_id: "payment_intent_id",
             subtotal: "subtotal",
