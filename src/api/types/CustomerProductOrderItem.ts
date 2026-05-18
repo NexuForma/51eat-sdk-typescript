@@ -5,8 +5,8 @@ export interface CustomerProductOrderItem {
     product_id: string;
     variant_id: string | null;
     quantity: number;
-    unit_price: number;
-    total_price: number;
+    unit_price: string;
+    total_price: string;
     product_snapshot: unknown[] | null;
     product?: CustomerProductOrderItem.Product | undefined;
     variant?: (CustomerProductOrderItem.Variant | null) | undefined;

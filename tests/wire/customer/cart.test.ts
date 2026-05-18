@@ -209,7 +209,7 @@ describe("CartClient", () => {
         const rawResponseBody = {
             client_secret: "client_secret",
             payment_intent_id: "payment_intent_id",
-            subtotal: 1,
+            subtotal: "subtotal",
             tax_amount: "tax_amount",
             tax_calculation: { id: "id", amount_total: "amount_total", tax_amount_exclusive: "tax_amount_exclusive" },
             shipping_amount: "shipping_amount",
@@ -326,7 +326,7 @@ describe("CartClient", () => {
                 country: "country",
             },
         };
-        const rawResponseBody = { message: "message" };
+        const rawResponseBody = { message: "Unable to process payment. Please try again." };
 
         server
             .mockEndpoint()
@@ -408,11 +408,11 @@ describe("CartClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                subtotal: 1.1,
-                tax_amount: 1.1,
-                shipping_amount: 1.1,
-                discount_amount: 1.1,
-                total_amount: 1.1,
+                subtotal: "subtotal",
+                tax_amount: "tax_amount",
+                shipping_amount: "shipping_amount",
+                discount_amount: "discount_amount",
+                total_amount: "total_amount",
                 tracking_number: "tracking_number",
                 tracking_url: "tracking_url",
                 shipping_address: [{ key: "value" }],
@@ -424,8 +424,8 @@ describe("CartClient", () => {
                         product_id: "product_id",
                         variant_id: null,
                         quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
+                        unit_price: "unit_price",
+                        total_price: "total_price",
                         product_snapshot: null,
                     },
                 ],

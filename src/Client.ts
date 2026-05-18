@@ -2,6 +2,7 @@
 
 import { BusinessClient } from "./api/resources/business/client/Client.js";
 import { BusinessMessagingClient } from "./api/resources/businessMessaging/client/Client.js";
+import { BusinessProductsClient } from "./api/resources/businessProducts/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
 import { CustomerMessagingClient } from "./api/resources/customerMessaging/client/Client.js";
 import { CustomerMyAccountClient } from "./api/resources/customerMyAccount/client/Client.js";
@@ -20,6 +21,7 @@ export declare namespace FiveOneEatClient {
 export class FiveOneEatClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FiveOneEatClient.Options>;
     protected _businessMessaging: BusinessMessagingClient | undefined;
+    protected _businessProducts: BusinessProductsClient | undefined;
     protected _customerMessaging: CustomerMessagingClient | undefined;
     protected _customerMyAccount: CustomerMyAccountClient | undefined;
     protected _customer: CustomerClient | undefined;
@@ -33,6 +35,10 @@ export class FiveOneEatClient {
 
     public get businessMessaging(): BusinessMessagingClient {
         return (this._businessMessaging ??= new BusinessMessagingClient(this._options));
+    }
+
+    public get businessProducts(): BusinessProductsClient {
+        return (this._businessProducts ??= new BusinessProductsClient(this._options));
     }
 
     public get customerMessaging(): CustomerMessagingClient {
