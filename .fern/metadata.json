@@ -5,10 +5,10 @@
     "generatorConfig": {
         "namespaceExport": "FiveOneEat"
     },
-    "originGitCommit": "4030f49ae7b005b1b67e6792ecfe499f92cc66f4",
+    "originGitCommit": "6c4defae44dac866349ba69c97415c161530e3a4",
     "originGitCommitIsDirty": false,
     "invokedBy": "manual",
     "requestedVersion": null,
     "ciProvider": null,
-    "sdkVersion": "0.0.46"
+    "sdkVersion": "0.0.47"
 }

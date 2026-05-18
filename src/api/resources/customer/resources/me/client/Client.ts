@@ -8,6 +8,7 @@ import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
+import { AddressesClient } from "../resources/addresses/client/Client.js";
 import { TicketOrdersClient } from "../resources/ticketOrders/client/Client.js";
 import { TicketsClient } from "../resources/tickets/client/Client.js";
 
@@ -21,6 +22,7 @@ export class MeClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MeClient.Options>;
     protected _tickets: TicketsClient | undefined;
     protected _ticketOrders: TicketOrdersClient | undefined;
+    protected _addresses: AddressesClient | undefined;
 
     constructor(options: MeClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -32,6 +34,10 @@ export class MeClient {
 
     public get ticketOrders(): TicketOrdersClient {
         return (this._ticketOrders ??= new TicketOrdersClient(this._options));
+    }
+
+    public get addresses(): AddressesClient {
+        return (this._addresses ??= new AddressesClient(this._options));
     }
 
     /**

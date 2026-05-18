@@ -1,4 +1,6 @@
 export * from "./Ad.js";
+export * from "./Address.js";
+export * from "./AddressCollection.js";
 export * from "./Allergen.js";
 export * from "./BardBlockquoteNode.js";
 export * from "./BardBody.js";
@@ -129,6 +131,7 @@ export * from "./RsvpItem.js";
 export * from "./RsvpResponse.js";
 export * from "./SearchResults.js";
 export * from "./ServiceUnavailableErrorBody.js";
+export * from "./StoreAddressRequest.js";
 export * from "./StoreProductImageRequest.js";
 export * from "./Ticket.js";
 export * from "./TicketOrder.js";

@@ -12084,6 +12084,270 @@ await client.customer.me.ticketOrders.get({
 </dl>
 </details>
 
+## Customer Me Addresses
+<details><summary><code>client.customer.me.addresses.<a href="/src/api/resources/customer/resources/me/resources/addresses/client/Client.ts">list</a>() -> FiveOneEat.ListAddressesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all saved addresses for the authenticated user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.addresses.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AddressesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.addresses.<a href="/src/api/resources/customer/resources/me/resources/addresses/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateAddressesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Save a new address to the authenticated user's account. If this is the first address,
+or if `is_default` is true, it will be set as the default (clearing any existing default).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.addresses.create({
+    line1: "line1",
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreAddressRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AddressesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.addresses.<a href="/src/api/resources/customer/resources/me/resources/addresses/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a saved address. If the deleted address was the default,
+the most recently created remaining address is promoted to default.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.addresses.delete({
+    address: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.DeleteAddressesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AddressesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.addresses.<a href="/src/api/resources/customer/resources/me/resources/addresses/client/Client.ts">update</a>({ ...params }) -> FiveOneEat.UpdateAddressesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a saved address. If `is_default` is true, the previous default address will be cleared.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.addresses.update({
+    address: 1,
+    body: {
+        line1: "line1",
+        city: "city",
+        state: "state",
+        postal_code: "postal_code",
+        country: "country"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.UpdateAddressesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AddressesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer Messaging Conversations
 <details><summary><code>client.customer.messaging.conversations.<a href="/src/api/resources/customer/resources/messaging/resources/conversations/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListConversationsResponse</code></summary>
 <dl>

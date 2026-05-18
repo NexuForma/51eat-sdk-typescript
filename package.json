@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.46",
+    "version": "0.0.47",
     "private": false,
     "repository": {
         "type": "git",
@@ -692,6 +692,17 @@
                 "default": "./dist/cjs/api/resources/customer/resources/me/resources/ticketOrders/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/resources/me/resources/ticketOrders/exports.js"
+        },
+        "./customer/me/addresses": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/addresses/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/addresses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/addresses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/addresses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/addresses/exports.js"
         },
         "./customer/messaging/conversations": {
             "import": {
