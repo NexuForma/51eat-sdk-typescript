@@ -51,6 +51,163 @@ await client.businessMessaging.searchBusinessConversations({
 </dl>
 </details>
 
+## Business: Products
+<details><summary><code>client.businessProducts.<a href="/src/api/resources/businessProducts/client/Client.ts">adjustVariantInventory</a>({ ...params }) -> FiveOneEat.AdjustVariantInventoryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessProducts.adjustVariantInventory({
+    variant: "variant",
+    type: "add",
+    quantity: 1,
+    reason: "restock"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.AdjustInventoryRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessProducts.<a href="/src/api/resources/businessProducts/client/Client.ts">listVariantInventoryHistory</a>({ ...params }) -> FiveOneEat.ListVariantInventoryHistoryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessProducts.listVariantInventoryHistory({
+    variant: "variant"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ListVariantInventoryHistoryRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessProducts.<a href="/src/api/resources/businessProducts/client/Client.ts">getProductInventorySummary</a>({ ...params }) -> FiveOneEat.GetProductInventorySummaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessProducts.getProductInventorySummary({
+    product: "product"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetProductInventorySummaryRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Messaging
 <details><summary><code>client.customerMessaging.<a href="/src/api/resources/customerMessaging/client/Client.ts">searchCustomerConversations</a>({ ...params }) -> FiveOneEat.SearchCustomerConversationsResponse</code></summary>
 <dl>

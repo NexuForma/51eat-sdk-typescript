@@ -23,6 +23,6 @@ export namespace CustomerCartItem {
     export interface Variant {
         id: string;
         name: string;
-        price: number;
+        price: string;
     }
 }

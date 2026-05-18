@@ -3,7 +3,7 @@
 export interface CreatePaymentIntentCartResponse {
     client_secret: string;
     payment_intent_id: string;
-    subtotal: number;
+    subtotal: string;
     tax_amount: string;
     tax_calculation: CreatePaymentIntentCartResponse.TaxCalculation | null;
     shipping_amount: string;

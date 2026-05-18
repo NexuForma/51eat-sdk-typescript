@@ -8,11 +8,11 @@ export interface CustomerProductOrder {
     status: string;
     fulfillment_status: string;
     fulfillment_method: string;
-    subtotal: number;
-    tax_amount: number;
-    shipping_amount: number;
-    discount_amount: number;
-    total_amount: number;
+    subtotal: string;
+    tax_amount: string;
+    shipping_amount: string;
+    discount_amount: string;
+    total_amount: string;
     tracking_number: string | null;
     tracking_url: string | null;
     shipping_address: unknown[] | null;
