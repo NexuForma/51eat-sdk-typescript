@@ -11749,7 +11749,14 @@ Returns a client_secret for the mobile app to confirm payment with Stripe.
 
 ```typescript
 await client.customer.events.ticketing.createPaymentIntent({
-    eventId: "eventId"
+    eventId: "eventId",
+    billing_address: {
+        line1: "line1",
+        city: "city",
+        state: "state",
+        postal_code: "postal_code",
+        country: "country"
+    }
 });
 
 ```

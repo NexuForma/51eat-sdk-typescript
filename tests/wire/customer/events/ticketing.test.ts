@@ -293,7 +293,15 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            billing_address: {
+                line1: "line1",
+                city: "city",
+                state: "state",
+                postal_code: "postal_code",
+                country: "country",
+            },
+        };
         const rawResponseBody = {
             status: "status",
             client_secret: "client_secret",
@@ -318,6 +326,13 @@ describe("TicketingClient", () => {
 
         const response = await client.customer.events.ticketing.createPaymentIntent({
             eventId: "eventId",
+            billing_address: {
+                line1: "line1",
+                city: "city",
+                state: "state",
+                postal_code: "postal_code",
+                country: "country",
+            },
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -325,7 +340,15 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            billing_address: {
+                line1: "line1",
+                city: "city",
+                state: "state",
+                postal_code: "postal_code",
+                country: "country",
+            },
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -340,6 +363,13 @@ describe("TicketingClient", () => {
         await expect(async () => {
             return await client.customer.events.ticketing.createPaymentIntent({
                 eventId: "eventId",
+                billing_address: {
+                    line1: "line1",
+                    city: "city",
+                    state: "state",
+                    postal_code: "postal_code",
+                    country: "country",
+                },
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -347,7 +377,15 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            billing_address: {
+                line1: "line1",
+                city: "city",
+                state: "state",
+                postal_code: "postal_code",
+                country: "country",
+            },
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -362,6 +400,13 @@ describe("TicketingClient", () => {
         await expect(async () => {
             return await client.customer.events.ticketing.createPaymentIntent({
                 eventId: "eventId",
+                billing_address: {
+                    line1: "line1",
+                    city: "city",
+                    state: "state",
+                    postal_code: "postal_code",
+                    country: "country",
+                },
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
