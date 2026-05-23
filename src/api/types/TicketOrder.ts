@@ -5,6 +5,26 @@ import type * as FiveOneEat from "../index.js";
 export interface TicketOrder {
     id: string;
     order_number: string;
+    event?: TicketOrder.Event | undefined;
     transaction?: FiveOneEat.Transaction | undefined;
     tickets?: FiveOneEat.Ticket[] | undefined;
+}
+
+export namespace TicketOrder {
+    export interface Event {
+        id: string;
+        name: string;
+        starts_at: string;
+        ends_at: string;
+        location: string;
+        business: Event.Business | null;
+    }
+
+    export namespace Event {
+        export interface Business {
+            id: string;
+            name: string;
+            handle: string;
+        }
+    }
 }
