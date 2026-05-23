@@ -63,6 +63,14 @@ describe("CustomerMyAccountClient", () => {
             data: {
                 id: "id",
                 order_number: "order_number",
+                event: {
+                    id: "id",
+                    name: "name",
+                    starts_at: "starts_at",
+                    ends_at: "ends_at",
+                    location: "location",
+                    business: { id: "id", name: "name", handle: "handle" },
+                },
                 transaction: {
                     ulid: "ulid",
                     status: "status",
