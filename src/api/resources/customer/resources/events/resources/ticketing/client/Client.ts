@@ -219,7 +219,14 @@ export class TicketingClient {
      *
      * @example
      *     await client.customer.events.ticketing.createPaymentIntent({
-     *         eventId: "eventId"
+     *         eventId: "eventId",
+     *         billing_address: {
+     *             line1: "line1",
+     *             city: "city",
+     *             state: "state",
+     *             postal_code: "postal_code",
+     *             country: "country"
+     *         }
      *     })
      */
     public createPaymentIntent(

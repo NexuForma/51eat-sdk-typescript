@@ -3,10 +3,28 @@
 /**
  * @example
  *     {
- *         eventId: "eventId"
+ *         eventId: "eventId",
+ *         billing_address: {
+ *             line1: "line1",
+ *             city: "city",
+ *             state: "state",
+ *             postal_code: "postal_code",
+ *             country: "country"
+ *         }
  *     }
  */
 export interface AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest {
     eventId: string;
     payment_method_id?: string | null;
+    billing_address: AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest.BillingAddress;
+}
+
+export namespace AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest {
+    export interface BillingAddress {
+        line1: string;
+        city: string;
+        state: string;
+        postal_code: string;
+        country: string;
+    }
 }
