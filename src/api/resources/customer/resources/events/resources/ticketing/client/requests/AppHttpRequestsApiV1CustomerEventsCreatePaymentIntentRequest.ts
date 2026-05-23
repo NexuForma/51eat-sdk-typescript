@@ -3,11 +3,10 @@
 /**
  * @example
  *     {
- *         eventId: "eventId",
- *         session_id: "session_id"
+ *         eventId: "eventId"
  *     }
  */
 export interface AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest {
     eventId: string;
-    session_id: string;
+    payment_method_id?: string | null;
 }

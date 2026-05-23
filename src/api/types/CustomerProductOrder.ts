@@ -8,18 +8,14 @@ export interface CustomerProductOrder {
     status: string;
     fulfillment_status: string;
     fulfillment_method: string;
-    subtotal: string;
-    tax_amount: string;
-    shipping_amount: string;
     discount_amount: string;
-    total_amount: string;
+    transaction?: FiveOneEat.Transaction | undefined;
     tracking_number: string | null;
     tracking_url: string | null;
     shipping_address: unknown[] | null;
     billing_address: unknown[] | null;
     business?: CustomerProductOrder.Business | undefined;
     items?: FiveOneEat.CustomerProductOrderItem[] | undefined;
-    payment_completed_at: string | null;
     fulfilled_at: string | null;
     created_at: string | null;
 }

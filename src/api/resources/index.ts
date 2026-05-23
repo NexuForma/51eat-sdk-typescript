@@ -8,6 +8,8 @@ export * from "./businessProducts/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";
+export * from "./customerEvents/client/requests/index.js";
+export * as customerEvents from "./customerEvents/index.js";
 export * from "./customerMessaging/client/requests/index.js";
 export * as customerMessaging from "./customerMessaging/index.js";
 export * from "./customerMessaging/types/index.js";

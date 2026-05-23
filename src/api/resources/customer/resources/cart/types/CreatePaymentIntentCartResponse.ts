@@ -8,7 +8,7 @@ export interface CreatePaymentIntentCartResponse {
     tax_amount: string;
     tax_calculation: CreatePaymentIntentCartResponse.TaxCalculation | null;
     shipping_amount: string;
-    shipping_method: string;
+    shipping_method: unknown | null;
     platform_fee: string;
     total_amount: string;
 }

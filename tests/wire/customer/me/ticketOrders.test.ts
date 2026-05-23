@@ -11,19 +11,7 @@ describe("TicketOrdersClient", () => {
 
         const rawResponseBody = {
             data: {
-                orders: [
-                    {
-                        id: "id",
-                        order_number: "order_number",
-                        status: "status",
-                        subtotal: "subtotal",
-                        fees: "fees",
-                        total_amount: "total_amount",
-                        customer_name: "customer_name",
-                        customer_email: "customer_email",
-                        payment_completed_at: "payment_completed_at",
-                    },
-                ],
+                orders: [{ id: "id", order_number: "order_number" }],
                 pagination: {
                     current_page: "current_page",
                     per_page: "per_page",

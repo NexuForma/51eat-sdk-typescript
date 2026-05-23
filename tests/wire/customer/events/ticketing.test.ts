@@ -11,8 +11,8 @@ describe("TicketingClient", () => {
         const rawRequestBody = { tickets: [{ ticket_type_id: "ticket_type_id", quantity: 1 }] };
         const rawResponseBody = {
             data: {
-                session_id: "session_id",
-                expires_at: "expires_at",
+                ticket_cart_id: "ticket_cart_id",
+                expires_at: "2024-01-15T09:30:00Z",
                 time_remaining_seconds: "time_remaining_seconds",
                 holds: "holds",
             },
@@ -148,68 +148,6 @@ describe("TicketingClient", () => {
                 ],
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
-    });
-
-    test("releaseHold (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        server
-            .mockEndpoint()
-            .delete("/customer/events/eventId/ticket-holds/sessionId")
-            .respondWith()
-            .statusCode(200)
-            .build();
-
-        const response = await client.customer.events.ticketing.releaseHold({
-            eventId: "eventId",
-            sessionId: "sessionId",
-        });
-        expect(response).toEqual(undefined);
-    });
-
-    test("releaseHold (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .delete("/customer/events/eventId/ticket-holds/sessionId")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.events.ticketing.releaseHold({
-                eventId: "eventId",
-                sessionId: "sessionId",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("releaseHold (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .delete("/customer/events/eventId/ticket-holds/sessionId")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.events.ticketing.releaseHold({
-                eventId: "eventId",
-                sessionId: "sessionId",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
     test("calculatePrice (1)", async () => {
@@ -355,16 +293,18 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { session_id: "session_id" };
+        const rawRequestBody = {};
         const rawResponseBody = {
-            data: {
-                payment_intent_id: "payment_intent_id",
-                client_secret: "client_secret",
-                session_id: "session_id",
-                subtotal: "subtotal",
-                platform_fee: "platform_fee",
-                total_amount: "total_amount",
-            },
+            status: "status",
+            client_secret: "client_secret",
+            payment_intent_id: "payment_intent_id",
+            subtotal: "subtotal",
+            tax_amount: "tax_amount",
+            tax_calculation: { id: "id", amount_total: "amount_total", tax_amount_exclusive: "tax_amount_exclusive" },
+            shipping_amount: "shipping_amount",
+            shipping_method: { key: "value" },
+            platform_fee: "platform_fee",
+            total_amount: "total_amount",
         };
 
         server
@@ -378,7 +318,6 @@ describe("TicketingClient", () => {
 
         const response = await client.customer.events.ticketing.createPaymentIntent({
             eventId: "eventId",
-            session_id: "session_id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -386,7 +325,7 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { session_id: "session_id" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -401,7 +340,6 @@ describe("TicketingClient", () => {
         await expect(async () => {
             return await client.customer.events.ticketing.createPaymentIntent({
                 eventId: "eventId",
-                session_id: "session_id",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -409,30 +347,7 @@ describe("TicketingClient", () => {
     test("createPaymentIntent (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { session_id: "session_id" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/events/eventId/payment-intent")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.events.ticketing.createPaymentIntent({
-                eventId: "eventId",
-                session_id: "session_id",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("createPaymentIntent (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { session_id: "session_id" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -447,7 +362,6 @@ describe("TicketingClient", () => {
         await expect(async () => {
             return await client.customer.events.ticketing.createPaymentIntent({
                 eventId: "eventId",
-                session_id: "session_id",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -455,7 +369,7 @@ describe("TicketingClient", () => {
     test("confirmOrder (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id", session_id: "session_id" };
+        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
         const rawResponseBody = { data: "data" };
 
         server
@@ -470,7 +384,6 @@ describe("TicketingClient", () => {
         const response = await client.customer.events.ticketing.confirmOrder({
             eventId: "eventId",
             payment_intent_id: "payment_intent_id",
-            session_id: "session_id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -478,7 +391,7 @@ describe("TicketingClient", () => {
     test("confirmOrder (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id", session_id: "session_id" };
+        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -494,7 +407,6 @@ describe("TicketingClient", () => {
             return await client.customer.events.ticketing.confirmOrder({
                 eventId: "eventId",
                 payment_intent_id: "payment_intent_id",
-                session_id: "session_id",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -502,7 +414,7 @@ describe("TicketingClient", () => {
     test("confirmOrder (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id", session_id: "session_id" };
+        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -518,8 +430,25 @@ describe("TicketingClient", () => {
             return await client.customer.events.ticketing.confirmOrder({
                 eventId: "eventId",
                 payment_intent_id: "payment_intent_id",
-                session_id: "session_id",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("releaseHold", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .delete("/customer/events/eventId/ticket-holds/sessionId")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.customer.events.ticketing.releaseHold({
+            eventId: "eventId",
+            sessionId: "sessionId",
+        });
+        expect(response).toEqual(undefined);
     });
 });

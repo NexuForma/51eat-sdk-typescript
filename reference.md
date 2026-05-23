@@ -208,6 +208,73 @@ await client.businessProducts.getProductInventorySummary({
 </dl>
 </details>
 
+## Customer: Events
+<details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">releaseTicketHold</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Release the TicketCart holds for the authenticated user and event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerEvents.releaseTicketHold({
+    eventId: "eventId",
+    cartId: "cartId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ReleaseTicketHoldRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerEventsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Messaging
 <details><summary><code>client.customerMessaging.<a href="/src/api/resources/customerMessaging/client/Client.ts">searchCustomerConversations</a>({ ...params }) -> FiveOneEat.SearchCustomerConversationsResponse</code></summary>
 <dl>
@@ -11584,72 +11651,6 @@ await client.customer.events.ticketing.holdTickets({
 </dl>
 </details>
 
-<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">releaseHold</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Release all active holds for the given session, freeing the tickets for others.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.events.ticketing.releaseHold({
-    eventId: "eventId",
-    sessionId: "sessionId"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.events.ReleaseHoldTicketingRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TicketingClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">calculatePrice</a>({ ...params }) -> FiveOneEat.CalculatePriceTicketingResponse</code></summary>
 <dl>
 <dd>
@@ -11731,7 +11732,7 @@ await client.customer.events.ticketing.calculatePrice({
 <dl>
 <dd>
 
-Create a Stripe payment intent for the tickets held in the given session.
+Create a Stripe payment intent for the tickets held in the cart for the given event.
 Returns a client_secret for the mobile app to confirm payment with Stripe.
 </dd>
 </dl>
@@ -11748,8 +11749,7 @@ Returns a client_secret for the mobile app to confirm payment with Stripe.
 
 ```typescript
 await client.customer.events.ticketing.createPaymentIntent({
-    eventId: "eventId",
-    session_id: "session_id"
+    eventId: "eventId"
 });
 
 ```
@@ -11816,8 +11816,7 @@ The payment must have succeeded before calling this endpoint.
 ```typescript
 await client.customer.events.ticketing.confirmOrder({
     eventId: "eventId",
-    payment_intent_id: "payment_intent_id",
-    session_id: "session_id"
+    payment_intent_id: "payment_intent_id"
 });
 
 ```
@@ -11835,6 +11834,58 @@ await client.customer.events.ticketing.confirmOrder({
 <dd>
 
 **request:** `FiveOneEat.customer.events.StoreTicketOrderRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TicketingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.events.ticketing.<a href="/src/api/resources/customer/resources/events/resources/ticketing/client/Client.ts">releaseHold</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.events.ticketing.releaseHold({
+    eventId: "eventId",
+    sessionId: "sessionId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.events.ReleaseHoldTicketingRequest` 
     
 </dd>
 </dl>

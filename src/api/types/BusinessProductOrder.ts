@@ -9,14 +9,8 @@ export interface BusinessProductOrder {
     fulfillment_status: string;
     fulfillment_method: string | null;
     fulfillment_type: string | null;
-    subtotal: number;
-    tax_amount: number;
-    shipping_amount: number;
     discount_amount: number;
-    total_amount: number;
-    refunded_amount: number;
-    customer_email: string;
-    customer_name: string;
+    transaction?: FiveOneEat.Transaction | undefined;
     customer_phone: string | null;
     shipping_address: Record<string, unknown> | null;
     billing_address: Record<string, unknown> | null;
@@ -27,10 +21,8 @@ export interface BusinessProductOrder {
     user?: BusinessProductOrder.User | undefined;
     items?: FiveOneEat.BusinessProductOrderItem[] | undefined;
     shipment?: (BusinessProductOrder.Shipment | null) | undefined;
-    payment_completed_at: string | null;
     fulfilled_at: string | null;
     picked_up_at: string | null;
-    refunded_at: string | null;
     created_at: string | null;
     updated_at: string | null;
 }

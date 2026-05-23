@@ -5,12 +5,6 @@ import type * as FiveOneEat from "../index.js";
 export interface TicketOrder {
     id: string;
     order_number: string;
-    status: string;
-    subtotal: string;
-    fees: string;
-    total_amount: string;
-    customer_name: string;
-    customer_email: string;
-    payment_completed_at: string;
+    transaction?: FiveOneEat.Transaction | undefined;
     tickets?: FiveOneEat.Ticket[] | undefined;
 }
