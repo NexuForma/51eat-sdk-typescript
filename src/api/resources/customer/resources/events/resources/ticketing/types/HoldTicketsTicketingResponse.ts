@@ -6,7 +6,7 @@ export interface HoldTicketsTicketingResponse {
 
 export namespace HoldTicketsTicketingResponse {
     export interface Data {
-        session_id: string | null;
+        ticket_cart_id: string;
         expires_at: string;
         time_remaining_seconds: string;
         holds: string;

@@ -4,10 +4,10 @@
  * @example
  *     {
  *         eventId: "eventId",
- *         payment_intent_id: "payment_intent_id"
+ *         cartId: "cartId"
  *     }
  */
-export interface StoreTicketOrderRequest {
+export interface ReleaseTicketHoldRequest {
     eventId: string;
-    payment_intent_id: string;
+    cartId: string;
 }

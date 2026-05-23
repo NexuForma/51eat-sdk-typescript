@@ -138,5 +138,6 @@ export * from "./Ticket.js";
 export * from "./TicketOrder.js";
 export * from "./TicketOrderResponse.js";
 export * from "./TicketResponse.js";
+export * from "./Transaction.js";
 export * from "./UnauthorizedErrorBody.js";
 export * from "./UnprocessableEntityErrorBody.js";
