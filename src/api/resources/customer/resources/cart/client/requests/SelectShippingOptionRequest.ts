@@ -3,13 +3,12 @@
 /**
  * @example
  *     {
- *         business: "katzs-deli",
- *         shipping_rate_id: "shipping_rate_id"
+ *         business: "katzs-deli"
  *     }
  */
 export interface SelectShippingOptionRequest {
     /** The business handle */
     business: string;
-    shipping_rate_id: string;
+    shipping_rate_id?: string | null;
     provider_rate_id?: string | null;
 }

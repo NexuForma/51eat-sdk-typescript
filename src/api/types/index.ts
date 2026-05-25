@@ -132,6 +132,8 @@ export * from "./RsvpItem.js";
 export * from "./RsvpResponse.js";
 export * from "./SearchResults.js";
 export * from "./ServiceUnavailableErrorBody.js";
+export * from "./ShippingAccountResource.js";
+export * from "./ShippingRateResource.js";
 export * from "./StoreAddressRequest.js";
 export * from "./StoreProductImageRequest.js";
 export * from "./Ticket.js";
