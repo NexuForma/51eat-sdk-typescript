@@ -3,6 +3,7 @@
 import { BusinessClient } from "./api/resources/business/client/Client.js";
 import { BusinessMessagingClient } from "./api/resources/businessMessaging/client/Client.js";
 import { BusinessProductsClient } from "./api/resources/businessProducts/client/Client.js";
+import { BusinessShippingClient } from "./api/resources/businessShipping/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
 import { CustomerEventsClient } from "./api/resources/customerEvents/client/Client.js";
 import { CustomerMessagingClient } from "./api/resources/customerMessaging/client/Client.js";
@@ -23,6 +24,7 @@ export class FiveOneEatClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FiveOneEatClient.Options>;
     protected _businessMessaging: BusinessMessagingClient | undefined;
     protected _businessProducts: BusinessProductsClient | undefined;
+    protected _businessShipping: BusinessShippingClient | undefined;
     protected _customerEvents: CustomerEventsClient | undefined;
     protected _customerMessaging: CustomerMessagingClient | undefined;
     protected _customerMyAccount: CustomerMyAccountClient | undefined;
@@ -41,6 +43,10 @@ export class FiveOneEatClient {
 
     public get businessProducts(): BusinessProductsClient {
         return (this._businessProducts ??= new BusinessProductsClient(this._options));
+    }
+
+    public get businessShipping(): BusinessShippingClient {
+        return (this._businessShipping ??= new BusinessShippingClient(this._options));
     }
 
     public get customerEvents(): CustomerEventsClient {

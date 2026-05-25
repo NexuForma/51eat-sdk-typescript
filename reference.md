@@ -208,6 +208,458 @@ await client.businessProducts.getProductInventorySummary({
 </dl>
 </details>
 
+## Business: Shipping
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">getBusinessShippingAccount</a>() -> FiveOneEat.GetBusinessShippingAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.getBusinessShippingAccount();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">getBusinessShippingSetupIntent</a>() -> FiveOneEat.GetBusinessShippingSetupIntentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Use the returned client_secret with the Stripe mobile SDK to collect
+a payment method for label billing. Pass the resulting pm_* ID to
+POST /shipping/account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.getBusinessShippingSetupIntent();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">setupBusinessShippingAccount</a>({ ...params }) -> string</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a Stripe Customer for label billing, attaches the provided
+payment method, and upserts the ShippingAccount record.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.setupBusinessShippingAccount({
+    payment_method_id: "payment_method_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.SetupShippingAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">updateBusinessShippingAccount</a>({ ...params }) -> FiveOneEat.UpdateBusinessShippingAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.updateBusinessShippingAccount();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UpdateShippingAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">deleteBusinessShippingAccount</a>() -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.deleteBusinessShippingAccount();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">listBusinessShippingRates</a>() -> FiveOneEat.ListBusinessShippingRatesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.listBusinessShippingRates();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">createBusinessShippingRate</a>({ ...params }) -> FiveOneEat.CreateBusinessShippingRateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.createBusinessShippingRate({
+    name: "name",
+    rate_type: "flat"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreShippingRateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">updateBusinessShippingRate</a>({ ...params }) -> FiveOneEat.UpdateBusinessShippingRateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.updateBusinessShippingRate({
+    shippingRate: "shippingRate",
+    name: "name",
+    rate_type: "flat"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UpdateShippingRateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessShipping.<a href="/src/api/resources/businessShipping/client/Client.ts">deleteBusinessShippingRate</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessShipping.deleteBusinessShippingRate({
+    shippingRate: "shippingRate"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.DeleteBusinessShippingRateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessShippingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Events
 <details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">releaseTicketHold</a>({ ...params }) -> void</code></summary>
 <dl>
@@ -9716,9 +10168,10 @@ await client.customer.cart.removeItem({
 <dl>
 <dd>
 
-Returns available shipping rates for the given address. For calculated rates,
-fetches live rates from the shipping provider and caches for 10 minutes.
-Pass the returned `provider_rate_id` to the select shipping option endpoint.
+Returns flat/free rates and live carrier rates (if enabled) for the given address.
+Free-shipping thresholds are applied automatically — qualifying rates show as $0.
+Cache live rates for 10 minutes per address/cart combination.
+Pass `shipping_rate_id` for flat/free options, or `provider_rate_id` for live rates.
 </dd>
 </dl>
 </dd>
@@ -9789,9 +10242,9 @@ await client.customer.cart.getShippingOptions({
 <dl>
 <dd>
 
-Saves the shipping amount and method to the cart server-side.
-For calculated rates, resolves the amount from cache using the provider_rate_id
-returned by the shipping options endpoint. The client never submits an amount.
+Pass either `shipping_rate_id` (for flat/free rates) or `provider_rate_id`
+(for live carrier rates). Never both. Amounts are resolved server-side —
+the client never submits a price.
 </dd>
 </dl>
 </dd>
@@ -9807,8 +10260,7 @@ returned by the shipping options endpoint. The client never submits an amount.
 
 ```typescript
 await client.customer.cart.selectShippingOption({
-    business: "katzs-deli",
-    shipping_rate_id: "shipping_rate_id"
+    business: "katzs-deli"
 });
 
 ```

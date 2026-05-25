@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.52",
+    "version": "0.0.53",
     "private": false,
     "repository": {
         "type": "git",
@@ -43,6 +43,17 @@
                 "default": "./dist/cjs/api/resources/businessProducts/exports.js"
             },
             "default": "./dist/cjs/api/resources/businessProducts/exports.js"
+        },
+        "./businessShipping": {
+            "import": {
+                "types": "./dist/esm/api/resources/businessShipping/exports.d.mts",
+                "default": "./dist/esm/api/resources/businessShipping/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/businessShipping/exports.d.ts",
+                "default": "./dist/cjs/api/resources/businessShipping/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/businessShipping/exports.js"
         },
         "./customerEvents": {
             "import": {
