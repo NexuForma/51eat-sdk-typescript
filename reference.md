@@ -3624,6 +3624,109 @@ await client.business.productOrders.refund({
 </dl>
 </details>
 
+<details><summary><code>client.business.productOrders.<a href="/src/api/resources/business/resources/productOrders/client/Client.ts">getLabelRates</a>({ ...params }) -> string</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.productOrders.getLabelRates({
+    productOrder: "productOrder"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.GetLabelRatesProductOrdersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductOrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.productOrders.<a href="/src/api/resources/business/resources/productOrders/client/Client.ts">purchaseLabel</a>({ ...params }) -> FiveOneEat.PurchaseLabelProductOrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.productOrders.purchaseLabel({
+    productOrder: "productOrder",
+    provider_rate_id: "provider_rate_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.PurchaseLabelRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductOrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Products
 <details><summary><code>client.business.products.<a href="/src/api/resources/business/resources/products/client/Client.ts">list</a>() -> FiveOneEat.ListProductsResponse</code></summary>
 <dl>
@@ -9582,6 +9685,147 @@ await client.customer.cart.removeItem({
 <dd>
 
 **request:** `FiveOneEat.customer.RemoveItemCartRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CartClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">getShippingOptions</a>({ ...params }) -> unknown[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns available shipping rates for the given address. For calculated rates,
+fetches live rates from the shipping provider and caches for 10 minutes.
+Pass the returned `provider_rate_id` to the select shipping option endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.cart.getShippingOptions({
+    business: "katzs-deli",
+    shipping_address: {
+        line1: "line1",
+        city: "city",
+        state: "state",
+        postal_code: "postal_code"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.GetShippingOptionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CartClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">selectShippingOption</a>({ ...params }) -> FiveOneEat.SelectShippingOptionCartResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Saves the shipping amount and method to the cart server-side.
+For calculated rates, resolves the amount from cache using the provider_rate_id
+returned by the shipping options endpoint. The client never submits an amount.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.cart.selectShippingOption({
+    business: "katzs-deli",
+    shipping_rate_id: "shipping_rate_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.SelectShippingOptionRequest` 
     
 </dd>
 </dl>

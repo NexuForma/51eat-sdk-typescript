@@ -4,4 +4,5 @@ export * from "./ClearCartResponse.js";
 export * from "./CreatePaymentIntentCartResponse.js";
 export * from "./GetCartResponse.js";
 export * from "./RemoveItemCartResponse.js";
+export * from "./SelectShippingOptionCartResponse.js";
 export * from "./UpdateItemCartResponse.js";
