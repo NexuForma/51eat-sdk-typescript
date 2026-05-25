@@ -862,4 +862,279 @@ describe("ProductOrdersClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
+
+    test("getLabelRates (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = "string";
+
+        server
+            .mockEndpoint()
+            .get("/business/product-orders/productOrder/label-rates")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.business.productOrders.getLabelRates({
+            productOrder: "productOrder",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getLabelRates (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-orders/productOrder/label-rates")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.getLabelRates({
+                productOrder: "productOrder",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("getLabelRates (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-orders/productOrder/label-rates")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.getLabelRates({
+                productOrder: "productOrder",
+            });
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("getLabelRates (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-orders/productOrder/label-rates")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.getLabelRates({
+                productOrder: "productOrder",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("getLabelRates (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-orders/productOrder/label-rates")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.getLabelRates({
+                productOrder: "productOrder",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("purchaseLabel (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                order_number: "order_number",
+                status: "status",
+                fulfillment_status: "fulfillment_status",
+                fulfillment_method: "fulfillment_method",
+                fulfillment_type: "fulfillment_type",
+                discount_amount: 1.1,
+                transaction: {
+                    ulid: "ulid",
+                    status: "status",
+                    subtotal: "subtotal",
+                    tax_amount: "tax_amount",
+                    shipping_amount: "shipping_amount",
+                    platform_fee: "platform_fee",
+                    total_amount: "total_amount",
+                    refunded_amount: "refunded_amount",
+                    customer_name: "customer_name",
+                    customer_email: "customer_email",
+                    stripe_payment_intent_id: "stripe_payment_intent_id",
+                    payment_completed_at: "2024-01-15T09:30:00Z",
+                    refunded_at: "2024-01-15T09:30:00Z",
+                    refund_reason: "refund_reason",
+                },
+                customer_phone: "customer_phone",
+                shipping_address: { key: "value" },
+                billing_address: { key: "value" },
+                tracking_number: "tracking_number",
+                tracking_url: "tracking_url",
+                pickup_date: "pickup_date",
+                pickup_time: "pickup_time",
+                user: { id: "id", name: "name", email: "email" },
+                items: [
+                    {
+                        id: "id",
+                        product_id: "product_id",
+                        variant_id: null,
+                        quantity: 1,
+                        unit_price: 1.1,
+                        total_price: 1.1,
+                        product_snapshot: { key: "value" },
+                    },
+                ],
+                shipment: {
+                    id: "id",
+                    carrier: "carrier",
+                    tracking_number: "tracking_number",
+                    tracking_url: "tracking_url",
+                    status: "status",
+                    shipped_at: "2024-01-15T09:30:00Z",
+                },
+                fulfilled_at: "2024-01-15T09:30:00Z",
+                picked_up_at: "2024-01-15T09:30:00Z",
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-orders/productOrder/purchase-label")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.business.productOrders.purchaseLabel({
+            productOrder: "productOrder",
+            provider_rate_id: "provider_rate_id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("purchaseLabel (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-orders/productOrder/purchase-label")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.purchaseLabel({
+                productOrder: "productOrder",
+                provider_rate_id: "provider_rate_id",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("purchaseLabel (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-orders/productOrder/purchase-label")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.purchaseLabel({
+                productOrder: "productOrder",
+                provider_rate_id: "provider_rate_id",
+            });
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("purchaseLabel (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-orders/productOrder/purchase-label")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.purchaseLabel({
+                productOrder: "productOrder",
+                provider_rate_id: "provider_rate_id",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("purchaseLabel (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-orders/productOrder/purchase-label")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productOrders.purchaseLabel({
+                productOrder: "productOrder",
+                provider_rate_id: "provider_rate_id",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
 });
