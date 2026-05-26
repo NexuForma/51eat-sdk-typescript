@@ -473,4 +473,21 @@ describe("BusinessesClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
+
+    test("getPickupTimeslots", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/business/pickup-timeslots")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.customer.businesses.getPickupTimeslots({
+            business: "business",
+        });
+        expect(response).toEqual(undefined);
+    });
 });
