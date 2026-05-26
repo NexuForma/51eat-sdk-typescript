@@ -19,7 +19,7 @@ export interface CheckoutRequest {
     business: string;
     payment_intent_id: string;
     fulfillment_method?: CheckoutRequest.FulfillmentMethod | null;
-    pickup_date?: CheckoutRequest.PickupDate | null;
+    pickup_date?: string | null;
     pickup_time?: string | null;
     billing_address: CheckoutRequest.BillingAddress;
     shipping_address?: CheckoutRequest.ShippingAddress;
@@ -31,11 +31,6 @@ export namespace CheckoutRequest {
         Pickup: "pickup",
     } as const;
     export type FulfillmentMethod = (typeof FulfillmentMethod)[keyof typeof FulfillmentMethod];
-    export const PickupDate = {
-        Today: "today",
-        Tomorrow: "tomorrow",
-    } as const;
-    export type PickupDate = (typeof PickupDate)[keyof typeof PickupDate];
 
     export interface BillingAddress {
         line1: string;

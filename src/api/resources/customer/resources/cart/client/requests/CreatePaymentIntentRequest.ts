@@ -17,7 +17,7 @@ export interface CreatePaymentIntentRequest {
     /** The business handle */
     business: string;
     fulfillment_method?: CreatePaymentIntentRequest.FulfillmentMethod | null;
-    pickup_date?: CreatePaymentIntentRequest.PickupDate | null;
+    pickup_date?: string | null;
     pickup_time?: string | null;
     payment_method_id?: string | null;
     billing_address: CreatePaymentIntentRequest.BillingAddress;
@@ -30,11 +30,6 @@ export namespace CreatePaymentIntentRequest {
         Pickup: "pickup",
     } as const;
     export type FulfillmentMethod = (typeof FulfillmentMethod)[keyof typeof FulfillmentMethod];
-    export const PickupDate = {
-        Today: "today",
-        Tomorrow: "tomorrow",
-    } as const;
-    export type PickupDate = (typeof PickupDate)[keyof typeof PickupDate];
 
     export interface BillingAddress {
         line1: string;
