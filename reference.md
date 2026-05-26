@@ -981,6 +981,59 @@ await client.customer.search({
 </dl>
 </details>
 
+## GetPickupTimeslots
+<details><summary><code>client.getPickupTimeslots.<a href="/src/api/resources/getPickupTimeslots/client/Client.ts">businessesGetPickupTimeslots</a>({ ...params }) -> FiveOneEat.BusinessesGetPickupTimeslotsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.getPickupTimeslots.businessesGetPickupTimeslots({
+    handle: "handle",
+    date: "2023-01-15"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.BusinessesGetPickupTimeslotsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `GetPickupTimeslotsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## RecordClick
 <details><summary><code>client.recordClick.<a href="/src/api/resources/recordClick/client/Client.ts">adsRecordClick</a>({ ...params }) -> void</code></summary>
 <dl>
@@ -9732,6 +9785,57 @@ await client.customer.businesses.listTemporaryLocations({
 <dd>
 
 **request:** `FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">getPickupTimeslots</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.getPickupTimeslots({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest` 
     
 </dd>
 </dl>

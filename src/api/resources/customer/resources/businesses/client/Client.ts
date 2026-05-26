@@ -519,4 +519,67 @@ export class BusinessesClient {
             "/customer/businesses/{business}/temporary-locations",
         );
     }
+
+    /**
+     * @param {FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.customer.businesses.getPickupTimeslots({
+     *         business: "business"
+     *     })
+     */
+    public getPickupTimeslots(
+        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__getPickupTimeslots(request, requestOptions));
+    }
+
+    private async __getPickupTimeslots(
+        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const { business } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(business)}/pickup-timeslots`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/businesses/{business}/pickup-timeslots",
+        );
+    }
 }
