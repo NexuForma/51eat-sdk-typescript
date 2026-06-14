@@ -378,20 +378,12 @@ describe("BusinessesClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .delete("/customer/businesses/katzs-deli/favorite")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().delete("/customer/businesses/katzs-deli/favorite").respondWith().statusCode(200).build();
 
         const response = await client.customer.businesses.unfavorite({
             business: "katzs-deli",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual(undefined);
     });
 
     test("unfavorite (2)", async () => {
@@ -413,6 +405,27 @@ describe("BusinessesClient", () => {
                 business: "business",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("unfavorite (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/customer/businesses/business/favorite")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.unfavorite({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
     test("listTemporaryLocations (1)", async () => {

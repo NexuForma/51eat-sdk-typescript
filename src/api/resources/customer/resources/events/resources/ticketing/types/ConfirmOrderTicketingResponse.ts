@@ -2,8 +2,6 @@
 
 import type * as FiveOneEat from "../../../../../../../index.js";
 
-export type ConfirmOrderTicketingResponse =
-    | {
-          data: FiveOneEat.JsonResource;
-      }
-    | Record<string, unknown>;
+export interface ConfirmOrderTicketingResponse {
+    data: FiveOneEat.TicketOrder;
+}

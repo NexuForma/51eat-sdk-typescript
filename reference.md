@@ -660,6 +660,73 @@ await client.businessShipping.deleteBusinessShippingRate({
 </dl>
 </details>
 
+## Customer: Businesses
+<details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessPickupTimeslots</a>({ ...params }) -> FiveOneEat.GetBusinessPickupTimeslotsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns available pickup timeslots for a business on a given date.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerBusinesses.getBusinessPickupTimeslots({
+    handle: "katzs-deli",
+    date: "2023-01-15"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessPickupTimeslotsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerBusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Events
 <details><summary><code>client.customerEvents.<a href="/src/api/resources/customerEvents/client/Client.ts">releaseTicketHold</a>({ ...params }) -> void</code></summary>
 <dl>
@@ -845,6 +912,71 @@ await client.customerMyAccount.getMyTicket({
 </dl>
 </details>
 
+<details><summary><code>client.customerMyAccount.<a href="/src/api/resources/customerMyAccount/client/Client.ts">downloadAppleWalletPass</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a signed .pkpass file for import into Apple Wallet.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerMyAccount.downloadAppleWalletPass({
+    ticketId: "ticketId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.DownloadAppleWalletPassRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerMyAccountClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.customerMyAccount.<a href="/src/api/resources/customerMyAccount/client/Client.ts">getMyTicketOrder</a>({ ...params }) -> FiveOneEat.GetMyTicketOrderResponse</code></summary>
 <dl>
 <dd>
@@ -981,59 +1113,6 @@ await client.customer.search({
 </dl>
 </details>
 
-## GetPickupTimeslots
-<details><summary><code>client.getPickupTimeslots.<a href="/src/api/resources/getPickupTimeslots/client/Client.ts">businessesGetPickupTimeslots</a>({ ...params }) -> FiveOneEat.BusinessesGetPickupTimeslotsResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.getPickupTimeslots.businessesGetPickupTimeslots({
-    handle: "handle",
-    date: "2023-01-15"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.BusinessesGetPickupTimeslotsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GetPickupTimeslotsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## RecordClick
 <details><summary><code>client.recordClick.<a href="/src/api/resources/recordClick/client/Client.ts">adsRecordClick</a>({ ...params }) -> void</code></summary>
 <dl>
@@ -1087,7 +1166,7 @@ await client.recordClick.adsRecordClick({
 </details>
 
 ## ServeAd
-<details><summary><code>client.serveAd.<a href="/src/api/resources/serveAd/client/Client.ts">adsServeAd</a>({ ...params }) -> FiveOneEat.AdsServeAdResponse</code></summary>
+<details><summary><code>client.serveAd.<a href="/src/api/resources/serveAd/client/Client.ts">adsServeAd</a>({ ...params }) -> FiveOneEat.AdsServeAdResponse | undefined</code></summary>
 <dl>
 <dd>
 
@@ -4129,7 +4208,7 @@ await client.business.productOrders.refund({
 </dl>
 </details>
 
-<details><summary><code>client.business.productOrders.<a href="/src/api/resources/business/resources/productOrders/client/Client.ts">getLabelRates</a>({ ...params }) -> string</code></summary>
+<details><summary><code>client.business.productOrders.<a href="/src/api/resources/business/resources/productOrders/client/Client.ts">getLabelRates</a>({ ...params }) -> FiveOneEat.GetLabelRatesProductOrdersResponseItem[]</code></summary>
 <dl>
 <dd>
 
@@ -9674,7 +9753,7 @@ await client.customer.businesses.favorite({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -9922,7 +10001,7 @@ await client.customer.cart.get({
 ```typescript
 await client.customer.cart.addItem({
     business: "katzs-deli",
-    product_id: 1,
+    product_id: "product_id",
     quantity: 1
 });
 
@@ -10260,7 +10339,7 @@ await client.customer.cart.removeItem({
 </dl>
 </details>
 
-<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">getShippingOptions</a>({ ...params }) -> unknown[]</code></summary>
+<details><summary><code>client.customer.cart.<a href="/src/api/resources/customer/resources/cart/client/Client.ts">getShippingOptions</a>({ ...params }) -> FiveOneEat.GetShippingOptionsCartResponseItem[]</code></summary>
 <dl>
 <dd>
 

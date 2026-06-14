@@ -3,7 +3,7 @@
 export interface RegisterPushNotificationsResponse {
     id: string;
     token: string;
-    device_id: string;
-    device_name: string;
-    platform: string;
+    device_id: string | null;
+    device_name: string | null;
+    platform: string | null;
 }

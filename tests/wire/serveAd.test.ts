@@ -12,7 +12,7 @@ describe("ServeAdClient", () => {
         const rawResponseBody = {
             data: {
                 id: "id",
-                image_url: "",
+                image_url: "image_url",
                 alt_text: "alt_text",
                 link_url: "link_url",
                 width: "width",

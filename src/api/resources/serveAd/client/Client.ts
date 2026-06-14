@@ -37,14 +37,14 @@ export class ServeAdClient {
     public adsServeAd(
         request: FiveOneEat.AdsServeAdRequest,
         requestOptions?: ServeAdClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.AdsServeAdResponse> {
+    ): core.HttpResponsePromise<FiveOneEat.AdsServeAdResponse | undefined> {
         return core.HttpResponsePromise.fromPromise(this.__adsServeAd(request, requestOptions));
     }
 
     private async __adsServeAd(
         request: FiveOneEat.AdsServeAdRequest,
         requestOptions?: ServeAdClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.AdsServeAdResponse>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.AdsServeAdResponse | undefined>> {
         const { placement } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -69,7 +69,10 @@ export class ServeAdClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as FiveOneEat.AdsServeAdResponse, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.AdsServeAdResponse | undefined,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {

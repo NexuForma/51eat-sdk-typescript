@@ -2,8 +2,6 @@
 
 import type * as FiveOneEat from "../../../index.js";
 
-export type AdsServeAdResponse =
-    | {
-          data: FiveOneEat.Ad;
-      }
-    | Record<string, unknown>;
+export interface AdsServeAdResponse {
+    data: FiveOneEat.Ad;
+}

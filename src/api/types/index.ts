@@ -119,7 +119,7 @@ export * from "./FavoriteResponse.js";
 export * from "./ForbiddenErrorBody.js";
 export * from "./Image.js";
 export * from "./InternalServerErrorBody.js";
-export * from "./JsonResource.js";
+export * from "./InventoryChangeType.js";
 export * from "./MenuItemSearchResult.js";
 export * from "./Message.js";
 export * from "./NotFoundErrorBody.js";

@@ -4,29 +4,29 @@ import * as FiveOneEat from "../../src/api/index";
 import { FiveOneEatClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("GetPickupTimeslotsClient", () => {
-    test("businesses.getPickupTimeslots (1)", async () => {
+describe("CustomerBusinessesClient", () => {
+    test("getBusinessPickupTimeslots (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { date: "date", timeslots: [{ key: "value" }] };
+        const rawResponseBody = { date: { key: "value" }, timeslots: ["timeslots"] };
 
         server
             .mockEndpoint()
-            .get("/customer/businesses/handle/pickup-timeslots")
+            .get("/customer/businesses/katzs-deli/pickup-timeslots")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.getPickupTimeslots.businessesGetPickupTimeslots({
-            handle: "handle",
+        const response = await client.customerBusinesses.getBusinessPickupTimeslots({
+            handle: "katzs-deli",
             date: "2023-01-15",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("businesses.getPickupTimeslots (2)", async () => {
+    test("getBusinessPickupTimeslots (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -41,14 +41,14 @@ describe("GetPickupTimeslotsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.getPickupTimeslots.businessesGetPickupTimeslots({
+            return await client.customerBusinesses.getBusinessPickupTimeslots({
                 handle: "handle",
                 date: "2023-01-15",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
-    test("businesses.getPickupTimeslots (3)", async () => {
+    test("getBusinessPickupTimeslots (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -63,7 +63,7 @@ describe("GetPickupTimeslotsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.getPickupTimeslots.businessesGetPickupTimeslots({
+            return await client.customerBusinesses.getBusinessPickupTimeslots({
                 handle: "handle",
                 date: "2023-01-15",
             });

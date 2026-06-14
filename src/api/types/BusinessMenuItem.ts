@@ -11,8 +11,32 @@ export interface BusinessMenuItem {
     is_available: boolean;
     sort_order: number;
     image?: string | undefined;
-    tags?: string | undefined;
-    allergens?: string | undefined;
+    tags?: BusinessMenuItem.Tags.Item[] | undefined;
+    allergens?: BusinessMenuItem.Allergens.Item[] | undefined;
     variations?: FiveOneEat.BusinessMenuItemVariation[] | undefined;
     modifiers?: FiveOneEat.BusinessMenuItemModifier[] | undefined;
+}
+
+export namespace BusinessMenuItem {
+    export type Tags = Tags.Item[];
+
+    export namespace Tags {
+        export interface Item {
+            id: string;
+            name: string;
+            slug: string;
+            color: string;
+        }
+    }
+
+    export type Allergens = Allergens.Item[];
+
+    export namespace Allergens {
+        export interface Item {
+            id: string;
+            name: string;
+            slug: string;
+            icon: string | null;
+        }
+    }
 }

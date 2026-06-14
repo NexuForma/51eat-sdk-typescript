@@ -67,7 +67,7 @@ describe("CartClient", () => {
     test("addItem (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { product_id: 1, quantity: 1 };
+        const rawRequestBody = { product_id: "product_id", quantity: 1 };
         const rawResponseBody = {
             data: {
                 id: "id",
@@ -99,7 +99,7 @@ describe("CartClient", () => {
 
         const response = await client.customer.cart.addItem({
             business: "katzs-deli",
-            product_id: 1,
+            product_id: "product_id",
             quantity: 1,
         });
         expect(response).toEqual(rawResponseBody);
@@ -108,7 +108,7 @@ describe("CartClient", () => {
     test("addItem (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { product_id: 1, quantity: 1 };
+        const rawRequestBody = { product_id: "product_id", quantity: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -123,7 +123,7 @@ describe("CartClient", () => {
         await expect(async () => {
             return await client.customer.cart.addItem({
                 business: "business",
-                product_id: 1,
+                product_id: "product_id",
                 quantity: 1,
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
@@ -132,7 +132,7 @@ describe("CartClient", () => {
     test("addItem (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { product_id: 1, quantity: 1 };
+        const rawRequestBody = { product_id: "product_id", quantity: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -147,7 +147,7 @@ describe("CartClient", () => {
         await expect(async () => {
             return await client.customer.cart.addItem({
                 business: "business",
-                product_id: 1,
+                product_id: "product_id",
                 quantity: 1,
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
@@ -743,7 +743,18 @@ describe("CartClient", () => {
         const rawRequestBody = {
             shipping_address: { line1: "line1", city: "city", state: "state", postal_code: "postal_code" },
         };
-        const rawResponseBody = [{ key: "value" }];
+        const rawResponseBody = [
+            {
+                shipping_rate_id: "shipping_rate_id",
+                provider_rate_id: { key: "value" },
+                name: "name",
+                amount_cents: 1,
+                amount: "amount",
+                carrier: { key: "value" },
+                service: { key: "value" },
+                estimated_days: { key: "value" },
+            },
+        ];
 
         server
             .mockEndpoint()

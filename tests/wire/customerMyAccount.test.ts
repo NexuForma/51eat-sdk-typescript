@@ -17,6 +17,7 @@ describe("CustomerMyAccountClient", () => {
                 qr_code: "qr_code",
                 ticket_type: { id: "id", name: "name", price: "price" },
                 used_at: "used_at",
+                wallet_url: { key: "value" },
             },
         };
 
@@ -55,6 +56,68 @@ describe("CustomerMyAccountClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("downloadAppleWalletPass (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customerMyAccount.downloadAppleWalletPass({
+            ticketId: "ticketId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("downloadAppleWalletPass (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customerMyAccount.downloadAppleWalletPass({
+                ticketId: "ticketId",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("downloadAppleWalletPass (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customerMyAccount.downloadAppleWalletPass({
+                ticketId: "ticketId",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
     test("getMyTicketOrder (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -88,7 +151,14 @@ describe("CustomerMyAccountClient", () => {
                     refund_reason: "refund_reason",
                 },
                 tickets: [
-                    { id: "id", ticket_number: "ticket_number", status: "status", qr_code: null, used_at: "used_at" },
+                    {
+                        id: "id",
+                        ticket_number: "ticket_number",
+                        status: "status",
+                        qr_code: null,
+                        used_at: "used_at",
+                        wallet_url: { key: "value" },
+                    },
                 ],
             },
         };

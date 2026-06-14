@@ -14,7 +14,7 @@ describe("ConversationsClient", () => {
                 {
                     id: "id",
                     customer: { id: "id", name: "name", email: "email" },
-                    last_message: { id: "id", content: "content", created_at: "created_at" },
+                    last_message: { id: "id", content: "content", created_at: null },
                     last_message_at: "last_message_at",
                     created_at: "created_at",
                     updated_at: "updated_at",

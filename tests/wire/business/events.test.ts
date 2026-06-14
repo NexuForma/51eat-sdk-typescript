@@ -881,7 +881,7 @@ describe("EventsClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { data: [{ key: "value" }] };
+        const rawResponseBody = { data: { key: "value" } };
 
         server
             .mockEndpoint()

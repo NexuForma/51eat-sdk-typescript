@@ -2,5 +2,5 @@
 
 export interface CreateAccountSessionStripeConnectResponse {
     client_secret: string;
-    expires_at: string;
+    expires_at: string | null;
 }

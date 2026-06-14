@@ -3,6 +3,7 @@ export * from "./CheckoutCartResponse.js";
 export * from "./ClearCartResponse.js";
 export * from "./CreatePaymentIntentCartResponse.js";
 export * from "./GetCartResponse.js";
+export * from "./GetShippingOptionsCartResponseItem.js";
 export * from "./RemoveItemCartResponse.js";
 export * from "./SelectShippingOptionCartResponse.js";
 export * from "./UpdateItemCartResponse.js";

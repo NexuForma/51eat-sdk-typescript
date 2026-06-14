@@ -19,8 +19,8 @@ describe("ItemsClient", () => {
                 is_available: true,
                 sort_order: 1,
                 image: "image",
-                tags: "tags",
-                allergens: "allergens",
+                tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
+                allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
                     {
                         id: "id",
@@ -127,8 +127,8 @@ describe("ItemsClient", () => {
                 is_available: true,
                 sort_order: 1,
                 image: "image",
-                tags: "tags",
-                allergens: "allergens",
+                tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
+                allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
                     {
                         id: "id",
@@ -276,8 +276,8 @@ describe("ItemsClient", () => {
                 is_available: true,
                 sort_order: 1,
                 image: "image",
-                tags: "tags",
-                allergens: "allergens",
+                tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
+                allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
                     {
                         id: "id",
@@ -388,8 +388,8 @@ describe("ItemsClient", () => {
                 is_available: true,
                 sort_order: 1,
                 image: "image",
-                tags: "tags",
-                allergens: "allergens",
+                tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
+                allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
                     {
                         id: "id",

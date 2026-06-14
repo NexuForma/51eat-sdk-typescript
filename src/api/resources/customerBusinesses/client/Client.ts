@@ -9,43 +9,45 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as FiveOneEat from "../../../index.js";
 
-export declare namespace GetPickupTimeslotsClient {
+export declare namespace CustomerBusinessesClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class GetPickupTimeslotsClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<GetPickupTimeslotsClient.Options>;
+export class CustomerBusinessesClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<CustomerBusinessesClient.Options>;
 
-    constructor(options: GetPickupTimeslotsClient.Options = {}) {
+    constructor(options: CustomerBusinessesClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
     /**
-     * @param {FiveOneEat.BusinessesGetPickupTimeslotsRequest} request
-     * @param {GetPickupTimeslotsClient.RequestOptions} requestOptions - Request-specific configuration.
+     * Returns available pickup timeslots for a business on a given date.
+     *
+     * @param {FiveOneEat.GetBusinessPickupTimeslotsRequest} request
+     * @param {CustomerBusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
-     *     await client.getPickupTimeslots.businessesGetPickupTimeslots({
-     *         handle: "handle",
+     *     await client.customerBusinesses.getBusinessPickupTimeslots({
+     *         handle: "katzs-deli",
      *         date: "2023-01-15"
      *     })
      */
-    public businessesGetPickupTimeslots(
-        request: FiveOneEat.BusinessesGetPickupTimeslotsRequest,
-        requestOptions?: GetPickupTimeslotsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.BusinessesGetPickupTimeslotsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__businessesGetPickupTimeslots(request, requestOptions));
+    public getBusinessPickupTimeslots(
+        request: FiveOneEat.GetBusinessPickupTimeslotsRequest,
+        requestOptions?: CustomerBusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.GetBusinessPickupTimeslotsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getBusinessPickupTimeslots(request, requestOptions));
     }
 
-    private async __businessesGetPickupTimeslots(
-        request: FiveOneEat.BusinessesGetPickupTimeslotsRequest,
-        requestOptions?: GetPickupTimeslotsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.BusinessesGetPickupTimeslotsResponse>> {
+    private async __getBusinessPickupTimeslots(
+        request: FiveOneEat.GetBusinessPickupTimeslotsRequest,
+        requestOptions?: CustomerBusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.GetBusinessPickupTimeslotsResponse>> {
         const { handle, date } = request;
         const _queryParams: Record<string, unknown> = {
             date,
@@ -79,7 +81,7 @@ export class GetPickupTimeslotsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as FiveOneEat.BusinessesGetPickupTimeslotsResponse,
+                data: _response.body as FiveOneEat.GetBusinessPickupTimeslotsResponse,
                 rawResponse: _response.rawResponse,
             };
         }

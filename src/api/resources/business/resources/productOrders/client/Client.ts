@@ -523,14 +523,14 @@ export class ProductOrdersClient {
     public getLabelRates(
         request: FiveOneEat.business.GetLabelRatesProductOrdersRequest,
         requestOptions?: ProductOrdersClient.RequestOptions,
-    ): core.HttpResponsePromise<string> {
+    ): core.HttpResponsePromise<FiveOneEat.business.GetLabelRatesProductOrdersResponseItem[]> {
         return core.HttpResponsePromise.fromPromise(this.__getLabelRates(request, requestOptions));
     }
 
     private async __getLabelRates(
         request: FiveOneEat.business.GetLabelRatesProductOrdersRequest,
         requestOptions?: ProductOrdersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<string>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.business.GetLabelRatesProductOrdersResponseItem[]>> {
         const { productOrder } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -555,7 +555,10 @@ export class ProductOrdersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as string, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.business.GetLabelRatesProductOrdersResponseItem[],
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
