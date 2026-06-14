@@ -9,6 +9,6 @@
 export interface StoreProductCategoryRequest {
     name: string;
     description?: string | null;
-    parent_id?: number | null;
+    parent_id?: string | null;
     sort_order?: number;
 }

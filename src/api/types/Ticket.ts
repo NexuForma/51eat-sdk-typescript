@@ -7,6 +7,7 @@ export interface Ticket {
     qr_code: string | null;
     ticket_type?: Ticket.TicketType | undefined;
     used_at: string;
+    wallet_url: Record<string, string>;
 }
 
 export namespace Ticket {

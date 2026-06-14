@@ -2,13 +2,9 @@
 
 export interface Ad {
     id: string;
-    image_url: Ad.ImageUrl;
+    image_url: string;
     alt_text: string;
     link_url: string;
     width: string;
     height: string;
-}
-
-export namespace Ad {
-    export type ImageUrl = string | "";
 }

@@ -5,10 +5,10 @@ import { BusinessMessagingClient } from "./api/resources/businessMessaging/clien
 import { BusinessProductsClient } from "./api/resources/businessProducts/client/Client.js";
 import { BusinessShippingClient } from "./api/resources/businessShipping/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
+import { CustomerBusinessesClient } from "./api/resources/customerBusinesses/client/Client.js";
 import { CustomerEventsClient } from "./api/resources/customerEvents/client/Client.js";
 import { CustomerMessagingClient } from "./api/resources/customerMessaging/client/Client.js";
 import { CustomerMyAccountClient } from "./api/resources/customerMyAccount/client/Client.js";
-import { GetPickupTimeslotsClient } from "./api/resources/getPickupTimeslots/client/Client.js";
 import { RecordClickClient } from "./api/resources/recordClick/client/Client.js";
 import { ServeAdClient } from "./api/resources/serveAd/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
@@ -26,11 +26,11 @@ export class FiveOneEatClient {
     protected _businessMessaging: BusinessMessagingClient | undefined;
     protected _businessProducts: BusinessProductsClient | undefined;
     protected _businessShipping: BusinessShippingClient | undefined;
+    protected _customerBusinesses: CustomerBusinessesClient | undefined;
     protected _customerEvents: CustomerEventsClient | undefined;
     protected _customerMessaging: CustomerMessagingClient | undefined;
     protected _customerMyAccount: CustomerMyAccountClient | undefined;
     protected _customer: CustomerClient | undefined;
-    protected _getPickupTimeslots: GetPickupTimeslotsClient | undefined;
     protected _recordClick: RecordClickClient | undefined;
     protected _serveAd: ServeAdClient | undefined;
     protected _business: BusinessClient | undefined;
@@ -51,6 +51,10 @@ export class FiveOneEatClient {
         return (this._businessShipping ??= new BusinessShippingClient(this._options));
     }
 
+    public get customerBusinesses(): CustomerBusinessesClient {
+        return (this._customerBusinesses ??= new CustomerBusinessesClient(this._options));
+    }
+
     public get customerEvents(): CustomerEventsClient {
         return (this._customerEvents ??= new CustomerEventsClient(this._options));
     }
@@ -65,10 +69,6 @@ export class FiveOneEatClient {
 
     public get customer(): CustomerClient {
         return (this._customer ??= new CustomerClient(this._options));
-    }
-
-    public get getPickupTimeslots(): GetPickupTimeslotsClient {
-        return (this._getPickupTimeslots ??= new GetPickupTimeslotsClient(this._options));
     }
 
     public get recordClick(): RecordClickClient {

@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.55",
+    "version": "0.0.56",
     "private": false,
     "repository": {
         "type": "git",
@@ -55,6 +55,17 @@
             },
             "default": "./dist/cjs/api/resources/businessShipping/exports.js"
         },
+        "./customerBusinesses": {
+            "import": {
+                "types": "./dist/esm/api/resources/customerBusinesses/exports.d.mts",
+                "default": "./dist/esm/api/resources/customerBusinesses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customerBusinesses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customerBusinesses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customerBusinesses/exports.js"
+        },
         "./customerEvents": {
             "import": {
                 "types": "./dist/esm/api/resources/customerEvents/exports.d.mts",
@@ -98,17 +109,6 @@
                 "default": "./dist/cjs/api/resources/customer/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/exports.js"
-        },
-        "./getPickupTimeslots": {
-            "import": {
-                "types": "./dist/esm/api/resources/getPickupTimeslots/exports.d.mts",
-                "default": "./dist/esm/api/resources/getPickupTimeslots/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/getPickupTimeslots/exports.d.ts",
-                "default": "./dist/cjs/api/resources/getPickupTimeslots/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/getPickupTimeslots/exports.js"
         },
         "./recordClick": {
             "import": {

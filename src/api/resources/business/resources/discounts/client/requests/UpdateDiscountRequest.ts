@@ -20,8 +20,8 @@ export interface UpdateDiscountRequest {
     starts_at?: string | null;
     ends_at?: string | null;
     is_active?: boolean;
-    product_ids?: number[] | null;
-    category_ids?: number[] | null;
+    product_ids?: string[] | null;
+    category_ids?: string[] | null;
 }
 
 export namespace UpdateDiscountRequest {

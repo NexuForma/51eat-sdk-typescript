@@ -102,7 +102,7 @@ export class CartClient {
      * @example
      *     await client.customer.cart.addItem({
      *         business: "katzs-deli",
-     *         product_id: 1,
+     *         product_id: "product_id",
      *         quantity: 1
      *     })
      */
@@ -633,14 +633,14 @@ export class CartClient {
     public getShippingOptions(
         request: FiveOneEat.customer.GetShippingOptionsRequest,
         requestOptions?: CartClient.RequestOptions,
-    ): core.HttpResponsePromise<unknown[]> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.GetShippingOptionsCartResponseItem[]> {
         return core.HttpResponsePromise.fromPromise(this.__getShippingOptions(request, requestOptions));
     }
 
     private async __getShippingOptions(
         request: FiveOneEat.customer.GetShippingOptionsRequest,
         requestOptions?: CartClient.RequestOptions,
-    ): Promise<core.WithRawResponse<unknown[]>> {
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.GetShippingOptionsCartResponseItem[]>> {
         const { business, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -668,7 +668,10 @@ export class CartClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as unknown[], rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.GetShippingOptionsCartResponseItem[],
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {

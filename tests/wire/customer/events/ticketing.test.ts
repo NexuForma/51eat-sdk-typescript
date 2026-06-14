@@ -13,8 +13,8 @@ describe("TicketingClient", () => {
             data: {
                 ticket_cart_id: "ticket_cart_id",
                 expires_at: "2024-01-15T09:30:00Z",
-                time_remaining_seconds: "time_remaining_seconds",
-                holds: "holds",
+                time_remaining_seconds: 1.1,
+                holds: [{ id: 1, ticket_type_id: "ticket_type_id", quantity: 1, expires_at: "2024-01-15T09:30:00Z" }],
             },
         };
 
@@ -155,7 +155,20 @@ describe("TicketingClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { tickets: [{ ticket_type_id: "ticket_type_id", quantity: 1 }] };
         const rawResponseBody = {
-            data: { subtotal: "subtotal", platform_fee: "platform_fee", total: "total", line_items: "line_items" },
+            data: {
+                subtotal: "subtotal",
+                platform_fee: "platform_fee",
+                total: "total",
+                line_items: [
+                    {
+                        ticket_type_id: "ticket_type_id",
+                        ticket_type_name: "ticket_type_name",
+                        unit_price: "unit_price",
+                        quantity: "quantity",
+                        line_total: "line_total",
+                    },
+                ],
+            },
         };
 
         server
@@ -415,7 +428,46 @@ describe("TicketingClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { payment_intent_id: "payment_intent_id" };
-        const rawResponseBody = { data: "data" };
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                order_number: "order_number",
+                event: {
+                    id: "id",
+                    name: "name",
+                    starts_at: "starts_at",
+                    ends_at: "ends_at",
+                    location: "location",
+                    business: { id: "id", name: "name", handle: "handle" },
+                },
+                transaction: {
+                    ulid: "ulid",
+                    status: "status",
+                    subtotal: "subtotal",
+                    tax_amount: "tax_amount",
+                    shipping_amount: "shipping_amount",
+                    platform_fee: "platform_fee",
+                    total_amount: "total_amount",
+                    refunded_amount: "refunded_amount",
+                    customer_name: "customer_name",
+                    customer_email: "customer_email",
+                    stripe_payment_intent_id: "stripe_payment_intent_id",
+                    payment_completed_at: "2024-01-15T09:30:00Z",
+                    refunded_at: "2024-01-15T09:30:00Z",
+                    refund_reason: "refund_reason",
+                },
+                tickets: [
+                    {
+                        id: "id",
+                        ticket_number: "ticket_number",
+                        status: "status",
+                        qr_code: null,
+                        used_at: "used_at",
+                        wallet_url: { key: "value" },
+                    },
+                ],
+            },
+        };
 
         server
             .mockEndpoint()

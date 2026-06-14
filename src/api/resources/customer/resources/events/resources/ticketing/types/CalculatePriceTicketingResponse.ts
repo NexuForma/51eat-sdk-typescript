@@ -9,6 +9,20 @@ export namespace CalculatePriceTicketingResponse {
         subtotal: string;
         platform_fee: string;
         total: string;
-        line_items: string;
+        line_items: Data.LineItems.Item[];
+    }
+
+    export namespace Data {
+        export type LineItems = LineItems.Item[];
+
+        export namespace LineItems {
+            export interface Item {
+                ticket_type_id: string;
+                ticket_type_name: string;
+                unit_price: string;
+                quantity: string;
+                line_total: string;
+            }
+        }
     }
 }

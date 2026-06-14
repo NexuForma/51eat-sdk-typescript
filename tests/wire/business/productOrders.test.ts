@@ -867,7 +867,18 @@ describe("ProductOrdersClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = "string";
+        const rawResponseBody = [
+            {
+                provider_rate_id: "provider_rate_id",
+                carrier: "carrier",
+                service: "service",
+                amount_cents: 1,
+                amount: "amount",
+                currency: "currency",
+                carrier_delivery_days: 1,
+                estimated_delivery_date: "estimated_delivery_date",
+            },
+        ];
 
         server
             .mockEndpoint()

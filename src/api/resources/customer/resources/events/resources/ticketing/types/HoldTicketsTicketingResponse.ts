@@ -8,7 +8,20 @@ export namespace HoldTicketsTicketingResponse {
     export interface Data {
         ticket_cart_id: string;
         expires_at: string;
-        time_remaining_seconds: string;
-        holds: string;
+        time_remaining_seconds: number;
+        holds: Data.Holds.Item[];
+    }
+
+    export namespace Data {
+        export type Holds = Holds.Item[];
+
+        export namespace Holds {
+            export interface Item {
+                id: number;
+                ticket_type_id: string;
+                quantity: number;
+                expires_at: string;
+            }
+        }
     }
 }

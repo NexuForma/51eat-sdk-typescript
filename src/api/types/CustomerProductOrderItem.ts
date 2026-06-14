@@ -10,7 +10,7 @@ export interface CustomerProductOrderItem {
     product_snapshot: unknown[] | null;
     product?: CustomerProductOrderItem.Product | undefined;
     variant?: (CustomerProductOrderItem.Variant | null) | undefined;
-    downloads?: string | undefined;
+    downloads?: CustomerProductOrderItem.Downloads.Item[] | undefined;
 }
 
 export namespace CustomerProductOrderItem {
@@ -23,5 +23,16 @@ export namespace CustomerProductOrderItem {
     export interface Variant {
         id: string;
         name: string;
+    }
+
+    export type Downloads = Downloads.Item[];
+
+    export namespace Downloads {
+        export interface Item {
+            id: string;
+            download_token: string;
+            download_count: number;
+            expires_at: string | null;
+        }
     }
 }

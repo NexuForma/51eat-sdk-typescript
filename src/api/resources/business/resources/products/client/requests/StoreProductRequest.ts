@@ -33,7 +33,7 @@ export interface StoreProductRequest {
     tax_code?: string | null;
     is_active?: boolean;
     is_featured?: boolean;
-    category_ids?: number[] | null;
+    category_ids?: string[] | null;
 }
 
 export namespace StoreProductRequest {

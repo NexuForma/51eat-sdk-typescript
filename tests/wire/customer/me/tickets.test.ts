@@ -12,7 +12,14 @@ describe("TicketsClient", () => {
         const rawResponseBody = {
             data: {
                 tickets: [
-                    { id: "id", ticket_number: "ticket_number", status: "status", qr_code: null, used_at: "used_at" },
+                    {
+                        id: "id",
+                        ticket_number: "ticket_number",
+                        status: "status",
+                        qr_code: null,
+                        used_at: "used_at",
+                        wallet_url: { key: "value" },
+                    },
                 ],
                 pagination: {
                     current_page: "current_page",

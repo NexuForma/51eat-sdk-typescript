@@ -19,6 +19,6 @@ export namespace BusinessConversation {
     export interface LastMessage {
         id: string;
         content: string;
-        created_at: string;
+        created_at: string | null;
     }
 }

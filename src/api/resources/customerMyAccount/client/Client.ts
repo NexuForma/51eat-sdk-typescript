@@ -90,6 +90,81 @@ export class CustomerMyAccountClient {
     }
 
     /**
+     * Returns a signed .pkpass file for import into Apple Wallet.
+     *
+     * @param {FiveOneEat.DownloadAppleWalletPassRequest} request
+     * @param {CustomerMyAccountClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     *
+     * @example
+     *     await client.customerMyAccount.downloadAppleWalletPass({
+     *         ticketId: "ticketId"
+     *     })
+     */
+    public downloadAppleWalletPass(
+        request: FiveOneEat.DownloadAppleWalletPassRequest,
+        requestOptions?: CustomerMyAccountClient.RequestOptions,
+    ): core.HttpResponsePromise<Record<string, unknown>> {
+        return core.HttpResponsePromise.fromPromise(this.__downloadAppleWalletPass(request, requestOptions));
+    }
+
+    private async __downloadAppleWalletPass(
+        request: FiveOneEat.DownloadAppleWalletPassRequest,
+        requestOptions?: CustomerMyAccountClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const { ticketId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/tickets/${core.url.encodePathParam(ticketId)}/wallet/apple`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/tickets/{ticketId}/wallet/apple",
+        );
+    }
+
+    /**
      * Retrieve a single ticket order belonging to the authenticated user.
      *
      * @param {FiveOneEat.GetMyTicketOrderRequest} request

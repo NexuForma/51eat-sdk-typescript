@@ -380,6 +380,7 @@ export class BusinessesClient {
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.customer.businesses.unfavorite({
@@ -389,14 +390,14 @@ export class BusinessesClient {
     public unfavorite(
         request: FiveOneEat.customer.UnfavoriteBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<Record<string, unknown>> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__unfavorite(request, requestOptions));
     }
 
     private async __unfavorite(
         request: FiveOneEat.customer.UnfavoriteBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Record<string, unknown>>> {
+    ): Promise<core.WithRawResponse<void>> {
         const { business } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -421,13 +422,15 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
