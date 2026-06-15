@@ -34,7 +34,8 @@ export class ExploreClient {
      *
      * @example
      *     await client.customer.explore.businesses({
-     *         bounds: "43.5000,42.5000,-73.5000,-76.5000"
+     *         bounds: "43.5000,42.5000,-73.5000,-76.5000",
+     *         categories: "food-trucks,bakeries"
      *     })
      */
     public businesses(
@@ -48,10 +49,11 @@ export class ExploreClient {
         request: FiveOneEat.customer.BusinessesExploreRequest,
         requestOptions?: ExploreClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.BusinessesExploreResponse>> {
-        const { bounds, zoom_level: zoomLevel } = request;
+        const { bounds, zoom_level: zoomLevel, categories } = request;
         const _queryParams: Record<string, unknown> = {
             bounds,
             zoom_level: zoomLevel,
+            categories,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

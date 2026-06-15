@@ -67,6 +67,7 @@ describe("ExploreClient", () => {
 
         const response = await client.customer.explore.businesses({
             bounds: "43.5000,42.5000,-73.5000,-76.5000",
+            categories: "food-trucks,bakeries",
         });
         expect(response).toEqual(rawResponseBody);
     });

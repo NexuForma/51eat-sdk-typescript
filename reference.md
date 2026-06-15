@@ -10510,7 +10510,8 @@ Results are optimized for map display with essential business information.
 
 ```typescript
 await client.customer.explore.businesses({
-    bounds: "43.5000,42.5000,-73.5000,-76.5000"
+    bounds: "43.5000,42.5000,-73.5000,-76.5000",
+    categories: "food-trucks,bakeries"
 });
 
 ```
