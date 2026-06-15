@@ -3,7 +3,8 @@
 /**
  * @example
  *     {
- *         bounds: "43.5000,42.5000,-73.5000,-76.5000"
+ *         bounds: "43.5000,42.5000,-73.5000,-76.5000",
+ *         categories: "food-trucks,bakeries"
  *     }
  */
 export interface BusinessesExploreRequest {
@@ -11,4 +12,6 @@ export interface BusinessesExploreRequest {
     bounds: string;
     /** Map zoom level for optimization */
     zoom_level?: number;
+    /** Comma-separated category slugs to filter results */
+    categories?: string;
 }
