@@ -13,7 +13,7 @@ export interface TicketOrder {
 export namespace TicketOrder {
     export interface Event {
         id: string;
-        name: string;
+        title: string;
         starts_at: string;
         ends_at: string;
         location: string;

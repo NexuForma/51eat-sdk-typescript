@@ -434,7 +434,7 @@ describe("TicketingClient", () => {
                 order_number: "order_number",
                 event: {
                     id: "id",
-                    name: "name",
+                    title: "title",
                     starts_at: "starts_at",
                     ends_at: "ends_at",
                     location: "location",
