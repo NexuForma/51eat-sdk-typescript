@@ -8,6 +8,7 @@ import { BulletinsClient } from "../resources/bulletins/client/Client.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
 import { CategoriesClient } from "../resources/categories/client/Client.js";
 import { CertificationsClient } from "../resources/certifications/client/Client.js";
+import { ClaimsClient } from "../resources/claims/client/Client.js";
 import { CuisinesClient } from "../resources/cuisines/client/Client.js";
 import { DiscountsClient } from "../resources/discounts/client/Client.js";
 import { EventsClient } from "../resources/events/client/Client.js";
@@ -31,6 +32,7 @@ export class BusinessClient {
     protected _auth: AuthClient | undefined;
     protected _bulletins: BulletinsClient | undefined;
     protected _businesses: BusinessesClient | undefined;
+    protected _claims: ClaimsClient | undefined;
     protected _discounts: DiscountsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _gallery: GalleryClient | undefined;
@@ -62,6 +64,10 @@ export class BusinessClient {
 
     public get businesses(): BusinessesClient {
         return (this._businesses ??= new BusinessesClient(this._options));
+    }
+
+    public get claims(): ClaimsClient {
+        return (this._claims ??= new ClaimsClient(this._options));
     }
 
     public get discounts(): DiscountsClient {

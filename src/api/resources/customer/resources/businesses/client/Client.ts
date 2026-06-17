@@ -352,10 +352,7 @@ export class BusinessesClient {
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
-                    throw new FiveOneEat.ConflictError(
-                        _response.error.body as FiveOneEat.ConflictErrorBody,
-                        _response.rawResponse,
-                    );
+                    throw new FiveOneEat.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
