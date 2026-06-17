@@ -2411,6 +2411,200 @@ await client.business.businesses.delete({
 </dl>
 </details>
 
+## Business Claims
+<details><summary><code>client.business.claims.<a href="/src/api/resources/business/resources/claims/client/Client.ts">listClaimableBusinesses</a>({ ...params }) -> FiveOneEat.ListClaimableBusinessesClaimsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.claims.listClaimableBusinesses();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ListClaimableBusinessesClaimsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ClaimsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.claims.<a href="/src/api/resources/business/resources/claims/client/Client.ts">listClaimRequests</a>() -> FiveOneEat.ListClaimRequestsClaimsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.claims.listClaimRequests();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ClaimsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.claims.<a href="/src/api/resources/business/resources/claims/client/Client.ts">requestClaim</a>({ ...params }) -> FiveOneEat.RequestClaimClaimsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.claims.requestClaim({
+    business_id: "business_id",
+    message: "message"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.StoreClaimRequestRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ClaimsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.business.claims.<a href="/src/api/resources/business/resources/claims/client/Client.ts">claimViaToken</a>({ ...params }) -> FiveOneEat.ClaimViaTokenClaimsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.business.claims.claimViaToken({
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.business.ClaimViaTokenClaimsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ClaimsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Discounts
 <details><summary><code>client.business.discounts.<a href="/src/api/resources/business/resources/discounts/client/Client.ts">list</a>() -> FiveOneEat.ListDiscountsResponse</code></summary>
 <dl>
@@ -9492,6 +9686,157 @@ await client.customer.auth.logoutAll();
 </dl>
 </details>
 
+## Customer BusinessSubmissions
+<details><summary><code>client.customer.businessSubmissions.<a href="/src/api/resources/customer/resources/businessSubmissions/client/Client.ts">list</a>() -> FiveOneEat.ListBusinessSubmissionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businessSubmissions.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessSubmissionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businessSubmissions.<a href="/src/api/resources/customer/resources/businessSubmissions/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateBusinessSubmissionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businessSubmissions.create({
+    name: "name",
+    address: "address",
+    city: "city",
+    state: "state",
+    zipcode: "zipcode",
+    country: "country",
+    latitude: 1.1,
+    longitude: 1.1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.StoreBusinessSubmissionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessSubmissionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businessSubmissions.<a href="/src/api/resources/customer/resources/businessSubmissions/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetBusinessSubmissionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businessSubmissions.get({
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.GetBusinessSubmissionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessSubmissionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer Businesses
 <details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">profile</a>({ ...params }) -> FiveOneEat.ProfileBusinessesResponse</code></summary>
 <dl>
@@ -10480,74 +10825,6 @@ await client.customer.cart.selectShippingOption({
 </dl>
 </details>
 
-## Customer Explore
-<details><summary><code>client.customer.explore.<a href="/src/api/resources/customer/resources/explore/client/Client.ts">businesses</a>({ ...params }) -> FiveOneEat.BusinessesExploreResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve businesses within the specified map bounds for map view.
-Results are optimized for map display with essential business information.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.explore.businesses({
-    bounds: "43.5000,42.5000,-73.5000,-76.5000",
-    categories: "food-trucks,bakeries"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.BusinessesExploreRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ExploreClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Customer Discovery
 <details><summary><code>client.customer.discovery.<a href="/src/api/resources/customer/resources/discovery/client/Client.ts">feed</a>({ ...params }) -> FiveOneEat.DiscoveryFeed</code></summary>
 <dl>
@@ -10961,6 +11238,74 @@ await client.customer.discovery.categoryBusinesses({
 <dd>
 
 **requestOptions:** `DiscoveryClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Customer Explore
+<details><summary><code>client.customer.explore.<a href="/src/api/resources/customer/resources/explore/client/Client.ts">businesses</a>({ ...params }) -> FiveOneEat.BusinessesExploreResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve businesses within the specified map bounds for map view.
+Results are optimized for map display with essential business information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.explore.businesses({
+    bounds: "43.5000,42.5000,-73.5000,-76.5000",
+    categories: "food-trucks,bakeries"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.BusinessesExploreRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExploreClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11850,6 +12195,111 @@ await client.customer.auth.tokens.revoke({
 <dd>
 
 **requestOptions:** `TokensClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Customer BusinessSubmissions Photos
+<details><summary><code>client.customer.businessSubmissions.photos.<a href="/src/api/resources/customer/resources/businessSubmissions/resources/photos/client/Client.ts">upload</a>({ ...params }) -> FiveOneEat.UploadPhotosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businessSubmissions.photos.upload({
+    image: fs.createReadStream("/path/to/your/file"),
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.businessSubmissions.UploadSubmissionPhotoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhotosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businessSubmissions.photos.<a href="/src/api/resources/customer/resources/businessSubmissions/resources/photos/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businessSubmissions.photos.delete({
+    business: "business",
+    photo: "photo"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.businessSubmissions.DeletePhotosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhotosClient.RequestOptions` 
     
 </dd>
 </dl>

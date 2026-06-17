@@ -326,10 +326,7 @@ export class CartClient {
                         _response.rawResponse,
                     );
                 case 500:
-                    throw new FiveOneEat.InternalServerError(
-                        _response.error.body as FiveOneEat.InternalServerErrorBody,
-                        _response.rawResponse,
-                    );
+                    throw new FiveOneEat.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 case 503:
                     throw new FiveOneEat.ServiceUnavailableError(
                         _response.error.body as FiveOneEat.ServiceUnavailableErrorBody,

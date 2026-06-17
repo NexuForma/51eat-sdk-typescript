@@ -357,7 +357,7 @@ describe("BusinessesClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { message: "Business is already favorited." };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

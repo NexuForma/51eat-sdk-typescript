@@ -11,6 +11,7 @@ import * as errors from "../../../../errors/index.js";
 import * as FiveOneEat from "../../../index.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
+import { BusinessSubmissionsClient } from "../resources/businessSubmissions/client/Client.js";
 import { CartClient } from "../resources/cart/client/Client.js";
 import { DiscoveryClient } from "../resources/discovery/client/Client.js";
 import { EditorialsClient } from "../resources/editorials/client/Client.js";
@@ -31,10 +32,11 @@ export declare namespace CustomerClient {
 export class CustomerClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CustomerClient.Options>;
     protected _auth: AuthClient | undefined;
+    protected _businessSubmissions: BusinessSubmissionsClient | undefined;
     protected _businesses: BusinessesClient | undefined;
     protected _cart: CartClient | undefined;
-    protected _explore: ExploreClient | undefined;
     protected _discovery: DiscoveryClient | undefined;
+    protected _explore: ExploreClient | undefined;
     protected _editorials: EditorialsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _messaging: MessagingClient | undefined;
@@ -51,6 +53,10 @@ export class CustomerClient {
         return (this._auth ??= new AuthClient(this._options));
     }
 
+    public get businessSubmissions(): BusinessSubmissionsClient {
+        return (this._businessSubmissions ??= new BusinessSubmissionsClient(this._options));
+    }
+
     public get businesses(): BusinessesClient {
         return (this._businesses ??= new BusinessesClient(this._options));
     }
@@ -59,12 +65,12 @@ export class CustomerClient {
         return (this._cart ??= new CartClient(this._options));
     }
 
-    public get explore(): ExploreClient {
-        return (this._explore ??= new ExploreClient(this._options));
-    }
-
     public get discovery(): DiscoveryClient {
         return (this._discovery ??= new DiscoveryClient(this._options));
+    }
+
+    public get explore(): ExploreClient {
+        return (this._explore ??= new ExploreClient(this._options));
     }
 
     public get editorials(): EditorialsClient {

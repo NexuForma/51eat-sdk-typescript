@@ -327,7 +327,7 @@ describe("CartClient", () => {
                 country: "country",
             },
         };
-        const rawResponseBody = { message: "Unable to process payment. Please try again." };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
