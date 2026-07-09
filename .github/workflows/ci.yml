@@ -91,4 +91,4 @@ jobs:
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm publish --access public --provenance --registry https://registry.npmjs.org
+        run: npm publish --provenance --registry https://registry.npmjs.org
