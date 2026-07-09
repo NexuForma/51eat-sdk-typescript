@@ -5,7 +5,11 @@ import type * as FiveOneEat from "../index.js";
 export type BardSetValues =
     | FiveOneEat.BardSetValues.MenuItem
     | FiveOneEat.BardSetValues.Product
-    | FiveOneEat.BardSetValues.Event;
+    | FiveOneEat.BardSetValues.Event
+    | FiveOneEat.BardSetValues.PullQuote
+    | FiveOneEat.BardSetValues.PhotoSpread
+    | FiveOneEat.BardSetValues.Ingredient
+    | FiveOneEat.BardSetValues.TastingNotes;
 
 export namespace BardSetValues {
     export interface MenuItem extends FiveOneEat.BardMenuItemSetValues {
@@ -18,5 +22,21 @@ export namespace BardSetValues {
 
     export interface Event extends FiveOneEat.BardEventSetValues {
         type: "event";
+    }
+
+    export interface PullQuote extends FiveOneEat.BardPullQuoteSetValues {
+        type: "pull_quote";
+    }
+
+    export interface PhotoSpread extends FiveOneEat.BardPhotoSpreadSetValues {
+        type: "photo_spread";
+    }
+
+    export interface Ingredient extends FiveOneEat.BardIngredientSetValues {
+        type: "ingredient";
+    }
+
+    export interface TastingNotes extends FiveOneEat.BardTastingNotesSetValues {
+        type: "tasting_notes";
     }
 }
