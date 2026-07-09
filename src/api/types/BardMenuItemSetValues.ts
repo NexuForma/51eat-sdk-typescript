@@ -12,5 +12,7 @@ export namespace BardMenuItemSetValues {
         description?: (string | null) | undefined;
         price?: (string | null) | undefined;
         image?: (string | null) | undefined;
+        /** Dietary/attribute tag names. */
+        tags: string[];
     }
 }
