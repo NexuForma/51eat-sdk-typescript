@@ -69,6 +69,8 @@ jobs:
         run: pnpm build
 
       - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           publish() {  # use latest npm to ensure OIDC support
             npm publish "$@"
