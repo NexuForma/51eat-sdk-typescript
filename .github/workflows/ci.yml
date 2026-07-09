@@ -1,6 +1,10 @@
 name: ci
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -9,13 +13,12 @@ concurrency:
 jobs:
   compile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -28,14 +31,13 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up node
-        uses: actions/setup-node@v6
-                
+        uses: actions/setup-node@v4
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
@@ -46,18 +48,20 @@ jobs:
         run: pnpm test
 
   publish:
-    needs: [ compile, test ]
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    needs: [compile, test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: read   # Required for checkout
-      id-token: write  # Required for OIDC
+      contents: write  # Required for creating GitHub Releases
+      id-token: write  # Required for OIDC npm provenance
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -68,25 +72,23 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Tag release
+        id: tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}"
+          git tag "${TAG}" || echo "Tag ${TAG} already exists, skipping"
+          git push origin "${TAG}" || echo "Tag already pushed, skipping"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          generate_release_notes: true
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          publish() {  # use latest npm to ensure OIDC support
-            npm publish "$@"
-          }
-          if [[ ${GITHUB_REF} == *alpha* ]]; then
-            publish --access public --tag alpha
-          elif [[ ${GITHUB_REF} == *beta* ]]; then
-            publish --access public --tag beta
-          else
-            PKG_NAME=$(node -p "require('./package.json').name")
-            PKG_VERSION=$(node -p "require('./package.json').version")
-            CURRENT_LATEST=$(npm view "${PKG_NAME}" dist-tags.latest 2>/dev/null || echo "0.0.0")
-            if npx -y semver "${PKG_VERSION}" -r "<${CURRENT_LATEST}" > /dev/null 2>&1; then
-              echo "Publishing ${PKG_VERSION} with --tag backport (current latest is ${CURRENT_LATEST})"
-              publish --access public --tag backport
-            else
-              publish --access public
-            fi
-          fi
+        run: npm publish --access public --provenance
