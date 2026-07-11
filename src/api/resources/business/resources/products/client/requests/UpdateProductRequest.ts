@@ -34,6 +34,7 @@ export interface UpdateProductRequest {
     is_active?: boolean;
     published_at?: string | null;
     is_featured?: boolean;
+    sort_order?: number | null;
     category_ids?: string[] | null;
 }
 

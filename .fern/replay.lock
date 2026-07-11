@@ -12,5 +12,239 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.64.1
-current_generation: db3ba9bdbc2f40f184b0ec8156f11c5af4eecb0c
-patches: []
+  - commit_sha: fc310316e57b86fd726ca9f67d90dfc8225806d1
+    tree_hash: 70585e6a8ca0c85750677d7d97ef9174b6cb7016
+    timestamp: 2026-07-11T03:23:52.196Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.64.1
+current_generation: fc310316e57b86fd726ca9f67d90dfc8225806d1
+patches:
+  - id: patch-e4eb4e4a
+    content_hash: sha256:efcc3b83f31eb1a91808badcc663fd7577e03985c28d15b0f7480c14635c96ba
+    original_commit: e4eb4e4ad5811b32368b449f8cdc9d587b16594d
+    original_message: Change npx to npm for publishing package
+    original_author: Luigi Battaglioli <him@theluigi.com>
+    base_generation: fc310316e57b86fd726ca9f67d90dfc8225806d1
+    files:
+      - .github/workflows/ci.yml
+    patch_content: |
+      diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+      index 4163539..6afbfb4 100644
+      --- a/.github/workflows/ci.yml
+      +++ b/.github/workflows/ci.yml
+      @@ -1,6 +1,10 @@
+       name: ci
+       
+      -on: [push]
+      +on:
+      +  push:
+      +    branches:
+      +      - main
+      +  pull_request:
+       
+       concurrency:
+         group: ${{ github.workflow }}-${{ github.ref }}
+      @@ -9,13 +13,12 @@ concurrency:
+       jobs:
+         compile:
+           runs-on: ubuntu-latest
+      -
+           steps:
+             - name: Checkout repo
+      -        uses: actions/checkout@v6
+      +        uses: actions/checkout@v4
+       
+             - name: Set up node
+      -        uses: actions/setup-node@v6
+      +        uses: actions/setup-node@v4
+       
+             - name: Install pnpm
+               uses: pnpm/action-setup@v4
+      @@ -28,14 +31,13 @@ jobs:
+       
+         test:
+           runs-on: ubuntu-latest
+      -
+           steps:
+             - name: Checkout repo
+      -        uses: actions/checkout@v6
+      +        uses: actions/checkout@v4
+       
+             - name: Set up node
+      -        uses: actions/setup-node@v6
+      -                
+      +        uses: actions/setup-node@v4
+      +
+             - name: Install pnpm
+               uses: pnpm/action-setup@v4
+       
+      @@ -46,18 +48,21 @@ jobs:
+               run: pnpm test
+       
+         publish:
+      -    needs: [ compile, test ]
+      -    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      +    needs: [compile, test]
+      +    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+           runs-on: ubuntu-latest
+           permissions:
+      -      contents: read   # Required for checkout
+      -      id-token: write  # Required for OIDC
+      +      contents: write  # Required for creating GitHub Releases
+      +      id-token: write  # Required for OIDC npm provenance
+           steps:
+             - name: Checkout repo
+      -        uses: actions/checkout@v6
+      +        uses: actions/checkout@v4
+       
+             - name: Set up node
+      -        uses: actions/setup-node@v6
+      +        uses: actions/setup-node@v4
+      +        with:
+      +          node-version: '24'
+      +          registry-url: 'https://registry.npmjs.org'
+       
+             - name: Install pnpm
+               uses: pnpm/action-setup@v4
+      @@ -68,23 +73,23 @@ jobs:
+             - name: Build
+               run: pnpm build
+       
+      -      - name: Publish to npm
+      +      - name: Tag release
+      +        id: tag
+               run: |
+      -          publish() {  # use latest npm to ensure OIDC support
+      -            npx -y npm@latest publish "$@"
+      -          }
+      -          if [[ ${GITHUB_REF} == *alpha* ]]; then
+      -            publish --access public --tag alpha
+      -          elif [[ ${GITHUB_REF} == *beta* ]]; then
+      -            publish --access public --tag beta
+      -          else
+      -            PKG_NAME=$(node -p "require('./package.json').name")
+      -            PKG_VERSION=$(node -p "require('./package.json').version")
+      -            CURRENT_LATEST=$(npm view "${PKG_NAME}" dist-tags.latest 2>/dev/null || echo "0.0.0")
+      -            if npx -y semver "${PKG_VERSION}" -r "<${CURRENT_LATEST}" > /dev/null 2>&1; then
+      -              echo "Publishing ${PKG_VERSION} with --tag backport (current latest is ${CURRENT_LATEST})"
+      -              publish --access public --tag backport
+      -            else
+      -              publish --access public
+      -            fi
+      -          fi
+      \ No newline at end of file
+      +          VERSION=$(node -p "require('./package.json').version")
+      +          TAG="v${VERSION}"
+      +          git tag "${TAG}" || echo "Tag ${TAG} already exists, skipping"
+      +          git push origin "${TAG}" || echo "Tag already pushed, skipping"
+      +          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+      +          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      +
+      +      - name: Create GitHub Release
+      +        uses: softprops/action-gh-release@v2
+      +        with:
+      +          tag_name: ${{ steps.tag.outputs.tag }}
+      +          generate_release_notes: true
+      +
+      +      - name: Publish to npm
+      +        env:
+      +          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      +        run: npm publish --provenance --registry https://registry.npmjs.org
+    theirs_snapshot:
+      .github/workflows/ci.yml: |
+        name: ci
+
+        on:
+          push:
+            branches:
+              - main
+          pull_request:
+
+        concurrency:
+          group: ${{ github.workflow }}-${{ github.ref }}
+          cancel-in-progress: false
+
+        jobs:
+          compile:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout repo
+                uses: actions/checkout@v4
+
+              - name: Set up node
+                uses: actions/setup-node@v4
+
+              - name: Install pnpm
+                uses: pnpm/action-setup@v4
+
+              - name: Install dependencies
+                run: pnpm install --frozen-lockfile
+
+              - name: Compile
+                run: pnpm build
+
+          test:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout repo
+                uses: actions/checkout@v4
+
+              - name: Set up node
+                uses: actions/setup-node@v4
+
+              - name: Install pnpm
+                uses: pnpm/action-setup@v4
+
+              - name: Install dependencies
+                run: pnpm install --frozen-lockfile
+
+              - name: Test
+                run: pnpm test
+
+          publish:
+            needs: [compile, test]
+            if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+            runs-on: ubuntu-latest
+            permissions:
+              contents: write  # Required for creating GitHub Releases
+              id-token: write  # Required for OIDC npm provenance
+            steps:
+              - name: Checkout repo
+                uses: actions/checkout@v4
+
+              - name: Set up node
+                uses: actions/setup-node@v4
+                with:
+                  node-version: '24'
+                  registry-url: 'https://registry.npmjs.org'
+
+              - name: Install pnpm
+                uses: pnpm/action-setup@v4
+
+              - name: Install dependencies
+                run: pnpm install --frozen-lockfile
+
+              - name: Build
+                run: pnpm build
+
+              - name: Tag release
+                id: tag
+                run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  TAG="v${VERSION}"
+                  git tag "${TAG}" || echo "Tag ${TAG} already exists, skipping"
+                  git push origin "${TAG}" || echo "Tag already pushed, skipping"
+                  echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+                  echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+              - name: Create GitHub Release
+                uses: softprops/action-gh-release@v2
+                with:
+                  tag_name: ${{ steps.tag.outputs.tag }}
+                  generate_release_notes: true
+
+              - name: Publish to npm
+                env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                run: npm publish --provenance --registry https://registry.npmjs.org
