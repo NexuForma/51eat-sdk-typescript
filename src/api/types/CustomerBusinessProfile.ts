@@ -27,7 +27,7 @@ export interface CustomerBusinessProfile {
     linkedin_url: string | null;
     logo: string | null;
     cover_photo?: (string | null) | undefined;
-    hours: Record<string, CustomerBusinessProfile.Hours.Value>;
+    hours: CustomerBusinessProfile.Hours;
     seasonal: boolean;
     operating_months: string[];
     ownership: string[];
@@ -44,12 +44,11 @@ export interface CustomerBusinessProfile {
 }
 
 export namespace CustomerBusinessProfile {
-    export namespace Hours {
-        export interface Value {
-            isOpen: boolean;
-            openTime: string;
-            closeTime: string;
-        }
+    export interface Hours {
+        is_open_now: string;
+        next_open_at: string | null;
+        schedule: FiveOneEat.BusinessScheduleDayResource[];
+        exceptions: FiveOneEat.BusinessHourExceptionResource[];
     }
 
     export type Cuisines = Cuisines.Item[];

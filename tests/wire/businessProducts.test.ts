@@ -173,7 +173,7 @@ describe("BusinessProductsClient", () => {
                     quantity_change: 1,
                     quantity_after: 1,
                     notes: "notes",
-                    created_by: { id: "id", name: "name" },
+                    created_by: { id: null, name: null },
                     created_at: "created_at",
                 },
             ],

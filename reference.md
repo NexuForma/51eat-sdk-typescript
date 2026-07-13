@@ -1,4 +1,257 @@
 # Reference
+## Business: Hours
+<details><summary><code>client.businessHours.<a href="/src/api/resources/businessHours/client/Client.ts">getBusinessHours</a>() -> FiveOneEat.GetBusinessHoursResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessHours.getBusinessHours();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessHoursClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessHours.<a href="/src/api/resources/businessHours/client/Client.ts">updateBusinessHours</a>({ ...params }) -> FiveOneEat.UpdateBusinessHoursResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessHours.updateBusinessHours({
+    slots: [{
+            day_of_week: 1,
+            opens_at: "opens_at",
+            closes_at: "closes_at"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UpdateBusinessHoursRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessHoursClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessHours.<a href="/src/api/resources/businessHours/client/Client.ts">createBusinessHourException</a>({ ...params }) -> FiveOneEat.CreateBusinessHourExceptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessHours.createBusinessHourException({
+    starts_on: "2024-01-15T09:30:00Z",
+    is_closed: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreBusinessHourExceptionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessHoursClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessHours.<a href="/src/api/resources/businessHours/client/Client.ts">deleteBusinessHourException</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessHours.deleteBusinessHourException({
+    exception: "exception"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.DeleteBusinessHourExceptionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessHoursClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessHours.<a href="/src/api/resources/businessHours/client/Client.ts">updateBusinessHourException</a>({ ...params }) -> FiveOneEat.UpdateBusinessHourExceptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessHours.updateBusinessHourException({
+    exception: "exception",
+    starts_on: "2024-01-15T09:30:00Z",
+    is_closed: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UpdateBusinessHourExceptionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessHoursClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business: Messaging
 <details><summary><code>client.businessMessaging.<a href="/src/api/resources/businessMessaging/client/Client.ts">searchBusinessConversations</a>({ ...params }) -> FiveOneEat.SearchBusinessConversationsResponse</code></summary>
 <dl>

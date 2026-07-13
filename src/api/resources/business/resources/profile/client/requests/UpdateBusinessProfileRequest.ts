@@ -34,18 +34,5 @@ export interface UpdateBusinessProfileRequest {
     ownership?: string[] | null;
     badges?: string[] | null;
     category_ids?: number[];
-    hours?: UpdateBusinessProfileRequest.Hours.Item[] | null;
     operating_months?: number[] | null;
-}
-
-export namespace UpdateBusinessProfileRequest {
-    export type Hours = Hours.Item[];
-
-    export namespace Hours {
-        export interface Item {
-            isOpen?: boolean | undefined;
-            openTime?: (string | null) | undefined;
-            closeTime?: (string | null) | undefined;
-        }
-    }
 }

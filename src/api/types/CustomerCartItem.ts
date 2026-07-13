@@ -17,7 +17,7 @@ export namespace CustomerCartItem {
         name: string;
         slug: string;
         product_type: string;
-        image: string;
+        image: string | null;
     }
 
     export interface Variant {

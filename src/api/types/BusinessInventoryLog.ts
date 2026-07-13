@@ -12,7 +12,7 @@ export interface BusinessInventoryLog {
 
 export namespace BusinessInventoryLog {
     export interface CreatedBy {
-        id: string;
-        name: string;
+        id: string | null;
+        name: string | null;
     }
 }
