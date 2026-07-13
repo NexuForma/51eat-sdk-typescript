@@ -18,14 +18,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.64.1
-current_generation: fc310316e57b86fd726ca9f67d90dfc8225806d1
+  - commit_sha: 7e1df969fe913befc09412c5275d113a3fc57722
+    tree_hash: 4bf932c66b4b32d4c3edad11ae16b49442d3e3f9
+    timestamp: 2026-07-13T02:52:50.846Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.64.1
+current_generation: 7e1df969fe913befc09412c5275d113a3fc57722
 patches:
   - id: patch-e4eb4e4a
     content_hash: sha256:efcc3b83f31eb1a91808badcc663fd7577e03985c28d15b0f7480c14635c96ba
     original_commit: e4eb4e4ad5811b32368b449f8cdc9d587b16594d
     original_message: Change npx to npm for publishing package
     original_author: Luigi Battaglioli <him@theluigi.com>
-    base_generation: fc310316e57b86fd726ca9f67d90dfc8225806d1
+    base_generation: 7e1df969fe913befc09412c5275d113a3fc57722
     files:
       - .github/workflows/ci.yml
     patch_content: |
@@ -248,3 +254,4 @@ patches:
                 env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 run: npm publish --provenance --registry https://registry.npmjs.org
+    user_owned: true

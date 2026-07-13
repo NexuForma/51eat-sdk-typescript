@@ -35,7 +35,28 @@ describe("BusinessesClient", () => {
                 linkedin_url: "linkedin_url",
                 logo: "logo",
                 cover_photo: "cover_photo",
-                hours: { key: { isOpen: true, openTime: "openTime", closeTime: "closeTime" } },
+                hours: {
+                    is_open_now: "is_open_now",
+                    next_open_at: "next_open_at",
+                    schedule: [
+                        {
+                            day: "day",
+                            slots: [{ opens_at: "opens_at", closes_at: "closes_at", label: null, sort_order: 1 }],
+                        },
+                    ],
+                    exceptions: [
+                        {
+                            id: "id",
+                            starts_on: "starts_on",
+                            ends_on: null,
+                            is_closed: true,
+                            opens_at: null,
+                            closes_at: null,
+                            label: null,
+                            message: null,
+                        },
+                    ],
+                },
                 seasonal: true,
                 operating_months: ["operating_months"],
                 ownership: ["ownership"],

@@ -11,7 +11,7 @@ export interface EventFeedItem {
     ticket_sales_enabled: boolean;
     image: string | null;
     rsvp_count: number;
-    user_rsvp_status?: string | undefined;
+    user_rsvp_status?: (string | null) | undefined;
     user_has_tickets?: boolean | undefined;
     ticket_price_from?: string | undefined;
     business: EventFeedItem.Business;

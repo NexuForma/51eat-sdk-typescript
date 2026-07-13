@@ -1,4 +1,7 @@
 export * as business from "./business/index.js";
+export * from "./businessHours/client/requests/index.js";
+export * as businessHours from "./businessHours/index.js";
+export * from "./businessHours/types/index.js";
 export * from "./businessMessaging/client/requests/index.js";
 export * as businessMessaging from "./businessMessaging/index.js";
 export * from "./businessMessaging/types/index.js";
