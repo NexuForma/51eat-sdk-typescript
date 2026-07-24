@@ -30,9 +30,6 @@ export interface CustomerBusinessProfile {
     hours: CustomerBusinessProfile.Hours;
     seasonal: boolean;
     operating_months: string[];
-    ownership: string[];
-    badges: string[];
-    metadata: Record<string, unknown>;
     founding_partner: boolean;
     staff_pick: boolean;
     favorites_count: number;

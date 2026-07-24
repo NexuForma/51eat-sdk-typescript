@@ -34,8 +34,6 @@ export interface BusinessProfile {
     pickup_hours: Record<string, unknown>;
     same_day_cutoff: string | null;
     pickup_instructions: string | null;
-    ownership: string[];
-    badges: string[];
     founding_partner: boolean;
     staff_pick: boolean;
     favorites_count: number;

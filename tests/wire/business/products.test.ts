@@ -31,11 +31,15 @@ describe("ProductsClient", () => {
                     weight: 1.1,
                     weight_unit: "weight_unit",
                     is_pre_order: true,
+                    pre_order_release_date: "pre_order_release_date",
+                    digital_download_limit: 1,
+                    digital_link_expiry_hours: 1,
                     taxable: true,
                     tax_code: "tax_code",
                     is_active: true,
                     is_featured: true,
                     sort_order: 1,
+                    published_at: "published_at",
                     variants: [
                         {
                             id: "id",
@@ -77,10 +81,12 @@ describe("ProductsClient", () => {
                             description: null,
                             parent_id: null,
                             sort_order: 1,
+                            is_active: true,
                             created_at: null,
                             updated_at: null,
                         },
                     ],
+                    digital_files: [{ id: "id", file_name: "file_name" }],
                     created_at: "2024-01-15T09:30:00Z",
                     updated_at: "2024-01-15T09:30:00Z",
                 },
@@ -104,6 +110,32 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.list();
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("list (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/products").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.business.products.list();
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/products").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.business.products.list();
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
     test("create (1)", async () => {
@@ -131,11 +163,15 @@ describe("ProductsClient", () => {
                 weight: 1.1,
                 weight_unit: "weight_unit",
                 is_pre_order: true,
+                pre_order_release_date: "pre_order_release_date",
+                digital_download_limit: 1,
+                digital_link_expiry_hours: 1,
                 taxable: true,
                 tax_code: "tax_code",
                 is_active: true,
                 is_featured: true,
                 sort_order: 1,
+                published_at: "published_at",
                 variants: [
                     {
                         id: "id",
@@ -177,10 +213,12 @@ describe("ProductsClient", () => {
                         description: null,
                         parent_id: null,
                         sort_order: 1,
+                        is_active: true,
                         created_at: null,
                         updated_at: null,
                     },
                 ],
+                digital_files: [{ id: "id", file_name: "file_name" }],
                 created_at: "2024-01-15T09:30:00Z",
                 updated_at: "2024-01-15T09:30:00Z",
             },
@@ -300,11 +338,15 @@ describe("ProductsClient", () => {
                 weight: 1.1,
                 weight_unit: "weight_unit",
                 is_pre_order: true,
+                pre_order_release_date: "pre_order_release_date",
+                digital_download_limit: 1,
+                digital_link_expiry_hours: 1,
                 taxable: true,
                 tax_code: "tax_code",
                 is_active: true,
                 is_featured: true,
                 sort_order: 1,
+                published_at: "published_at",
                 variants: [
                     {
                         id: "id",
@@ -346,10 +388,12 @@ describe("ProductsClient", () => {
                         description: null,
                         parent_id: null,
                         sort_order: 1,
+                        is_active: true,
                         created_at: null,
                         updated_at: null,
                     },
                 ],
+                digital_files: [{ id: "id", file_name: "file_name" }],
                 created_at: "2024-01-15T09:30:00Z",
                 updated_at: "2024-01-15T09:30:00Z",
             },
@@ -432,6 +476,27 @@ describe("ProductsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("get (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/products/product")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.products.get({
+                product: "product",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -457,11 +522,15 @@ describe("ProductsClient", () => {
                 weight: 1.1,
                 weight_unit: "weight_unit",
                 is_pre_order: true,
+                pre_order_release_date: "pre_order_release_date",
+                digital_download_limit: 1,
+                digital_link_expiry_hours: 1,
                 taxable: true,
                 tax_code: "tax_code",
                 is_active: true,
                 is_featured: true,
                 sort_order: 1,
+                published_at: "published_at",
                 variants: [
                     {
                         id: "id",
@@ -503,10 +572,12 @@ describe("ProductsClient", () => {
                         description: null,
                         parent_id: null,
                         sort_order: 1,
+                        is_active: true,
                         created_at: null,
                         updated_at: null,
                     },
                 ],
+                digital_files: [{ id: "id", file_name: "file_name" }],
                 created_at: "2024-01-15T09:30:00Z",
                 updated_at: "2024-01-15T09:30:00Z",
             },
@@ -696,5 +767,26 @@ describe("ProductsClient", () => {
                 product: "product",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/products/product")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.products.delete({
+                product: "product",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

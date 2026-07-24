@@ -913,6 +913,320 @@ await client.businessShipping.deleteBusinessShippingRate({
 </dl>
 </details>
 
+## Business: Stands
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">listBusinessStands</a>() -> FiveOneEat.ListBusinessStandsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.listBusinessStands();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">createBusinessStand</a>({ ...params }) -> FiveOneEat.CreateBusinessStandResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.createBusinessStand({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.StoreStandRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">getBusinessStand</a>({ ...params }) -> FiveOneEat.GetBusinessStandResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.getBusinessStand({
+    stand: "stand"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetBusinessStandRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">updateBusinessStand</a>({ ...params }) -> FiveOneEat.UpdateBusinessStandResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.updateBusinessStand({
+    stand: "stand"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.UpdateStandRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">deleteBusinessStand</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.deleteBusinessStand({
+    stand: "stand"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.DeleteBusinessStandRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businessStands.<a href="/src/api/resources/businessStands/client/Client.ts">syncStandProducts</a>({ ...params }) -> number</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replaces the stand's product list with the submitted set. Send an empty
+array to clear all assignments. Only products belonging to the
+authenticated business are accepted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.businessStands.syncStandProducts({
+    stand: "stand",
+    product_ids: ["product_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.SyncStandProductsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer: Businesses
 <details><summary><code>client.customerBusinesses.<a href="/src/api/resources/customerBusinesses/client/Client.ts">getBusinessPickupTimeslots</a>({ ...params }) -> FiveOneEat.GetBusinessPickupTimeslotsResponse</code></summary>
 <dl>
@@ -1355,6 +1669,191 @@ await client.customer.search({
 <dd>
 
 **requestOptions:** `CustomerClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Customer: Stands
+<details><summary><code>client.customerStands.<a href="/src/api/resources/customerStands/client/Client.ts">scanStand</a>({ ...params }) -> FiveOneEat.ScanStandResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Logs the scan (user id captured when authenticated) and returns the
+stand, its business, and the business's published products.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerStands.scanStand({
+    stand: "stand"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.ScanStandRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerStands.<a href="/src/api/resources/customerStands/client/Client.ts">createStandPaymentIntent</a>({ ...params }) -> FiveOneEat.CreateStandPaymentIntentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns client_secret, price breakdown, and tax calculation for use with Stripe SDK.
+Shipping is always zero for stand orders.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerStands.createStandPaymentIntent({
+    stand: "stand"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.CreateStandPaymentIntentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerStandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customerStands.<a href="/src/api/resources/customerStands/client/Client.ts">standCheckout</a>({ ...params }) -> FiveOneEat.StandCheckoutResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customerStands.standCheckout({
+    stand: "stand",
+    payment_intent_id: "payment_intent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.SelfCheckoutRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerStandsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7501,7 +8000,7 @@ await client.business.menus.groups.reorder({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.menus.ReorderGroupsRequest` 
+**request:** `FiveOneEat.business.menus.ReorderMenuGroupsRequest` 
     
 </dd>
 </dl>
@@ -7834,7 +8333,7 @@ await client.business.menus.items.reorder({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.menus.ReorderItemsRequest` 
+**request:** `FiveOneEat.business.menus.ReorderMenuItemsRequest` 
     
 </dd>
 </dl>
@@ -7901,7 +8400,7 @@ await client.business.menus.items.move({
 <dl>
 <dd>
 
-**request:** `FiveOneEat.business.menus.MoveItemsRequest` 
+**request:** `FiveOneEat.business.menus.MoveMenuItemRequest` 
     
 </dd>
 </dl>

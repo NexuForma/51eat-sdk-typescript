@@ -6,5 +6,6 @@ export interface BusinessMenu {
     id: string;
     name: string;
     description: string | null;
+    created_at: string | null;
     groups?: FiveOneEat.BusinessMenuGroup[] | undefined;
 }

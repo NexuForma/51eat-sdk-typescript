@@ -10,13 +10,13 @@
  *             }]
  *     }
  */
-export interface ReorderGroupsRequest {
+export interface ReorderMenuGroupsRequest {
     /** The menu ID */
     menu: string;
-    groups: ReorderGroupsRequest.Groups.Item[];
+    groups: ReorderMenuGroupsRequest.Groups.Item[];
 }
 
-export namespace ReorderGroupsRequest {
+export namespace ReorderMenuGroupsRequest {
     export type Groups = Groups.Item[];
 
     export namespace Groups {

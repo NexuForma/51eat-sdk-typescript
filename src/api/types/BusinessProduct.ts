@@ -22,14 +22,30 @@ export interface BusinessProduct {
     weight: number | null;
     weight_unit: string | null;
     is_pre_order: boolean;
+    pre_order_release_date: string | null;
+    digital_download_limit: number | null;
+    digital_link_expiry_hours: number | null;
     taxable: boolean;
     tax_code: string | null;
     is_active: boolean;
     is_featured: boolean;
     sort_order: number;
+    published_at: string | null;
     variants?: FiveOneEat.BusinessProductVariant[] | undefined;
     images?: FiveOneEat.BusinessPhoto[] | undefined;
     categories?: FiveOneEat.BusinessProductCategory[] | undefined;
+    digital_files?: BusinessProduct.DigitalFiles.Item[] | undefined;
     created_at: string | null;
     updated_at: string | null;
+}
+
+export namespace BusinessProduct {
+    export type DigitalFiles = DigitalFiles.Item[];
+
+    export namespace DigitalFiles {
+        export interface Item {
+            id: string;
+            file_name: string;
+        }
+    }
 }

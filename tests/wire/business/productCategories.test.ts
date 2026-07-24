@@ -18,6 +18,7 @@ describe("ProductCategoriesClient", () => {
                     description: "description",
                     parent_id: "parent_id",
                     sort_order: 1,
+                    is_active: true,
                     created_at: "2024-01-15T09:30:00Z",
                     updated_at: "2024-01-15T09:30:00Z",
                 },
@@ -55,6 +56,44 @@ describe("ProductCategoriesClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("list (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-categories")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productCategories.list();
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/product-categories")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productCategories.list();
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -67,6 +106,7 @@ describe("ProductCategoriesClient", () => {
                 description: "description",
                 parent_id: "parent_id",
                 sort_order: 1,
+                is_active: true,
                 created_at: "2024-01-15T09:30:00Z",
                 updated_at: "2024-01-15T09:30:00Z",
             },
@@ -120,6 +160,28 @@ describe("ProductCategoriesClient", () => {
             .post("/business/product-categories")
             .jsonBody(rawRequestBody)
             .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productCategories.create({
+                name: "name",
+            });
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("create (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/product-categories")
+            .jsonBody(rawRequestBody)
+            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -143,6 +205,7 @@ describe("ProductCategoriesClient", () => {
                 description: "description",
                 parent_id: "parent_id",
                 sort_order: 1,
+                is_active: true,
                 created_at: "2024-01-15T09:30:00Z",
                 updated_at: "2024-01-15T09:30:00Z",
             },
@@ -332,5 +395,26 @@ describe("ProductCategoriesClient", () => {
                 productCategory: "productCategory",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/product-categories/productCategory")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.productCategories.delete({
+                productCategory: "productCategory",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

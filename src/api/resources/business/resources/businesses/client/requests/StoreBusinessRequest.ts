@@ -23,10 +23,7 @@ export interface StoreBusinessRequest {
     latitude?: number | null;
     longitude?: number | null;
     has_location?: boolean;
-    metadata?: string[] | null;
-    badges?: string[] | null;
     seasonal?: boolean;
-    ownership?: string[] | null;
     category_ids: number[];
     operating_months?: StoreBusinessRequest.OperatingMonths.Item[] | null;
 }
