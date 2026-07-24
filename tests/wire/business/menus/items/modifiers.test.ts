@@ -90,6 +90,27 @@ describe("ModifiersClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("list (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/items/menuItem/modifiers")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.items.modifiers.list({
+                menuItem: "menuItem",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("attach (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -296,5 +317,27 @@ describe("ModifiersClient", () => {
                 modifier: "modifier",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("detach (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/items/menuItem/modifiers/modifier")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.items.modifiers.detach({
+                menuItem: "menuItem",
+                modifier: "modifier",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

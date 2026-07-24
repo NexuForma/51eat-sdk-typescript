@@ -10,13 +10,13 @@
  *             }]
  *     }
  */
-export interface ReorderItemsRequest {
+export interface ReorderMenuItemsRequest {
     /** The group ID */
     group: string;
-    items: ReorderItemsRequest.Items.Item[];
+    items: ReorderMenuItemsRequest.Items.Item[];
 }
 
-export namespace ReorderItemsRequest {
+export namespace ReorderMenuItemsRequest {
     export type Items = Items.Item[];
 
     export namespace Items {

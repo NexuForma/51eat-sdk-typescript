@@ -19,5 +19,5 @@ export interface StoreTicketTypeRequest {
     sales_start_at?: string | null;
     sales_end_at?: string | null;
     is_active?: boolean;
-    sort_order?: number | null;
+    sort_order?: number;
 }

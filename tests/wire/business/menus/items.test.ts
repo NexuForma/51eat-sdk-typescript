@@ -18,7 +18,7 @@ describe("ItemsClient", () => {
                 price: 1.1,
                 is_available: true,
                 sort_order: 1,
-                image: "image",
+                image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
@@ -113,6 +113,27 @@ describe("ItemsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("list (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/menus/menu/items")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.items.list({
+                menu: "menu",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -126,7 +147,7 @@ describe("ItemsClient", () => {
                 price: 1.1,
                 is_available: true,
                 sort_order: 1,
-                image: "image",
+                image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
@@ -275,7 +296,7 @@ describe("ItemsClient", () => {
                 price: 1.1,
                 is_available: true,
                 sort_order: 1,
-                image: "image",
+                image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
@@ -374,6 +395,28 @@ describe("ItemsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("get (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/menus/menu/items/item")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.items.get({
+                menu: "menu",
+                item: "item",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -387,7 +430,7 @@ describe("ItemsClient", () => {
                 price: 1.1,
                 is_available: true,
                 sort_order: 1,
-                image: "image",
+                image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
                 variations: [
@@ -608,6 +651,28 @@ describe("ItemsClient", () => {
                 item: "item",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/menus/menu/items/item")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.items.delete({
+                menu: "menu",
+                item: "item",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
     test("reorder (1)", async () => {

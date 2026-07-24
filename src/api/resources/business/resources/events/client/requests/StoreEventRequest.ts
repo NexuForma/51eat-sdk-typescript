@@ -11,9 +11,9 @@
 export interface StoreEventRequest {
     title: string;
     description?: string | null;
+    location?: string | null;
     starts_at: string;
     ends_at: string;
-    location?: string | null;
     is_all_day?: boolean;
     is_featured?: boolean;
     ticket_sales_enabled?: boolean;

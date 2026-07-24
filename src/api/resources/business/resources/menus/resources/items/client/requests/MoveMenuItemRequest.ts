@@ -8,7 +8,7 @@
  *         new_sort_order: 1
  *     }
  */
-export interface MoveItemsRequest {
+export interface MoveMenuItemRequest {
     /** The item ID */
     item: string;
     target_group_id: string;

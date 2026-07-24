@@ -44,6 +44,7 @@ export class ItemsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.items.list({
@@ -99,6 +100,11 @@ export class ItemsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -204,6 +210,7 @@ export class ItemsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.items.get({
@@ -260,6 +267,11 @@ export class ItemsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -375,6 +387,7 @@ export class ItemsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.items.delete({
@@ -431,6 +444,11 @@ export class ItemsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -451,7 +469,7 @@ export class ItemsClient {
     /**
      * Batch-update sort_order for items. Items not belonging to this group are silently skipped.
      *
-     * @param {FiveOneEat.business.menus.ReorderItemsRequest} request
+     * @param {FiveOneEat.business.menus.ReorderMenuItemsRequest} request
      * @param {ItemsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -469,14 +487,14 @@ export class ItemsClient {
      *     })
      */
     public reorder(
-        request: FiveOneEat.business.menus.ReorderItemsRequest,
+        request: FiveOneEat.business.menus.ReorderMenuItemsRequest,
         requestOptions?: ItemsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.business.menus.ReorderItemsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__reorder(request, requestOptions));
     }
 
     private async __reorder(
-        request: FiveOneEat.business.menus.ReorderItemsRequest,
+        request: FiveOneEat.business.menus.ReorderMenuItemsRequest,
         requestOptions?: ItemsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.business.menus.ReorderItemsResponse>> {
         const { group, ..._body } = request;
@@ -545,7 +563,7 @@ export class ItemsClient {
     /**
      * Moves the item to the target group at the specified sort order, shifting existing items to make room.
      *
-     * @param {FiveOneEat.business.menus.MoveItemsRequest} request
+     * @param {FiveOneEat.business.menus.MoveMenuItemRequest} request
      * @param {ItemsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -561,14 +579,14 @@ export class ItemsClient {
      *     })
      */
     public move(
-        request: FiveOneEat.business.menus.MoveItemsRequest,
+        request: FiveOneEat.business.menus.MoveMenuItemRequest,
         requestOptions?: ItemsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.business.menus.MoveItemsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__move(request, requestOptions));
     }
 
     private async __move(
-        request: FiveOneEat.business.menus.MoveItemsRequest,
+        request: FiveOneEat.business.menus.MoveMenuItemRequest,
         requestOptions?: ItemsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.business.menus.MoveItemsResponse>> {
         const { item, ..._body } = request;

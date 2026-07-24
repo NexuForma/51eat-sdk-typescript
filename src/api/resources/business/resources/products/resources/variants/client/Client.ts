@@ -216,6 +216,7 @@ export class VariantsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.products.variants.delete({
@@ -271,6 +272,11 @@ export class VariantsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,

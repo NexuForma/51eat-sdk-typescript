@@ -10,7 +10,7 @@ export interface BusinessMenuItem {
     price: number | null;
     is_available: boolean;
     sort_order: number;
-    image?: string | undefined;
+    image?: (BusinessMenuItem.Image | null) | undefined;
     tags?: BusinessMenuItem.Tags.Item[] | undefined;
     allergens?: BusinessMenuItem.Allergens.Item[] | undefined;
     variations?: FiveOneEat.BusinessMenuItemVariation[] | undefined;
@@ -18,6 +18,11 @@ export interface BusinessMenuItem {
 }
 
 export namespace BusinessMenuItem {
+    export interface Image {
+        id: string;
+        url: string;
+    }
+
     export type Tags = Tags.Item[];
 
     export namespace Tags {

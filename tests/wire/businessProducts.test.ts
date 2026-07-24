@@ -256,6 +256,27 @@ describe("BusinessProductsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("listVariantInventoryHistory (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/products/variants/variant/inventory/history")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.businessProducts.listVariantInventoryHistory({
+                variant: "variant",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("getProductInventorySummary (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -345,5 +366,26 @@ describe("BusinessProductsClient", () => {
                 product: "product",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("getProductInventorySummary (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/products/product/inventory")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.businessProducts.getProductInventorySummary({
+                product: "product",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

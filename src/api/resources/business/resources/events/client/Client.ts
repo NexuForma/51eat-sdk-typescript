@@ -47,6 +47,7 @@ export class EventsClient {
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.list()
@@ -95,6 +96,11 @@ export class EventsClient {
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -195,6 +201,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.get({
@@ -250,6 +257,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -352,6 +364,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.delete({
@@ -407,6 +420,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -426,6 +444,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.togglePublished({
@@ -481,6 +500,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -604,6 +628,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.deleteImage({
@@ -659,6 +684,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -685,6 +715,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.listRsvps({
@@ -740,6 +771,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -767,6 +803,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.listAttendees({
@@ -822,6 +859,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -849,6 +891,7 @@ export class EventsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.events.salesSummary({
@@ -904,6 +947,11 @@ export class EventsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,

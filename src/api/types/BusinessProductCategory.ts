@@ -9,6 +9,7 @@ export interface BusinessProductCategory {
     description: string | null;
     parent_id: string | null;
     sort_order: number;
+    is_active: boolean;
     children?: FiveOneEat.BusinessProductCategory[] | undefined;
     created_at: string | null;
     updated_at: string | null;

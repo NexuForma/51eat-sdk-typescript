@@ -14,6 +14,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
+                created_at: "2024-01-15T09:30:00Z",
                 groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
             },
         };
@@ -37,6 +38,32 @@ describe("MenusClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("list (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/menus").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.business.menus.list();
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/menus").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.business.menus.list();
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -46,6 +73,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
+                created_at: "2024-01-15T09:30:00Z",
                 groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
             },
         };
@@ -98,6 +126,28 @@ describe("MenusClient", () => {
             .post("/business/menus")
             .jsonBody(rawRequestBody)
             .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.create({
+                name: "name",
+            });
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("create (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/business/menus")
+            .jsonBody(rawRequestBody)
+            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -118,6 +168,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
+                created_at: "2024-01-15T09:30:00Z",
                 groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
             },
         };
@@ -199,6 +250,27 @@ describe("MenusClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("get (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/menus/menu")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.get({
+                menu: "menu",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -208,6 +280,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
+                created_at: "2024-01-15T09:30:00Z",
                 groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
             },
         };
@@ -401,5 +474,26 @@ describe("MenusClient", () => {
                 menu: "menu",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/menus/menu")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.menus.delete({
+                menu: "menu",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

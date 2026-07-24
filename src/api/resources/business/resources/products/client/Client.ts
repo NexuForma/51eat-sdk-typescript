@@ -38,6 +38,8 @@ export class ProductsClient {
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.products.list()
@@ -84,6 +86,13 @@ export class ProductsClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -184,6 +193,7 @@ export class ProductsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.products.get({
@@ -239,6 +249,11 @@ export class ProductsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -341,6 +356,7 @@ export class ProductsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.products.delete({
@@ -396,6 +412,11 @@ export class ProductsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,

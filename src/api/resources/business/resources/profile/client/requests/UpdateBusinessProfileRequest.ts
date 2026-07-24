@@ -31,8 +31,6 @@ export interface UpdateBusinessProfileRequest {
     pickup_hours?: string[] | null;
     same_day_cutoff?: string | null;
     pickup_instructions?: string | null;
-    ownership?: string[] | null;
-    badges?: string[] | null;
     category_ids?: number[];
     operating_months?: number[] | null;
 }

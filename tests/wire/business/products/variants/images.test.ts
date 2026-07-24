@@ -276,4 +276,26 @@ describe("ImagesClient", () => {
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/products/variants/variant/images/image")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.products.variants.images.delete({
+                variant: "variant",
+                image: "image",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
 });

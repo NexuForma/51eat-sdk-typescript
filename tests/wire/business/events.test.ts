@@ -13,6 +13,7 @@ describe("EventsClient", () => {
             data: [
                 {
                     id: "id",
+                    business_id: "business_id",
                     title: "title",
                     description: "description",
                     starts_at: "2024-01-15T09:30:00Z",
@@ -25,6 +26,25 @@ describe("EventsClient", () => {
                     published_at: "2024-01-15T09:30:00Z",
                     sort_order: 1,
                     image: "image",
+                    ticket_types: [
+                        {
+                            id: "id",
+                            event_id: "event_id",
+                            name: "name",
+                            description: null,
+                            price: 1.1,
+                            quantity_available: 1,
+                            quantity_sold: 1,
+                            remaining_quantity: "remaining_quantity",
+                            is_available_for_sale: true,
+                            sales_start_at: null,
+                            sales_end_at: null,
+                            is_active: true,
+                            sort_order: 1,
+                            created_at: null,
+                            updated_at: null,
+                        },
+                    ],
                     rsvps_count: 1,
                     attendees_count: 1,
                     tickets_count: 1,
@@ -66,6 +86,19 @@ describe("EventsClient", () => {
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/business/events").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.business.events.list();
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -73,6 +106,7 @@ describe("EventsClient", () => {
         const rawResponseBody = {
             data: {
                 id: "id",
+                business_id: "business_id",
                 title: "title",
                 description: "description",
                 starts_at: "2024-01-15T09:30:00Z",
@@ -85,6 +119,25 @@ describe("EventsClient", () => {
                 published_at: "2024-01-15T09:30:00Z",
                 sort_order: 1,
                 image: "image",
+                ticket_types: [
+                    {
+                        id: "id",
+                        event_id: "event_id",
+                        name: "name",
+                        description: null,
+                        price: 1.1,
+                        quantity_available: 1,
+                        quantity_sold: 1,
+                        remaining_quantity: "remaining_quantity",
+                        is_available_for_sale: true,
+                        sales_start_at: null,
+                        sales_end_at: null,
+                        is_active: true,
+                        sort_order: 1,
+                        created_at: null,
+                        updated_at: null,
+                    },
+                ],
                 rsvps_count: 1,
                 attendees_count: 1,
                 tickets_count: 1,
@@ -189,6 +242,7 @@ describe("EventsClient", () => {
         const rawResponseBody = {
             data: {
                 id: "id",
+                business_id: "business_id",
                 title: "title",
                 description: "description",
                 starts_at: "2024-01-15T09:30:00Z",
@@ -201,6 +255,25 @@ describe("EventsClient", () => {
                 published_at: "2024-01-15T09:30:00Z",
                 sort_order: 1,
                 image: "image",
+                ticket_types: [
+                    {
+                        id: "id",
+                        event_id: "event_id",
+                        name: "name",
+                        description: null,
+                        price: 1.1,
+                        quantity_available: 1,
+                        quantity_sold: 1,
+                        remaining_quantity: "remaining_quantity",
+                        is_available_for_sale: true,
+                        sales_start_at: null,
+                        sales_end_at: null,
+                        is_active: true,
+                        sort_order: 1,
+                        created_at: null,
+                        updated_at: null,
+                    },
+                ],
                 rsvps_count: 1,
                 attendees_count: 1,
                 tickets_count: 1,
@@ -286,6 +359,27 @@ describe("EventsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("get (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/events/event")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.get({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -293,6 +387,7 @@ describe("EventsClient", () => {
         const rawResponseBody = {
             data: {
                 id: "id",
+                business_id: "business_id",
                 title: "title",
                 description: "description",
                 starts_at: "2024-01-15T09:30:00Z",
@@ -305,6 +400,25 @@ describe("EventsClient", () => {
                 published_at: "2024-01-15T09:30:00Z",
                 sort_order: 1,
                 image: "image",
+                ticket_types: [
+                    {
+                        id: "id",
+                        event_id: "event_id",
+                        name: "name",
+                        description: null,
+                        price: 1.1,
+                        quantity_available: 1,
+                        quantity_sold: 1,
+                        remaining_quantity: "remaining_quantity",
+                        is_available_for_sale: true,
+                        sales_start_at: null,
+                        sales_end_at: null,
+                        is_active: true,
+                        sort_order: 1,
+                        created_at: null,
+                        updated_at: null,
+                    },
+                ],
                 rsvps_count: 1,
                 attendees_count: 1,
                 tickets_count: 1,
@@ -499,6 +613,27 @@ describe("EventsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/events/event")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.delete({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("togglePublished (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -506,6 +641,7 @@ describe("EventsClient", () => {
         const rawResponseBody = {
             data: {
                 id: "id",
+                business_id: "business_id",
                 title: "title",
                 description: "description",
                 starts_at: "2024-01-15T09:30:00Z",
@@ -518,6 +654,25 @@ describe("EventsClient", () => {
                 published_at: "2024-01-15T09:30:00Z",
                 sort_order: 1,
                 image: "image",
+                ticket_types: [
+                    {
+                        id: "id",
+                        event_id: "event_id",
+                        name: "name",
+                        description: null,
+                        price: 1.1,
+                        quantity_available: 1,
+                        quantity_sold: 1,
+                        remaining_quantity: "remaining_quantity",
+                        is_available_for_sale: true,
+                        sales_start_at: null,
+                        sales_end_at: null,
+                        is_active: true,
+                        sort_order: 1,
+                        created_at: null,
+                        updated_at: null,
+                    },
+                ],
                 rsvps_count: 1,
                 attendees_count: 1,
                 tickets_count: 1,
@@ -603,6 +758,27 @@ describe("EventsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("togglePublished (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .put("/business/events/event/toggle-published")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.togglePublished({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("deleteImage (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -684,6 +860,27 @@ describe("EventsClient", () => {
                 event: "event",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("deleteImage (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/business/events/event/image")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.deleteImage({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
     test("listRsvps (1)", async () => {
@@ -779,6 +976,27 @@ describe("EventsClient", () => {
                 event: "event",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("listRsvps (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/events/event/rsvps")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.listRsvps({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
     test("listAttendees (1)", async () => {
@@ -877,6 +1095,27 @@ describe("EventsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
+    test("listAttendees (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/events/event/attendees")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.listAttendees({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("salesSummary (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -958,5 +1197,26 @@ describe("EventsClient", () => {
                 event: "event",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
+    test("salesSummary (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/business/events/event/sales-summary")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.business.events.salesSummary({
+                event: "event",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

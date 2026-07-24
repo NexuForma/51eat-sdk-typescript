@@ -63,8 +63,6 @@ describe("LogoClient", () => {
                 pickup_hours: { key: "value" },
                 same_day_cutoff: "same_day_cutoff",
                 pickup_instructions: "pickup_instructions",
-                ownership: ["ownership"],
-                badges: ["badges"],
                 founding_partner: true,
                 staff_pick: true,
                 favorites_count: 1,

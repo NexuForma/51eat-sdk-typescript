@@ -32,6 +32,7 @@ export class GroupsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.groups.list({
@@ -87,6 +88,11 @@ export class GroupsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -195,6 +201,7 @@ export class GroupsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.groups.get({
@@ -251,6 +258,11 @@ export class GroupsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -365,6 +377,7 @@ export class GroupsClient {
      * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.NotFoundError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.menus.groups.delete({
@@ -421,6 +434,11 @@ export class GroupsClient {
                     throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -441,7 +459,7 @@ export class GroupsClient {
     /**
      * Batch-update sort_order for groups. Groups not belonging to this menu are silently skipped.
      *
-     * @param {FiveOneEat.business.menus.ReorderGroupsRequest} request
+     * @param {FiveOneEat.business.menus.ReorderMenuGroupsRequest} request
      * @param {GroupsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -459,14 +477,14 @@ export class GroupsClient {
      *     })
      */
     public reorder(
-        request: FiveOneEat.business.menus.ReorderGroupsRequest,
+        request: FiveOneEat.business.menus.ReorderMenuGroupsRequest,
         requestOptions?: GroupsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.business.menus.ReorderGroupsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__reorder(request, requestOptions));
     }
 
     private async __reorder(
-        request: FiveOneEat.business.menus.ReorderGroupsRequest,
+        request: FiveOneEat.business.menus.ReorderMenuGroupsRequest,
         requestOptions?: GroupsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.business.menus.ReorderGroupsResponse>> {
         const { menu, ..._body } = request;
