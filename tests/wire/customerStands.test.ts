@@ -71,7 +71,14 @@ describe("CustomerStandsClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { client_secret: "client_secret", subtotal: 1, tax: 1, total: 1 };
+        const rawResponseBody = {
+            client_secret: "client_secret",
+            status: "status",
+            payment_intent_id: "payment_intent_id",
+            subtotal: 1,
+            tax: 1,
+            total: 1,
+        };
 
         server
             .mockEndpoint()

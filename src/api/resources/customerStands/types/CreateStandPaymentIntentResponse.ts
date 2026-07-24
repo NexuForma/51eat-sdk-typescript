@@ -2,6 +2,8 @@
 
 export interface CreateStandPaymentIntentResponse {
     client_secret: string;
+    status: string;
+    payment_intent_id: string;
     subtotal: number;
     tax: number;
     total: number;
