@@ -75,9 +75,10 @@ describe("CustomerStandsClient", () => {
             client_secret: "client_secret",
             status: "status",
             payment_intent_id: "payment_intent_id",
-            subtotal: 1,
-            tax: 1,
-            total: 1,
+            subtotal: 1.1,
+            tax: 1.1,
+            platform_fee: 1.1,
+            total: 1.1,
         };
 
         server
