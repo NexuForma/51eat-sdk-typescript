@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as FiveOneEat from "../../../index.js";
+import { AdsClient } from "../resources/ads/client/Client.js";
 import { AuthClient } from "../resources/auth/client/Client.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
 import { BusinessSubmissionsClient } from "../resources/businessSubmissions/client/Client.js";
@@ -22,6 +23,7 @@ import { MessagingClient } from "../resources/messaging/client/Client.js";
 import { ProductOrdersClient } from "../resources/productOrders/client/Client.js";
 import { PushNotificationsClient } from "../resources/pushNotifications/client/Client.js";
 import { ShopClient } from "../resources/shop/client/Client.js";
+import { StandsClient } from "../resources/stands/client/Client.js";
 
 export declare namespace CustomerClient {
     export type Options = BaseClientOptions;
@@ -31,6 +33,7 @@ export declare namespace CustomerClient {
 
 export class CustomerClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CustomerClient.Options>;
+    protected _ads: AdsClient | undefined;
     protected _auth: AuthClient | undefined;
     protected _businessSubmissions: BusinessSubmissionsClient | undefined;
     protected _businesses: BusinessesClient | undefined;
@@ -44,9 +47,14 @@ export class CustomerClient {
     protected _productOrders: ProductOrdersClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
     protected _shop: ShopClient | undefined;
+    protected _stands: StandsClient | undefined;
 
     constructor(options: CustomerClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get ads(): AdsClient {
+        return (this._ads ??= new AdsClient(this._options));
     }
 
     public get auth(): AuthClient {
@@ -99,6 +107,10 @@ export class CustomerClient {
 
     public get shop(): ShopClient {
         return (this._shop ??= new ShopClient(this._options));
+    }
+
+    public get stands(): StandsClient {
+        return (this._stands ??= new StandsClient(this._options));
     }
 
     /**

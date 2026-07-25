@@ -62,15 +62,116 @@ describe("TicketsClient", () => {
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        server.mockEndpoint().get("/customer/tickets/ticket").respondWith().statusCode(200).build();
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                ticket_number: "ticket_number",
+                status: "status",
+                qr_code: "qr_code",
+                ticket_type: { id: "id", name: "name", price: "price" },
+                used_at: "used_at",
+                wallet_url: { key: "value" },
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const response = await client.customer.me.tickets.get({
-            ticket: "ticket",
+            ticketId: "ticketId",
         });
-        expect(response).toEqual(undefined);
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.tickets.get({
+                ticketId: "ticketId",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("appleWalletPass (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.me.tickets.appleWalletPass({
+            ticketId: "ticketId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("appleWalletPass (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.tickets.appleWalletPass({
+                ticketId: "ticketId",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("appleWalletPass (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/tickets/ticketId/wallet/apple")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.tickets.appleWalletPass({
+                ticketId: "ticketId",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 });

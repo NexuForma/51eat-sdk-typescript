@@ -150,6 +150,46 @@ describe("TicketingClient", () => {
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
+    test("releaseHold (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .delete("/customer/events/eventId/ticket-holds/cartId")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.customer.events.ticketing.releaseHold({
+            eventId: "eventId",
+            cartId: "cartId",
+        });
+        expect(response).toEqual(undefined);
+    });
+
+    test("releaseHold (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/customer/events/eventId/ticket-holds/cartId")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.events.ticketing.releaseHold({
+                eventId: "eventId",
+                cartId: "cartId",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
     test("calculatePrice (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -529,23 +569,5 @@ describe("TicketingClient", () => {
                 payment_intent_id: "payment_intent_id",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
-    });
-
-    test("releaseHold", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        server
-            .mockEndpoint()
-            .delete("/customer/events/eventId/ticket-holds/sessionId")
-            .respondWith()
-            .statusCode(200)
-            .build();
-
-        const response = await client.customer.events.ticketing.releaseHold({
-            eventId: "eventId",
-            sessionId: "sessionId",
-        });
-        expect(response).toEqual(undefined);
     });
 });

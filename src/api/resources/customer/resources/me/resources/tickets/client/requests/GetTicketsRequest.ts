@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         ticket: "ticket"
+ *         ticketId: "ticketId"
  *     }
  */
 export interface GetTicketsRequest {
-    ticket: string;
+    ticketId: string;
 }

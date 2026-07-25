@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         order: "order"
+ *         orderId: "orderId"
  *     }
  */
 export interface GetTicketOrdersRequest {
-    order: string;
+    orderId: string;
 }

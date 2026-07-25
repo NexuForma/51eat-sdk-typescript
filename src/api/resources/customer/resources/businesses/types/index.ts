@@ -1,4 +1,5 @@
 export * from "./FavoriteBusinessesResponse.js";
+export * from "./GetPickupTimeslotsBusinessesResponse.js";
 export * from "./ListTemporaryLocationsBusinessesResponse.js";
 export * from "./MenusBusinessesResponse.js";
 export * from "./PhotosBusinessesResponse.js";

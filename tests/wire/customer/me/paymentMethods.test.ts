@@ -42,6 +42,43 @@ describe("PaymentMethodsClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("ephemeralKey (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { customer_id: "customer_id", ephemeral_key_secret: "ephemeral_key_secret" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/payment-methods/ephemeral-key")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.me.paymentMethods.ephemeralKey();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("ephemeralKey (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/payment-methods/ephemeral-key")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.paymentMethods.ephemeralKey();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });

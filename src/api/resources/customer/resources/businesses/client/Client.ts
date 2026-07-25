@@ -521,26 +521,35 @@ export class BusinessesClient {
     }
 
     /**
+     * Returns available pickup timeslots for a business on a given date.
+     *
      * @param {FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
      * @example
      *     await client.customer.businesses.getPickupTimeslots({
-     *         business: "business"
+     *         handle: "katzs-deli",
+     *         date: "2023-01-15"
      *     })
      */
     public getPickupTimeslots(
         request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getPickupTimeslots(request, requestOptions));
     }
 
     private async __getPickupTimeslots(
         request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
         requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { business } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse>> {
+        const { handle, date } = request;
+        const _queryParams: Record<string, unknown> = {
+            date,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -552,11 +561,16 @@ export class BusinessesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(business)}/pickup-timeslots`,
+                `customer/businesses/${core.url.encodePathParam(handle)}/pickup-timeslots`,
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -564,22 +578,35 @@ export class BusinessesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "GET",
-            "/customer/businesses/{business}/pickup-timeslots",
+            "/customer/businesses/{handle}/pickup-timeslots",
         );
     }
 }

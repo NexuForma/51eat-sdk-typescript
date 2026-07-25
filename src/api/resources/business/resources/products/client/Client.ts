@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
 import { ImagesClient } from "../resources/images/client/Client.js";
+import { InventoryClient } from "../resources/inventory/client/Client.js";
 import { VariantsClient } from "../resources/variants/client/Client.js";
 
 export declare namespace ProductsClient {
@@ -21,6 +22,7 @@ export class ProductsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ProductsClient.Options>;
     protected _variants: VariantsClient | undefined;
     protected _images: ImagesClient | undefined;
+    protected _inventory: InventoryClient | undefined;
 
     constructor(options: ProductsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -32,6 +34,10 @@ export class ProductsClient {
 
     public get images(): ImagesClient {
         return (this._images ??= new ImagesClient(this._options));
+    }
+
+    public get inventory(): InventoryClient {
+        return (this._inventory ??= new InventoryClient(this._options));
     }
 
     /**

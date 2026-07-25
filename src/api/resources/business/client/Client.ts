@@ -13,6 +13,7 @@ import { CuisinesClient } from "../resources/cuisines/client/Client.js";
 import { DiscountsClient } from "../resources/discounts/client/Client.js";
 import { EventsClient } from "../resources/events/client/Client.js";
 import { GalleryClient } from "../resources/gallery/client/Client.js";
+import { HoursClient } from "../resources/hours/client/Client.js";
 import { MenusClient } from "../resources/menus/client/Client.js";
 import { MessagingClient } from "../resources/messaging/client/Client.js";
 import { ProductCategoriesClient } from "../resources/productCategories/client/Client.js";
@@ -20,6 +21,8 @@ import { ProductOrdersClient } from "../resources/productOrders/client/Client.js
 import { ProductsClient } from "../resources/products/client/Client.js";
 import { ProfileClient } from "../resources/profile/client/Client.js";
 import { PushNotificationsClient } from "../resources/pushNotifications/client/Client.js";
+import { ShippingClient } from "../resources/shipping/client/Client.js";
+import { StandsClient } from "../resources/stands/client/Client.js";
 import { StripeConnectClient } from "../resources/stripeConnect/client/Client.js";
 import { TemporaryLocationsClient } from "../resources/temporaryLocations/client/Client.js";
 
@@ -36,6 +39,7 @@ export class BusinessClient {
     protected _discounts: DiscountsClient | undefined;
     protected _events: EventsClient | undefined;
     protected _gallery: GalleryClient | undefined;
+    protected _hours: HoursClient | undefined;
     protected _menus: MenusClient | undefined;
     protected _messaging: MessagingClient | undefined;
     protected _productOrders: ProductOrdersClient | undefined;
@@ -43,12 +47,14 @@ export class BusinessClient {
     protected _productCategories: ProductCategoriesClient | undefined;
     protected _profile: ProfileClient | undefined;
     protected _pushNotifications: PushNotificationsClient | undefined;
+    protected _stands: StandsClient | undefined;
     protected _stripeConnect: StripeConnectClient | undefined;
     protected _cuisines: CuisinesClient | undefined;
     protected _certifications: CertificationsClient | undefined;
     protected _categories: CategoriesClient | undefined;
     protected _allergens: AllergensClient | undefined;
     protected _temporaryLocations: TemporaryLocationsClient | undefined;
+    protected _shipping: ShippingClient | undefined;
 
     constructor(options: BusinessClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -82,6 +88,10 @@ export class BusinessClient {
         return (this._gallery ??= new GalleryClient(this._options));
     }
 
+    public get hours(): HoursClient {
+        return (this._hours ??= new HoursClient(this._options));
+    }
+
     public get menus(): MenusClient {
         return (this._menus ??= new MenusClient(this._options));
     }
@@ -110,6 +120,10 @@ export class BusinessClient {
         return (this._pushNotifications ??= new PushNotificationsClient(this._options));
     }
 
+    public get stands(): StandsClient {
+        return (this._stands ??= new StandsClient(this._options));
+    }
+
     public get stripeConnect(): StripeConnectClient {
         return (this._stripeConnect ??= new StripeConnectClient(this._options));
     }
@@ -132,5 +146,9 @@ export class BusinessClient {
 
     public get temporaryLocations(): TemporaryLocationsClient {
         return (this._temporaryLocations ??= new TemporaryLocationsClient(this._options));
+    }
+
+    public get shipping(): ShippingClient {
+        return (this._shipping ??= new ShippingClient(this._options));
     }
 }

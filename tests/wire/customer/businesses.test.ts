@@ -505,20 +505,68 @@ describe("BusinessesClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
-    test("getPickupTimeslots", async () => {
+    test("getPickupTimeslots (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
+        const rawResponseBody = { date: { key: "value" }, timeslots: ["timeslots"] };
+
         server
             .mockEndpoint()
-            .get("/customer/businesses/business/pickup-timeslots")
+            .get("/customer/businesses/katzs-deli/pickup-timeslots")
             .respondWith()
             .statusCode(200)
+            .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.customer.businesses.getPickupTimeslots({
-            business: "business",
+            handle: "katzs-deli",
+            date: "2023-01-15",
         });
-        expect(response).toEqual(undefined);
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getPickupTimeslots (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/pickup-timeslots")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.getPickupTimeslots({
+                handle: "handle",
+                date: "2023-01-15",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("getPickupTimeslots (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/pickup-timeslots")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.getPickupTimeslots({
+                handle: "handle",
+                date: "2023-01-15",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

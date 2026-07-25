@@ -72,6 +72,79 @@ describe("ConversationsClient", () => {
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
+    test("search (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    id: "id",
+                    business: { id: "id", name: "name", handle: "handle", logo_url: null },
+                    last_message: { id: "id", content: "content", created_at: null },
+                    last_message_at: "last_message_at",
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/messaging/conversations/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.messaging.conversations.search({
+            q: "pizza",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("search (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/messaging/conversations/search")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.messaging.conversations.search({
+                q: "q",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("search (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/messaging/conversations/search")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.messaging.conversations.search({
+                q: "q",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
     test("start (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
