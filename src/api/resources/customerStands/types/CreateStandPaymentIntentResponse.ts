@@ -6,5 +6,6 @@ export interface CreateStandPaymentIntentResponse {
     payment_intent_id: string;
     subtotal: number;
     tax: number;
+    platform_fee: number;
     total: number;
 }
