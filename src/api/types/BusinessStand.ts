@@ -13,6 +13,7 @@ export interface BusinessStand {
     longitude: number | null;
     notes: string | null;
     is_active: boolean;
+    product_ids?: string[] | undefined;
     created_at: string | null;
     updated_at: string | null;
 }
