@@ -97,6 +97,77 @@ export class PaymentMethodsClient {
     }
 
     /**
+     * Returns the Stripe customer id and an ephemeral key secret. Pass these to the
+     * Stripe mobile SDK's `initPaymentSheet` as `customerId` and
+     * `customerEphemeralKeySecret` so the sheet lists the customer's saved cards.
+     *
+     * @param {PaymentMethodsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.customer.me.paymentMethods.ephemeralKey()
+     */
+    public ephemeralKey(
+        requestOptions?: PaymentMethodsClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.me.EphemeralKeyPaymentMethodsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ephemeralKey(requestOptions));
+    }
+
+    private async __ephemeralKey(
+        requestOptions?: PaymentMethodsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.me.EphemeralKeyPaymentMethodsResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/payment-methods/ephemeral-key",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.me.EphemeralKeyPaymentMethodsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/payment-methods/ephemeral-key",
+        );
+    }
+
+    /**
      * Returns all saved cards for the authenticated user.
      *
      * @param {PaymentMethodsClient.RequestOptions} requestOptions - Request-specific configuration.

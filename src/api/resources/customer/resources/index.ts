@@ -1,3 +1,6 @@
+export * from "./ads/client/requests/index.js";
+export * as ads from "./ads/index.js";
+export * from "./ads/types/index.js";
 export * from "./auth/client/requests/index.js";
 export * as auth from "./auth/index.js";
 export * from "./auth/types/index.js";
@@ -36,3 +39,6 @@ export * from "./pushNotifications/types/index.js";
 export * from "./shop/client/requests/index.js";
 export * as shop from "./shop/index.js";
 export * from "./shop/types/index.js";
+export * from "./stands/client/requests/index.js";
+export * as stands from "./stands/index.js";
+export * from "./stands/types/index.js";

@@ -4,10 +4,10 @@
  * @example
  *     {
  *         eventId: "eventId",
- *         sessionId: "sessionId"
+ *         cartId: "cartId"
  *     }
  */
 export interface ReleaseHoldTicketingRequest {
     eventId: string;
-    sessionId: string;
+    cartId: string;
 }

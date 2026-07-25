@@ -71,15 +71,83 @@ describe("TicketOrdersClient", () => {
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        server.mockEndpoint().get("/customer/ticket-orders/order").respondWith().statusCode(200).build();
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                order_number: "order_number",
+                event: {
+                    id: "id",
+                    title: "title",
+                    starts_at: "starts_at",
+                    ends_at: "ends_at",
+                    location: "location",
+                    business: { id: "id", name: "name", handle: "handle" },
+                },
+                transaction: {
+                    ulid: "ulid",
+                    status: "status",
+                    subtotal: "subtotal",
+                    tax_amount: "tax_amount",
+                    shipping_amount: "shipping_amount",
+                    platform_fee: "platform_fee",
+                    total_amount: "total_amount",
+                    refunded_amount: "refunded_amount",
+                    customer_name: "customer_name",
+                    customer_email: "customer_email",
+                    stripe_payment_intent_id: "stripe_payment_intent_id",
+                    payment_completed_at: "2024-01-15T09:30:00Z",
+                    refunded_at: "2024-01-15T09:30:00Z",
+                    refund_reason: "refund_reason",
+                },
+                tickets: [
+                    {
+                        id: "id",
+                        ticket_number: "ticket_number",
+                        status: "status",
+                        qr_code: null,
+                        used_at: "used_at",
+                        wallet_url: { key: "value" },
+                    },
+                ],
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/ticket-orders/orderId")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const response = await client.customer.me.ticketOrders.get({
-            order: "order",
+            orderId: "orderId",
         });
-        expect(response).toEqual(undefined);
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/ticket-orders/orderId")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.ticketOrders.get({
+                orderId: "orderId",
+            });
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 });

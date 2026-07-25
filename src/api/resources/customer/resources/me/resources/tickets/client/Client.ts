@@ -109,26 +109,30 @@ export class TicketsClient {
     }
 
     /**
+     * Retrieve a single ticket belonging to the authenticated user.
+     *
      * @param {FiveOneEat.customer.me.GetTicketsRequest} request
      * @param {TicketsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
      * @example
      *     await client.customer.me.tickets.get({
-     *         ticket: "ticket"
+     *         ticketId: "ticketId"
      *     })
      */
     public get(
         request: FiveOneEat.customer.me.GetTicketsRequest,
         requestOptions?: TicketsClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.me.GetTicketsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
         request: FiveOneEat.customer.me.GetTicketsRequest,
         requestOptions?: TicketsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { ticket } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.me.GetTicketsResponse>> {
+        const { ticketId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -140,7 +144,7 @@ export class TicketsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/tickets/${core.url.encodePathParam(ticket)}`,
+                `customer/tickets/${core.url.encodePathParam(ticketId)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -152,17 +156,100 @@ export class TicketsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.me.GetTicketsResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/customer/tickets/{ticket}");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/customer/tickets/{ticketId}");
+    }
+
+    /**
+     * Returns a signed .pkpass file for import into Apple Wallet.
+     *
+     * @param {FiveOneEat.customer.me.AppleWalletPassTicketsRequest} request
+     * @param {TicketsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
+     *
+     * @example
+     *     await client.customer.me.tickets.appleWalletPass({
+     *         ticketId: "ticketId"
+     *     })
+     */
+    public appleWalletPass(
+        request: FiveOneEat.customer.me.AppleWalletPassTicketsRequest,
+        requestOptions?: TicketsClient.RequestOptions,
+    ): core.HttpResponsePromise<Record<string, unknown>> {
+        return core.HttpResponsePromise.fromPromise(this.__appleWalletPass(request, requestOptions));
+    }
+
+    private async __appleWalletPass(
+        request: FiveOneEat.customer.me.AppleWalletPassTicketsRequest,
+        requestOptions?: TicketsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const { ticketId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/tickets/${core.url.encodePathParam(ticketId)}/wallet/apple`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/tickets/{ticketId}/wallet/apple",
+        );
     }
 }

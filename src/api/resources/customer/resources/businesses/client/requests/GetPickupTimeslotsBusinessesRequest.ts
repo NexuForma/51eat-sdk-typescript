@@ -3,9 +3,12 @@
 /**
  * @example
  *     {
- *         business: "business"
+ *         handle: "katzs-deli",
+ *         date: "2023-01-15"
  *     }
  */
 export interface GetPickupTimeslotsBusinessesRequest {
-    business: string;
+    /** The business handle */
+    handle: string;
+    date: string;
 }

@@ -15,7 +15,6 @@
  */
 export interface AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest {
     eventId: string;
-    payment_method_id?: string | null;
     billing_address: AppHttpRequestsApiV1CustomerEventsCreatePaymentIntentRequest.BillingAddress;
 }
 

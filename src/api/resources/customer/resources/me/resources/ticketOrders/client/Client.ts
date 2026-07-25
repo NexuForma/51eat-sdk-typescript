@@ -109,26 +109,30 @@ export class TicketOrdersClient {
     }
 
     /**
+     * Retrieve a single ticket order belonging to the authenticated user.
+     *
      * @param {FiveOneEat.customer.me.GetTicketOrdersRequest} request
      * @param {TicketOrdersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
      * @example
      *     await client.customer.me.ticketOrders.get({
-     *         order: "order"
+     *         orderId: "orderId"
      *     })
      */
     public get(
         request: FiveOneEat.customer.me.GetTicketOrdersRequest,
         requestOptions?: TicketOrdersClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<FiveOneEat.customer.me.GetTicketOrdersResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
         request: FiveOneEat.customer.me.GetTicketOrdersRequest,
         requestOptions?: TicketOrdersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const { order } = request;
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.me.GetTicketOrdersResponse>> {
+        const { orderId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -140,7 +144,7 @@ export class TicketOrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `customer/ticket-orders/${core.url.encodePathParam(order)}`,
+                `customer/ticket-orders/${core.url.encodePathParam(orderId)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -152,22 +156,30 @@ export class TicketOrdersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as FiveOneEat.customer.me.GetTicketOrdersResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.FiveOneEatError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
             "GET",
-            "/customer/ticket-orders/{order}",
+            "/customer/ticket-orders/{orderId}",
         );
     }
 }
