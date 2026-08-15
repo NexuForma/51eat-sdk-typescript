@@ -7,6 +7,5 @@
  *     }
  */
 export interface GetLabelRatesProductOrdersRequest {
-    /** The product order ID */
     productOrder: string;
 }

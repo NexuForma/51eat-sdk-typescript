@@ -3,5 +3,5 @@
 import type * as FiveOneEat from "../../../../../../../../../index.js";
 
 export interface AdjustInventoryResponse {
-    data: FiveOneEat.BusinessProductVariant;
+    data: FiveOneEat.InventoryLevelResource;
 }

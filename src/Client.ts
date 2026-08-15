@@ -2,6 +2,7 @@
 
 import { BusinessClient } from "./api/resources/business/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
+import { CustomerStandsClient } from "./api/resources/customerStands/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
@@ -15,6 +16,7 @@ export declare namespace FiveOneEatClient {
 export class FiveOneEatClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FiveOneEatClient.Options>;
     protected _customer: CustomerClient | undefined;
+    protected _customerStands: CustomerStandsClient | undefined;
     protected _business: BusinessClient | undefined;
 
     constructor(options: FiveOneEatClient.Options = {}) {
@@ -23,6 +25,10 @@ export class FiveOneEatClient {
 
     public get customer(): CustomerClient {
         return (this._customer ??= new CustomerClient(this._options));
+    }
+
+    public get customerStands(): CustomerStandsClient {
+        return (this._customerStands ??= new CustomerStandsClient(this._options));
     }
 
     public get business(): BusinessClient {

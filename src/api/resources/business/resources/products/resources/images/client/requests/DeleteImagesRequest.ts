@@ -8,8 +8,6 @@
  *     }
  */
 export interface DeleteImagesRequest {
-    /** The product ID */
     product: string;
-    /** The image ID */
     image: string;
 }

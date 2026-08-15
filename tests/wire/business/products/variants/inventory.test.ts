@@ -8,38 +8,14 @@ describe("InventoryClient", () => {
     test("adjust (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "add", quantity: 1, reason: "restock" };
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", adjustment: 1 };
         const rawResponseBody = {
             data: {
                 id: "id",
-                product_id: "product_id",
-                name: "name",
-                sku: "sku",
-                price: 1.1,
-                compare_at_price: 1.1,
-                inventory_quantity: 1,
-                option1: "option1",
-                option2: "option2",
-                option3: "option3",
-                barcode: "barcode",
-                weight: 1.1,
-                weight_unit: "weight_unit",
-                requires_shipping: true,
-                is_default: true,
-                images: [
-                    {
-                        id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
-                        created_at: "created_at",
-                    },
-                ],
-                sort_order: 1,
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                sales_channel_id: "sales_channel_id",
+                quantity: "quantity",
+                tracks_inventory: "tracks_inventory",
+                allows_holds: "allows_holds",
             },
         };
 
@@ -54,9 +30,8 @@ describe("InventoryClient", () => {
 
         const response = await client.business.products.variants.inventory.adjust({
             variant: "variant",
-            type: "add",
-            quantity: 1,
-            reason: "restock",
+            sales_channel_id: "sales_channel_id",
+            adjustment: 1,
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -64,7 +39,7 @@ describe("InventoryClient", () => {
     test("adjust (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "add", quantity: 1, reason: "restock" };
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", adjustment: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -79,9 +54,8 @@ describe("InventoryClient", () => {
         await expect(async () => {
             return await client.business.products.variants.inventory.adjust({
                 variant: "variant",
-                type: "add",
-                quantity: 1,
-                reason: "restock",
+                sales_channel_id: "sales_channel_id",
+                adjustment: 1,
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -89,7 +63,7 @@ describe("InventoryClient", () => {
     test("adjust (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "add", quantity: 1, reason: "restock" };
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", adjustment: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -104,9 +78,8 @@ describe("InventoryClient", () => {
         await expect(async () => {
             return await client.business.products.variants.inventory.adjust({
                 variant: "variant",
-                type: "add",
-                quantity: 1,
-                reason: "restock",
+                sales_channel_id: "sales_channel_id",
+                adjustment: 1,
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -114,7 +87,7 @@ describe("InventoryClient", () => {
     test("adjust (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "add", quantity: 1, reason: "restock" };
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", adjustment: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -129,9 +102,8 @@ describe("InventoryClient", () => {
         await expect(async () => {
             return await client.business.products.variants.inventory.adjust({
                 variant: "variant",
-                type: "add",
-                quantity: 1,
-                reason: "restock",
+                sales_channel_id: "sales_channel_id",
+                adjustment: 1,
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
@@ -139,7 +111,7 @@ describe("InventoryClient", () => {
     test("adjust (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "add", quantity: 1, reason: "restock" };
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", adjustment: 1 };
         const rawResponseBody = { key: "value" };
 
         server
@@ -154,126 +126,153 @@ describe("InventoryClient", () => {
         await expect(async () => {
             return await client.business.products.variants.inventory.adjust({
                 variant: "variant",
-                type: "add",
-                quantity: 1,
-                reason: "restock",
+                sales_channel_id: "sales_channel_id",
+                adjustment: 1,
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 
-    test("history (1)", async () => {
+    test("updateTracking (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", tracks_inventory: true };
         const rawResponseBody = {
-            data: [
-                {
-                    id: "id",
-                    change_type: "change_type",
-                    quantity_change: 1,
-                    quantity_after: 1,
-                    notes: "notes",
-                    created_by: { id: null, name: null },
-                    created_at: "created_at",
-                },
-            ],
+            data: {
+                id: "id",
+                sales_channel_id: "sales_channel_id",
+                quantity: "quantity",
+                tracks_inventory: "tracks_inventory",
+                allows_holds: "allows_holds",
+            },
         };
 
         server
             .mockEndpoint()
-            .get("/business/products/variants/variant/inventory/history")
+            .patch("/business/products/variants/variant/inventory/tracking")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.business.products.variants.inventory.history({
+        const response = await client.business.products.variants.inventory.updateTracking({
             variant: "variant",
+            sales_channel_id: "sales_channel_id",
+            tracks_inventory: true,
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("history (2)", async () => {
+    test("updateTracking (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", tracks_inventory: true };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .get("/business/products/variants/variant/inventory/history")
+            .patch("/business/products/variants/variant/inventory/tracking")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.business.products.variants.inventory.history({
+            return await client.business.products.variants.inventory.updateTracking({
                 variant: "variant",
+                sales_channel_id: "sales_channel_id",
+                tracks_inventory: true,
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
-    test("history (3)", async () => {
+    test("updateTracking (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", tracks_inventory: true };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .get("/business/products/variants/variant/inventory/history")
+            .patch("/business/products/variants/variant/inventory/tracking")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.business.products.variants.inventory.history({
+            return await client.business.products.variants.inventory.updateTracking({
                 variant: "variant",
+                sales_channel_id: "sales_channel_id",
+                tracks_inventory: true,
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 
-    test("history (4)", async () => {
+    test("updateTracking (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", tracks_inventory: true };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .get("/business/products/variants/variant/inventory/history")
+            .patch("/business/products/variants/variant/inventory/tracking")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.business.products.variants.inventory.history({
+            return await client.business.products.variants.inventory.updateTracking({
                 variant: "variant",
+                sales_channel_id: "sales_channel_id",
+                tracks_inventory: true,
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
-    test("history (5)", async () => {
+    test("updateTracking (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
+        const rawRequestBody = { sales_channel_id: "sales_channel_id", tracks_inventory: true };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .get("/business/products/variants/variant/inventory/history")
+            .patch("/business/products/variants/variant/inventory/tracking")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.business.products.variants.inventory.history({
+            return await client.business.products.variants.inventory.updateTracking({
                 variant: "variant",
+                sales_channel_id: "sales_channel_id",
+                tracks_inventory: true,
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("history", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .get("/business/products/variants/variant/inventory/history")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.business.products.variants.inventory.history({
+            variant: "variant",
+        });
+        expect(response).toEqual(undefined);
     });
 });

@@ -7,7 +7,7 @@ import * as core from "../../../../../../core/index.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
-import * as FiveOneEat from "../../../../../index.js";
+import type * as FiveOneEat from "../../../../../index.js";
 
 export declare namespace ProductCategoriesClient {
     export type Options = BaseClientOptions;
@@ -25,22 +25,14 @@ export class ProductCategoriesClient {
     /**
      * @param {ProductCategoriesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
      *     await client.business.productCategories.list()
      */
-    public list(
-        requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.ListProductCategoriesResponse> {
+    public list(requestOptions?: ProductCategoriesClient.RequestOptions): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
-    private async __list(
-        requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.ListProductCategoriesResponse>> {
+    private async __list(requestOptions?: ProductCategoriesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -64,59 +56,33 @@ export class ProductCategoriesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.ListProductCategoriesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/product-categories");
     }
 
     /**
-     * @param {FiveOneEat.business.StoreProductCategoryRequest} request
      * @param {ProductCategoriesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
-     *     await client.business.productCategories.create({
-     *         name: "name"
-     *     })
+     *     await client.business.productCategories.create()
      */
-    public create(
-        request: FiveOneEat.business.StoreProductCategoryRequest,
-        requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.CreateProductCategoriesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    public create(requestOptions?: ProductCategoriesClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__create(requestOptions));
     }
 
     private async __create(
-        request: FiveOneEat.business.StoreProductCategoryRequest,
         requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.CreateProductCategoriesResponse>> {
+    ): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -132,10 +98,7 @@ export class ProductCategoriesClient {
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -143,43 +106,23 @@ export class ProductCategoriesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.CreateProductCategoriesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/product-categories");
     }
 
     /**
-     * @param {FiveOneEat.business.UpdateProductCategoryRequest} request
+     * @param {FiveOneEat.business.UpdateProductCategoriesRequest} request
      * @param {ProductCategoriesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.productCategories.update({
@@ -187,17 +130,17 @@ export class ProductCategoriesClient {
      *     })
      */
     public update(
-        request: FiveOneEat.business.UpdateProductCategoryRequest,
+        request: FiveOneEat.business.UpdateProductCategoriesRequest,
         requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.UpdateProductCategoriesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
     private async __update(
-        request: FiveOneEat.business.UpdateProductCategoryRequest,
+        request: FiveOneEat.business.UpdateProductCategoriesRequest,
         requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.UpdateProductCategoriesResponse>> {
-        const { productCategory, ..._body } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { productCategory } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -213,10 +156,7 @@ export class ProductCategoriesClient {
             ),
             method: "PUT",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -224,32 +164,15 @@ export class ProductCategoriesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.UpdateProductCategoriesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -264,11 +187,6 @@ export class ProductCategoriesClient {
      * @param {FiveOneEat.business.DeleteProductCategoriesRequest} request
      * @param {ProductCategoriesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
      *     await client.business.productCategories.delete({
      *         productCategory: "productCategory"
@@ -277,14 +195,14 @@ export class ProductCategoriesClient {
     public delete(
         request: FiveOneEat.business.DeleteProductCategoriesRequest,
         requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.DeleteProductCategoriesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
     private async __delete(
         request: FiveOneEat.business.DeleteProductCategoriesRequest,
         requestOptions?: ProductCategoriesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.DeleteProductCategoriesResponse>> {
+    ): Promise<core.WithRawResponse<void>> {
         const { productCategory } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -309,32 +227,15 @@ export class ProductCategoriesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.DeleteProductCategoriesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(

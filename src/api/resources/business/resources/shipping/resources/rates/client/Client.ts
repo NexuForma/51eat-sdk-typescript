@@ -10,7 +10,7 @@ import * as core from "../../../../../../../../core/index.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
-import * as FiveOneEat from "../../../../../../../index.js";
+import type * as FiveOneEat from "../../../../../../../index.js";
 
 export declare namespace RatesClient {
     export type Options = BaseClientOptions;
@@ -28,20 +28,14 @@ export class RatesClient {
     /**
      * @param {RatesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     *
      * @example
      *     await client.business.shipping.rates.list()
      */
-    public list(
-        requestOptions?: RatesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.shipping.ListRatesResponse> {
+    public list(requestOptions?: RatesClient.RequestOptions): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
-    private async __list(
-        requestOptions?: RatesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.shipping.ListRatesResponse>> {
+    private async __list(requestOptions?: RatesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -65,53 +59,31 @@ export class RatesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.shipping.ListRatesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/business/shipping/rates");
     }
 
     /**
-     * @param {FiveOneEat.business.shipping.StoreShippingRateRequest} request
      * @param {RatesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
-     *     await client.business.shipping.rates.create({
-     *         name: "name",
-     *         rate_type: "flat"
-     *     })
+     *     await client.business.shipping.rates.create()
      */
-    public create(
-        request: FiveOneEat.business.shipping.StoreShippingRateRequest,
-        requestOptions?: RatesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.shipping.CreateRatesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    public create(requestOptions?: RatesClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__create(requestOptions));
     }
 
-    private async __create(
-        request: FiveOneEat.business.shipping.StoreShippingRateRequest,
-        requestOptions?: RatesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.shipping.CreateRatesResponse>> {
+    private async __create(requestOptions?: RatesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -127,10 +99,7 @@ export class RatesClient {
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -138,63 +107,41 @@ export class RatesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.shipping.CreateRatesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/business/shipping/rates");
     }
 
     /**
-     * @param {FiveOneEat.business.shipping.UpdateShippingRateRequest} request
+     * @param {FiveOneEat.business.shipping.UpdateRatesRequest} request
      * @param {RatesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
      *     await client.business.shipping.rates.update({
-     *         shippingRate: "shippingRate",
-     *         name: "name",
-     *         rate_type: "flat"
+     *         shippingRate: "shippingRate"
      *     })
      */
     public update(
-        request: FiveOneEat.business.shipping.UpdateShippingRateRequest,
+        request: FiveOneEat.business.shipping.UpdateRatesRequest,
         requestOptions?: RatesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.shipping.UpdateRatesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
     private async __update(
-        request: FiveOneEat.business.shipping.UpdateShippingRateRequest,
+        request: FiveOneEat.business.shipping.UpdateRatesRequest,
         requestOptions?: RatesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.shipping.UpdateRatesResponse>> {
-        const { shippingRate, ..._body } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { shippingRate } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -210,10 +157,7 @@ export class RatesClient {
             ),
             method: "PUT",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -221,32 +165,15 @@ export class RatesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.shipping.UpdateRatesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -260,10 +187,6 @@ export class RatesClient {
     /**
      * @param {FiveOneEat.business.shipping.DeleteRatesRequest} request
      * @param {RatesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.business.shipping.rates.delete({
@@ -309,20 +232,11 @@ export class RatesClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(

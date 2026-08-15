@@ -4,8 +4,8 @@ export interface GetLabelRatesProductOrdersResponseItem {
     provider_rate_id: string;
     carrier: string;
     service: string;
-    amount_cents: number;
     amount: string;
+    amount_cents: number;
     currency: string;
     carrier_delivery_days: number | null;
     estimated_delivery_date: string | null;

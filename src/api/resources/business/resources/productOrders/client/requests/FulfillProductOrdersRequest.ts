@@ -7,6 +7,5 @@
  *     }
  */
 export interface FulfillProductOrdersRequest {
-    /** The product order ID */
     productOrder: string;
 }

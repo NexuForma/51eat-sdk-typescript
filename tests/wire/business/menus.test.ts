@@ -15,7 +15,7 @@ describe("MenusClient", () => {
                 name: "name",
                 description: "description",
                 created_at: "2024-01-15T09:30:00Z",
-                groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
+                groups: [{ key: "value" }],
             },
         };
 
@@ -74,7 +74,7 @@ describe("MenusClient", () => {
                 name: "name",
                 description: "description",
                 created_at: "2024-01-15T09:30:00Z",
-                groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
+                groups: [{ key: "value" }],
             },
         };
 
@@ -169,7 +169,7 @@ describe("MenusClient", () => {
                 name: "name",
                 description: "description",
                 created_at: "2024-01-15T09:30:00Z",
-                groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
+                groups: [{ key: "value" }],
             },
         };
 
@@ -281,7 +281,7 @@ describe("MenusClient", () => {
                 name: "name",
                 description: "description",
                 created_at: "2024-01-15T09:30:00Z",
-                groups: [{ id: "id", menu_id: "menu_id", name: "name", description: null, sort_order: 1 }],
+                groups: [{ key: "value" }],
             },
         };
 

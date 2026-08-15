@@ -13,6 +13,7 @@ import * as errors from "../../../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../../../index.js";
 import { ImagesClient } from "../resources/images/client/Client.js";
 import { InventoryClient } from "../resources/inventory/client/Client.js";
+import { PricesClient } from "../resources/prices/client/Client.js";
 
 export declare namespace VariantsClient {
     export type Options = BaseClientOptions;
@@ -22,23 +23,28 @@ export declare namespace VariantsClient {
 
 export class VariantsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<VariantsClient.Options>;
-    protected _images: ImagesClient | undefined;
+    protected _prices: PricesClient | undefined;
     protected _inventory: InventoryClient | undefined;
+    protected _images: ImagesClient | undefined;
 
     constructor(options: VariantsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
-    public get images(): ImagesClient {
-        return (this._images ??= new ImagesClient(this._options));
+    public get prices(): PricesClient {
+        return (this._prices ??= new PricesClient(this._options));
     }
 
     public get inventory(): InventoryClient {
         return (this._inventory ??= new InventoryClient(this._options));
     }
 
+    public get images(): ImagesClient {
+        return (this._images ??= new ImagesClient(this._options));
+    }
+
     /**
-     * @param {FiveOneEat.business.products.StoreProductVariantRequest} request
+     * @param {FiveOneEat.business.products.StoreVariantRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -49,19 +55,18 @@ export class VariantsClient {
      * @example
      *     await client.business.products.variants.create({
      *         product: "product",
-     *         name: "name",
-     *         price: 1.1
+     *         name: "name"
      *     })
      */
     public create(
-        request: FiveOneEat.business.products.StoreProductVariantRequest,
+        request: FiveOneEat.business.products.StoreVariantRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.business.products.CreateVariantsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: FiveOneEat.business.products.StoreProductVariantRequest,
+        request: FiveOneEat.business.products.StoreVariantRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.business.products.CreateVariantsResponse>> {
         const { product, ..._body } = request;
@@ -128,7 +133,7 @@ export class VariantsClient {
     }
 
     /**
-     * @param {FiveOneEat.business.products.UpdateProductVariantRequest} request
+     * @param {FiveOneEat.business.products.UpdateVariantRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -138,18 +143,19 @@ export class VariantsClient {
      *
      * @example
      *     await client.business.products.variants.update({
-     *         variant: "variant"
+     *         variant: "variant",
+     *         name: "name"
      *     })
      */
     public update(
-        request: FiveOneEat.business.products.UpdateProductVariantRequest,
+        request: FiveOneEat.business.products.UpdateVariantRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): core.HttpResponsePromise<FiveOneEat.business.products.UpdateVariantsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
     private async __update(
-        request: FiveOneEat.business.products.UpdateProductVariantRequest,
+        request: FiveOneEat.business.products.UpdateVariantRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.business.products.UpdateVariantsResponse>> {
         const { variant, ..._body } = request;
@@ -232,14 +238,14 @@ export class VariantsClient {
     public delete(
         request: FiveOneEat.business.products.DeleteVariantsRequest,
         requestOptions?: VariantsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.products.DeleteVariantsResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
     private async __delete(
         request: FiveOneEat.business.products.DeleteVariantsRequest,
         requestOptions?: VariantsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.products.DeleteVariantsResponse>> {
+    ): Promise<core.WithRawResponse<void>> {
         const { variant } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -264,10 +270,7 @@ export class VariantsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.products.DeleteVariantsResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

@@ -8,8 +8,6 @@
  *     }
  */
 export interface DeleteImagesRequest {
-    /** The variant ID */
     variant: string;
-    /** The image ID */
     image: string;
 }

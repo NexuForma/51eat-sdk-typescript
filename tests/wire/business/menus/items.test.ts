@@ -21,18 +21,8 @@ describe("ItemsClient", () => {
                 image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
-                variations: [
-                    {
-                        id: "id",
-                        menu_item_id: "menu_item_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_default: true,
-                        sort_order: 1,
-                    },
-                ],
-                modifiers: [{ id: "id", name: "name", description: null, price: 1.1, is_default: true }],
+                variations: [{ key: "value" }],
+                modifiers: [{ key: "value" }],
             },
         };
 
@@ -150,18 +140,8 @@ describe("ItemsClient", () => {
                 image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
-                variations: [
-                    {
-                        id: "id",
-                        menu_item_id: "menu_item_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_default: true,
-                        sort_order: 1,
-                    },
-                ],
-                modifiers: [{ id: "id", name: "name", description: null, price: 1.1, is_default: true }],
+                variations: [{ key: "value" }],
+                modifiers: [{ key: "value" }],
             },
         };
 
@@ -299,18 +279,8 @@ describe("ItemsClient", () => {
                 image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
-                variations: [
-                    {
-                        id: "id",
-                        menu_item_id: "menu_item_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_default: true,
-                        sort_order: 1,
-                    },
-                ],
-                modifiers: [{ id: "id", name: "name", description: null, price: 1.1, is_default: true }],
+                variations: [{ key: "value" }],
+                modifiers: [{ key: "value" }],
             },
         };
 
@@ -433,18 +403,8 @@ describe("ItemsClient", () => {
                 image: { id: "id", url: "url" },
                 tags: [{ id: "id", name: "name", slug: "slug", color: "color" }],
                 allergens: [{ id: "id", name: "name", slug: "slug", icon: null }],
-                variations: [
-                    {
-                        id: "id",
-                        menu_item_id: "menu_item_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_default: true,
-                        sort_order: 1,
-                    },
-                ],
-                modifiers: [{ id: "id", name: "name", description: null, price: 1.1, is_default: true }],
+                variations: [{ key: "value" }],
+                modifiers: [{ key: "value" }],
             },
         };
 

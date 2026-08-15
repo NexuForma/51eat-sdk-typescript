@@ -16,50 +16,48 @@ describe("ShopClient", () => {
                     name: "name",
                     slug: "slug",
                     description: "description",
-                    product_type: "product_type",
-                    base_price: 1.1,
-                    compare_at_price: 1.1,
-                    sku: "sku",
-                    track_inventory: true,
-                    inventory_policy: "inventory_policy",
-                    fulfillment_type: "fulfillment_type",
-                    requires_shipping: true,
-                    is_pre_order: true,
-                    is_featured: true,
-                    sort_order: 1,
+                    is_active: "is_active",
+                    published_at: "published_at",
                     variants: [
                         {
                             id: "id",
                             name: "name",
-                            price: 1.1,
-                            compare_at_price: null,
-                            sku: null,
-                            inventory_quantity: 1,
-                            is_default: true,
-                            sort_order: 1,
-                            option1: null,
-                            option2: null,
-                            option3: null,
+                            sku: "sku",
+                            is_default: "is_default",
+                            weight: "weight",
+                            weight_unit: "weight_unit",
+                            sort_order: "sort_order",
+                            created_at: "created_at",
+                            updated_at: "updated_at",
                         },
                     ],
-                    images: [{ key: "value" }],
-                    categories: [
-                        { id: "id", name: "name", slug: "slug", description: null, parent_id: null, sort_order: 1 },
-                    ],
+                    default_variant: {
+                        id: "id",
+                        name: "name",
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
+                        created_at: "created_at",
+                        updated_at: "updated_at",
+                    },
+                    created_at: "created_at",
+                    updated_at: "updated_at",
                 },
             ],
         };
 
         server
             .mockEndpoint()
-            .get("/customer/businesses/katzs-deli/shop")
+            .get("/customer/businesses/business/shop")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.customer.shop.listProducts({
-            business: "katzs-deli",
+            business: "business",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -85,6 +83,27 @@ describe("ShopClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("listProducts (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/business/shop")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.shop.listProducts({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
     test("getProduct (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -95,49 +114,66 @@ describe("ShopClient", () => {
                 name: "name",
                 slug: "slug",
                 description: "description",
-                product_type: "product_type",
-                base_price: 1.1,
-                compare_at_price: 1.1,
-                sku: "sku",
-                track_inventory: true,
-                inventory_policy: "inventory_policy",
-                fulfillment_type: "fulfillment_type",
-                requires_shipping: true,
-                is_pre_order: true,
-                is_featured: true,
-                sort_order: 1,
+                is_active: "is_active",
+                published_at: "published_at",
                 variants: [
                     {
                         id: "id",
                         name: "name",
-                        price: 1.1,
-                        compare_at_price: null,
-                        sku: null,
-                        inventory_quantity: 1,
-                        is_default: true,
-                        sort_order: 1,
-                        option1: null,
-                        option2: null,
-                        option3: null,
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
+                        created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
-                images: [{ key: "value" }],
-                categories: [
-                    { id: "id", name: "name", slug: "slug", description: null, parent_id: null, sort_order: 1 },
-                ],
+                default_variant: {
+                    id: "id",
+                    name: "name",
+                    sku: "sku",
+                    is_default: "is_default",
+                    weight: "weight",
+                    weight_unit: "weight_unit",
+                    sort_order: "sort_order",
+                    prices: [
+                        {
+                            id: "id",
+                            price_list_id: "price_list_id",
+                            amount_cents: "amount_cents",
+                            compare_at_cents: "compare_at_cents",
+                            currency: "currency",
+                            min_quantity: "min_quantity",
+                        },
+                    ],
+                    inventory_levels: [
+                        {
+                            id: "id",
+                            sales_channel_id: "sales_channel_id",
+                            quantity: "quantity",
+                            tracks_inventory: "tracks_inventory",
+                            allows_holds: "allows_holds",
+                        },
+                    ],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
         server
             .mockEndpoint()
-            .get("/customer/businesses/katzs-deli/shop/products/product")
+            .get("/customer/businesses/business/shop/products/product")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.customer.shop.getProduct({
-            business: "katzs-deli",
+            business: "business",
             product: "product",
         });
         expect(response).toEqual(rawResponseBody);
@@ -165,33 +201,44 @@ describe("ShopClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
+    test("getProduct (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/business/shop/products/product")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.shop.getProduct({
+                business: "business",
+                product: "product",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
+    });
+
     test("listCategories (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = {
-            data: [
-                {
-                    id: "id",
-                    name: "name",
-                    slug: "slug",
-                    description: "description",
-                    parent_id: "parent_id",
-                    sort_order: 1,
-                },
-            ],
-        };
+        const rawResponseBody = { data: [{ id: "id", name: "name", slug: "slug", products_count: "products_count" }] };
 
         server
             .mockEndpoint()
-            .get("/customer/businesses/katzs-deli/shop/categories")
+            .get("/customer/businesses/business/shop/categories")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.customer.shop.listCategories({
-            business: "katzs-deli",
+            business: "business",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -215,5 +262,26 @@ describe("ShopClient", () => {
                 business: "business",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
+    test("listCategories (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/business/shop/categories")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.shop.listCategories({
+                business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 });

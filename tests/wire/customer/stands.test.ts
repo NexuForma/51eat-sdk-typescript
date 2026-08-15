@@ -27,18 +27,13 @@ describe("StandsClient", () => {
                         id: "id",
                         name: "name",
                         slug: "slug",
-                        description: null,
-                        product_type: "product_type",
-                        base_price: 1.1,
-                        compare_at_price: null,
-                        sku: null,
-                        track_inventory: true,
-                        inventory_policy: null,
-                        fulfillment_type: null,
-                        requires_shipping: true,
-                        is_pre_order: true,
-                        is_featured: true,
-                        sort_order: 1,
+                        description: "description",
+                        is_active: "is_active",
+                        published_at: "published_at",
+                        metadata: "metadata",
+                        product_category_id: "product_category_id",
+                        created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
             },
@@ -67,228 +62,27 @@ describe("StandsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
-    test("createPaymentIntent (1)", async () => {
+    test("checkout", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = {
-            client_secret: "client_secret",
-            status: "status",
-            payment_intent_id: "payment_intent_id",
-            subtotal: 1.1,
-            tax: 1.1,
-            platform_fee: 1.1,
-            total: 1.1,
-        };
+        server.mockEndpoint().post("/customer/stands/stand/checkout").respondWith().statusCode(200).build();
 
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/payment-intent")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        const response = await client.customer.stands.checkout({
+            stand: "stand",
+        });
+        expect(response).toEqual(undefined);
+    });
+
+    test("createPaymentIntent", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        server.mockEndpoint().post("/customer/stands/stand/payment-intent").respondWith().statusCode(200).build();
 
         const response = await client.customer.stands.createPaymentIntent({
             stand: "stand",
         });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("createPaymentIntent (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/payment-intent")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.createPaymentIntent({
-                stand: "stand",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("createPaymentIntent (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/payment-intent")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.createPaymentIntent({
-                stand: "stand",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("createPaymentIntent (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/payment-intent")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.createPaymentIntent({
-                stand: "stand",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
-    });
-
-    test("checkout (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
-        const rawResponseBody = {
-            data: {
-                id: "id",
-                order_number: "order_number",
-                status: "status",
-                fulfillment_status: "fulfillment_status",
-                fulfillment_method: "fulfillment_method",
-                discount_amount: "discount_amount",
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                shipping_address: [{ key: "value" }],
-                billing_address: [{ key: "value" }],
-                business: { id: "id", name: "name", handle: "handle" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: "unit_price",
-                        total_price: "total_price",
-                        product_snapshot: null,
-                    },
-                ],
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-            },
-        };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/checkout")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.customer.stands.checkout({
-            stand: "stand",
-            payment_intent_id: "payment_intent_id",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("checkout (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/checkout")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.checkout({
-                stand: "stand",
-                payment_intent_id: "payment_intent_id",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("checkout (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/checkout")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.checkout({
-                stand: "stand",
-                payment_intent_id: "payment_intent_id",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("checkout (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { payment_intent_id: "payment_intent_id" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/stands/stand/checkout")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.stands.checkout({
-                stand: "stand",
-                payment_intent_id: "payment_intent_id",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+        expect(response).toEqual(undefined);
     });
 });

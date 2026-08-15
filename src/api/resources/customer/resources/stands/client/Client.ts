@@ -94,15 +94,71 @@ export class StandsClient {
     }
 
     /**
-     * Returns client_secret, price breakdown, and tax calculation for use with Stripe SDK.
-     * Shipping is always zero for stand orders.
-     *
-     * @param {FiveOneEat.customer.CreatePaymentIntentStandsRequest} request
+     * @param {FiveOneEat.customer.CheckoutStandsRequest} request
      * @param {StandsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     * @example
+     *     await client.customer.stands.checkout({
+     *         stand: "stand"
+     *     })
+     */
+    public checkout(
+        request: FiveOneEat.customer.CheckoutStandsRequest,
+        requestOptions?: StandsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__checkout(request, requestOptions));
+    }
+
+    private async __checkout(
+        request: FiveOneEat.customer.CheckoutStandsRequest,
+        requestOptions?: StandsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const { stand } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/stands/${core.url.encodePathParam(stand)}/checkout`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/customer/stands/{stand}/checkout",
+        );
+    }
+
+    /**
+     * @param {FiveOneEat.customer.CreatePaymentIntentStandsRequest} request
+     * @param {StandsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.customer.stands.createPaymentIntent({
@@ -112,14 +168,14 @@ export class StandsClient {
     public createPaymentIntent(
         request: FiveOneEat.customer.CreatePaymentIntentStandsRequest,
         requestOptions?: StandsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.CreatePaymentIntentStandsResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__createPaymentIntent(request, requestOptions));
     }
 
     private async __createPaymentIntent(
         request: FiveOneEat.customer.CreatePaymentIntentStandsRequest,
         requestOptions?: StandsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.CreatePaymentIntentStandsResponse>> {
+    ): Promise<core.WithRawResponse<void>> {
         const { stand } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -144,30 +200,15 @@ export class StandsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.CreatePaymentIntentStandsResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -175,92 +216,6 @@ export class StandsClient {
             _response.rawResponse,
             "POST",
             "/customer/stands/{stand}/payment-intent",
-        );
-    }
-
-    /**
-     * @param {FiveOneEat.customer.SelfCheckoutRequest} request
-     * @param {StandsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.customer.stands.checkout({
-     *         stand: "stand",
-     *         payment_intent_id: "payment_intent_id"
-     *     })
-     */
-    public checkout(
-        request: FiveOneEat.customer.SelfCheckoutRequest,
-        requestOptions?: StandsClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.CheckoutStandsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__checkout(request, requestOptions));
-    }
-
-    private async __checkout(
-        request: FiveOneEat.customer.SelfCheckoutRequest,
-        requestOptions?: StandsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.CheckoutStandsResponse>> {
-        const { stand, ..._body } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.FiveOneEatEnvironment.Production,
-                `customer/stands/${core.url.encodePathParam(stand)}/checkout`,
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: _body,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.CheckoutStandsResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/customer/stands/{stand}/checkout",
         );
     }
 }
