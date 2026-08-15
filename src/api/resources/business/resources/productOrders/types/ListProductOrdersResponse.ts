@@ -3,5 +3,5 @@
 import type * as FiveOneEat from "../../../../../index.js";
 
 export interface ListProductOrdersResponse {
-    data: FiveOneEat.BusinessProductOrder[];
+    data: FiveOneEat.OrderResource[];
 }

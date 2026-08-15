@@ -6,7 +6,7 @@ export interface InternalServerErrorBody {
 
 export namespace InternalServerErrorBody {
     export const Message = {
-        UnableToProcessPaymentPleaseTryAgain: "Unable to process payment. Please try again.",
+        FailedToUploadImage: "Failed to upload image.",
     } as const;
     export type Message = (typeof Message)[keyof typeof Message];
 }

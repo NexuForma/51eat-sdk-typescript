@@ -7,6 +7,5 @@
  *     }
  */
 export interface MarkPickedUpProductOrdersRequest {
-    /** The product order ID */
     productOrder: string;
 }

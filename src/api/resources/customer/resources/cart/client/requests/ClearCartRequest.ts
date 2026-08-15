@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         business: "katzs-deli"
+ *         business: "business"
  *     }
  */
 export interface ClearCartRequest {
-    /** The business handle */
+    /** The business ID */
     business: string;
 }

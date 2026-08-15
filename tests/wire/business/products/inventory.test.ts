@@ -10,13 +10,15 @@ describe("InventoryClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            data: {
-                product_id: "product_id",
-                total_inventory: 1,
-                track_inventory: true,
-                inventory_policy: "inventory_policy",
-                variants: "variants",
-            },
+            data: [
+                {
+                    id: "id",
+                    sales_channel_id: "sales_channel_id",
+                    quantity: "quantity",
+                    tracks_inventory: "tracks_inventory",
+                    allows_holds: "allows_holds",
+                },
+            ],
         };
 
         server
@@ -94,26 +96,5 @@ describe("InventoryClient", () => {
                 product: "product",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("summary (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/business/products/product/inventory")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.products.inventory.summary({
-                product: "product",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

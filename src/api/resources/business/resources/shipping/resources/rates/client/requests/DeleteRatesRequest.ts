@@ -7,6 +7,5 @@
  *     }
  */
 export interface DeleteRatesRequest {
-    /** The shipping rate ID */
     shippingRate: string;
 }

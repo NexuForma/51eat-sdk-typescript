@@ -17,55 +17,22 @@ describe("ProductOrdersClient", () => {
                     status: "status",
                     fulfillment_status: "fulfillment_status",
                     fulfillment_method: "fulfillment_method",
-                    fulfillment_type: "fulfillment_type",
-                    discount_amount: 1.1,
-                    transaction: {
-                        ulid: "ulid",
-                        status: "status",
-                        subtotal: "subtotal",
-                        tax_amount: "tax_amount",
-                        shipping_amount: "shipping_amount",
-                        platform_fee: "platform_fee",
-                        total_amount: "total_amount",
-                        refunded_amount: "refunded_amount",
-                        customer_name: null,
-                        customer_email: "customer_email",
-                        stripe_payment_intent_id: null,
-                        payment_completed_at: null,
-                        refunded_at: null,
-                        refund_reason: null,
-                    },
-                    customer_phone: "customer_phone",
-                    shipping_address: { key: "value" },
-                    billing_address: { key: "value" },
+                    subtotal_cents: "subtotal_cents",
+                    discount_cents: "discount_cents",
+                    shipping_cents: "shipping_cents",
+                    tax_cents: "tax_cents",
+                    platform_fee_cents: "platform_fee_cents",
+                    total_cents: "total_cents",
+                    currency: "currency",
+                    shipping_address: "shipping_address",
+                    notes: "notes",
+                    fulfilled_at: "fulfilled_at",
+                    refunded_at: "refunded_at",
                     tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    pickup_date: "pickup_date",
-                    pickup_time: "pickup_time",
-                    user: { id: "id", name: "name", email: "email" },
-                    items: [
-                        {
-                            id: "id",
-                            product_id: "product_id",
-                            variant_id: null,
-                            quantity: 1,
-                            unit_price: 1.1,
-                            total_price: 1.1,
-                            product_snapshot: { key: "value" },
-                        },
-                    ],
-                    shipment: {
-                        id: "id",
-                        carrier: null,
-                        tracking_number: null,
-                        tracking_url: null,
-                        status: null,
-                        shipped_at: null,
-                    },
-                    fulfilled_at: "2024-01-15T09:30:00Z",
-                    picked_up_at: "2024-01-15T09:30:00Z",
-                    created_at: "2024-01-15T09:30:00Z",
-                    updated_at: "2024-01-15T09:30:00Z",
+                    shipments: "shipments",
+                    items: [],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
                 },
             ],
         };
@@ -112,55 +79,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -220,27 +154,6 @@ describe("ProductOrdersClient", () => {
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 
-    test("get (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/business/product-orders/productOrder")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.get({
-                productOrder: "productOrder",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
     test("fulfill (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -252,55 +165,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -360,27 +240,6 @@ describe("ProductOrdersClient", () => {
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 
-    test("fulfill (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .put("/business/product-orders/productOrder/fulfill")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.fulfill({
-                productOrder: "productOrder",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
     test("markPickedUp (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -392,55 +251,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -500,31 +326,10 @@ describe("ProductOrdersClient", () => {
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 
-    test("markPickedUp (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .put("/business/product-orders/productOrder/mark-picked-up")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.markPickedUp({
-                productOrder: "productOrder",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
     test("addTracking (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { tracking_number: "tracking_number", carrier: "carrier" };
+        const rawRequestBody = { carrier: "carrier", tracking_number: "tracking_number" };
         const rawResponseBody = {
             data: {
                 id: "id",
@@ -532,55 +337,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -595,8 +367,8 @@ describe("ProductOrdersClient", () => {
 
         const response = await client.business.productOrders.addTracking({
             productOrder: "productOrder",
-            tracking_number: "tracking_number",
             carrier: "carrier",
+            tracking_number: "tracking_number",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -604,7 +376,7 @@ describe("ProductOrdersClient", () => {
     test("addTracking (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { tracking_number: "tracking_number", carrier: "carrier" };
+        const rawRequestBody = { carrier: "carrier", tracking_number: "tracking_number" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -619,8 +391,8 @@ describe("ProductOrdersClient", () => {
         await expect(async () => {
             return await client.business.productOrders.addTracking({
                 productOrder: "productOrder",
-                tracking_number: "tracking_number",
                 carrier: "carrier",
+                tracking_number: "tracking_number",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -628,7 +400,7 @@ describe("ProductOrdersClient", () => {
     test("addTracking (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { tracking_number: "tracking_number", carrier: "carrier" };
+        const rawRequestBody = { carrier: "carrier", tracking_number: "tracking_number" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -643,8 +415,8 @@ describe("ProductOrdersClient", () => {
         await expect(async () => {
             return await client.business.productOrders.addTracking({
                 productOrder: "productOrder",
-                tracking_number: "tracking_number",
                 carrier: "carrier",
+                tracking_number: "tracking_number",
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -652,31 +424,7 @@ describe("ProductOrdersClient", () => {
     test("addTracking (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { tracking_number: "tracking_number", carrier: "carrier" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/business/product-orders/productOrder/tracking")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.addTracking({
-                productOrder: "productOrder",
-                tracking_number: "tracking_number",
-                carrier: "carrier",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("addTracking (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { tracking_number: "tracking_number", carrier: "carrier" };
+        const rawRequestBody = { carrier: "carrier", tracking_number: "tracking_number" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -691,8 +439,8 @@ describe("ProductOrdersClient", () => {
         await expect(async () => {
             return await client.business.productOrders.addTracking({
                 productOrder: "productOrder",
-                tracking_number: "tracking_number",
                 carrier: "carrier",
+                tracking_number: "tracking_number",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -708,55 +456,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -830,28 +545,6 @@ describe("ProductOrdersClient", () => {
             .post("/business/product-orders/productOrder/refund")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.refund({
-                productOrder: "productOrder",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("refund (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/business/product-orders/productOrder/refund")
-            .jsonBody(rawRequestBody)
-            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -872,8 +565,8 @@ describe("ProductOrdersClient", () => {
                 provider_rate_id: "provider_rate_id",
                 carrier: "carrier",
                 service: "service",
-                amount_cents: 1,
                 amount: "amount",
+                amount_cents: 1,
                 currency: "currency",
                 carrier_delivery_days: 1,
                 estimated_delivery_date: "estimated_delivery_date",
@@ -946,27 +639,6 @@ describe("ProductOrdersClient", () => {
             .mockEndpoint()
             .get("/business/product-orders/productOrder/label-rates")
             .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.getLabelRates({
-                productOrder: "productOrder",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("getLabelRates (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/business/product-orders/productOrder/label-rates")
-            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -989,55 +661,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                fulfillment_type: "fulfillment_type",
-                discount_amount: 1.1,
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
-                customer_phone: "customer_phone",
-                shipping_address: { key: "value" },
-                billing_address: { key: "value" },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                pickup_date: "pickup_date",
-                pickup_time: "pickup_time",
-                user: { id: "id", name: "name", email: "email" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: 1.1,
-                        total_price: 1.1,
-                        product_snapshot: { key: "value" },
-                    },
-                ],
-                shipment: {
-                    id: "id",
-                    carrier: "carrier",
-                    tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    status: "status",
-                    shipped_at: "2024-01-15T09:30:00Z",
-                },
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                picked_up_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -1104,29 +743,6 @@ describe("ProductOrdersClient", () => {
     });
 
     test("purchaseLabel (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { provider_rate_id: "provider_rate_id" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/business/product-orders/productOrder/purchase-label")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.productOrders.purchaseLabel({
-                productOrder: "productOrder",
-                provider_rate_id: "provider_rate_id",
-            });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("purchaseLabel (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { provider_rate_id: "provider_rate_id" };

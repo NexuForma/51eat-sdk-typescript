@@ -17,41 +17,22 @@ describe("ProductOrdersClient", () => {
                     status: "status",
                     fulfillment_status: "fulfillment_status",
                     fulfillment_method: "fulfillment_method",
-                    discount_amount: "discount_amount",
-                    transaction: {
-                        ulid: "ulid",
-                        status: "status",
-                        subtotal: "subtotal",
-                        tax_amount: "tax_amount",
-                        shipping_amount: "shipping_amount",
-                        platform_fee: "platform_fee",
-                        total_amount: "total_amount",
-                        refunded_amount: "refunded_amount",
-                        customer_name: null,
-                        customer_email: "customer_email",
-                        stripe_payment_intent_id: null,
-                        payment_completed_at: null,
-                        refunded_at: null,
-                        refund_reason: null,
-                    },
+                    subtotal_cents: "subtotal_cents",
+                    discount_cents: "discount_cents",
+                    shipping_cents: "shipping_cents",
+                    tax_cents: "tax_cents",
+                    platform_fee_cents: "platform_fee_cents",
+                    total_cents: "total_cents",
+                    currency: "currency",
+                    shipping_address: "shipping_address",
+                    notes: "notes",
+                    fulfilled_at: "fulfilled_at",
+                    refunded_at: "refunded_at",
                     tracking_number: "tracking_number",
-                    tracking_url: "tracking_url",
-                    shipping_address: [],
-                    billing_address: [],
-                    business: { id: "id", name: "name", handle: "handle" },
-                    items: [
-                        {
-                            id: "id",
-                            product_id: "product_id",
-                            variant_id: null,
-                            quantity: 1,
-                            unit_price: "unit_price",
-                            total_price: "total_price",
-                            product_snapshot: null,
-                        },
-                    ],
-                    fulfilled_at: "2024-01-15T09:30:00Z",
-                    created_at: "2024-01-15T09:30:00Z",
+                    shipments: "shipments",
+                    items: [],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
                 },
             ],
         };
@@ -98,41 +79,22 @@ describe("ProductOrdersClient", () => {
                 status: "status",
                 fulfillment_status: "fulfillment_status",
                 fulfillment_method: "fulfillment_method",
-                discount_amount: "discount_amount",
-                transaction: {
-                    ulid: "ulid",
-                    status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
-                    customer_name: "customer_name",
-                    customer_email: "customer_email",
-                    stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
-                    refund_reason: "refund_reason",
-                },
+                subtotal_cents: "subtotal_cents",
+                discount_cents: "discount_cents",
+                shipping_cents: "shipping_cents",
+                tax_cents: "tax_cents",
+                platform_fee_cents: "platform_fee_cents",
+                total_cents: "total_cents",
+                currency: "currency",
+                shipping_address: "shipping_address",
+                notes: "notes",
+                fulfilled_at: "fulfilled_at",
+                refunded_at: "refunded_at",
                 tracking_number: "tracking_number",
-                tracking_url: "tracking_url",
-                shipping_address: [{ key: "value" }],
-                billing_address: [{ key: "value" }],
-                business: { id: "id", name: "name", handle: "handle" },
-                items: [
-                    {
-                        id: "id",
-                        product_id: "product_id",
-                        variant_id: null,
-                        quantity: 1,
-                        unit_price: "unit_price",
-                        total_price: "total_price",
-                        product_snapshot: null,
-                    },
-                ],
-                fulfilled_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
+                shipments: "shipments",
+                items: [{ key: "value" }],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -181,7 +143,7 @@ describe("ProductOrdersClient", () => {
             .mockEndpoint()
             .get("/customer/product-orders/productOrder")
             .respondWith()
-            .statusCode(404)
+            .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -189,6 +151,6 @@ describe("ProductOrdersClient", () => {
             return await client.customer.productOrders.get({
                 productOrder: "productOrder",
             });
-        }).rejects.toThrow(FiveOneEat.NotFoundError);
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
 });

@@ -3,5 +3,5 @@
 import type * as FiveOneEat from "../../../../../../../index.js";
 
 export interface UpdateVariantsResponse {
-    data: FiveOneEat.BusinessProductVariant;
+    data: FiveOneEat.VariantResource;
 }

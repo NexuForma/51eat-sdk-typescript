@@ -27,10 +27,11 @@ export class ShopClient {
      * @param {ShopClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.customer.shop.listProducts({
-     *         business: "katzs-deli"
+     *         business: "business"
      *     })
      */
     public listProducts(
@@ -44,10 +45,9 @@ export class ShopClient {
         request: FiveOneEat.customer.ListProductsShopRequest,
         requestOptions?: ShopClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.ListProductsShopResponse>> {
-        const { business, category_id: categoryId, featured } = request;
+        const { business, category } = request;
         const _queryParams: Record<string, unknown> = {
-            category_id: categoryId,
-            featured,
+            category,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -87,6 +87,8 @@ export class ShopClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -109,10 +111,11 @@ export class ShopClient {
      * @param {ShopClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.customer.shop.getProduct({
-     *         business: "katzs-deli",
+     *         business: "business",
      *         product: "product"
      *     })
      */
@@ -161,6 +164,8 @@ export class ShopClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,
@@ -183,10 +188,11 @@ export class ShopClient {
      * @param {ShopClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.NotFoundError}
      *
      * @example
      *     await client.customer.shop.listCategories({
-     *         business: "katzs-deli"
+     *         business: "business"
      *     })
      */
     public listCategories(
@@ -234,6 +240,8 @@ export class ShopClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,

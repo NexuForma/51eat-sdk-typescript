@@ -16,79 +16,34 @@ describe("ProductsClient", () => {
                     name: "name",
                     slug: "slug",
                     description: "description",
-                    product_type: "product_type",
-                    base_price: 1.1,
-                    compare_at_price: 1.1,
-                    sku: "sku",
-                    track_inventory: true,
-                    inventory_policy: "inventory_policy",
-                    fulfillment_type: "fulfillment_type",
-                    requires_shipping: true,
-                    length: 1.1,
-                    width: 1.1,
-                    height: 1.1,
-                    dimension_unit: "dimension_unit",
-                    weight: 1.1,
-                    weight_unit: "weight_unit",
-                    is_pre_order: true,
-                    pre_order_release_date: "pre_order_release_date",
-                    digital_download_limit: 1,
-                    digital_link_expiry_hours: 1,
-                    taxable: true,
-                    tax_code: "tax_code",
-                    is_active: true,
-                    is_featured: true,
-                    sort_order: 1,
+                    is_active: "is_active",
                     published_at: "published_at",
                     variants: [
                         {
                             id: "id",
-                            product_id: "product_id",
                             name: "name",
-                            sku: null,
-                            price: 1.1,
-                            compare_at_price: null,
-                            inventory_quantity: 1,
-                            option1: null,
-                            option2: null,
-                            option3: null,
-                            barcode: null,
-                            weight: null,
-                            weight_unit: null,
-                            requires_shipping: true,
-                            is_default: true,
-                            sort_order: 1,
-                            created_at: null,
-                            updated_at: null,
-                        },
-                    ],
-                    images: [
-                        {
-                            id: "id",
-                            url: "url",
-                            original_filename: "original_filename",
-                            alt_text: null,
-                            sort_order: 1,
-                            size: null,
+                            sku: "sku",
+                            is_default: "is_default",
+                            weight: "weight",
+                            weight_unit: "weight_unit",
+                            sort_order: "sort_order",
                             created_at: "created_at",
+                            updated_at: "updated_at",
                         },
                     ],
-                    categories: [
-                        {
-                            id: "id",
-                            name: "name",
-                            slug: "slug",
-                            description: null,
-                            parent_id: null,
-                            sort_order: 1,
-                            is_active: true,
-                            created_at: null,
-                            updated_at: null,
-                        },
-                    ],
-                    digital_files: [{ id: "id", file_name: "file_name" }],
-                    created_at: "2024-01-15T09:30:00Z",
-                    updated_at: "2024-01-15T09:30:00Z",
+                    default_variant: {
+                        id: "id",
+                        name: "name",
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
+                        created_at: "created_at",
+                        updated_at: "updated_at",
+                    },
+                    created_at: "created_at",
+                    updated_at: "updated_at",
                 },
             ],
         };
@@ -112,115 +67,63 @@ describe("ProductsClient", () => {
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
 
-    test("list (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/business/products").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.business.products.list();
-        }).rejects.toThrow(FiveOneEat.ForbiddenError);
-    });
-
-    test("list (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/business/products").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.business.products.list();
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
-    });
-
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", product_type: "physical", base_price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = {
             data: {
                 id: "id",
                 name: "name",
                 slug: "slug",
                 description: "description",
-                product_type: "product_type",
-                base_price: 1.1,
-                compare_at_price: 1.1,
-                sku: "sku",
-                track_inventory: true,
-                inventory_policy: "inventory_policy",
-                fulfillment_type: "fulfillment_type",
-                requires_shipping: true,
-                length: 1.1,
-                width: 1.1,
-                height: 1.1,
-                dimension_unit: "dimension_unit",
-                weight: 1.1,
-                weight_unit: "weight_unit",
-                is_pre_order: true,
-                pre_order_release_date: "pre_order_release_date",
-                digital_download_limit: 1,
-                digital_link_expiry_hours: 1,
-                taxable: true,
-                tax_code: "tax_code",
-                is_active: true,
-                is_featured: true,
-                sort_order: 1,
+                is_active: "is_active",
                 published_at: "published_at",
                 variants: [
                     {
                         id: "id",
-                        product_id: "product_id",
                         name: "name",
-                        sku: null,
-                        price: 1.1,
-                        compare_at_price: null,
-                        inventory_quantity: 1,
-                        option1: null,
-                        option2: null,
-                        option3: null,
-                        barcode: null,
-                        weight: null,
-                        weight_unit: null,
-                        requires_shipping: true,
-                        is_default: true,
-                        sort_order: 1,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                images: [
-                    {
-                        id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
                         created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
-                categories: [
-                    {
-                        id: "id",
-                        name: "name",
-                        slug: "slug",
-                        description: null,
-                        parent_id: null,
-                        sort_order: 1,
-                        is_active: true,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                digital_files: [{ id: "id", file_name: "file_name" }],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                default_variant: {
+                    id: "id",
+                    name: "name",
+                    sku: "sku",
+                    is_default: "is_default",
+                    weight: "weight",
+                    weight_unit: "weight_unit",
+                    sort_order: "sort_order",
+                    prices: [
+                        {
+                            id: "id",
+                            price_list_id: "price_list_id",
+                            amount_cents: "amount_cents",
+                            compare_at_cents: "compare_at_cents",
+                            currency: "currency",
+                            min_quantity: "min_quantity",
+                        },
+                    ],
+                    inventory_levels: [
+                        {
+                            id: "id",
+                            sales_channel_id: "sales_channel_id",
+                            quantity: "quantity",
+                            tracks_inventory: "tracks_inventory",
+                            allows_holds: "allows_holds",
+                        },
+                    ],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -235,8 +138,6 @@ describe("ProductsClient", () => {
 
         const response = await client.business.products.create({
             name: "name",
-            product_type: "physical",
-            base_price: 1.1,
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -244,7 +145,7 @@ describe("ProductsClient", () => {
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", product_type: "physical", base_price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -259,8 +160,6 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.create({
                 name: "name",
-                product_type: "physical",
-                base_price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -268,7 +167,7 @@ describe("ProductsClient", () => {
     test("create (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", product_type: "physical", base_price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -283,8 +182,6 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.create({
                 name: "name",
-                product_type: "physical",
-                base_price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -292,7 +189,7 @@ describe("ProductsClient", () => {
     test("create (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", product_type: "physical", base_price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -307,8 +204,6 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.create({
                 name: "name",
-                product_type: "physical",
-                base_price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -323,79 +218,53 @@ describe("ProductsClient", () => {
                 name: "name",
                 slug: "slug",
                 description: "description",
-                product_type: "product_type",
-                base_price: 1.1,
-                compare_at_price: 1.1,
-                sku: "sku",
-                track_inventory: true,
-                inventory_policy: "inventory_policy",
-                fulfillment_type: "fulfillment_type",
-                requires_shipping: true,
-                length: 1.1,
-                width: 1.1,
-                height: 1.1,
-                dimension_unit: "dimension_unit",
-                weight: 1.1,
-                weight_unit: "weight_unit",
-                is_pre_order: true,
-                pre_order_release_date: "pre_order_release_date",
-                digital_download_limit: 1,
-                digital_link_expiry_hours: 1,
-                taxable: true,
-                tax_code: "tax_code",
-                is_active: true,
-                is_featured: true,
-                sort_order: 1,
+                is_active: "is_active",
                 published_at: "published_at",
                 variants: [
                     {
                         id: "id",
-                        product_id: "product_id",
                         name: "name",
-                        sku: null,
-                        price: 1.1,
-                        compare_at_price: null,
-                        inventory_quantity: 1,
-                        option1: null,
-                        option2: null,
-                        option3: null,
-                        barcode: null,
-                        weight: null,
-                        weight_unit: null,
-                        requires_shipping: true,
-                        is_default: true,
-                        sort_order: 1,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                images: [
-                    {
-                        id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
                         created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
-                categories: [
-                    {
-                        id: "id",
-                        name: "name",
-                        slug: "slug",
-                        description: null,
-                        parent_id: null,
-                        sort_order: 1,
-                        is_active: true,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                digital_files: [{ id: "id", file_name: "file_name" }],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                default_variant: {
+                    id: "id",
+                    name: "name",
+                    sku: "sku",
+                    is_default: "is_default",
+                    weight: "weight",
+                    weight_unit: "weight_unit",
+                    sort_order: "sort_order",
+                    prices: [
+                        {
+                            id: "id",
+                            price_list_id: "price_list_id",
+                            amount_cents: "amount_cents",
+                            compare_at_cents: "compare_at_cents",
+                            currency: "currency",
+                            min_quantity: "min_quantity",
+                        },
+                    ],
+                    inventory_levels: [
+                        {
+                            id: "id",
+                            sales_channel_id: "sales_channel_id",
+                            quantity: "quantity",
+                            tracks_inventory: "tracks_inventory",
+                            allows_holds: "allows_holds",
+                        },
+                    ],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -476,110 +345,63 @@ describe("ProductsClient", () => {
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
 
-    test("get (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/business/products/product")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.products.get({
-                product: "product",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
-    });
-
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = {
             data: {
                 id: "id",
                 name: "name",
                 slug: "slug",
                 description: "description",
-                product_type: "product_type",
-                base_price: 1.1,
-                compare_at_price: 1.1,
-                sku: "sku",
-                track_inventory: true,
-                inventory_policy: "inventory_policy",
-                fulfillment_type: "fulfillment_type",
-                requires_shipping: true,
-                length: 1.1,
-                width: 1.1,
-                height: 1.1,
-                dimension_unit: "dimension_unit",
-                weight: 1.1,
-                weight_unit: "weight_unit",
-                is_pre_order: true,
-                pre_order_release_date: "pre_order_release_date",
-                digital_download_limit: 1,
-                digital_link_expiry_hours: 1,
-                taxable: true,
-                tax_code: "tax_code",
-                is_active: true,
-                is_featured: true,
-                sort_order: 1,
+                is_active: "is_active",
                 published_at: "published_at",
                 variants: [
                     {
                         id: "id",
-                        product_id: "product_id",
                         name: "name",
-                        sku: null,
-                        price: 1.1,
-                        compare_at_price: null,
-                        inventory_quantity: 1,
-                        option1: null,
-                        option2: null,
-                        option3: null,
-                        barcode: null,
-                        weight: null,
-                        weight_unit: null,
-                        requires_shipping: true,
-                        is_default: true,
-                        sort_order: 1,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                images: [
-                    {
-                        id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
+                        sku: "sku",
+                        is_default: "is_default",
+                        weight: "weight",
+                        weight_unit: "weight_unit",
+                        sort_order: "sort_order",
                         created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
-                categories: [
-                    {
-                        id: "id",
-                        name: "name",
-                        slug: "slug",
-                        description: null,
-                        parent_id: null,
-                        sort_order: 1,
-                        is_active: true,
-                        created_at: null,
-                        updated_at: null,
-                    },
-                ],
-                digital_files: [{ id: "id", file_name: "file_name" }],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                default_variant: {
+                    id: "id",
+                    name: "name",
+                    sku: "sku",
+                    is_default: "is_default",
+                    weight: "weight",
+                    weight_unit: "weight_unit",
+                    sort_order: "sort_order",
+                    prices: [
+                        {
+                            id: "id",
+                            price_list_id: "price_list_id",
+                            amount_cents: "amount_cents",
+                            compare_at_cents: "compare_at_cents",
+                            currency: "currency",
+                            min_quantity: "min_quantity",
+                        },
+                    ],
+                    inventory_levels: [
+                        {
+                            id: "id",
+                            sales_channel_id: "sales_channel_id",
+                            quantity: "quantity",
+                            tracks_inventory: "tracks_inventory",
+                            allows_holds: "allows_holds",
+                        },
+                    ],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -594,6 +416,7 @@ describe("ProductsClient", () => {
 
         const response = await client.business.products.update({
             product: "product",
+            name: "name",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -601,7 +424,7 @@ describe("ProductsClient", () => {
     test("update (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -616,6 +439,7 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.update({
                 product: "product",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -623,7 +447,7 @@ describe("ProductsClient", () => {
     test("update (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -638,6 +462,7 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.update({
                 product: "product",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -645,7 +470,7 @@ describe("ProductsClient", () => {
     test("update (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -660,6 +485,7 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.update({
                 product: "product",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
@@ -667,7 +493,7 @@ describe("ProductsClient", () => {
     test("update (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -682,6 +508,7 @@ describe("ProductsClient", () => {
         await expect(async () => {
             return await client.business.products.update({
                 product: "product",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -690,20 +517,12 @@ describe("ProductsClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { message: "Product deleted successfully." };
-
-        server
-            .mockEndpoint()
-            .delete("/business/products/product")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().delete("/business/products/product").respondWith().statusCode(200).build();
 
         const response = await client.business.products.delete({
             product: "product",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual(undefined);
     });
 
     test("delete (2)", async () => {
@@ -767,26 +586,5 @@ describe("ProductsClient", () => {
                 product: "product",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("delete (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .delete("/business/products/product")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.business.products.delete({
-                product: "product",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

@@ -5,7 +5,7 @@ import type * as FiveOneEat from "../index.js";
 export interface StandShop {
     stand: StandShop.Stand;
     business: StandShop.Business;
-    products: FiveOneEat.CustomerShopProduct[];
+    products: FiveOneEat.ProductResource[];
 }
 
 export namespace StandShop {

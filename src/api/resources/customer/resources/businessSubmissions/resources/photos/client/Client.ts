@@ -107,7 +107,10 @@ export class PhotosClient {
                         _response.rawResponse,
                     );
                 case 500:
-                    throw new FiveOneEat.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                    throw new FiveOneEat.InternalServerError(
+                        _response.error.body as FiveOneEat.InternalServerErrorBody,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.FiveOneEatError({
                         statusCode: _response.error.statusCode,

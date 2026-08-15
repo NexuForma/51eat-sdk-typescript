@@ -3,68 +3,17 @@
 /**
  * @example
  *     {
- *         product: "product"
+ *         product: "product",
+ *         name: "name"
  *     }
  */
 export interface UpdateProductRequest {
     /** The product ID */
     product: string;
-    name?: string;
+    name: string;
     description?: string | null;
-    product_type?: UpdateProductRequest.ProductType;
-    base_price?: number;
-    compare_at_price?: number | null;
-    sku?: string | null;
-    track_inventory?: boolean;
-    inventory_policy?: UpdateProductRequest.InventoryPolicy | null;
-    fulfillment_type?: UpdateProductRequest.FulfillmentType | null;
-    requires_shipping?: boolean;
-    length?: number | null;
-    width?: number | null;
-    height?: number | null;
-    dimension_unit?: UpdateProductRequest.DimensionUnit | null;
-    weight?: number | null;
-    weight_unit?: UpdateProductRequest.WeightUnit | null;
-    is_pre_order?: boolean;
-    pre_order_release_date?: string | null;
-    digital_download_limit?: number | null;
-    digital_link_expiry_hours?: number | null;
-    taxable?: boolean;
-    tax_code?: string | null;
     is_active?: boolean;
-    published_at?: string | null;
-    is_featured?: boolean;
-    sort_order?: number | null;
-    category_ids?: string[] | null;
-}
-
-export namespace UpdateProductRequest {
-    export const ProductType = {
-        Physical: "physical",
-        Digital: "digital",
-    } as const;
-    export type ProductType = (typeof ProductType)[keyof typeof ProductType];
-    export const InventoryPolicy = {
-        Deny: "deny",
-        Continue: "continue",
-    } as const;
-    export type InventoryPolicy = (typeof InventoryPolicy)[keyof typeof InventoryPolicy];
-    export const FulfillmentType = {
-        Pickup: "pickup",
-        Shipping: "shipping",
-        Both: "both",
-    } as const;
-    export type FulfillmentType = (typeof FulfillmentType)[keyof typeof FulfillmentType];
-    export const DimensionUnit = {
-        In: "in",
-        Cm: "cm",
-    } as const;
-    export type DimensionUnit = (typeof DimensionUnit)[keyof typeof DimensionUnit];
-    export const WeightUnit = {
-        Oz: "oz",
-        Lb: "lb",
-        G: "g",
-        Kg: "kg",
-    } as const;
-    export type WeightUnit = (typeof WeightUnit)[keyof typeof WeightUnit];
+    product_category_id?: string | null;
+    metadata?: string[] | null;
+    channel_ids?: string[] | null;
 }

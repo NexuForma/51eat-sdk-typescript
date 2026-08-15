@@ -3,12 +3,12 @@
 /**
  * @example
  *     {
- *         business: "katzs-deli",
+ *         business: "business",
  *         product: "product"
  *     }
  */
 export interface GetProductShopRequest {
-    /** The business handle */
+    /** The business ID */
     business: string;
     /** The product ID */
     product: string;

@@ -5,12 +5,12 @@ import {
     type NormalizedClientOptionsWithAuth,
     normalizeClientOptionsWithAuth,
 } from "../../../../../../../../../../BaseClient.js";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../../../core/headers.js";
+import { mergeHeaders } from "../../../../../../../../../../core/headers.js";
 import * as core from "../../../../../../../../../../core/index.js";
 import * as environments from "../../../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../../../errors/index.js";
-import * as FiveOneEat from "../../../../../../../../../index.js";
+import type * as FiveOneEat from "../../../../../../../../../index.js";
 
 export declare namespace ImagesClient {
     export type Options = BaseClientOptions;
@@ -29,41 +29,27 @@ export class ImagesClient {
      * @param {FiveOneEat.business.products.variants.UploadImagesRequest} request
      * @param {ImagesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
-     *     import { createReadStream } from "fs";
      *     await client.business.products.variants.images.upload({
-     *         image: fs.createReadStream("/path/to/your/file"),
      *         variant: "variant"
      *     })
      */
     public upload(
         request: FiveOneEat.business.products.variants.UploadImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.products.variants.UploadImagesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__upload(request, requestOptions));
     }
 
     private async __upload(
         request: FiveOneEat.business.products.variants.UploadImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.products.variants.UploadImagesResponse>> {
-        const _body = await core.newFormData();
-        await _body.appendFile("image", request.image);
-        if (request.alt_text != null) {
-            _body.append("alt_text", request.alt_text);
-        }
-
-        const _maybeEncodedRequest = await _body.getRequest();
+    ): Promise<core.WithRawResponse<void>> {
+        const { variant } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ ..._maybeEncodedRequest.headers }),
             requestOptions?.headers,
         );
         const _response = await core.fetcher({
@@ -71,14 +57,11 @@ export class ImagesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `business/products/variants/${core.url.encodePathParam(request.variant)}/images`,
+                `business/products/variants/${core.url.encodePathParam(variant)}/images`,
             ),
             method: "POST",
             headers: _headers,
             queryParameters: requestOptions?.queryParams,
-            requestType: "file",
-            duplex: _maybeEncodedRequest.duplex,
-            body: _maybeEncodedRequest.body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -86,32 +69,15 @@ export class ImagesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.products.variants.UploadImagesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -126,34 +92,23 @@ export class ImagesClient {
      * @param {FiveOneEat.business.products.variants.ReorderImagesRequest} request
      * @param {ImagesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
      *     await client.business.products.variants.images.reorder({
-     *         variant: "variant",
-     *         body: {
-     *             images: [{
-     *                     id: "id",
-     *                     sort_order: 1
-     *                 }]
-     *         }
+     *         variant: "variant"
      *     })
      */
     public reorder(
         request: FiveOneEat.business.products.variants.ReorderImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.products.variants.ReorderImagesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__reorder(request, requestOptions));
     }
 
     private async __reorder(
         request: FiveOneEat.business.products.variants.ReorderImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.products.variants.ReorderImagesResponse>> {
-        const { variant, body: _body } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { variant } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -169,10 +124,7 @@ export class ImagesClient {
             ),
             method: "PUT",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -180,32 +132,15 @@ export class ImagesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.products.variants.ReorderImagesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -220,11 +155,6 @@ export class ImagesClient {
      * @param {FiveOneEat.business.products.variants.DeleteImagesRequest} request
      * @param {ImagesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.ForbiddenError}
-     * @throws {@link FiveOneEat.NotFoundError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
      * @example
      *     await client.business.products.variants.images.delete({
      *         variant: "variant",
@@ -234,14 +164,14 @@ export class ImagesClient {
     public delete(
         request: FiveOneEat.business.products.variants.DeleteImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.products.variants.DeleteImagesResponse> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
     private async __delete(
         request: FiveOneEat.business.products.variants.DeleteImagesRequest,
         requestOptions?: ImagesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.products.variants.DeleteImagesResponse>> {
+    ): Promise<core.WithRawResponse<void>> {
         const { variant, image } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -266,32 +196,15 @@ export class ImagesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.business.products.variants.DeleteImagesResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new FiveOneEat.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(

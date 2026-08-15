@@ -37,9 +37,8 @@ export class InventoryClient {
      * @example
      *     await client.business.products.variants.inventory.adjust({
      *         variant: "variant",
-     *         type: "add",
-     *         quantity: 1,
-     *         reason: "restock"
+     *         sales_channel_id: "sales_channel_id",
+     *         adjustment: 1
      *     })
      */
     public adjust(
@@ -117,7 +116,7 @@ export class InventoryClient {
     }
 
     /**
-     * @param {FiveOneEat.business.products.variants.HistoryInventoryRequest} request
+     * @param {FiveOneEat.business.products.variants.UpdateTrackingInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
@@ -126,25 +125,24 @@ export class InventoryClient {
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
-     *     await client.business.products.variants.inventory.history({
-     *         variant: "variant"
+     *     await client.business.products.variants.inventory.updateTracking({
+     *         variant: "variant",
+     *         sales_channel_id: "sales_channel_id",
+     *         tracks_inventory: true
      *     })
      */
-    public history(
-        request: FiveOneEat.business.products.variants.HistoryInventoryRequest,
+    public updateTracking(
+        request: FiveOneEat.business.products.variants.UpdateTrackingInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.business.products.variants.HistoryInventoryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__history(request, requestOptions));
+    ): core.HttpResponsePromise<FiveOneEat.business.products.variants.UpdateTrackingInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateTracking(request, requestOptions));
     }
 
-    private async __history(
-        request: FiveOneEat.business.products.variants.HistoryInventoryRequest,
+    private async __updateTracking(
+        request: FiveOneEat.business.products.variants.UpdateTrackingInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.business.products.variants.HistoryInventoryResponse>> {
-        const { variant, per_page: perPage } = request;
-        const _queryParams: Record<string, unknown> = {
-            per_page: perPage,
-        };
+    ): Promise<core.WithRawResponse<FiveOneEat.business.products.variants.UpdateTrackingInventoryResponse>> {
+        const { variant, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -156,16 +154,14 @@ export class InventoryClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FiveOneEatEnvironment.Production,
-                `business/products/variants/${core.url.encodePathParam(variant)}/inventory/history`,
+                `business/products/variants/${core.url.encodePathParam(variant)}/inventory/tracking`,
             ),
-            method: "GET",
+            method: "PATCH",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -174,7 +170,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as FiveOneEat.business.products.variants.HistoryInventoryResponse,
+                data: _response.body as FiveOneEat.business.products.variants.UpdateTrackingInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -199,6 +195,69 @@ export class InventoryClient {
                         rawResponse: _response.rawResponse,
                     });
             }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PATCH",
+            "/business/products/variants/{variant}/inventory/tracking",
+        );
+    }
+
+    /**
+     * @param {FiveOneEat.business.products.variants.HistoryInventoryRequest} request
+     * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.business.products.variants.inventory.history({
+     *         variant: "variant"
+     *     })
+     */
+    public history(
+        request: FiveOneEat.business.products.variants.HistoryInventoryRequest,
+        requestOptions?: InventoryClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__history(request, requestOptions));
+    }
+
+    private async __history(
+        request: FiveOneEat.business.products.variants.HistoryInventoryRequest,
+        requestOptions?: InventoryClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const { variant } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `business/products/variants/${core.url.encodePathParam(variant)}/inventory/history`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(

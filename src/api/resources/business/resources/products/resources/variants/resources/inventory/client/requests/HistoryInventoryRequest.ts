@@ -7,7 +7,5 @@
  *     }
  */
 export interface HistoryInventoryRequest {
-    /** The variant ID */
     variant: string;
-    per_page?: number;
 }

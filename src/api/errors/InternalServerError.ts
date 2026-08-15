@@ -2,9 +2,10 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
+import type * as FiveOneEat from "../index.js";
 
 export class InternalServerError extends errors.FiveOneEatError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    constructor(body: FiveOneEat.InternalServerErrorBody, rawResponse?: core.RawResponse) {
         super({
             message: "InternalServerError",
             statusCode: 500,

@@ -16,17 +16,7 @@ describe("GroupsClient", () => {
                 name: "name",
                 description: "description",
                 sort_order: 1,
-                items: [
-                    {
-                        id: "id",
-                        menu_group_id: "menu_group_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_available: true,
-                        sort_order: 1,
-                    },
-                ],
+                items: [{ key: "value" }],
             },
         };
 
@@ -139,17 +129,7 @@ describe("GroupsClient", () => {
                 name: "name",
                 description: "description",
                 sort_order: 1,
-                items: [
-                    {
-                        id: "id",
-                        menu_group_id: "menu_group_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_available: true,
-                        sort_order: 1,
-                    },
-                ],
+                items: [{ key: "value" }],
             },
         };
 
@@ -272,17 +252,7 @@ describe("GroupsClient", () => {
                 name: "name",
                 description: "description",
                 sort_order: 1,
-                items: [
-                    {
-                        id: "id",
-                        menu_group_id: "menu_group_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_available: true,
-                        sort_order: 1,
-                    },
-                ],
+                items: [{ key: "value" }],
             },
         };
 
@@ -400,17 +370,7 @@ describe("GroupsClient", () => {
                 name: "name",
                 description: "description",
                 sort_order: 1,
-                items: [
-                    {
-                        id: "id",
-                        menu_group_id: "menu_group_id",
-                        name: "name",
-                        description: null,
-                        price: null,
-                        is_available: true,
-                        sort_order: 1,
-                    },
-                ],
+                items: [{ key: "value" }],
             },
         };
 

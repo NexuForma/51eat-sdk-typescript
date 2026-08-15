@@ -8,38 +8,37 @@ describe("VariantsClient", () => {
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = {
             data: {
                 id: "id",
-                product_id: "product_id",
                 name: "name",
                 sku: "sku",
-                price: 1.1,
-                compare_at_price: 1.1,
-                inventory_quantity: 1,
-                option1: "option1",
-                option2: "option2",
-                option3: "option3",
-                barcode: "barcode",
-                weight: 1.1,
+                is_default: "is_default",
+                weight: "weight",
                 weight_unit: "weight_unit",
-                requires_shipping: true,
-                is_default: true,
-                images: [
+                sort_order: "sort_order",
+                prices: [
                     {
                         id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
-                        created_at: "created_at",
+                        price_list_id: "price_list_id",
+                        amount_cents: "amount_cents",
+                        compare_at_cents: "compare_at_cents",
+                        currency: "currency",
+                        min_quantity: "min_quantity",
                     },
                 ],
-                sort_order: 1,
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                inventory_levels: [
+                    {
+                        id: "id",
+                        sales_channel_id: "sales_channel_id",
+                        quantity: "quantity",
+                        tracks_inventory: "tracks_inventory",
+                        allows_holds: "allows_holds",
+                    },
+                ],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -55,7 +54,6 @@ describe("VariantsClient", () => {
         const response = await client.business.products.variants.create({
             product: "product",
             name: "name",
-            price: 1.1,
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -63,7 +61,7 @@ describe("VariantsClient", () => {
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -79,7 +77,6 @@ describe("VariantsClient", () => {
             return await client.business.products.variants.create({
                 product: "product",
                 name: "name",
-                price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -87,7 +84,7 @@ describe("VariantsClient", () => {
     test("create (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -103,7 +100,6 @@ describe("VariantsClient", () => {
             return await client.business.products.variants.create({
                 product: "product",
                 name: "name",
-                price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -111,7 +107,7 @@ describe("VariantsClient", () => {
     test("create (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -127,7 +123,6 @@ describe("VariantsClient", () => {
             return await client.business.products.variants.create({
                 product: "product",
                 name: "name",
-                price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
@@ -135,7 +130,7 @@ describe("VariantsClient", () => {
     test("create (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", price: 1.1 };
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -151,7 +146,6 @@ describe("VariantsClient", () => {
             return await client.business.products.variants.create({
                 product: "product",
                 name: "name",
-                price: 1.1,
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -159,38 +153,37 @@ describe("VariantsClient", () => {
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = {
             data: {
                 id: "id",
-                product_id: "product_id",
                 name: "name",
                 sku: "sku",
-                price: 1.1,
-                compare_at_price: 1.1,
-                inventory_quantity: 1,
-                option1: "option1",
-                option2: "option2",
-                option3: "option3",
-                barcode: "barcode",
-                weight: 1.1,
+                is_default: "is_default",
+                weight: "weight",
                 weight_unit: "weight_unit",
-                requires_shipping: true,
-                is_default: true,
-                images: [
+                sort_order: "sort_order",
+                prices: [
                     {
                         id: "id",
-                        url: "url",
-                        original_filename: "original_filename",
-                        alt_text: null,
-                        sort_order: 1,
-                        size: null,
-                        created_at: "created_at",
+                        price_list_id: "price_list_id",
+                        amount_cents: "amount_cents",
+                        compare_at_cents: "compare_at_cents",
+                        currency: "currency",
+                        min_quantity: "min_quantity",
                     },
                 ],
-                sort_order: 1,
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                inventory_levels: [
+                    {
+                        id: "id",
+                        sales_channel_id: "sales_channel_id",
+                        quantity: "quantity",
+                        tracks_inventory: "tracks_inventory",
+                        allows_holds: "allows_holds",
+                    },
+                ],
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -205,6 +198,7 @@ describe("VariantsClient", () => {
 
         const response = await client.business.products.variants.update({
             variant: "variant",
+            name: "name",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -212,7 +206,7 @@ describe("VariantsClient", () => {
     test("update (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -227,6 +221,7 @@ describe("VariantsClient", () => {
         await expect(async () => {
             return await client.business.products.variants.update({
                 variant: "variant",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.UnauthorizedError);
     });
@@ -234,7 +229,7 @@ describe("VariantsClient", () => {
     test("update (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -249,6 +244,7 @@ describe("VariantsClient", () => {
         await expect(async () => {
             return await client.business.products.variants.update({
                 variant: "variant",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.ForbiddenError);
     });
@@ -256,7 +252,7 @@ describe("VariantsClient", () => {
     test("update (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -271,6 +267,7 @@ describe("VariantsClient", () => {
         await expect(async () => {
             return await client.business.products.variants.update({
                 variant: "variant",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
     });
@@ -278,7 +275,7 @@ describe("VariantsClient", () => {
     test("update (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { name: "name" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -293,6 +290,7 @@ describe("VariantsClient", () => {
         await expect(async () => {
             return await client.business.products.variants.update({
                 variant: "variant",
+                name: "name",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -301,20 +299,12 @@ describe("VariantsClient", () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { message: "Variant deleted successfully." };
-
-        server
-            .mockEndpoint()
-            .delete("/business/products/variants/variant")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().delete("/business/products/variants/variant").respondWith().statusCode(200).build();
 
         const response = await client.business.products.variants.delete({
             variant: "variant",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual(undefined);
     });
 
     test("delete (2)", async () => {

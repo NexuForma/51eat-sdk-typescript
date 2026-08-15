@@ -7,6 +7,5 @@
  *     }
  */
 export interface DeleteProductCategoriesRequest {
-    /** The product category ID */
     productCategory: string;
 }

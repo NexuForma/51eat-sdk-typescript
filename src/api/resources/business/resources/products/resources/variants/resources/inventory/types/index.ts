@@ -1,2 +1,2 @@
 export * from "./AdjustInventoryResponse.js";
-export * from "./HistoryInventoryResponse.js";
+export * from "./UpdateTrackingInventoryResponse.js";
