@@ -7,5 +7,6 @@
  *     }
  */
 export interface CreatePaymentIntentStandsRequest {
+    /** The stand ID */
     stand: string;
 }

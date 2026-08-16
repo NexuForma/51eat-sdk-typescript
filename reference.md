@@ -226,111 +226,6 @@ await client.customerStands.customerClearStandCart({
 </dl>
 </details>
 
-<details><summary><code>client.customerStands.<a href="/src/api/resources/customerStands/client/Client.ts">customerStandPaymentIntent</a>({ ...params }) -> FiveOneEat.CustomerStandPaymentIntentResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerStands.customerStandPaymentIntent({
-    stand: "stand"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.CustomerStandPaymentIntentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerStandsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customerStands.<a href="/src/api/resources/customerStands/client/Client.ts">customerStandCheckout</a>({ ...params }) -> FiveOneEat.CustomerStandCheckoutResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customerStands.customerStandCheckout({
-    stand: "stand",
-    body: {
-        payment_intent_id: "payment_intent_id"
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.CustomerStandCheckoutRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CustomerStandsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Business Auth
 <details><summary><code>client.business.auth.<a href="/src/api/resources/business/resources/auth/client/Client.ts">register</a>({ ...params }) -> FiveOneEat.RegisterAuthResponse</code></summary>
 <dl>
@@ -12499,58 +12394,7 @@ await client.customer.stands.scan({
 </dl>
 </details>
 
-<details><summary><code>client.customer.stands.<a href="/src/api/resources/customer/resources/stands/client/Client.ts">checkout</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.stands.checkout({
-    stand: "stand"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.CheckoutStandsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `StandsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.stands.<a href="/src/api/resources/customer/resources/stands/client/Client.ts">createPaymentIntent</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.customer.stands.<a href="/src/api/resources/customer/resources/stands/client/Client.ts">createPaymentIntent</a>({ ...params }) -> FiveOneEat.CreatePaymentIntentStandsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12582,6 +12426,60 @@ await client.customer.stands.createPaymentIntent({
 <dd>
 
 **request:** `FiveOneEat.customer.CreatePaymentIntentStandsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StandsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.stands.<a href="/src/api/resources/customer/resources/stands/client/Client.ts">checkout</a>({ ...params }) -> FiveOneEat.CheckoutStandsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.stands.checkout({
+    stand: "stand",
+    body: {
+        payment_intent_id: "payment_intent_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.CheckoutStandsRequest` 
     
 </dd>
 </dl>

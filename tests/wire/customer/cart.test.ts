@@ -492,6 +492,10 @@ describe("CartClient", () => {
         const rawResponseBody = {
             client_secret: "client_secret",
             payment_intent_id: "payment_intent_id",
+            subtotal: "subtotal",
+            tax_amount: "tax_amount",
+            platform_fee: "platform_fee",
+            total_amount: "total_amount",
             amount: 1,
             currency: "usd",
         };
