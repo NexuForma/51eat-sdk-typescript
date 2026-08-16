@@ -3,6 +3,10 @@
 export interface CreatePaymentIntentCartResponse {
     client_secret: string;
     payment_intent_id: string;
+    subtotal: string;
+    tax_amount: string;
+    platform_fee: string;
+    total_amount: string;
     amount: number;
     currency: CreatePaymentIntentCartResponse.Currency;
 }
