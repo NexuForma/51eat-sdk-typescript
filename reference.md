@@ -9747,6 +9747,74 @@ await client.customer.auth.updateProfile();
 </dl>
 </details>
 
+<details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">deleteAccount</a>({ ...params }) -> FiveOneEat.DeleteAccountAuthResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently delete the account and its associated data, cancel any billing,
+and revoke every API token. This cannot be undone. Requires the current
+password for confirmation. Accounts that manage a business cannot be deleted
+here and return a 422 explaining how to proceed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.auth.deleteAccount({
+    password: "password"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.DeleteAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.customer.auth.<a href="/src/api/resources/customer/resources/auth/client/Client.ts">uploadAvatar</a>({ ...params }) -> FiveOneEat.UploadAvatarAuthResponse</code></summary>
 <dl>
 <dd>

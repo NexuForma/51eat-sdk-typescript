@@ -1,3 +1,4 @@
+export * from "./DeleteAccountAuthResponse.js";
 export * from "./DeleteAvatarAuthResponse.js";
 export * from "./ForgotPasswordAuthResponse.js";
 export * from "./LoginAuthResponse.js";

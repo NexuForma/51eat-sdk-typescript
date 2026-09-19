@@ -458,6 +458,87 @@ export class AuthClient {
     }
 
     /**
+     * Permanently delete the account and its associated data, cancel any billing,
+     * and revoke every API token. This cannot be undone. Requires the current
+     * password for confirmation. Accounts that manage a business cannot be deleted
+     * here and return a 422 explaining how to proceed.
+     *
+     * @param {FiveOneEat.customer.DeleteAccountRequest} request
+     * @param {AuthClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.auth.deleteAccount({
+     *         password: "password"
+     *     })
+     */
+    public deleteAccount(
+        request: FiveOneEat.customer.DeleteAccountRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.DeleteAccountAuthResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteAccount(request, requestOptions));
+    }
+
+    private async __deleteAccount(
+        request: FiveOneEat.customer.DeleteAccountRequest,
+        requestOptions?: AuthClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.DeleteAccountAuthResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/user/delete",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.DeleteAccountAuthResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/customer/user/delete");
+    }
+
+    /**
      * Upload and replace the avatar for the authenticated customer. Any existing avatar file will be deleted.
      *
      * @param {FiveOneEat.customer.UploadAvatarRequest} request

@@ -1,5 +1,6 @@
 export type { AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest } from "./AppHttpRequestsApiV1CustomerAuthForgotPasswordRequest.js";
 export type { AppHttpRequestsApiV1CustomerAuthResetPasswordRequest } from "./AppHttpRequestsApiV1CustomerAuthResetPasswordRequest.js";
+export type { DeleteAccountRequest } from "./DeleteAccountRequest.js";
 export type { LoginCustomerRequest } from "./LoginCustomerRequest.js";
 export type { LogoutAuthRequest } from "./LogoutAuthRequest.js";
 export type { RegisterCustomerRequest } from "./RegisterCustomerRequest.js";
