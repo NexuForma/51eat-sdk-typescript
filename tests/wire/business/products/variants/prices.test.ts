@@ -17,14 +17,14 @@ describe("PricesClient", () => {
                     id: "id",
                     key: "key",
                     name: "name",
-                    is_default: "is_default",
+                    is_default: true,
                     created_at: "created_at",
                     updated_at: "updated_at",
                 },
-                amount_cents: "amount_cents",
-                compare_at_cents: "compare_at_cents",
+                amount_cents: 1,
+                compare_at_cents: 1,
                 currency: "currency",
-                min_quantity: "min_quantity",
+                min_quantity: 1,
             },
         };
 

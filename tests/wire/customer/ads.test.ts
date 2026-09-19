@@ -44,27 +44,6 @@ describe("AdsClient", () => {
             .mockEndpoint()
             .get("/customer/ads/placement")
             .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.ads.serve({
-                placement: "placement",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("serve (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/ads/placement")
-            .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
@@ -97,27 +76,6 @@ describe("AdsClient", () => {
     });
 
     test("recordClick (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/customer/ads/advertisement/click")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.ads.recordClick({
-                advertisement: "advertisement",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("recordClick (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 

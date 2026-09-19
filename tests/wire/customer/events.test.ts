@@ -41,12 +41,7 @@ describe("EventsClient", () => {
                         business: { name: "name", handle: "handle", logo: null },
                     },
                 ],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 
@@ -60,19 +55,6 @@ describe("EventsClient", () => {
     });
 
     test("feed (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/customer/events").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.customer.events.feed();
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("feed (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 

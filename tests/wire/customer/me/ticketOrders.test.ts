@@ -12,12 +12,7 @@ describe("TicketOrdersClient", () => {
         const rawResponseBody = {
             data: {
                 orders: [{ id: "id", order_number: "order_number" }],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 
@@ -90,12 +85,12 @@ describe("TicketOrdersClient", () => {
                 transaction: {
                     ulid: "ulid",
                     status: "status",
-                    subtotal: "subtotal",
-                    tax_amount: "tax_amount",
-                    shipping_amount: "shipping_amount",
-                    platform_fee: "platform_fee",
-                    total_amount: "total_amount",
-                    refunded_amount: "refunded_amount",
+                    subtotal: 1.1,
+                    tax_amount: 1.1,
+                    shipping_amount: 1.1,
+                    platform_fee: 1.1,
+                    total_amount: 1.1,
+                    refunded_amount: 1.1,
                     customer_name: "customer_name",
                     customer_email: "customer_email",
                     stripe_payment_intent_id: "stripe_payment_intent_id",

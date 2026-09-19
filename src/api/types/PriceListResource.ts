@@ -4,7 +4,7 @@ export interface PriceListResource {
     id: string;
     key: string;
     name: string;
-    is_default: string;
+    is_default: boolean;
     created_at: string;
     updated_at: string;
 }

@@ -16,17 +16,17 @@ describe("ShopClient", () => {
                     name: "name",
                     slug: "slug",
                     description: "description",
-                    is_active: "is_active",
+                    is_active: true,
                     published_at: "published_at",
                     variants: [
                         {
                             id: "id",
                             name: "name",
                             sku: "sku",
-                            is_default: "is_default",
-                            weight: "weight",
+                            is_default: true,
+                            weight: null,
                             weight_unit: "weight_unit",
-                            sort_order: "sort_order",
+                            sort_order: 1,
                             created_at: "created_at",
                             updated_at: "updated_at",
                         },
@@ -35,10 +35,10 @@ describe("ShopClient", () => {
                         id: "id",
                         name: "name",
                         sku: "sku",
-                        is_default: "is_default",
-                        weight: "weight",
+                        is_default: true,
+                        weight: null,
                         weight_unit: "weight_unit",
-                        sort_order: "sort_order",
+                        sort_order: 1,
                         created_at: "created_at",
                         updated_at: "updated_at",
                     },
@@ -72,27 +72,6 @@ describe("ShopClient", () => {
             .mockEndpoint()
             .get("/customer/businesses/business/shop")
             .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.shop.listProducts({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("listProducts (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/shop")
-            .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
@@ -114,17 +93,17 @@ describe("ShopClient", () => {
                 name: "name",
                 slug: "slug",
                 description: "description",
-                is_active: "is_active",
+                is_active: true,
                 published_at: "published_at",
                 variants: [
                     {
                         id: "id",
                         name: "name",
                         sku: "sku",
-                        is_default: "is_default",
-                        weight: "weight",
+                        is_default: true,
+                        weight: null,
                         weight_unit: "weight_unit",
-                        sort_order: "sort_order",
+                        sort_order: 1,
                         created_at: "created_at",
                         updated_at: "updated_at",
                     },
@@ -133,27 +112,27 @@ describe("ShopClient", () => {
                     id: "id",
                     name: "name",
                     sku: "sku",
-                    is_default: "is_default",
-                    weight: "weight",
+                    is_default: true,
+                    weight: 1.1,
                     weight_unit: "weight_unit",
-                    sort_order: "sort_order",
+                    sort_order: 1,
                     prices: [
                         {
                             id: "id",
                             price_list_id: "price_list_id",
-                            amount_cents: "amount_cents",
-                            compare_at_cents: "compare_at_cents",
+                            amount_cents: 1,
+                            compare_at_cents: null,
                             currency: "currency",
-                            min_quantity: "min_quantity",
+                            min_quantity: 1,
                         },
                     ],
                     inventory_levels: [
                         {
                             id: "id",
                             sales_channel_id: "sales_channel_id",
-                            quantity: "quantity",
-                            tracks_inventory: "tracks_inventory",
-                            allows_holds: "allows_holds",
+                            quantity: 1,
+                            tracks_inventory: true,
+                            allows_holds: true,
                         },
                     ],
                     created_at: "created_at",
@@ -180,28 +159,6 @@ describe("ShopClient", () => {
     });
 
     test("getProduct (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/shop/products/product")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.shop.getProduct({
-                business: "business",
-                product: "product",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("getProduct (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -244,27 +201,6 @@ describe("ShopClient", () => {
     });
 
     test("listCategories (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/shop/categories")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.shop.listCategories({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("listCategories (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 

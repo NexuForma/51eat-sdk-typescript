@@ -10332,136 +10332,6 @@ await client.customer.businesses.photos({
 </dl>
 </details>
 
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">favorite</a>({ ...params }) -> FiveOneEat.FavoriteBusinessesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a business to the authenticated user's favorites.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.favorite({
-    business: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.FavoriteBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Remove a business from the authenticated user's favorites.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.customer.businesses.unfavorite({
-    business: "katzs-deli"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FiveOneEat.customer.UnfavoriteBusinessesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BusinessesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">listTemporaryLocations</a>({ ...params }) -> FiveOneEat.ListTemporaryLocationsBusinessesResponse</code></summary>
 <dl>
 <dd>
@@ -10574,6 +10444,136 @@ await client.customer.businesses.getPickupTimeslots({
 <dd>
 
 **request:** `FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">favorite</a>({ ...params }) -> FiveOneEat.FavoriteBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a business to the authenticated user's favorites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.favorite({
+    business: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.FavoriteBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.businesses.<a href="/src/api/resources/customer/resources/businesses/client/Client.ts">unfavorite</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a business from the authenticated user's favorites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.businesses.unfavorite({
+    business: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.UnfavoriteBusinessesRequest` 
     
 </dd>
 </dl>

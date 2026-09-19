@@ -4,7 +4,7 @@ export interface CartResource {
     id: string;
     items: CartResource.Items.Item[];
     subtotal_cents: number;
-    subtotal: string;
+    subtotal: number;
     item_count: number;
 }
 

@@ -24,7 +24,7 @@ describe("CustomerStandsClient", () => {
                     },
                 ],
                 subtotal_cents: 1,
-                subtotal: "subtotal",
+                subtotal: 1.1,
                 item_count: 1,
             },
         };
@@ -104,7 +104,7 @@ describe("CustomerStandsClient", () => {
                     },
                 ],
                 subtotal_cents: 1,
-                subtotal: "subtotal",
+                subtotal: 1.1,
                 item_count: 1,
             },
         };

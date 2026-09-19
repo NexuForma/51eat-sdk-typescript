@@ -19,4 +19,11 @@ export interface UpdateStandRequest {
     latitude?: number | null;
     longitude?: number | null;
     is_active?: boolean | null;
+    /**
+     * `UpdateStand` passes these straight to `$stand->products()->sync()`.
+     * Unvalidated, any id at all was accepted — including one from another
+     * business's catalogue, which then appeared on this stand's public
+     * self-checkout. Scoped to the caller's own products.
+     */
+    product_ids?: string[];
 }

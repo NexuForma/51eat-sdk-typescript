@@ -20,12 +20,7 @@ describe("CommentsClient", () => {
                         created_at: "created_at",
                     },
                 ],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 

@@ -6,8 +6,8 @@ export interface PriceResource {
     id: string;
     price_list_id: string;
     price_list?: FiveOneEat.PriceListResource | undefined;
-    amount_cents: string;
-    compare_at_cents: string;
+    amount_cents: number;
+    compare_at_cents: number | null;
     currency: string;
-    min_quantity: string;
+    min_quantity: number;
 }

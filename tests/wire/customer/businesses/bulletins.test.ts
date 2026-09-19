@@ -12,12 +12,7 @@ describe("BulletinsClient", () => {
         const rawResponseBody = {
             data: {
                 bulletins: [{ id: "id", title: null, content: null, published_at: null }],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 
@@ -36,27 +31,6 @@ describe("BulletinsClient", () => {
     });
 
     test("list (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/bulletins")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.bulletins.list({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("list (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 

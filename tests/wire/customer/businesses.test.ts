@@ -5,7 +5,7 @@ import { FiveOneEatClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("BusinessesClient", () => {
-    test("profile (1)", async () => {
+    test("profile", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -102,27 +102,6 @@ describe("BusinessesClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("profile (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.profile({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
     test("menus (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -172,12 +151,7 @@ describe("BusinessesClient", () => {
                         ],
                     },
                 ],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 
@@ -205,27 +179,6 @@ describe("BusinessesClient", () => {
             .mockEndpoint()
             .get("/customer/businesses/business/menus")
             .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.menus({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("menus (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/menus")
-            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -244,12 +197,7 @@ describe("BusinessesClient", () => {
         const rawResponseBody = {
             data: {
                 photos: [{ id: "id", url: "url", alt_text: null }],
-                pagination: {
-                    current_page: "current_page",
-                    per_page: "per_page",
-                    total: "total",
-                    has_more: "has_more",
-                },
+                pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };
 
@@ -277,27 +225,6 @@ describe("BusinessesClient", () => {
             .mockEndpoint()
             .get("/customer/businesses/business/photos")
             .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.photos({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("photos (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/photos")
-            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
@@ -305,6 +232,87 @@ describe("BusinessesClient", () => {
         await expect(async () => {
             return await client.customer.businesses.photos({
                 business: "business",
+            });
+        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
+    });
+
+    test("listTemporaryLocations", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    id: "id",
+                    title: "title",
+                    notes: "notes",
+                    address: "address",
+                    city: "city",
+                    state: "state",
+                    zipcode: "zipcode",
+                    country: "country",
+                    latitude: 1.1,
+                    longitude: 1.1,
+                    hours: { key: { isOpen: true, openTime: "openTime", closeTime: "closeTime" } },
+                    starts_at: "2024-01-15T09:30:00Z",
+                    ends_at: "2024-01-15T09:30:00Z",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/katzs-deli/temporary-locations")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.businesses.listTemporaryLocations({
+            business: "katzs-deli",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getPickupTimeslots (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { date: { key: "value" }, timeslots: ["timeslots"] };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/katzs-deli/pickup-timeslots")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.businesses.getPickupTimeslots({
+            handle: "katzs-deli",
+            date: "2023-01-15",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getPickupTimeslots (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/businesses/handle/pickup-timeslots")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.businesses.getPickupTimeslots({
+                handle: "handle",
+                date: "2023-01-15",
             });
         }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
@@ -444,129 +452,5 @@ describe("BusinessesClient", () => {
                 business: "business",
             });
         }).rejects.toThrow(FiveOneEat.NotFoundError);
-    });
-
-    test("listTemporaryLocations (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {
-            data: [
-                {
-                    id: "id",
-                    title: "title",
-                    notes: "notes",
-                    address: "address",
-                    city: "city",
-                    state: "state",
-                    zipcode: "zipcode",
-                    country: "country",
-                    latitude: 1.1,
-                    longitude: 1.1,
-                    hours: { key: { isOpen: true, openTime: "openTime", closeTime: "closeTime" } },
-                    starts_at: "2024-01-15T09:30:00Z",
-                    ends_at: "2024-01-15T09:30:00Z",
-                },
-            ],
-        };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/katzs-deli/temporary-locations")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.customer.businesses.listTemporaryLocations({
-            business: "katzs-deli",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("listTemporaryLocations (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/business/temporary-locations")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.listTemporaryLocations({
-                business: "business",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("getPickupTimeslots (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { date: { key: "value" }, timeslots: ["timeslots"] };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/katzs-deli/pickup-timeslots")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.customer.businesses.getPickupTimeslots({
-            handle: "katzs-deli",
-            date: "2023-01-15",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("getPickupTimeslots (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/handle/pickup-timeslots")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.getPickupTimeslots({
-                handle: "handle",
-                date: "2023-01-15",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("getPickupTimeslots (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/businesses/handle/pickup-timeslots")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.businesses.getPickupTimeslots({
-                handle: "handle",
-                date: "2023-01-15",
-            });
-        }).rejects.toThrow(FiveOneEat.UnprocessableEntityError);
     });
 });

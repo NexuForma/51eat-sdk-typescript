@@ -13,9 +13,9 @@ describe("InventoryClient", () => {
             data: {
                 id: "id",
                 sales_channel_id: "sales_channel_id",
-                quantity: "quantity",
-                tracks_inventory: "tracks_inventory",
-                allows_holds: "allows_holds",
+                quantity: 1,
+                tracks_inventory: true,
+                allows_holds: true,
             },
         };
 
@@ -140,9 +140,9 @@ describe("InventoryClient", () => {
             data: {
                 id: "id",
                 sales_channel_id: "sales_channel_id",
-                quantity: "quantity",
-                tracks_inventory: "tracks_inventory",
-                allows_holds: "allows_holds",
+                quantity: 1,
+                tracks_inventory: true,
+                allows_holds: true,
             },
         };
 

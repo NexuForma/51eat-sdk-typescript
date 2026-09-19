@@ -82,27 +82,6 @@ describe("ExploreClient", () => {
             .mockEndpoint()
             .get("/customer/explore/businesses")
             .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.customer.explore.businesses({
-                bounds: "bounds",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("businesses (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/customer/explore/businesses")
-            .respondWith()
             .statusCode(422)
             .jsonBody(rawResponseBody)
             .build();
