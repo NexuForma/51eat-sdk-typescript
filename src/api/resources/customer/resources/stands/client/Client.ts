@@ -48,12 +48,7 @@ export class StandsClient {
         requestOptions?: StandsClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.ScanStandsResponse>> {
         const { stand } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??

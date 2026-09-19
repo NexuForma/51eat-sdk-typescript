@@ -6,10 +6,10 @@ export interface VariantResource {
     id: string;
     name: string;
     sku: string;
-    is_default: string;
-    weight: string;
+    is_default: boolean;
+    weight: number | null;
     weight_unit: string;
-    sort_order: string;
+    sort_order: number;
     prices?: FiveOneEat.PriceResource[] | undefined;
     inventory_levels?: FiveOneEat.InventoryLevelResource[] | undefined;
     created_at: string;

@@ -40,8 +40,6 @@ export class BusinessesClient {
      * @param {FiveOneEat.customer.ProfileBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     *
      * @example
      *     await client.customer.businesses.profile({
      *         business: "katzs-deli"
@@ -59,12 +57,7 @@ export class BusinessesClient {
         requestOptions?: BusinessesClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.ProfileBusinessesResponse>> {
         const { business } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -89,16 +82,11 @@ export class BusinessesClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(
@@ -115,7 +103,6 @@ export class BusinessesClient {
      * @param {FiveOneEat.customer.MenusBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
@@ -139,12 +126,7 @@ export class BusinessesClient {
             page,
             per_page: perPage,
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -175,8 +157,6 @@ export class BusinessesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
                     throw new FiveOneEat.UnprocessableEntityError(
                         _response.error.body as unknown,
@@ -205,7 +185,6 @@ export class BusinessesClient {
      * @param {FiveOneEat.customer.PhotosBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link FiveOneEat.UnauthorizedError}
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
@@ -229,12 +208,7 @@ export class BusinessesClient {
             page,
             per_page: perPage,
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -265,8 +239,6 @@ export class BusinessesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
                     throw new FiveOneEat.UnprocessableEntityError(
                         _response.error.body as unknown,
@@ -286,6 +258,151 @@ export class BusinessesClient {
             _response.rawResponse,
             "GET",
             "/customer/businesses/{business}/photos",
+        );
+    }
+
+    /**
+     * Retrieve active and upcoming temporary locations for a business.
+     *
+     * @param {FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.customer.businesses.listTemporaryLocations({
+     *         business: "katzs-deli"
+     *     })
+     */
+    public listTemporaryLocations(
+        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listTemporaryLocations(request, requestOptions));
+    }
+
+    private async __listTemporaryLocations(
+        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse>> {
+        const { business } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(business)}/temporary-locations`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FiveOneEatError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/businesses/{business}/temporary-locations",
+        );
+    }
+
+    /**
+     * Returns available pickup timeslots for a business on a given date.
+     *
+     * @param {FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.customer.businesses.getPickupTimeslots({
+     *         handle: "katzs-deli",
+     *         date: "2023-01-15"
+     *     })
+     */
+    public getPickupTimeslots(
+        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getPickupTimeslots(request, requestOptions));
+    }
+
+    private async __getPickupTimeslots(
+        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse>> {
+        const { handle, date } = request;
+        const _queryParams: Record<string, unknown> = {
+            date,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                `customer/businesses/${core.url.encodePathParam(handle)}/pickup-timeslots`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new FiveOneEat.UnprocessableEntityError(
+                        _response.error.body as unknown,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/customer/businesses/{handle}/pickup-timeslots",
         );
     }
 
@@ -442,171 +559,6 @@ export class BusinessesClient {
             _response.rawResponse,
             "DELETE",
             "/customer/businesses/{business}/favorite",
-        );
-    }
-
-    /**
-     * Retrieve active and upcoming temporary locations for a business.
-     *
-     * @param {FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest} request
-     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     *
-     * @example
-     *     await client.customer.businesses.listTemporaryLocations({
-     *         business: "katzs-deli"
-     *     })
-     */
-    public listTemporaryLocations(
-        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
-        requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listTemporaryLocations(request, requestOptions));
-    }
-
-    private async __listTemporaryLocations(
-        request: FiveOneEat.customer.ListTemporaryLocationsBusinessesRequest,
-        requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse>> {
-        const { business } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(business)}/temporary-locations`,
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.ListTemporaryLocationsBusinessesResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "GET",
-            "/customer/businesses/{business}/temporary-locations",
-        );
-    }
-
-    /**
-     * Returns available pickup timeslots for a business on a given date.
-     *
-     * @param {FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest} request
-     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link FiveOneEat.UnauthorizedError}
-     * @throws {@link FiveOneEat.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.customer.businesses.getPickupTimeslots({
-     *         handle: "katzs-deli",
-     *         date: "2023-01-15"
-     *     })
-     */
-    public getPickupTimeslots(
-        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
-        requestOptions?: BusinessesClient.RequestOptions,
-    ): core.HttpResponsePromise<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getPickupTimeslots(request, requestOptions));
-    }
-
-    private async __getPickupTimeslots(
-        request: FiveOneEat.customer.GetPickupTimeslotsBusinessesRequest,
-        requestOptions?: BusinessesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse>> {
-        const { handle, date } = request;
-        const _queryParams: Record<string, unknown> = {
-            date,
-        };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.FiveOneEatEnvironment.Production,
-                `customer/businesses/${core.url.encodePathParam(handle)}/pickup-timeslots`,
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as FiveOneEat.customer.GetPickupTimeslotsBusinessesResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new FiveOneEat.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.FiveOneEatError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "GET",
-            "/customer/businesses/{handle}/pickup-timeslots",
         );
     }
 }

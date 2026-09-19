@@ -77,21 +77,6 @@ describe("CustomerClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/customer/search").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.customer.search({
-                q: "q",
-            });
-        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
-    });
-
-    test("search (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/customer/search").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
         await expect(async () => {

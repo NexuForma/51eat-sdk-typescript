@@ -3,7 +3,7 @@
 export interface InventoryLevelResource {
     id: string;
     sales_channel_id: string;
-    quantity: string;
-    tracks_inventory: string;
-    allows_holds: string;
+    quantity: number;
+    tracks_inventory: boolean;
+    allows_holds: boolean;
 }

@@ -7,7 +7,7 @@ export interface AppHttpResourcesApiV1BusinessCommerceProductResource {
     name: string;
     slug: string;
     description: string;
-    is_active: string;
+    is_active: boolean;
     published_at: string;
     variants?: FiveOneEat.VariantResource[] | undefined;
     default_variant?: FiveOneEat.VariantResource | undefined;

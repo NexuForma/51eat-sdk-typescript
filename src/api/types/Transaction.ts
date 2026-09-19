@@ -3,12 +3,12 @@
 export interface Transaction {
     ulid: string;
     status: string;
-    subtotal: string;
-    tax_amount: string;
-    shipping_amount: string;
-    platform_fee: string;
-    total_amount: string;
-    refunded_amount: string;
+    subtotal: number;
+    tax_amount: number;
+    shipping_amount: number;
+    platform_fee: number;
+    total_amount: number;
+    refunded_amount: number;
     customer_name: string | null;
     customer_email: string;
     stripe_payment_intent_id: string | null;
