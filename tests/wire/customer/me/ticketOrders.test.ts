@@ -94,8 +94,8 @@ describe("TicketOrdersClient", () => {
                     customer_name: "customer_name",
                     customer_email: "customer_email",
                     stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
+                    payment_completed_at: "payment_completed_at",
+                    refunded_at: "refunded_at",
                     refund_reason: "refund_reason",
                 },
                 tickets: [

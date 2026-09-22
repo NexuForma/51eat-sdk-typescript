@@ -11,6 +11,7 @@
 export interface StoreBusinessRequest {
     name: string;
     handle: string;
+    category_ids: number[];
     email?: string | null;
     phone?: string | null;
     website?: string | null;
@@ -24,7 +25,6 @@ export interface StoreBusinessRequest {
     longitude?: number | null;
     has_location?: boolean;
     seasonal?: boolean;
-    category_ids: number[];
     operating_months?: StoreBusinessRequest.OperatingMonths.Item[] | null;
 }
 

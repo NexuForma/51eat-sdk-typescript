@@ -12,7 +12,13 @@ describe("CommentsClient", () => {
         const rawResponseBody = {
             data: {
                 comments: [
-                    { id: "id", parent_id: null, body: "body", user: { id: "id", name: "name" }, created_at: null },
+                    {
+                        id: "id",
+                        parent_id: "parent_id",
+                        body: "body",
+                        user: { id: "id", name: "name" },
+                        created_at: "created_at",
+                    },
                 ],
                 pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
@@ -87,7 +93,7 @@ describe("CommentsClient", () => {
                 parent_id: "parent_id",
                 body: "body",
                 user: { id: "id", name: "name" },
-                created_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
                 replies: [
                     {
                         id: "id",

@@ -12,6 +12,6 @@ export interface Address {
     latitude: number | null;
     longitude: number | null;
     is_default: boolean;
-    created_at: string | null;
-    updated_at: string | null;
+    created_at: string;
+    updated_at: string;
 }

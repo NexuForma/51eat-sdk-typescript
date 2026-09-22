@@ -16,8 +16,8 @@ describe("EventsClient", () => {
                         id: "id",
                         title: "title",
                         description: null,
-                        starts_at: "2024-01-15T09:30:00Z",
-                        ends_at: "2024-01-15T09:30:00Z",
+                        starts_at: "starts_at",
+                        ends_at: "ends_at",
                         location: null,
                         is_featured: true,
                         ticket_sales_enabled: true,
@@ -91,8 +91,8 @@ describe("EventsClient", () => {
                         price: "price",
                         remaining_quantity: null,
                         is_available_for_sale: true,
-                        sales_start_at: null,
-                        sales_end_at: null,
+                        sales_start_at: "sales_start_at",
+                        sales_end_at: "sales_end_at",
                     },
                 ],
             },
@@ -118,13 +118,7 @@ describe("EventsClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { status: "attending" };
         const rawResponseBody = {
-            data: {
-                id: "id",
-                status: "status",
-                notes: "notes",
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
-            },
+            data: { id: "id", status: "status", notes: "notes", created_at: "created_at", updated_at: "updated_at" },
         };
 
         server

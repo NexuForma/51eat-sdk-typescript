@@ -29,7 +29,7 @@ export interface BusinessProfile {
     logo_url: string | null;
     hours: BusinessProfile.Hours;
     seasonal: boolean;
-    operating_months: number[];
+    operating_months: string[];
     pickup_enabled: boolean;
     pickup_hours: Record<string, unknown>;
     same_day_cutoff: string | null;

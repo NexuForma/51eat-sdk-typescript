@@ -10,7 +10,7 @@ describe("ModifiersClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            data: { id: "id", name: "name", description: "description", price: 1.1, is_default: true },
+            data: { id: "id", name: "name", description: "description", price: "price", is_default: "is_default" },
         };
 
         server
@@ -116,7 +116,7 @@ describe("ModifiersClient", () => {
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", price: 1.1 };
         const rawResponseBody = {
-            data: { id: "id", name: "name", description: "description", price: 1.1, is_default: true },
+            data: { id: "id", name: "name", description: "description", price: "price", is_default: "is_default" },
         };
 
         server

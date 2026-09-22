@@ -7,6 +7,7 @@
 export interface UpdateBusinessProfileRequest {
     name?: string;
     handle?: string;
+    category_ids?: number[];
     phone?: string | null;
     email?: string | null;
     website?: string | null;
@@ -27,10 +28,31 @@ export interface UpdateBusinessProfileRequest {
     longitude?: number | null;
     has_location?: boolean;
     seasonal?: boolean;
+    operating_months?: UpdateBusinessProfileRequest.OperatingMonths.Item[] | null;
     pickup_enabled?: boolean;
     pickup_hours?: string[] | null;
     same_day_cutoff?: string | null;
     pickup_instructions?: string | null;
-    category_ids?: number[];
-    operating_months?: number[] | null;
+}
+
+export namespace UpdateBusinessProfileRequest {
+    export type OperatingMonths = OperatingMonths.Item[];
+
+    export namespace OperatingMonths {
+        export const Item = {
+            January: "january",
+            February: "february",
+            March: "march",
+            April: "april",
+            May: "may",
+            June: "june",
+            July: "july",
+            August: "august",
+            September: "september",
+            October: "october",
+            November: "november",
+            December: "december",
+        } as const;
+        export type Item = (typeof Item)[keyof typeof Item];
+    }
 }

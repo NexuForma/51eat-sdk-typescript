@@ -4,15 +4,15 @@ export interface ProductResource {
     id: string;
     name: string;
     slug: string;
-    description: string;
+    description: string | null;
     is_active: boolean;
-    published_at: string;
+    published_at: string | null;
     metadata: Record<string, unknown> | null;
-    product_category_id: string;
+    product_category_id: string | null;
     category?: unknown[] | undefined;
     images?: unknown[] | undefined;
     variants?: unknown[] | undefined;
     default_variant?: unknown[] | undefined;
-    created_at: string;
-    updated_at: string;
+    created_at: string | null;
+    updated_at: string | null;
 }

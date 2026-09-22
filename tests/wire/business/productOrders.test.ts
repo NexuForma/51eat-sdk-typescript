@@ -619,7 +619,7 @@ describe("ProductOrdersClient", () => {
                 provider_rate_id: "provider_rate_id",
                 carrier: "carrier",
                 service: "service",
-                amount: "amount",
+                amount: 1.1,
                 amount_cents: 1,
                 currency: "currency",
                 carrier_delivery_days: 1,

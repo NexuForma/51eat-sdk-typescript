@@ -12,7 +12,7 @@ export interface Transaction {
     customer_name: string | null;
     customer_email: string;
     stripe_payment_intent_id: string | null;
-    payment_completed_at: string | null;
-    refunded_at: string | null;
+    payment_completed_at: string;
+    refunded_at: string;
     refund_reason: string | null;
 }

@@ -4,7 +4,7 @@ export interface CustomerDiscoveryAllergen {
     id: string;
     name: string;
     slug: string;
-    icon: string | null;
-    description: string | null;
+    icon: string;
+    description: string;
     color: string;
 }

@@ -7,6 +7,6 @@ export interface CustomerEventTicketType {
     price: string;
     remaining_quantity: number | null;
     is_available_for_sale: boolean;
-    sales_start_at: string | null;
-    sales_end_at: string | null;
+    sales_start_at: string;
+    sales_end_at: string;
 }

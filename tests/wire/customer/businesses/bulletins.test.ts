@@ -11,7 +11,7 @@ describe("BulletinsClient", () => {
 
         const rawResponseBody = {
             data: {
-                bulletins: [{ id: "id", title: null, content: null, published_at: null }],
+                bulletins: [{ id: "id", title: null, content: null, published_at: "published_at" }],
                 pagination: { current_page: 1, per_page: 1, total: 1, has_more: true },
             },
         };

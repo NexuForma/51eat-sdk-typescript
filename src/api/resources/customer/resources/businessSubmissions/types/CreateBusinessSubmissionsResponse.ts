@@ -3,5 +3,9 @@
 import type * as FiveOneEat from "../../../../../index.js";
 
 export interface CreateBusinessSubmissionsResponse {
-    data: FiveOneEat.CustomerBusinessSubmission;
+    data: CreateBusinessSubmissionsResponse.Data;
+}
+
+export namespace CreateBusinessSubmissionsResponse {
+    export interface Data extends FiveOneEat.CustomerBusinessSubmission {}
 }

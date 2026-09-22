@@ -15,8 +15,8 @@ export interface BusinessTemporaryLocation {
     full_address: string;
     starts_at: string;
     ends_at: string;
-    created_at: string | null;
-    updated_at: string | null;
+    created_at: string;
+    updated_at: string;
 }
 
 export namespace BusinessTemporaryLocation {

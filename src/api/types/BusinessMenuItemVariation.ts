@@ -4,8 +4,8 @@ export interface BusinessMenuItemVariation {
     id: string;
     menu_item_id: string;
     name: string;
-    description: string | null;
-    price: number | null;
-    is_default: boolean;
-    sort_order: number;
+    description: string;
+    price: string;
+    is_default: string;
+    sort_order: string;
 }

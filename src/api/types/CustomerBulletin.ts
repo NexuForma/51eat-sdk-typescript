@@ -4,5 +4,5 @@ export interface CustomerBulletin {
     id: string;
     title: string | null;
     content: string | null;
-    published_at: string | null;
+    published_at: string;
 }

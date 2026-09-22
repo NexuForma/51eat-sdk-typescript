@@ -24,8 +24,8 @@ describe("AddressesClient", () => {
                         latitude: null,
                         longitude: null,
                         is_default: true,
-                        created_at: null,
-                        updated_at: null,
+                        created_at: "created_at",
+                        updated_at: "updated_at",
                     },
                 ],
             },
@@ -85,8 +85,8 @@ describe("AddressesClient", () => {
                 latitude: 1.1,
                 longitude: 1.1,
                 is_default: true,
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -271,8 +271,8 @@ describe("AddressesClient", () => {
                 latitude: 1.1,
                 longitude: 1.1,
                 is_default: true,
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 

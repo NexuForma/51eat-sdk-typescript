@@ -1,6 +1,6 @@
 {
     "name": "@51eat/sdk",
-    "version": "0.0.74",
+    "version": "0.0.75",
     "private": false,
     "repository": {
         "type": "git",
@@ -43,6 +43,17 @@
                 "default": "./dist/cjs/api/resources/customerStands/exports.js"
             },
             "default": "./dist/cjs/api/resources/customerStands/exports.js"
+        },
+        "./publicLists": {
+            "import": {
+                "types": "./dist/esm/api/resources/publicLists/exports.d.mts",
+                "default": "./dist/esm/api/resources/publicLists/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/publicLists/exports.d.ts",
+                "default": "./dist/cjs/api/resources/publicLists/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/publicLists/exports.js"
         },
         "./business": {
             "import": {
@@ -770,6 +781,17 @@
             },
             "default": "./dist/cjs/api/resources/customer/resources/events/resources/ticketing/exports.js"
         },
+        "./customer/me/lists": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/lists/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/lists/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/lists/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/lists/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/lists/exports.js"
+        },
         "./customer/me/tickets": {
             "import": {
                 "types": "./dist/esm/api/resources/customer/resources/me/resources/tickets/exports.d.mts",
@@ -813,6 +835,17 @@
                 "default": "./dist/cjs/api/resources/customer/resources/me/resources/paymentMethods/exports.js"
             },
             "default": "./dist/cjs/api/resources/customer/resources/me/resources/paymentMethods/exports.js"
+        },
+        "./customer/me/lists/items": {
+            "import": {
+                "types": "./dist/esm/api/resources/customer/resources/me/resources/lists/resources/items/exports.d.mts",
+                "default": "./dist/esm/api/resources/customer/resources/me/resources/lists/resources/items/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/customer/resources/me/resources/lists/resources/items/exports.d.ts",
+                "default": "./dist/cjs/api/resources/customer/resources/me/resources/lists/resources/items/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/customer/resources/me/resources/lists/resources/items/exports.js"
         },
         "./customer/messaging/conversations": {
             "import": {

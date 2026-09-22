@@ -25,8 +25,8 @@ describe("StandsClient", () => {
                     notes: "notes",
                     is_active: true,
                     product_ids: ["product_ids"],
-                    created_at: "2024-01-15T09:30:00Z",
-                    updated_at: "2024-01-15T09:30:00Z",
+                    created_at: "created_at",
+                    updated_at: "updated_at",
                 },
             ],
         };
@@ -82,8 +82,8 @@ describe("StandsClient", () => {
                 notes: "notes",
                 is_active: true,
                 product_ids: ["product_ids"],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -187,8 +187,8 @@ describe("StandsClient", () => {
                 notes: "notes",
                 is_active: true,
                 product_ids: ["product_ids"],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 
@@ -288,8 +288,8 @@ describe("StandsClient", () => {
                 notes: "notes",
                 is_active: true,
                 product_ids: ["product_ids"],
-                created_at: "2024-01-15T09:30:00Z",
-                updated_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
+                updated_at: "updated_at",
             },
         };
 

@@ -5,3 +5,6 @@ export * from "./customer/types/index.js";
 export * from "./customerStands/client/requests/index.js";
 export * as customerStands from "./customerStands/index.js";
 export * from "./customerStands/types/index.js";
+export * from "./publicLists/client/requests/index.js";
+export * as publicLists from "./publicLists/index.js";
+export * from "./publicLists/types/index.js";

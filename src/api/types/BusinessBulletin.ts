@@ -5,10 +5,10 @@ export interface BusinessBulletin {
     title: string;
     content: string;
     type: string;
-    is_pinned: boolean;
-    is_published: boolean;
-    published_at: string | null;
-    image?: string | undefined;
-    created_at: string | null;
-    updated_at: string | null;
+    is_pinned: string;
+    is_published: string;
+    published_at: string;
+    image?: (string | null) | undefined;
+    created_at: string;
+    updated_at: string;
 }

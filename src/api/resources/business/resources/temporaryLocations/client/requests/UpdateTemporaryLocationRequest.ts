@@ -18,9 +18,9 @@ export interface UpdateTemporaryLocationRequest {
     country?: string | null;
     latitude?: number | null;
     longitude?: number | null;
+    hours?: UpdateTemporaryLocationRequest.Hours.Item[] | null;
     starts_at?: string;
     ends_at?: string;
-    hours?: UpdateTemporaryLocationRequest.Hours.Item[] | null;
 }
 
 export namespace UpdateTemporaryLocationRequest {

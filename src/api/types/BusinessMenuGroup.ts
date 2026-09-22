@@ -4,7 +4,7 @@ export interface BusinessMenuGroup {
     id: string;
     menu_id: string;
     name: string;
-    description: string | null;
-    sort_order: number;
+    description: string;
+    sort_order: string;
     items?: unknown[] | undefined;
 }

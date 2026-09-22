@@ -3,7 +3,7 @@
 export interface BusinessMenuItemModifier {
     id: string;
     name: string;
-    description: string | null;
-    price: number;
-    is_default: boolean;
+    description: string;
+    price: string;
+    is_default: string;
 }

@@ -4,10 +4,10 @@ export interface BusinessEventRsvp {
     id: string;
     event_id: string;
     status: string;
-    notes: string | null;
+    notes: string;
     user?: BusinessEventRsvp.User | undefined;
-    created_at: string | null;
-    updated_at: string | null;
+    created_at: string;
+    updated_at: string;
 }
 
 export namespace BusinessEventRsvp {
