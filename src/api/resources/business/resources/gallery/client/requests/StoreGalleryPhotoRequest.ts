@@ -9,6 +9,7 @@ import type * as core from "../../../../../../../core/index.js";
  *     }
  */
 export interface StoreGalleryPhotoRequest {
+    /** Maximum file size: 10240 kilobytes. */
     photo: core.file.Uploadable;
     alt_text?: string | null;
 }

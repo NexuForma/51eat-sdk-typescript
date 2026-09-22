@@ -14,6 +14,7 @@ export interface UpdateBusinessRequest {
     business: string;
     name: string;
     handle: string;
+    category_ids: number[];
     email?: string | null;
     phone?: string | null;
     website?: string | null;
@@ -34,7 +35,6 @@ export interface UpdateBusinessRequest {
     longitude?: number | null;
     has_location?: boolean;
     seasonal?: boolean;
-    category_ids: number[];
     operating_months?: UpdateBusinessRequest.OperatingMonths.Item[] | null;
     certification_ids?: number[] | null;
     cuisine_ids?: number[] | null;

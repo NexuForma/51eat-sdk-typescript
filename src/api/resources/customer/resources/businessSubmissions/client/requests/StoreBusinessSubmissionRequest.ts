@@ -25,7 +25,9 @@ export interface StoreBusinessSubmissionRequest {
     phone?: string | null;
     website?: string | null;
     description?: string | null;
+    category_slugs?: string[] | null;
     hours?: string[] | null;
+    operating_months?: StoreBusinessSubmissionRequest.OperatingMonths.Item[] | null;
     seasonal?: boolean | null;
     has_location?: boolean | null;
     facebook_url?: string | null;
@@ -34,6 +36,26 @@ export interface StoreBusinessSubmissionRequest {
     tiktok_url?: string | null;
     youtube_url?: string | null;
     linkedin_url?: string | null;
-    category_slugs?: string[] | null;
-    operating_months?: number[] | null;
+}
+
+export namespace StoreBusinessSubmissionRequest {
+    export type OperatingMonths = OperatingMonths.Item[];
+
+    export namespace OperatingMonths {
+        export const Item = {
+            January: "january",
+            February: "february",
+            March: "march",
+            April: "april",
+            May: "may",
+            June: "june",
+            July: "july",
+            August: "august",
+            September: "september",
+            October: "october",
+            November: "november",
+            December: "december",
+        } as const;
+        export type Item = (typeof Item)[keyof typeof Item];
+    }
 }

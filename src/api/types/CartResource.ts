@@ -16,10 +16,10 @@ export namespace CartResource {
             id: string;
             variant_id: string | null;
             variant_name: string | null;
-            product_name: string;
+            product_name: string | null;
             quantity: number;
             unit_price_cents: number;
-            total_cents: string;
+            total_cents: number;
         }
     }
 }

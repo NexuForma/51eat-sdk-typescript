@@ -4,13 +4,13 @@ export interface BusinessMenuItem {
     id: string;
     menu_group_id: string;
     name: string;
-    description: string | null;
-    price: number | null;
-    is_available: boolean;
-    sort_order: number;
+    description: string;
+    price: string;
+    is_available: string;
+    sort_order: string;
     image?: (BusinessMenuItem.Image | null) | undefined;
-    tags?: BusinessMenuItem.Tags.Item[] | undefined;
-    allergens?: BusinessMenuItem.Allergens.Item[] | undefined;
+    tags?: string | undefined;
+    allergens?: string | undefined;
     variations?: unknown[] | undefined;
     modifiers?: unknown[] | undefined;
 }
@@ -19,27 +19,5 @@ export namespace BusinessMenuItem {
     export interface Image {
         id: string;
         url: string;
-    }
-
-    export type Tags = Tags.Item[];
-
-    export namespace Tags {
-        export interface Item {
-            id: string;
-            name: string;
-            slug: string;
-            color: string;
-        }
-    }
-
-    export type Allergens = Allergens.Item[];
-
-    export namespace Allergens {
-        export interface Item {
-            id: string;
-            name: string;
-            slug: string;
-            icon: string | null;
-        }
     }
 }

@@ -4,19 +4,19 @@ export interface CreatePaymentIntentTicketingResponse {
     status: string;
     client_secret: string;
     payment_intent_id: string;
-    subtotal: string;
-    tax_amount: string;
+    subtotal: number;
+    tax_amount: number;
     tax_calculation: CreatePaymentIntentTicketingResponse.TaxCalculation | null;
-    shipping_amount: string;
+    shipping_amount: number;
     shipping_method: unknown | null;
-    platform_fee: string;
-    total_amount: string;
+    platform_fee: number;
+    total_amount: number;
 }
 
 export namespace CreatePaymentIntentTicketingResponse {
     export interface TaxCalculation {
         id: string;
-        amount_total: string;
-        tax_amount_exclusive: string;
+        amount_total: number;
+        tax_amount_exclusive: number;
     }
 }

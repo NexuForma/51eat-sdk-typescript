@@ -359,13 +359,13 @@ describe("TicketingClient", () => {
             status: "status",
             client_secret: "client_secret",
             payment_intent_id: "payment_intent_id",
-            subtotal: "subtotal",
-            tax_amount: "tax_amount",
-            tax_calculation: { id: "id", amount_total: "amount_total", tax_amount_exclusive: "tax_amount_exclusive" },
-            shipping_amount: "shipping_amount",
+            subtotal: 1.1,
+            tax_amount: 1.1,
+            tax_calculation: { id: "id", amount_total: 1.1, tax_amount_exclusive: 1.1 },
+            shipping_amount: 1.1,
             shipping_method: { key: "value" },
-            platform_fee: "platform_fee",
-            total_amount: "total_amount",
+            platform_fee: 1.1,
+            total_amount: 1.1,
         };
 
         server
@@ -492,8 +492,8 @@ describe("TicketingClient", () => {
                     customer_name: "customer_name",
                     customer_email: "customer_email",
                     stripe_payment_intent_id: "stripe_payment_intent_id",
-                    payment_completed_at: "2024-01-15T09:30:00Z",
-                    refunded_at: "2024-01-15T09:30:00Z",
+                    payment_completed_at: "payment_completed_at",
+                    refunded_at: "refunded_at",
                     refund_reason: "refund_reason",
                 },
                 tickets: [

@@ -15,9 +15,9 @@ describe("VariationsClient", () => {
                 menu_item_id: "menu_item_id",
                 name: "name",
                 description: "description",
-                price: 1.1,
-                is_default: true,
-                sort_order: 1,
+                price: "price",
+                is_default: "is_default",
+                sort_order: "sort_order",
             },
         };
 
@@ -129,9 +129,9 @@ describe("VariationsClient", () => {
                 menu_item_id: "menu_item_id",
                 name: "name",
                 description: "description",
-                price: 1.1,
-                is_default: true,
-                sort_order: 1,
+                price: "price",
+                is_default: "is_default",
+                sort_order: "sort_order",
             },
         };
 
@@ -258,9 +258,9 @@ describe("VariationsClient", () => {
                 menu_item_id: "menu_item_id",
                 name: "name",
                 description: "description",
-                price: 1.1,
-                is_default: true,
-                sort_order: 1,
+                price: "price",
+                is_default: "is_default",
+                sort_order: "sort_order",
             },
         };
 

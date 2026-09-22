@@ -12,6 +12,7 @@ import type * as core from "../../../../../../../../../core/index.js";
 export interface UploadSubmissionPhotoRequest {
     /** The business ID */
     business: string;
+    /** Maximum file size: 10240 kilobytes. */
     image: core.file.Uploadable;
     alt_text?: string | null;
 }

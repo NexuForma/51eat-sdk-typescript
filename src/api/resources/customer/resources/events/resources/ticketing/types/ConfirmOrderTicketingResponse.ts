@@ -3,5 +3,9 @@
 import type * as FiveOneEat from "../../../../../../../index.js";
 
 export interface ConfirmOrderTicketingResponse {
-    data: FiveOneEat.TicketOrder;
+    data: ConfirmOrderTicketingResponse.Data;
+}
+
+export namespace ConfirmOrderTicketingResponse {
+    export interface Data extends FiveOneEat.TicketOrder {}
 }

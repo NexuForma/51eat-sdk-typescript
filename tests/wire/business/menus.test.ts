@@ -14,7 +14,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
-                created_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
                 groups: [{ key: "value" }],
             },
         };
@@ -73,7 +73,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
-                created_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
                 groups: [{ key: "value" }],
             },
         };
@@ -168,7 +168,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
-                created_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
                 groups: [{ key: "value" }],
             },
         };
@@ -280,7 +280,7 @@ describe("MenusClient", () => {
                 id: "id",
                 name: "name",
                 description: "description",
-                created_at: "2024-01-15T09:30:00Z",
+                created_at: "created_at",
                 groups: [{ key: "value" }],
             },
         };

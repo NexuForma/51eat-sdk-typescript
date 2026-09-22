@@ -14,6 +14,6 @@ export interface BusinessStand {
     notes: string | null;
     is_active: boolean;
     product_ids?: string[] | undefined;
-    created_at: string | null;
-    updated_at: string | null;
+    created_at: string;
+    updated_at: string;
 }

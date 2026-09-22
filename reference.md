@@ -226,6 +226,78 @@ await client.customerStands.customerClearStandCart({
 </dl>
 </details>
 
+## PublicLists
+<details><summary><code>client.publicLists.<a href="/src/api/resources/publicLists/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetPublicListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read a publicly shared list. No authentication required — this is what a
+share link resolves to.
+
+A private list returns 404 rather than 403: a 403 would confirm the list
+exists, which is more than a stranger should learn from a guessed URL.
+Items exclude delisted businesses, so a business that has left the
+platform cannot leak through someone's shared link.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.publicLists.get({
+    businessList: "businessList"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.GetPublicListsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PublicListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Business Auth
 <details><summary><code>client.business.auth.<a href="/src/api/resources/business/resources/auth/client/Client.ts">register</a>({ ...params }) -> FiveOneEat.RegisterAuthResponse</code></summary>
 <dl>
@@ -11887,6 +11959,63 @@ await client.customer.messaging.channelAuth({
 </details>
 
 ## Customer Me
+<details><summary><code>client.customer.me.<a href="/src/api/resources/customer/resources/me/client/Client.ts">favoriteFacets</a>() -> FiveOneEat.FavoriteFacetsMeResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The filter options available for this user's favorites — only taxonomies
+actually present among them, each with a count. An option that cannot
+match anything is never returned.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.favoriteFacets();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `MeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.customer.me.<a href="/src/api/resources/customer/resources/me/client/Client.ts">favorites</a>({ ...params }) -> FiveOneEat.FavoritesMeResponse</code></summary>
 <dl>
 <dd>
@@ -11899,7 +12028,9 @@ await client.customer.messaging.channelAuth({
 <dl>
 <dd>
 
-Retrieve the authenticated user's favorited businesses with pagination.
+The authenticated user's favorited businesses, optionally narrowed by
+search term and taxonomy facets. Values within one facet are OR; separate
+facets compose as AND.
 </dd>
 </dl>
 </dd>
@@ -13738,6 +13869,400 @@ await client.customer.events.ticketing.confirmOrder({
 </dl>
 </details>
 
+## Customer Me Lists
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">list</a>() -> FiveOneEat.ListListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Every list the authenticated user owns, newest first, each carrying a
+cover image drawn from its most recently added business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">create</a>({ ...params }) -> FiveOneEat.CreateListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new list for the authenticated user. A public list is readable
+by anyone holding its share link.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.create({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.StoreBusinessListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">memberships</a>({ ...params }) -> FiveOneEat.MembershipsListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Which of the authenticated user's lists already contain this business.
+Backs the checkbox state in a save-to-list sheet.
+
+Scoped to the caller's own lists, so there is nothing here another user
+could learn.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.memberships({
+    business: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.MembershipsListsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">get</a>({ ...params }) -> FiveOneEat.GetListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve one of the authenticated user's own lists with its businesses.
+
+Owner-only. `view` would return true for any public list, which would
+expose this owner-scoped payload — including delisted businesses — to a
+signed-in stranger. Strangers read a shared list through the public
+endpoint instead.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.get({
+    businessList: "businessList"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.GetListsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">update</a>({ ...params }) -> FiveOneEat.UpdateListsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Change a list's name, description, or visibility.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.update({
+    businessList: "businessList",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.UpdateBusinessListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.<a href="/src/api/resources/customer/resources/me/resources/lists/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently delete a list and its notes. The businesses themselves are
+unaffected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.delete({
+    businessList: "businessList"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.DeleteListsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ListsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customer Me Tickets
 <details><summary><code>client.customer.me.tickets.<a href="/src/api/resources/customer/resources/me/resources/tickets/client/Client.ts">list</a>({ ...params }) -> FiveOneEat.ListTicketsResponse</code></summary>
 <dl>
@@ -14680,6 +15205,209 @@ await client.customer.me.paymentMethods.delete({
 <dd>
 
 **requestOptions:** `PaymentMethodsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Customer Me Lists Items
+<details><summary><code>client.customer.me.lists.items.<a href="/src/api/resources/customer/resources/me/resources/lists/resources/items/client/Client.ts">add</a>({ ...params }) -> FiveOneEat.AddItemsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Save a business to one of the authenticated user's lists, with an
+optional note. Idempotent: adding a business already in the list leaves
+the existing entry and its note untouched.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.items.add({
+    businessList: "businessList",
+    business: "business"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.lists.AddListItemRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.items.<a href="/src/api/resources/customer/resources/me/resources/lists/resources/items/client/Client.ts">remove</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a business and its note from a list. The business itself is
+unaffected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.items.remove({
+    businessList: "businessList",
+    business: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.lists.RemoveItemsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.customer.me.lists.items.<a href="/src/api/resources/customer/resources/me/resources/lists/resources/items/client/Client.ts">updateNote</a>({ ...params }) -> FiveOneEat.UpdateNoteItemsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Change the note attached to one business within one list. Notes are
+per-list, so the same business can carry a different note elsewhere.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.me.lists.items.updateNote({
+    businessList: "businessList",
+    business: "katzs-deli"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FiveOneEat.customer.me.lists.UpdateListItemNoteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ItemsClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index.js";
 import * as FiveOneEat from "../../../../../index.js";
 import { AddressesClient } from "../resources/addresses/client/Client.js";
+import { ListsClient } from "../resources/lists/client/Client.js";
 import { PaymentMethodsClient } from "../resources/paymentMethods/client/Client.js";
 import { TicketOrdersClient } from "../resources/ticketOrders/client/Client.js";
 import { TicketsClient } from "../resources/tickets/client/Client.js";
@@ -21,6 +22,7 @@ export declare namespace MeClient {
 
 export class MeClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MeClient.Options>;
+    protected _lists: ListsClient | undefined;
     protected _tickets: TicketsClient | undefined;
     protected _ticketOrders: TicketOrdersClient | undefined;
     protected _addresses: AddressesClient | undefined;
@@ -28,6 +30,10 @@ export class MeClient {
 
     constructor(options: MeClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get lists(): ListsClient {
+        return (this._lists ??= new ListsClient(this._options));
     }
 
     public get tickets(): TicketsClient {
@@ -47,12 +53,81 @@ export class MeClient {
     }
 
     /**
-     * Retrieve the authenticated user's favorited businesses with pagination.
+     * The filter options available for this user's favorites — only taxonomies
+     * actually present among them, each with a count. An option that cannot
+     * match anything is never returned.
+     *
+     * @param {MeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link FiveOneEat.UnauthorizedError}
+     *
+     * @example
+     *     await client.customer.me.favoriteFacets()
+     */
+    public favoriteFacets(
+        requestOptions?: MeClient.RequestOptions,
+    ): core.HttpResponsePromise<FiveOneEat.customer.FavoriteFacetsMeResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__favoriteFacets(requestOptions));
+    }
+
+    private async __favoriteFacets(
+        requestOptions?: MeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FiveOneEat.customer.FavoriteFacetsMeResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FiveOneEatEnvironment.Production,
+                "customer/favorites/facets",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as FiveOneEat.customer.FavoriteFacetsMeResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.FiveOneEatError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/customer/favorites/facets");
+    }
+
+    /**
+     * The authenticated user's favorited businesses, optionally narrowed by
+     * search term and taxonomy facets. Values within one facet are OR; separate
+     * facets compose as AND.
      *
      * @param {FiveOneEat.customer.FavoritesMeRequest} request
      * @param {MeClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link FiveOneEat.UnauthorizedError}
+     * @throws {@link FiveOneEat.ForbiddenError}
      * @throws {@link FiveOneEat.UnprocessableEntityError}
      *
      * @example
@@ -69,8 +144,13 @@ export class MeClient {
         request: FiveOneEat.customer.FavoritesMeRequest = {},
         requestOptions?: MeClient.RequestOptions,
     ): Promise<core.WithRawResponse<FiveOneEat.customer.FavoritesMeResponse>> {
-        const { page, per_page: perPage } = request;
+        const { search, categories, cuisines, certifications, sort, page, per_page: perPage } = request;
         const _queryParams: Record<string, unknown> = {
+            search,
+            categories,
+            cuisines,
+            certifications,
+            sort: sort !== undefined ? sort : undefined,
             page,
             per_page: perPage,
         };
@@ -112,6 +192,8 @@ export class MeClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new FiveOneEat.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new FiveOneEat.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
                     throw new FiveOneEat.UnprocessableEntityError(
                         _response.error.body as unknown,

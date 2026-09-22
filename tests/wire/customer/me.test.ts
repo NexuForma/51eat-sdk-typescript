@@ -5,6 +5,49 @@ import { FiveOneEatClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("MeClient", () => {
+    test("favoriteFacets (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: {
+                categories: [{ id: 1, name: "name", slug: "slug", count: 1 }],
+                cuisines: [{ id: 1, name: "name", slug: "slug", count: 1 }],
+                certifications: [{ id: 1, name: "name", slug: "slug", count: 1 }],
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/customer/favorites/facets")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.me.favoriteFacets();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("favoriteFacets (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/favorites/facets")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.favoriteFacets();
+        }).rejects.toThrow(FiveOneEat.UnauthorizedError);
+    });
+
     test("favorites (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -104,6 +147,25 @@ describe("MeClient", () => {
     });
 
     test("favorites (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/customer/favorites")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.customer.me.favorites();
+        }).rejects.toThrow(FiveOneEat.ForbiddenError);
+    });
+
+    test("favorites (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new FiveOneEatClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 

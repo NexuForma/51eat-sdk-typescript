@@ -9,5 +9,6 @@ import type * as core from "../../../../../../../../../core/index.js";
  *     }
  */
 export interface UploadLogoRequest {
+    /** Maximum file size: 5120 kilobytes. */
     logo: core.file.Uploadable;
 }

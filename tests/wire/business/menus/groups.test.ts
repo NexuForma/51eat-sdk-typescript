@@ -15,7 +15,7 @@ describe("GroupsClient", () => {
                 menu_id: "menu_id",
                 name: "name",
                 description: "description",
-                sort_order: 1,
+                sort_order: "sort_order",
                 items: [{ key: "value" }],
             },
         };
@@ -128,7 +128,7 @@ describe("GroupsClient", () => {
                 menu_id: "menu_id",
                 name: "name",
                 description: "description",
-                sort_order: 1,
+                sort_order: "sort_order",
                 items: [{ key: "value" }],
             },
         };
@@ -251,7 +251,7 @@ describe("GroupsClient", () => {
                 menu_id: "menu_id",
                 name: "name",
                 description: "description",
-                sort_order: 1,
+                sort_order: "sort_order",
                 items: [{ key: "value" }],
             },
         };
@@ -369,7 +369,7 @@ describe("GroupsClient", () => {
                 menu_id: "menu_id",
                 name: "name",
                 description: "description",
-                sort_order: 1,
+                sort_order: "sort_order",
                 items: [{ key: "value" }],
             },
         };

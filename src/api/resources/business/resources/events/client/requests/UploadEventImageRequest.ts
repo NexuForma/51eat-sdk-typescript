@@ -12,6 +12,7 @@ import type * as core from "../../../../../../../core/index.js";
 export interface UploadEventImageRequest {
     /** The event ID */
     event: string;
+    /** Maximum file size: 10240 kilobytes. */
     image: core.file.Uploadable;
     alt_text?: string | null;
 }

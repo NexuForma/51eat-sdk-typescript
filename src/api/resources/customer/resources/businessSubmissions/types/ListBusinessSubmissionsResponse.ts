@@ -3,12 +3,18 @@
 import type * as FiveOneEat from "../../../../../index.js";
 
 export interface ListBusinessSubmissionsResponse {
-    data: FiveOneEat.CustomerBusinessSubmission[];
+    data: ListBusinessSubmissionsResponse.Data.Item[];
     links: ListBusinessSubmissionsResponse.Links;
     meta: ListBusinessSubmissionsResponse.Meta;
 }
 
 export namespace ListBusinessSubmissionsResponse {
+    export type Data = Data.Item[];
+
+    export namespace Data {
+        export interface Item extends FiveOneEat.CustomerBusinessSubmission {}
+    }
+
     export interface Links {
         first: string | null;
         last: string | null;

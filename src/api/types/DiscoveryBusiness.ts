@@ -11,9 +11,9 @@ export interface DiscoveryBusiness {
     bio: string | null;
     location: DiscoveryBusiness.Location;
     logo: string | null;
-    photos: DiscoveryBusiness.Photos.Item[];
-    has_bulletins: boolean;
-    latest_bulletin: DiscoveryBusiness.LatestBulletin | null;
+    photos?: DiscoveryBusiness.Photos.Item[] | undefined;
+    has_bulletins?: boolean | undefined;
+    latest_bulletin?: (DiscoveryBusiness.LatestBulletin | null) | undefined;
     badges: DiscoveryBusiness.Badges;
     created_at: string;
     editorial?: (DiscoveryBusiness.Editorial | null) | undefined;

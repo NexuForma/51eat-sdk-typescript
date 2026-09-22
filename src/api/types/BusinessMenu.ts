@@ -3,7 +3,7 @@
 export interface BusinessMenu {
     id: string;
     name: string;
-    description: string | null;
-    created_at: string | null;
+    description: string;
+    created_at: string;
     groups?: unknown[] | undefined;
 }
